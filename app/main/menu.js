@@ -148,7 +148,7 @@ function getMenuTemplate() {
 			]
 		}
 	];
-
+	// Mac menu
 	if (process.platform === 'darwin') {
 		template.unshift({
 			label: app.getName(),
