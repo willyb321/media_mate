@@ -16,7 +16,7 @@ function firstrun() {
 		cancelButtonColor: '#d33',
 		confirmButtonText: 'Yes!'
 	}).then(function () {
-		require('electron').remote.getCurrentWindow().loadURL(`file://${__dirname}/../onboard.html`)
+		require('electron').remote.getCurrentWindow().loadURL(`file://${__dirname}/../renderhtml/onboard.html`)
 	}).catch(err => {
 		if (err !== 'cancel') {
 			throw err;
