@@ -70,6 +70,12 @@ function getMenuTemplate() {
 					click: () => {
 						win.loadURL(`file://${__dirname}/../renderhtml/streamer.html`);
 					}
+				},
+				{
+					label: 'Tutorial',
+					click: () => {
+						win.loadURL(`file://${__dirname}/../renderhtml/onboard.html`);
+					}
 				}
 			]
 		},
