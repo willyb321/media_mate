@@ -47,7 +47,7 @@
 		"electron": "^1.6.6",
 		"electron-builder": "^17.3.1",
 		"electron-compilers": "^5.9.0",
-		"electron-rebuild": "^1.5.7",
+		"electron-rebuild": "^1.5.10",
 		"eslint": "^3.19.0",
 		"eslint-config-xo": "^0.18.1",
 		"eslint-formatter-pretty": "^1.1.0",
