@@ -8,6 +8,11 @@
 - [Media Mate](#media-mate)
     - [What is it?](#what-is-it)
     - [Whats it look like then?](#whats-it-look-like-then)
+        - [Homepage](#homepage)
+        - [Downloader](#downloader)
+        - [Viewer](#viewer)
+        - [Streamer](#streamer)
+        - [Tutorial](#tutorial)
     - [Disclaimer](#disclaimer)
     - [License](#license)
     - [Support on Beerpay](#support-on-beerpay)
@@ -20,10 +25,19 @@
 Media Mate is a media centre, along the lines of [Plex](https://plex.tv), with the features of [Sonarr](https://sonarr.tv), downloading and organising your media in a good looking way. Media Mate also allows you to automatically download the shows that *you* want to watch, thanks to [ShowRSS](http://showrss.info/).
 
 ## Whats it look like then?
+### Homepage
 <img align="center" style="width: 100%; height:100%;" src="https://raw.githubusercontent.com/willyb321/media_mate/develop/img/homepage.png" alt="Media Mate UI">
+
+### Downloader
 <img align="center" style="width: 100%; height:100%;" src="https://raw.githubusercontent.com/willyb321/media_mate/develop/img/downloader.png" alt="Media Mate UI">
+
+### Viewer
 <img align="center" style="width: 100%; height:100%;" src="https://raw.githubusercontent.com/willyb321/media_mate/develop/img/viewer.png" alt="Media Mate UI">
+
+### Streamer
 <img align="center" style="width: 100%; height:100%;" src="https://raw.githubusercontent.com/willyb321/media_mate/develop/img/streamer.png" alt="Media Mate UI">
+
+### Tutorial
 <img align="center" style="width: 100%; height:100%;" src="https://raw.githubusercontent.com/willyb321/media_mate/develop/img/tutorial.png" alt="Media Mate UI">
 
 ## Disclaimer
