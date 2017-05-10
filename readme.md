@@ -10,6 +10,7 @@
     - [Whats it look like then?](#whats-it-look-like-then)
     - [Disclaimer](#disclaimer)
     - [License](#license)
+    - [Support on Beerpay](#support-on-beerpay)
 
 <!-- /TOC -->
 
