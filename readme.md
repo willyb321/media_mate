@@ -31,3 +31,8 @@ I cannot be responsible for anything that happens when you use this program. If 
 ## License
 
 MIT © [Willyb321](https://tehsuperwilly.tech)
+
+## Support on Beerpay
+Hey dude! Help me out for a couple of :beers:!
+
+[![Beerpay](https://beerpay.io/willyb321/media_mate/badge.svg?style=beer-square)](https://beerpay.io/willyb321/media_mate)  [![Beerpay](https://beerpay.io/willyb321/media_mate/make-wish.svg?style=flat-square)](https://beerpay.io/willyb321/media_mate?focus=wish)
