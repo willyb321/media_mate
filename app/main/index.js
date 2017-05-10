@@ -335,7 +335,7 @@ app.on('ready', () => {
 	init();
 	watchRSS();
 	onBoard();
-	if (!isDev && process.env.NODE_ENV !== 'test') {
+	if (!isDev && process.env.NODE_ENV !== 'test' && process.platform !== 'darwin') {
 		autoUpdater.checkForUpdates();
 	}
 	protocol.uninterceptProtocol('video');
