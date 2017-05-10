@@ -1,6 +1,7 @@
 # Media Mate
 > A full media server/player/downloader - in one program
 
+[![Github All Releases](https://img.shields.io/github/downloads/willyb321/media_mate/total.svg)]()
 <p align="center"><img src="https://raw.githubusercontent.com/willyb321/media_mate/develop/build/icon.png"></p>
 
 <!-- TOC -->
