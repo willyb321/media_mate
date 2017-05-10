@@ -335,6 +335,9 @@ app.on('ready', () => {
 	init();
 	watchRSS();
 	onBoard();
+	if (!isDev && process.env.NODE_ENV !== 'test') {
+		autoUpdater.checkForUpdates();
+	}
 	protocol.uninterceptProtocol('video');
 	protocol.registerFileProtocol('video', (request, callback) => {
 		const url = request.url;
