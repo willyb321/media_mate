@@ -22,5 +22,11 @@ function firstrun() {
 			throw err;
 		}
 	});
-
+}
+function sweetAlert(title, text, type) {
+	require('sweetalert2')({
+		title: title,
+		text: text,
+		type: type
+	})
 }
