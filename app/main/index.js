@@ -307,6 +307,12 @@ function watchRSS() {
 			mainWindow.webContents.executeJavaScript(`notify('Put your ShowRSS URL into the downloader!', 'showrss.info')`);
 		} else {
 			RSS = new RSSParse(uri);
+			RSS.on('error', err => {
+				bugsnag.notify(new Error(err));
+			});
+			RSS.on('offline', online => {
+				mainWindow.webContents.executeJavaScript(`sweetAlert('Offline', 'You are offline, thats fine though.', 'info')`);
+			});
 			RSS.on('data', data => {
 				ignoreDupeTorrents(data, dupe => {
 					if (dupe) {

@@ -11,6 +11,7 @@ const FeedParser = require('feedparser');
 const request = require('request'); // For fetching the feed
 const bugsnag = require('bugsnag'); // Catch bugs / errors
 const isRenderer = require('is-electron-renderer');
+const isOnline = require('is-online');
 
 let version;
 // Make sure that version can be got from both render and main process
@@ -32,7 +33,13 @@ class RSSParse extends events.EventEmitter {
 	constructor(rssFeed) {
 		super(rssFeed);
 		this.rssFeed = rssFeed;
-		this.reqFeed();
+		isOnline().then(online => {
+			if (online === false) {
+				this.emit('offline', online);
+			} else {
+				this.reqFeed();
+			}
+		});
 	}
 
 	/**
@@ -44,6 +51,7 @@ class RSSParse extends events.EventEmitter {
 		const feedparser = new FeedParser();
 		req.on('error', err => {
 			console.log(err);
+			this.emit('error', err);
 			bugsnag.notify(new Error(err), {
 				subsystem: {
 					name: 'RSS Parser'

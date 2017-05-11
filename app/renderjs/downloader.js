@@ -381,6 +381,12 @@ function runScript(e) {
 		const RSS = new RSSParse(tb.value);
 		// Emitted on RSS error (invalid url etc).
 		RSS.on('error', err => {
+			bugsnag.notify(new Error(err));
+		});
+		RSS.on('offline', online => {
+			swal('Offline', 'You are offline, thats fine though.', 'info');
+		});
+		RSS.on('error', err => {
 			console.log(err);
 			tb.disabled = false;
 			document.getElementById('dupecount').disabled = false;
