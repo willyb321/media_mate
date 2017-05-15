@@ -2444,9 +2444,9 @@ strip-json-comments@~2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/strip-json-comments/-/strip-json-comments-2.0.1.tgz#3c531942e908c2697c0ec344858c286c7ca0a60a"
 
-sweetalert2@^6.6.2:
-  version "6.6.2"
-  resolved "https://registry.yarnpkg.com/sweetalert2/-/sweetalert2-6.6.2.tgz#baa8895e7d006ebd0182e7366ced053540d1bb0d"
+sweetalert2@^6.6.3:
+  version "6.6.3"
+  resolved "https://registry.yarnpkg.com/sweetalert2/-/sweetalert2-6.6.3.tgz#728ebdbe6c88e2961e1ce1c3acdb2cd354fe9171"
 
 symbol-observable@^1.0.1:
   version "1.0.4"
