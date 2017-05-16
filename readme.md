@@ -17,6 +17,7 @@
     - [Disclaimer](#disclaimer)
     - [License](#license)
     - [Support on Beerpay](#support-on-beerpay)
+    - [Paypal Donate](#paypal-donate)
 
 <!-- /TOC -->
 
@@ -53,3 +54,7 @@ MIT © [Willyb321](https://tehsuperwilly.tech)
 Hey dude! If you like this, why not chuck a buck my way!
 
 [![Beerpay](https://beerpay.io/willyb321/media_mate/badge.svg?style=beer-square)](https://beerpay.io/willyb321/media_mate)  [![Beerpay](https://beerpay.io/willyb321/media_mate/make-wish.svg?style=flat-square)](https://beerpay.io/willyb321/media_mate?focus=wish)
+
+## Paypal Donate
+
+[![Paypal Donate](https://img.shields.io/badge/Donate-PayPal-brightgreen.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=4DSWUCDLVSKQS&lc=AU&item_name=Willyb321&currency_code=AUD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted)
