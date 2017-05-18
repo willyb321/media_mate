@@ -310,8 +310,15 @@ function watchRSS() {
 			RSS.on('error', err => {
 				bugsnag.notify(new Error(err));
 			});
-			RSS.on('offline', online => {
-				mainWindow.webContents.executeJavaScript(`sweetAlert('Offline', 'You are offline, thats fine though.', 'info')`);
+			RSS.on('offline', () => {
+				if (mainWindow.webContents.isLoading() === false) {
+					mainWindow.webContents.executeJavaScript(`sweetAlert('Offline', 'You are offline, thats fine though.', 'info')`);
+				} else {
+					console.log('offline');
+					mainWindow.webContents.once('dom-ready', e => {
+						mainWindow.webContents.executeJavaScript(`sweetAlert('Offline', 'You are offline, thats fine though.', 'info')`);
+					});
+				}
 			});
 			RSS.on('data', data => {
 				ignoreDupeTorrents(data, dupe => {
