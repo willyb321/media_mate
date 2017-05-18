@@ -1,6 +1,14 @@
 ## Change Log
 
-### upcoming (2017/05/16 02:23 +00:00)
+### upcoming (2017/05/18 04:16 +00:00)
+- [fc22e1e](https://github.com/willyb321/media_mate/commit/fc22e1ebd4d1f30850b18e37a6f567c17d2c8b37) bump app/package.json (@willyb321)
+
+### v1.0.2 (2017/05/18 04:00 +00:00)
+- [ac02ff5](https://github.com/willyb321/media_mate/commit/ac02ff5f5125cf6d62db44138b0643d801398df7) 1.0.2 (@willyb321)
+- [f15a2c5](https://github.com/willyb321/media_mate/commit/f15a2c5c1f5a7911345e56ea8f8a6bae241e364c) better offline handling (@willyb321)
+- [f85d545](https://github.com/willyb321/media_mate/commit/f85d5451bbf912ca72750ca44eda0345b82360df) deps (@willyb321)
+- [34bea14](https://github.com/willyb321/media_mate/commit/34bea149c947d63f7ede083a73a08047871cb2cf) deps (@willyb321)
+- [3665a6d](https://github.com/willyb321/media_mate/commit/3665a6d77152846c50a4cfdc5d5a1fbd15ad1d42) changelog (@willyb321)
 - [8c79b42](https://github.com/willyb321/media_mate/commit/8c79b42267170f3e23dcf424efd2f286b8446773) paypal button (@willyb321)
 - [3c396ea](https://github.com/willyb321/media_mate/commit/3c396eaecf1b5285f48069f43fcfa5e8aab9b9c6) deps (@willyb321)
 - [9f19a37](https://github.com/willyb321/media_mate/commit/9f19a37c50d8bd7ee376fbe58c352e4e5b44eb54) update sweetalert2 (@willyb321)
