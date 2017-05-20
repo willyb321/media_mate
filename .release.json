@@ -1,0 +1,40 @@
+{
+	"non-interactive": false,
+	"dry-run": false,
+	"verbose": true,
+	"force": false,
+	"pkgFiles": [
+		"package.json",
+		"app/package.json"
+	],
+	"increment": "patch",
+	"prereleaseId": null,
+	"buildCommand": false,
+	"changelogCommand": "git log --pretty=format:'* %s (%h)' [REV_RANGE]",
+	"requireCleanWorkingDir": true,
+	"src": {
+		"commitMessage": "Release v%s",
+		"tagName": "v%s",
+		"tagAnnotation": "Release v%s",
+		"pushRepo": null,
+		"beforeStartCommand": false,
+		"beforeStageCommand": false,
+		"afterReleaseCommand": "npm run release && gulp changelog"
+	},
+	"github": {
+		"release": true,
+		"releaseName": "Release %s",
+		"preRelease": false,
+		"tokenRef": "GITHUB_TOKEN"
+	},
+	"prompt": {
+		"src": {
+			"status": false,
+			"commit": true,
+			"tag": true,
+			"push": true,
+			"release": true,
+			"publish": false
+		}
+	}
+}
