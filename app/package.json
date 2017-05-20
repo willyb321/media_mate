@@ -16,7 +16,7 @@
     "blob-util": "^1.2.1",
     "bugsnag": "^1.10.0",
     "bulma": "^0.4.1",
-    "debug": "^2.6.7",
+    "debug": "^2.6.8",
     "devtron": "^1.4.0",
     "dotenv": "^4.0.0",
     "electron-compile": "^6.4.1",
