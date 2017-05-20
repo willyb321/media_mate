@@ -61,7 +61,7 @@ if (process.env.SPECTRON) {
 	/**
 	 * If Spectron is running, mock showOpenDialog to return the test folder.
 	 * @param opts {object} Options showOpenDialog was called with.
-	 * @param cb {array} An array of file paths returned.
+	 * @param cb {function} An array of file paths returned.
 	 */
 	electron.dialog.showOpenDialog = (opts, cb) => {
 		cb([require('path').join(require('os').tmpdir(), 'MediaMateTest', 'Downloads')]);
