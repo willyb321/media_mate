@@ -29,6 +29,7 @@
     "electron-window-state": "^4.1.1",
     "episode-parser": "willyb321/episode-parser.git#9008e1da6ed5152349e1d35ff65b68b9684a9b9e",
     "feedparser": "^2.2.0",
+    "font-awesome": "^4.7.0",
     "fs-extra": "^3.0.1",
     "hover.css": "^2.2.0",
     "is-electron-renderer": "^2.0.1",
