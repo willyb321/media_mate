@@ -25,7 +25,7 @@
     "electron-is-dev": "^0.1.2",
     "electron-json-storage": "^3.0.5",
     "electron-notify": "^0.1.0",
-    "electron-updater": "^1.15.0",
+    "electron-updater": "^1.16.0",
     "electron-window-state": "^4.1.1",
     "episode-parser": "willyb321/episode-parser.git#9008e1da6ed5152349e1d35ff65b68b9684a9b9e",
     "feedparser": "^2.2.0",
@@ -50,7 +50,7 @@
     "progressbar.js": "^1.0.1",
     "request": "^2.81.0",
     "source-map-support": "^0.4.15",
-    "sweetalert2": "^6.6.3",
+    "sweetalert2": "^6.6.4",
     "tableify": "^1.0.0",
     "underscore": "^1.8.3",
     "webtorrent": "^0.98.18"
