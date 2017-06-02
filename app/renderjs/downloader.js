@@ -34,6 +34,7 @@ let bar;
 const dbindex = 0;
 const allTorrents = [];
 const prog = _.throttle(dlProgress, 10000);
+const updateDlProg = _.throttle(updateProgress, 2000);
 
 process.on('unhandledRejection', (err, promise) => {
 	console.error('Unhandled rejection: ' + (err && err.stack || err)); // eslint-disable-line
@@ -275,6 +276,12 @@ function insertDlPath(callback) {
 		}
 	});
 }
+
+function updateProgress(magnet, torrent) {
+	const percent = Math.round(torrent.progress * 100 * 100) / 100;
+	document.getElementsByName(magnet)[0].parentNode.childNodes[1].nodeValue = `- ${percent.toString()}% downloaded, ${moment.duration(torrent.timeRemaining / 1000, 'seconds').humanize()} remaining.`;
+}
+
 /**
  * Add a torrent to WebTorrent and the DB.
  * @param magnet {string} - the magnet URI for WebTorrent
@@ -291,8 +298,7 @@ function addTor(magnet, index) {
 			document.getElementsByName(magnet)[0].disabled = true;
 			torrent.on('download', () => {
 				prog(torrent, magnet);
-				const percent = Math.round(torrent.progress * 100 * 100) / 100;
-				document.getElementsByName(magnet)[0].parentNode.childNodes[1].nodeValue = `- ${percent.toString()}% downloaded, ${moment.duration(torrent.timeRemaining / 1000, 'seconds').humanize()} remaining.`;
+				updateDlProg(magnet, torrent);
 			});
 			torrent.on('done', () => {
 				dlProgress();
