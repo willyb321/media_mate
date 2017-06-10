@@ -247,38 +247,45 @@ app.on('activate', () => {
 function ignoreDupeTorrents(torrent, callback) {
 	const db = new PouchDB(require('path').join(app.getPath('userData'), 'dbTor').toString());
 	db.get(torrent.link)
-				.then(doc => {
-					if (doc === null) {
-						db.put({
-							_id: torrent.link,
-							magnet: torrent.link,
-							title: torrent.title,
-							tvdbID: torrent['tv:show_name']['#'],
-							airdate: torrent.pubDate,
-							downloaded: false
-						}).then(() => {
-							db.close();
-							callback();
-						}).catch(err => {
-							if (err) {
-								throw err;
-							}
-						});
-					} else if (doc.downloaded === true) {
-						db.close();
-						callback('dupe');
-					} else if (doc.downloaded === false) {
-						db.close();
+		.then(doc => {
+			if (doc === null) {
+				db.put({
+					_id: torrent.link,
+					magnet: torrent.link,
+					title: torrent.title,
+					tvdbID: torrent['tv:show_name']['#'],
+					airdate: torrent.pubDate,
+					downloaded: false
+				}).then(() => {
+					db.close().then(() => {
 						callback();
-					}
-				})
-				.catch(err => {
-					if (err.status === 404) {
-						callback();
-					} else if (err.status !== 404) {
+					});
+				}).catch(err => {
+					if (err) {
 						throw err;
 					}
 				});
+			} else if (doc.downloaded === true) {
+				db.close().then(() => {
+					callback('dupe');
+				});
+			} else if (doc.downloaded === false) {
+				db.close().then(() => {
+					callback();
+				});
+			}
+		})
+		.catch(err => {
+			if (err.status === 404) {
+				db.close().then(() => {
+					callback();
+				});
+			} else if (err.status !== 404) {
+				db.close().then(() => {
+				});
+				throw err;
+			}
+		});
 }
 /**
  * @description Get the ShowRSS URI from the DB.
