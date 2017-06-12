@@ -44,7 +44,7 @@ Media Mate is a media centre, along the lines of [Plex](https://plex.tv), with t
 
 ## Disclaimer
 
-I cannot be responsible for anything that happens when you use this program. If your computer explodes, if your house gets blown up - I cannot be responsible. Likewise, I am not responsible for anything that you do with this program.
+Media Mate (and its team) am not responsible for anything that is done with Media Mate. Media Mate recommends viewing the free media below.
 
 ## Links to free media
 
