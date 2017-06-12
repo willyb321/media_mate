@@ -46,6 +46,16 @@ Media Mate is a media centre, along the lines of [Plex](https://plex.tv), with t
 
 I cannot be responsible for anything that happens when you use this program. If your computer explodes, if your house gets blown up - I cannot be responsible. Likewise, I am not responsible for anything that you do with this program.
 
+## Links to free media
+
+https://durian.blender.org/
+
+https://en.wikipedia.org/wiki/Open-source_film
+
+https://en.wikipedia.org/wiki/Elephants_Dream
+
+http://www.hdehal.com/filmandvideo.php
+
 ## License
 
 MIT © [Willyb321](https://tehsuperwilly.tech)
