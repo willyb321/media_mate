@@ -1,6 +1,9 @@
 ## Change Log
 
-### upcoming (2017/06/12 06:41 +00:00)
+### v1.0.3 (2017/06/12 06:45 +00:00)
+- [46f9050](https://github.com/willyb321/media_mate/commit/46f90505023daf9c72d380005aade3b96cefb332) Release v1.0.3 (@willyb321)
+- [4c0f664](https://github.com/willyb321/media_mate/commit/4c0f6648e2da195a86fd1ec29187c26dc68dc852) .release.json (@willyb321)
+- [9bdb6fd](https://github.com/willyb321/media_mate/commit/9bdb6fdfed86ca4323f171e88c90689e11ea58ee) changelog (@willyb321)
 - [a0be59c](https://github.com/willyb321/media_mate/commit/a0be59cae0e0c57713eb75a14821d435649e4b9b) update readme (@willyb321)
 - [70aaa12](https://github.com/willyb321/media_mate/commit/70aaa12dd0dc350a24d32c034922fe771e86963b) update readme (@willyb321)
 - [e4b24f4](https://github.com/willyb321/media_mate/commit/e4b24f43ca8380ef8416f9d70eabb3c5d7bef3a7) maybe the end of db LOCK errors (@willyb321)
