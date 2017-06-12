@@ -1,123 +1,123 @@
 {
-	"name": "media-mate",
-	"productName": "MediaMate",
-	"version": "1.0.2",
-	"private": true,
-	"license": "MIT",
-	"description": "A full media server/player/downloader/etc - in one",
-	"repository": "willyb321/media_mate",
-	"author": {
-		"name": "willyb321",
-		"email": "wbwilliam7@gmail.com",
-		"url": "tehsuperwilly.tech"
-	},
-	"scripts": {
-		"compile": "(cd app && npm run compile)",
-		"test": "node tests/",
-		"prestart": "gulp && gulp index",
-		"start": "electron app/",
-		"build": "electron-zip-packager . --out=dist --overwrite --platform=win32 --arch=x64 --prune --asar",
-		"pack": "gulp index && gulp build:pack",
-		"dist": "gulp index && gulp build:dist",
-		"release": "gulp index && gulp build:dist",
-		"tag": "release-it",
-		"lint": "eslint . -c .eslintrc --format=node_modules/eslint-formatter-pretty",
-		"docs": "jsdoc -c ./conf.json -R readme.md",
-		"postinstall": "(install-app-deps)",
-		"deps": "(ncu -au && cd app && ncu -au)",
-		"changelog": "gulp changelog"
-	},
-	"pre-commit": [
-		"lint"
-	],
-	"keywords": [
-		"electron-app",
-		"electron"
-	],
-	"devDependencies": {
-		"ava": "^0.19.1",
-		"babel-core": "^6.25.0",
-		"babel-preset-env": "^1.5.2",
-		"babel-preset-es2015": "^6.24.1",
-		"babel-preset-latest": "^6.24.1",
-		"babel-preset-react": "^6.24.1",
-		"cp-file": "^4.2.0",
-		"del": "^3.0.0",
-		"devtron": "^1.4.0",
-		"electron": "^1.7.2",
-		"electron-builder": "^18.6.2",
-		"electron-compilers": "^5.9.0",
-		"electron-rebuild": "^1.5.11",
-		"eslint": "^3.19.0",
-		"eslint-config-xo": "^0.18.2",
-		"eslint-formatter-pretty": "^1.1.0",
-		"eslint-plugin-google-camelcase": "^0.0.2",
-		"github-changes": "^1.1.0",
-		"gulp": "^3.9.1",
-		"gulp-ava": "^0.17.1",
-		"gulp-babel": "^6.1.2",
-		"gulp-concat": "^2.6.1",
-		"gulp-if": "^2.0.2",
-		"gulp-inject": "^4.2.0",
-		"gulp-sourcemaps": "^2.6.0",
-		"gulp-uglify": "^3.0.0",
-		"gulp-xo": "^0.15.0",
-		"ink-docstrap": "^1.3.0",
-		"jsdoc": "^3.4.3",
-		"jsdoc-export-default-interop": "^0.3.1",
-		"jsdoc-strip-async-await": "^0.1.0",
-		"mkdirp": "latest",
-		"npm-check-updates": "^2.11.3",
-		"pngjs": "^3.2.0",
-		"pre-commit": "^1.2.2",
-		"release-it": "^2.7.3",
-		"rimraf": "^2.6.1",
-		"spectron": "^3.7.1",
-		"tape": "^4.6.3",
-		"tui-jsdoc-template": "^1.1.0"
-	},
-	"ava": {},
-	"xo": {
-		"esnext": true,
-		"envs": [
-			"node",
-			"browser"
-		],
-		"reporter": "mocha-circleci-reporter",
-		"ignores": [
-			"tests/*",
-			"test.js",
-			"gulpfile.babel.js",
-			"app/indexbuild.*",
-			"docs/**/*"
-		]
-	},
-	"build": {
-		"electronCompile": true,
-		"nodeGypRebuild": false,
-		"appId": "com.willyb321.media_mate",
-		"nsis": {
-			"oneClick": false,
-			"allowToChangeInstallationDirectory": true
-		},
-		"mac": {
-			"category": "public.app-category.entertainment",
-			"publish": [
-				"github"
-			]
-		},
-		"win": {
-			"target": [
-				"nsis"
-			],
-			"publish": [
-				"github"
-			]
-		},
-		"linux": {
-			"target": [
-				"dir"
-			]
-		}
-	}
+  "name": "media-mate",
+  "productName": "MediaMate",
+  "version": "1.0.3",
+  "private": true,
+  "license": "MIT",
+  "description": "A full media server/player/downloader/etc - in one",
+  "repository": "willyb321/media_mate",
+  "author": {
+    "name": "willyb321",
+    "email": "wbwilliam7@gmail.com",
+    "url": "tehsuperwilly.tech"
+  },
+  "scripts": {
+    "compile": "(cd app && npm run compile)",
+    "test": "node tests/",
+    "prestart": "gulp && gulp index",
+    "start": "electron app/",
+    "build": "electron-zip-packager . --out=dist --overwrite --platform=win32 --arch=x64 --prune --asar",
+    "pack": "gulp index && gulp build:pack",
+    "dist": "gulp index && gulp build:dist",
+    "release": "gulp index && gulp build:dist",
+    "tag": "release-it",
+    "lint": "eslint . -c .eslintrc --format=node_modules/eslint-formatter-pretty",
+    "docs": "jsdoc -c ./conf.json -R readme.md",
+    "postinstall": "(install-app-deps)",
+    "deps": "(ncu -au && cd app && ncu -au)",
+    "changelog": "gulp changelog"
+  },
+  "pre-commit": [
+    "lint"
+  ],
+  "keywords": [
+    "electron-app",
+    "electron"
+  ],
+  "devDependencies": {
+    "ava": "^0.19.1",
+    "babel-core": "^6.25.0",
+    "babel-preset-env": "^1.5.2",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-latest": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "cp-file": "^4.2.0",
+    "del": "^3.0.0",
+    "devtron": "^1.4.0",
+    "electron": "^1.7.2",
+    "electron-builder": "^18.6.2",
+    "electron-compilers": "^5.9.0",
+    "electron-rebuild": "^1.5.11",
+    "eslint": "^3.19.0",
+    "eslint-config-xo": "^0.18.2",
+    "eslint-formatter-pretty": "^1.1.0",
+    "eslint-plugin-google-camelcase": "^0.0.2",
+    "github-changes": "^1.1.0",
+    "gulp": "^3.9.1",
+    "gulp-ava": "^0.17.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-concat": "^2.6.1",
+    "gulp-if": "^2.0.2",
+    "gulp-inject": "^4.2.0",
+    "gulp-sourcemaps": "^2.6.0",
+    "gulp-uglify": "^3.0.0",
+    "gulp-xo": "^0.15.0",
+    "ink-docstrap": "^1.3.0",
+    "jsdoc": "^3.4.3",
+    "jsdoc-export-default-interop": "^0.3.1",
+    "jsdoc-strip-async-await": "^0.1.0",
+    "mkdirp": "latest",
+    "npm-check-updates": "^2.11.3",
+    "pngjs": "^3.2.0",
+    "pre-commit": "^1.2.2",
+    "release-it": "^2.7.3",
+    "rimraf": "^2.6.1",
+    "spectron": "^3.7.1",
+    "tape": "^4.6.3",
+    "tui-jsdoc-template": "^1.1.0"
+  },
+  "ava": {},
+  "xo": {
+    "esnext": true,
+    "envs": [
+      "node",
+      "browser"
+    ],
+    "reporter": "mocha-circleci-reporter",
+    "ignores": [
+      "tests/*",
+      "test.js",
+      "gulpfile.babel.js",
+      "app/indexbuild.*",
+      "docs/**/*"
+    ]
+  },
+  "build": {
+    "electronCompile": true,
+    "nodeGypRebuild": false,
+    "appId": "com.willyb321.media_mate",
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    },
+    "mac": {
+      "category": "public.app-category.entertainment",
+      "publish": [
+        "github"
+      ]
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "publish": [
+        "github"
+      ]
+    },
+    "linux": {
+      "target": [
+        "dir"
+      ]
+    }
+  }
 }
