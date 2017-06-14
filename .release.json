@@ -1,5 +1,5 @@
 {
-	"non-interactive": true,
+	"non-interactive": false,
 	"dry-run": false,
 	"verbose": false,
 	"force": false,
