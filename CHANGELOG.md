@@ -1,5 +1,13 @@
 ## Change Log
 
+### v1.0.4 (2017/06/14 22:55 +00:00)
+- [0c1da22](https://github.com/willyb321/media_mate/commit/0c1da228b896b40d5401410f4027baed469672ad) Release v1.0.4 (@willyb321)
+- [7660bce](https://github.com/willyb321/media_mate/commit/7660bce3b66bf4c9e2186fdb8b2a64241a6c1156) .release.json (@willyb321)
+- [ee5ffb5](https://github.com/willyb321/media_mate/commit/ee5ffb5a10bc2912f99d232e6f971e845b16b5e6) Merge branch 'develop' of https://github.com/willyb321/media_mate into develop (@willyb321)
+- [a1ed3c7](https://github.com/willyb321/media_mate/commit/a1ed3c7d23d1b35aa099954bba5c684756e2f11c) finally can build properly on windows! :tada: (@willyb321)
+- [179b51c](https://github.com/willyb321/media_mate/commit/179b51c94ad865e508ba97fa4f2d6005024a2a77) linux test screens (@willyb321)
+- [507065b](https://github.com/willyb321/media_mate/commit/507065b69fd00713381e30d6bb13bf3887b7d45b) changelog (@willyb321)
+
 ### v1.0.3 (2017/06/12 06:45 +00:00)
 - [46f9050](https://github.com/willyb321/media_mate/commit/46f90505023daf9c72d380005aade3b96cefb332) Release v1.0.3 (@willyb321)
 - [4c0f664](https://github.com/willyb321/media_mate/commit/4c0f6648e2da195a86fd1ec29187c26dc68dc852) .release.json (@willyb321)
