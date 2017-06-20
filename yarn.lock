@@ -170,11 +170,13 @@ ajv@^4.7.0, ajv@^4.9.1:
     co "^4.6.0"
     json-stable-stringify "^1.0.1"
 
-ajv@^5.1.5:
-  version "5.1.5"
-  resolved "https://registry.yarnpkg.com/ajv/-/ajv-5.1.5.tgz#8734931b601f00d4feef7c65738d77d1b65d1f68"
+ajv@^5.2.0:
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/ajv/-/ajv-5.2.0.tgz#c1735024c5da2ef75cc190713073d44f098bf486"
   dependencies:
     co "^4.6.0"
+    fast-deep-equal "^0.1.0"
+    json-schema-traverse "^0.3.0"
     json-stable-stringify "^1.0.1"
 
 align-text@^0.1.1, align-text@^0.1.3:
@@ -1211,20 +1213,6 @@ boxen@^0.3.1:
     string-width "^1.0.1"
     widest-line "^1.0.0"
 
-boxen@^0.6.0:
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/boxen/-/boxen-0.6.0.tgz#8364d4248ac34ff0ef1b2f2bf49a6c60ce0d81b6"
-  dependencies:
-    ansi-align "^1.1.0"
-    camelcase "^2.1.0"
-    chalk "^1.1.1"
-    cli-boxes "^1.0.0"
-    filled-array "^1.0.0"
-    object-assign "^4.0.1"
-    repeating "^2.0.0"
-    string-width "^1.0.1"
-    widest-line "^1.0.0"
-
 boxen@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/boxen/-/boxen-1.0.0.tgz#b2694baf1f605f708ff0177c12193b22f29aaaab"
@@ -1336,7 +1324,7 @@ camelcase@^1.0.2:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/camelcase/-/camelcase-1.2.1.tgz#9bb5304d2e0b56698b2c758b08a3eaa9daa58a39"
 
-camelcase@^2.0.0, camelcase@^2.1.0:
+camelcase@^2.0.0:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/camelcase/-/camelcase-2.1.1.tgz#7c1d16d679a1bbe59ca02cacecfb011e201f5a1f"
 
@@ -2373,27 +2361,23 @@ ejs@^2.3.1:
   version "2.5.6"
   resolved "https://registry.yarnpkg.com/ejs/-/ejs-2.5.6.tgz#479636bfa3fe3b1debd52087f0acb204b4f19c88"
 
-electron-builder-core@19.2.3:
-  version "19.2.3"
-  resolved "https://registry.yarnpkg.com/electron-builder-core/-/electron-builder-core-19.2.3.tgz#867da02faf94455a0049573782898e5ae7a93783"
-
-electron-builder-http@19.2.3, electron-builder-http@~19.2.3:
-  version "19.2.3"
-  resolved "https://registry.yarnpkg.com/electron-builder-http/-/electron-builder-http-19.2.3.tgz#b2d7c938ff33a28c3a1b891e872dc89310412a96"
+electron-builder-http@19.6.0, electron-builder-http@~19.6.0:
+  version "19.6.0"
+  resolved "https://registry.yarnpkg.com/electron-builder-http/-/electron-builder-http-19.6.0.tgz#7429a70d63f43f2d78b21613bd4ae5cded70562a"
   dependencies:
     debug "2.6.8"
     fs-extra-p "^4.3.0"
 
-electron-builder-util@19.2.5, electron-builder-util@~19.2.3:
-  version "19.2.5"
-  resolved "https://registry.yarnpkg.com/electron-builder-util/-/electron-builder-util-19.2.5.tgz#cefe989503e8d43b00ccd28a8359b748dc391c68"
+electron-builder-util@19.6.0, electron-builder-util@~19.6.0:
+  version "19.6.0"
+  resolved "https://registry.yarnpkg.com/electron-builder-util/-/electron-builder-util-19.6.0.tgz#5901fa631ab7ecf16fb86c6905ef2785144bc205"
   dependencies:
     "7zip-bin" "^2.1.0"
     bluebird-lst "^1.0.2"
     chalk "^1.1.3"
     debug "2.6.8"
-    electron-builder-http "~19.2.3"
-    fcopy-pre-bundled "0.3.3"
+    electron-builder-http "~19.6.0"
+    fcopy-pre-bundled "0.3.4"
     fs-extra-p "^4.3.0"
     ini "^1.3.4"
     is-ci "^1.0.10"
@@ -2402,12 +2386,12 @@ electron-builder-util@19.2.5, electron-builder-util@~19.2.3:
     stat-mode "^0.2.2"
     tunnel-agent "^0.6.0"
 
-electron-builder@^19.2.7:
-  version "19.2.7"
-  resolved "https://registry.yarnpkg.com/electron-builder/-/electron-builder-19.2.7.tgz#ed5022ea9f1e2e141edd27194f6875a277f65906"
+electron-builder@^19.6.1:
+  version "19.6.1"
+  resolved "https://registry.yarnpkg.com/electron-builder/-/electron-builder-19.6.1.tgz#560777a90ed556fc3b840989407331b798c62270"
   dependencies:
     "7zip-bin" "^2.1.0"
-    ajv "^5.1.5"
+    ajv "^5.2.0"
     ajv-keywords "^2.1.0"
     asar-integrity "0.1.1"
     bluebird-lst "^1.0.2"
@@ -2415,12 +2399,11 @@ electron-builder@^19.2.7:
     chromium-pickle-js "^0.2.0"
     cuint "^0.2.2"
     debug "2.6.8"
-    electron-builder-core "19.2.3"
-    electron-builder-http "19.2.3"
-    electron-builder-util "19.2.5"
+    electron-builder-http "19.6.0"
+    electron-builder-util "19.6.0"
     electron-download-tf "4.3.1"
     electron-osx-sign "0.4.6"
-    electron-publish "19.2.3"
+    electron-publish "19.6.0"
     fs-extra-p "^4.3.0"
     hosted-git-info "^2.4.2"
     is-ci "^1.0.10"
@@ -2534,14 +2517,14 @@ electron-osx-sign@0.4.6:
     plist "^2.0.1"
     tempfile "^1.1.1"
 
-electron-publish@19.2.3:
-  version "19.2.3"
-  resolved "https://registry.yarnpkg.com/electron-publish/-/electron-publish-19.2.3.tgz#e51093146f4a96f0ca08bd2ce3f6b4a97d46a437"
+electron-publish@19.6.0:
+  version "19.6.0"
+  resolved "https://registry.yarnpkg.com/electron-publish/-/electron-publish-19.6.0.tgz#63ca75d2c6c54f56003b75b5313d6f4d96d85377"
   dependencies:
     bluebird-lst "^1.0.2"
     chalk "^1.1.3"
-    electron-builder-http "~19.2.3"
-    electron-builder-util "~19.2.3"
+    electron-builder-http "~19.6.0"
+    electron-builder-util "~19.6.0"
     fs-extra-p "^4.3.0"
     mime "^1.3.6"
 
@@ -3097,6 +3080,10 @@ fancy-log@^1.1.0:
     chalk "^1.1.1"
     time-stamp "^1.0.0"
 
+fast-deep-equal@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/fast-deep-equal/-/fast-deep-equal-0.1.0.tgz#5c6f4599aba6b333ee3342e2ed978672f1001f8d"
+
 fast-diff@^1.0.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/fast-diff/-/fast-diff-1.1.1.tgz#0aea0e4e605b6a2189f0e936d4b7fbaf1b7cfd9b"
@@ -3105,9 +3092,9 @@ fast-levenshtein@~2.0.4:
   version "2.0.6"
   resolved "https://registry.yarnpkg.com/fast-levenshtein/-/fast-levenshtein-2.0.6.tgz#3d8a5c66883a16a30ca8643e851f19baa7797917"
 
-fcopy-pre-bundled@0.3.3:
-  version "0.3.3"
-  resolved "https://registry.yarnpkg.com/fcopy-pre-bundled/-/fcopy-pre-bundled-0.3.3.tgz#4e1fce4a94ab3fafcf3bbb3d5567bb152092bf1b"
+fcopy-pre-bundled@0.3.4:
+  version "0.3.4"
+  resolved "https://registry.yarnpkg.com/fcopy-pre-bundled/-/fcopy-pre-bundled-0.3.4.tgz#7ff1a1c339e877baa86b0856bebb33621cd5620b"
 
 fd-slicer@~1.0.1:
   version "1.0.1"
@@ -4846,6 +4833,10 @@ json-parse-helpfulerror@^1.0.2, json-parse-helpfulerror@^1.0.3:
   dependencies:
     jju "^1.1.0"
 
+json-schema-traverse@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/json-schema-traverse/-/json-schema-traverse-0.3.0.tgz#0016c0b1ca1efe46d44d37541bcdfc19dcfae0db"
+
 json-schema@0.2.3:
   version "0.2.3"
   resolved "https://registry.yarnpkg.com/json-schema/-/json-schema-0.2.3.tgz#b480c892e59a2f05954ce727bd3f2a4e882f9e13"
@@ -4943,10 +4934,6 @@ latest-version@^3.0.0:
 lazy-cache@^1.0.3:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/lazy-cache/-/lazy-cache-1.0.4.tgz#a1d78fc3a50474cb80845d3b3b6e1da49a446e8e"
-
-lazy-req@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/lazy-req/-/lazy-req-1.1.0.tgz#bdaebead30f8d824039ce0ce149d4daa07ba1fac"
 
 lazy-req@^2.0.0:
   version "2.0.0"
@@ -5753,9 +5740,9 @@ npm-cache-filename@~1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/npm-cache-filename/-/npm-cache-filename-1.0.2.tgz#ded306c5b0bfc870a9e9faf823bc5f283e05ae11"
 
-npm-check-updates@^2.11.3:
-  version "2.11.3"
-  resolved "https://registry.yarnpkg.com/npm-check-updates/-/npm-check-updates-2.11.3.tgz#5e0172857f89004340b1b9afc0e9acb3bc56d440"
+npm-check-updates@^2.12.0:
+  version "2.12.0"
+  resolved "https://registry.yarnpkg.com/npm-check-updates/-/npm-check-updates-2.12.0.tgz#f7326b865f6916058822e8d05045d88b8410aeb9"
   dependencies:
     bluebird "^3.4.3"
     chalk "^1.1.3"
@@ -5774,8 +5761,8 @@ npm-check-updates@^2.11.3:
     semver "^5.3.0"
     semver-utils "^1.1.1"
     snyk "^1.25.1"
-    spawn-please "^0.2.0"
-    update-notifier "^1.0.2"
+    spawn-please "^0.3.0"
+    update-notifier "^2.2.0"
 
 npm-install-checks@~3.0.0:
   version "3.0.0"
@@ -7690,9 +7677,9 @@ sparkles@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/sparkles/-/sparkles-1.0.0.tgz#1acbbfb592436d10bbe8f785b7cc6f82815012c3"
 
-spawn-please@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/spawn-please/-/spawn-please-0.2.0.tgz#bdd85991b80409f9c0dac709bc44a0a318a9760d"
+spawn-please@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/spawn-please/-/spawn-please-0.3.0.tgz#db338ec4cff63abc69f1d0e08cee9eb8bebd9d11"
 
 spawn-rx@^2.0.10:
   version "2.0.10"
@@ -8421,19 +8408,6 @@ update-notifier@^0.6.0:
     is-npm "^1.0.0"
     latest-version "^2.0.0"
     semver-diff "^2.0.0"
-
-update-notifier@^1.0.2:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/update-notifier/-/update-notifier-1.0.3.tgz#8f92c515482bd6831b7c93013e70f87552c7cf5a"
-  dependencies:
-    boxen "^0.6.0"
-    chalk "^1.0.0"
-    configstore "^2.0.0"
-    is-npm "^1.0.0"
-    latest-version "^2.0.0"
-    lazy-req "^1.1.0"
-    semver-diff "^2.0.0"
-    xdg-basedir "^2.0.0"
 
 update-notifier@^2.1.0:
   version "2.1.0"
