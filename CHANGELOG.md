@@ -1,5 +1,11 @@
 ## Change Log
 
+### v1.0.6 (2017/06/21 22:50 +00:00)
+- [28ea124](https://github.com/willyb321/media_mate/commit/28ea1249a4de3651dbd16abeef2cd51f9d726140) Release v1.0.6 (@willyb321)
+- [1cac090](https://github.com/willyb321/media_mate/commit/1cac090759edfa902478c19c7ced7fa852865164) .release.json (@willyb321)
+- [701755a](https://github.com/willyb321/media_mate/commit/701755a77550627c76606438fb91c396e39795c1) fix some downloader crashes (@willyb321)
+- [91b4a52](https://github.com/willyb321/media_mate/commit/91b4a52e7407e8c5529a60d8d3048909bc058533) changes (@willyb321)
+
 ### v1.0.5 (2017/06/21 09:17 +00:00)
 - [c2a95e1](https://github.com/willyb321/media_mate/commit/c2a95e11e9992201cbbcfc4277bd4c3bab7d578f) Release v1.0.5 (@willyb321)
 - [e4e3f06](https://github.com/willyb321/media_mate/commit/e4e3f06bc621f131b1ee4cd142c6a78b7373c16a) finally build on windows :tada: (@willyb321)
