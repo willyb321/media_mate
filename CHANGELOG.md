@@ -1,5 +1,11 @@
 ## Change Log
 
+### v1.0.5 (2017/06/21 09:17 +00:00)
+- [c2a95e1](https://github.com/willyb321/media_mate/commit/c2a95e11e9992201cbbcfc4277bd4c3bab7d578f) Release v1.0.5 (@willyb321)
+- [e4e3f06](https://github.com/willyb321/media_mate/commit/e4e3f06bc621f131b1ee4cd142c6a78b7373c16a) finally build on windows :tada: (@willyb321)
+- [74d5d6c](https://github.com/willyb321/media_mate/commit/74d5d6cd01ed0764ce96a4fb8264c520aca62738) deps (@willyb321)
+- [8a05c5c](https://github.com/willyb321/media_mate/commit/8a05c5cc67ff9cf6ec1d25aa57a310727c6a0894) changelog (@willyb321)
+
 ### v1.0.4 (2017/06/14 22:55 +00:00)
 - [0c1da22](https://github.com/willyb321/media_mate/commit/0c1da228b896b40d5401410f4027baed469672ad) Release v1.0.4 (@willyb321)
 - [7660bce](https://github.com/willyb321/media_mate/commit/7660bce3b66bf4c9e2186fdb8b2a64241a6c1156) .release.json (@willyb321)
