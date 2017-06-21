@@ -279,7 +279,10 @@ function insertDlPath(callback) {
 
 function updateProgress(magnet, torrent) {
 	const percent = Math.round(torrent.progress * 100 * 100) / 100;
-	document.getElementsByName(magnet)[0].parentNode.childNodes[1].nodeValue = `- ${percent.toString()}% downloaded, ${moment.duration(torrent.timeRemaining / 1000, 'seconds').humanize()} remaining.`;
+	const elem = document.getElementsByName(magnet)[0];
+	if (elem) {
+		elem.parentNode.childNodes[1].nodeValue = `- ${percent.toString()}% downloaded, ${moment.duration(torrent.timeRemaining / 1000, 'seconds').humanize()} remaining.`;
+	}
 }
 
 /**
@@ -294,8 +297,16 @@ function addTor(magnet, index) {
 			path: callback
 		}, torrent => {
 			torrent.index = index;
-			document.getElementsByName(magnet)[0].checked = true;
-			document.getElementsByName(magnet)[0].disabled = true;
+			try {
+				const elem = document.getElementsByName(magnet)[0];
+				if (elem) {
+					elem.checked = true;
+					elem.disabled = true;
+				}
+			} catch (err) {
+				console.error(err);
+			}
+
 			torrent.on('download', () => {
 				prog(torrent, magnet);
 				updateDlProg(magnet, torrent);
