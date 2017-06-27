@@ -10,7 +10,7 @@
 require('dotenv').config({path: `${__dirname}/.env`});
 const {dialog} = require('electron').remote;
 const path = require('path');
-const bugsnag = require('bugsnag');
+const Raven = require('raven');
 const ipc = require('electron').ipcRenderer;
 const PouchDB = require('pouchdb');
 require('events').EventEmitter.prototype._maxListeners = 1000;
@@ -27,7 +27,9 @@ let dupeCount = 0;
 let db;
 PouchDB.plugin(require('pouchdb-find'));
 const version = require('electron').remote.app.getVersion();
-bugsnag.register('03b389d77abc2d10136d8c859391f952', {appVersion: version, sendCode: true});
+Raven.config('https://3d1b1821b4c84725a3968fcb79f49ea1:1ec6e95026654dddb578cf1555a2b6eb@sentry.io/184666').install({
+	release: version
+});
 const client = new WebTorrent();
 let i = 0;
 let bar;
@@ -38,12 +40,12 @@ const updateDlProg = _.throttle(updateProgress, 2000);
 
 process.on('unhandledRejection', (err, promise) => {
 	console.error('Unhandled rejection: ' + (err && err.stack || err)); // eslint-disable-line
-	bugsnag.notify(new Error(err));
+	Raven.captureException(err);
 });
 
 function handleErrs(err) {
 	console.error('Unhandled error: ' + (err && err.stack || err)); // eslint-disable-line
-	bugsnag.notify(new Error(err));
+	Raven.captureException(err);
 }
 
 /**
@@ -398,7 +400,7 @@ function runScript(e) {
 		const RSS = new RSSParse(tb.value);
 		// Emitted on RSS error (invalid url etc).
 		RSS.on('error', err => {
-			bugsnag.notify(new Error(err));
+			Raven.captureException(err);
 		});
 		RSS.on('offline', online => {
 			swal('Offline', 'You are offline, thats fine though.', 'info');

@@ -20,9 +20,9 @@ console.timeEnd('updater');
 console.time('is-dev');
 import isDev from 'electron-is-dev';
 console.timeEnd('is-dev');
-console.time('bugsnag');
-import bugsnag from 'bugsnag';
-console.timeEnd('bugsnag');
+console.time('sentry');
+import Raven from 'raven';
+console.timeEnd('sentry');
 console.time('rssparse');
 import {RSSParse} from '../lib/rssparse';
 console.timeEnd('rssparse');
@@ -54,7 +54,9 @@ console.timeEnd('path');
 console.timeEnd('require');
 let RSS;
 const app = electron.app;
-bugsnag.register('03b389d77abc2d10136d8c859391f952', {appVersion: app.getVersion(), sendCode: true});
+Raven.config('https://3d1b1821b4c84725a3968fcb79f49ea1:1ec6e95026654dddb578cf1555a2b6eb@sentry.io/184666').install({
+	release: app.getVersion()
+});
 let win;
 
 if (process.env.SPECTRON) {
@@ -102,7 +104,7 @@ autoUpdater.on('error', error => {
 		message: `Sorry, we've had an error. The message is ` + error
 	});
 	if (!isDev) {
-		bugsnag.notify(error);
+		Raven.captureException(error);
 	}
 });
 /**
@@ -121,15 +123,15 @@ let mainWindow;
  * @param err {object} - The error to be handled.
  */
 process.on('uncaughtError', err => {
-	bugsnag.notify(err);
 	console.log('ERROR! The error is: ' + err || err.stack);
+	Raven.captureException(err);
 });
 /**
  * Same as process.on('uncaughtError') but for promises.
  */
 process.on('unhandledRejection', err => {
 	console.error('Unhandled rejection: ' + (err && err.stack || err)); // eslint-disable-line
-	bugsnag.notify(err);
+	Raven.captureException(err);
 });
 /**
  * Called from renderer process when an error occurs
@@ -196,6 +198,7 @@ function createMainWindow() {
 			}
 		} else {
 			console.log(e);
+			Raven.captureException(e);
 		}
 	});
 	win.once('ready-to-show', () => {
@@ -209,13 +212,13 @@ function createMainWindow() {
 function onBoard() {
 	storage.get('firstrun', (err, data) => {
 		if (err) {
-			throw err;
+			Raven.captureException(err);
 		}
 		if (_.isEmpty(data)) {
 			mainWindow.webContents.executeJavaScript('firstrun()');
 			storage.set('firstrun', {first: false}, err => {
 				if (err) {
-					throw err;
+					Raven.captureException(err);
 				}
 			});
 		}
@@ -262,7 +265,7 @@ function ignoreDupeTorrents(torrent, callback) {
 					});
 				}).catch(err => {
 					if (err) {
-						throw err;
+						Raven.captureException(err);
 					}
 				});
 			} else if (doc.downloaded === true) {
@@ -283,7 +286,7 @@ function ignoreDupeTorrents(torrent, callback) {
 			} else if (err.status !== 404) {
 				db.close().then(() => {
 				});
-				throw err;
+				Raven.captureException(err);
 			}
 		});
 }
@@ -294,7 +297,7 @@ function ignoreDupeTorrents(torrent, callback) {
 function getRSSURI(callback) {
 	storage.get('showRSS', (err, data) => {
 		if (err) {
-			throw err;
+			Raven.captureException(err);
 		}
 		if (_.isEmpty(data) === false) {
 			callback(data.showRSSURI);
@@ -315,7 +318,7 @@ function watchRSS() {
 		} else {
 			RSS = new RSSParse(uri);
 			RSS.on('error', err => {
-				bugsnag.notify(new Error(err));
+				Raven.captureException(err);
 			});
 			RSS.on('offline', () => {
 				if (mainWindow.webContents.isLoading() === false) {
@@ -371,6 +374,7 @@ app.on('ready', () => {
 	}, error => {
 		if (error) {
 			console.log(error);
+			Raven.captureException(error);
 			console.error('Failed to register protocol');
 		}
 	});

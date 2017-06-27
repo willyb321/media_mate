@@ -388,6 +388,13 @@ async-each@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/async-each/-/async-each-1.0.1.tgz#19d386a1d9edc6e7c1c85d388aedbcc56d33602d"
 
+async-retry@1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/async-retry/-/async-retry-1.1.1.tgz#c47b3aac3fb891fc29117b4a222dd33d27c1d5d7"
+  dependencies:
+    babel-preset-es2015 "6.24.1"
+    retry "0.10.1"
+
 async@1.x, async@^1.4.0, async@^1.5.0, async@~1.5:
   version "1.5.2"
   resolved "https://registry.yarnpkg.com/async/-/async-1.5.2.tgz#ec6a61ae56480c0c3cb241c95618e20892f9672a"
@@ -993,7 +1000,7 @@ babel-preset-env@^1.3.2, babel-preset-env@^1.5.2:
     invariant "^2.2.2"
     semver "^5.3.0"
 
-babel-preset-es2015@^6.24.1:
+babel-preset-es2015@6.24.1, babel-preset-es2015@^6.24.1:
   version "6.24.1"
   resolved "https://registry.yarnpkg.com/babel-preset-es2015/-/babel-preset-es2015-6.24.1.tgz#d44050d6bc2c9feea702aaf38d727a0210538939"
   dependencies:
@@ -2368,9 +2375,9 @@ electron-builder-http@19.7.2, electron-builder-http@~19.7.2:
     debug "^2.6.8"
     fs-extra-p "^4.3.0"
 
-electron-builder-util@19.7.2, electron-builder-util@~19.7.2:
-  version "19.7.2"
-  resolved "https://registry.yarnpkg.com/electron-builder-util/-/electron-builder-util-19.7.2.tgz#d33454ead9f6f782ebc4aa7503fa33034a940f22"
+electron-builder-util@19.8.0, electron-builder-util@~19.8.0:
+  version "19.8.0"
+  resolved "https://registry.yarnpkg.com/electron-builder-util/-/electron-builder-util-19.8.0.tgz#f6aa75c271cafcc335b965b50416d167e74ad6c5"
   dependencies:
     "7zip-bin" "^2.1.0"
     bluebird-lst "^1.0.2"
@@ -2386,9 +2393,9 @@ electron-builder-util@19.7.2, electron-builder-util@~19.7.2:
     stat-mode "^0.2.2"
     tunnel-agent "^0.6.0"
 
-electron-builder@^19.7.1:
-  version "19.7.3"
-  resolved "https://registry.yarnpkg.com/electron-builder/-/electron-builder-19.7.3.tgz#37040a3a4a3e6fe8fff041a65210a7692817a53d"
+electron-builder@^19.8.0:
+  version "19.10.0"
+  resolved "https://registry.yarnpkg.com/electron-builder/-/electron-builder-19.10.0.tgz#6c03987bae06c85fe88083a73b8c8142f1a3fb14"
   dependencies:
     "7zip-bin" "^2.1.0"
     ajv "^5.2.0"
@@ -2400,10 +2407,10 @@ electron-builder@^19.7.1:
     cuint "^0.2.2"
     debug "^2.6.8"
     electron-builder-http "19.7.2"
-    electron-builder-util "19.7.2"
+    electron-builder-util "19.8.0"
     electron-download-tf "4.3.1"
     electron-osx-sign "0.4.6"
-    electron-publish "19.7.2"
+    electron-publish "19.8.0"
     fs-extra-p "^4.3.0"
     hosted-git-info "^2.4.2"
     is-ci "^1.0.10"
@@ -2516,14 +2523,14 @@ electron-osx-sign@0.4.6:
     plist "^2.0.1"
     tempfile "^1.1.1"
 
-electron-publish@19.7.2:
-  version "19.7.2"
-  resolved "https://registry.yarnpkg.com/electron-publish/-/electron-publish-19.7.2.tgz#8fd8f1a6d895e2e0d4b654d2d78d1bd1b768e613"
+electron-publish@19.8.0:
+  version "19.8.0"
+  resolved "https://registry.yarnpkg.com/electron-publish/-/electron-publish-19.8.0.tgz#ff288f53f639553791a727dfcad1b9d15c999365"
   dependencies:
     bluebird-lst "^1.0.2"
     chalk "^1.1.3"
     electron-builder-http "~19.7.2"
-    electron-builder-util "~19.7.2"
+    electron-builder-util "~19.8.0"
     fs-extra-p "^4.3.0"
     mime "^1.3.6"
 
@@ -2842,9 +2849,9 @@ eslint@^3.18.0:
     text-table "~0.2.0"
     user-home "^2.0.0"
 
-eslint@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/eslint/-/eslint-4.0.0.tgz#7277c01437fdf41dccd168d5aa0e49b75ca1f260"
+eslint@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/eslint/-/eslint-4.1.1.tgz#facbdfcfe3e0facd3a8b80dc98c4e6c13ae582df"
   dependencies:
     babel-code-frame "^6.22.0"
     chalk "^1.1.3"
@@ -2868,6 +2875,7 @@ eslint@^4.0.0:
     json-stable-stringify "^1.0.1"
     levn "^0.3.0"
     lodash "^4.17.4"
+    minimatch "^3.0.2"
     mkdirp "^0.5.1"
     natural-compare "^1.4.0"
     optionator "^0.8.2"
@@ -3592,7 +3600,7 @@ glob@^5.0.15:
     once "^1.3.0"
     path-is-absolute "^1.0.0"
 
-glob@^7.0.0, glob@^7.0.3, glob@^7.0.5, glob@^7.1.1, glob@^7.1.2, glob@~7.1.0, glob@~7.1.1:
+glob@^7.0.0, glob@^7.0.3, glob@^7.0.5, glob@^7.1.1, glob@^7.1.2, glob@~7.1.0, glob@~7.1.1, glob@~7.1.2:
   version "7.1.2"
   resolved "https://registry.yarnpkg.com/glob/-/glob-7.1.2.tgz#c19c9df9a028702d678612384a6552404c636d15"
   dependencies:
@@ -5735,9 +5743,9 @@ npm-cache-filename@~1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/npm-cache-filename/-/npm-cache-filename-1.0.2.tgz#ded306c5b0bfc870a9e9faf823bc5f283e05ae11"
 
-npm-check-updates@^2.12.0:
-  version "2.12.0"
-  resolved "https://registry.yarnpkg.com/npm-check-updates/-/npm-check-updates-2.12.0.tgz#f7326b865f6916058822e8d05045d88b8410aeb9"
+npm-check-updates@^2.12.1:
+  version "2.12.1"
+  resolved "https://registry.yarnpkg.com/npm-check-updates/-/npm-check-updates-2.12.1.tgz#9a41006f5186e8a59da7fd2b466fee9e896d865d"
   dependencies:
     bluebird "^3.4.3"
     chalk "^1.1.3"
@@ -5965,7 +5973,7 @@ object-assign@^4.0.1, object-assign@^4.1.0:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/object-assign/-/object-assign-4.1.1.tgz#2109adc7965887cfc05cbbd442cac8bfbb360863"
 
-object-inspect@~1.2.1:
+object-inspect@~1.2.2:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/object-inspect/-/object-inspect-1.2.2.tgz#c82115e4fcc888aea14d64c22e4f17f6a70d5e5a"
 
@@ -7029,10 +7037,11 @@ regjsparser@^0.1.4:
   dependencies:
     jsesc "~0.5.0"
 
-release-it@^2.7.3:
-  version "2.7.3"
-  resolved "https://registry.yarnpkg.com/release-it/-/release-it-2.7.3.tgz#2490e10e2a72c37462832c3a6693dedfe8c412c3"
+release-it@^2.8.0:
+  version "2.8.0"
+  resolved "https://registry.yarnpkg.com/release-it/-/release-it-2.8.0.tgz#d6550eaa798522823bed262e97610b9e0e33067a"
   dependencies:
+    async-retry "1.1.1"
     chalk "1.1.3"
     github "9.2.0"
     glob "7.1.1"
@@ -7243,11 +7252,17 @@ resolve-url@~0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/resolve-url/-/resolve-url-0.2.1.tgz#2c637fe77c893afd2a663fe21aa9080068e2052a"
 
-resolve@1.1.x, resolve@~1.1.7:
+resolve@1.1.x:
   version "1.1.7"
   resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.1.7.tgz#203114d82ad2c5ed9e8e0411b3932875e889e97b"
 
-resolve@^1.1.6, resolve@^1.1.7, resolve@^1.2.0:
+resolve@^1.1.6, resolve@^1.1.7, resolve@~1.3.3:
+  version "1.3.3"
+  resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.3.3.tgz#655907c3469a8680dc2de3a275a8fdd69691f0e5"
+  dependencies:
+    path-parse "^1.0.5"
+
+resolve@^1.2.0:
   version "1.3.2"
   resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.3.2.tgz#1f0442c9e0cbb8136e87b9305f932f46c7f28235"
   dependencies:
@@ -7273,7 +7288,7 @@ resumer@~0.0.0:
   dependencies:
     through "~2.3.4"
 
-retry@^0.10.0, retry@~0.10.0:
+retry@0.10.1, retry@^0.10.0, retry@~0.10.0:
   version "0.10.1"
   resolved "https://registry.yarnpkg.com/retry/-/retry-0.10.1.tgz#e76388d217992c252750241d3d3956fed98d8ff4"
 
@@ -7982,20 +7997,20 @@ taffydb@2.6.2:
   version "2.6.2"
   resolved "https://registry.yarnpkg.com/taffydb/-/taffydb-2.6.2.tgz#7cbcb64b5a141b6a2efc2c5d2c67b4e150b2a268"
 
-tape@^4.6.3:
-  version "4.6.3"
-  resolved "https://registry.yarnpkg.com/tape/-/tape-4.6.3.tgz#637e77581e9ab2ce17577e9bd4ce4f575806d8b6"
+tape@^4.7.0:
+  version "4.7.0"
+  resolved "https://registry.yarnpkg.com/tape/-/tape-4.7.0.tgz#f3ebb214fef3d6907e5a57dbaafe3bd8a7cbed88"
   dependencies:
     deep-equal "~1.0.1"
     defined "~1.0.0"
     for-each "~0.3.2"
     function-bind "~1.1.0"
-    glob "~7.1.1"
+    glob "~7.1.2"
     has "~1.0.1"
     inherits "~2.0.3"
     minimist "~1.2.0"
-    object-inspect "~1.2.1"
-    resolve "~1.1.7"
+    object-inspect "~1.2.2"
+    resolve "~1.3.3"
     resumer "~0.0.0"
     string.prototype.trim "~1.1.2"
     through "~2.3.8"

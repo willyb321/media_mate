@@ -9,7 +9,7 @@
 /* eslint-disable max-nested-callbacks */
 require('dotenv').config({path: `${__dirname}/../.env`});
 const events = require('events');
-const bugsnag = require('bugsnag'); // Catch bugs / errors
+const Raven = require('raven');
 const isRenderer = require('is-electron-renderer');
 const TVDB = require('node-tvdb');
 // Const storage = require('electron-json-storage');
@@ -30,9 +30,9 @@ if (isRenderer) {
 } else {
 	version = require('electron').app.getVersion();
 }
-
-bugsnag.register('03b389d77abc2d10136d8c859391f952', {sendCode: true});
-
+Raven.config('https://3d1b1821b4c84725a3968fcb79f49ea1:1ec6e95026654dddb578cf1555a2b6eb@sentry.io/184666').install({
+	release: version
+});
 /**
  * Class for getting images from files in the download directory
  */
@@ -70,11 +70,7 @@ class GetImgs extends events.EventEmitter {
 		return new Promise(resolve => {
 			dir.files(this._directory, (err, files) => {
 				if (err) {
-					bugsnag.notify(new Error(err), {
-						subsystem: {
-							name: 'Get Imgs Class'
-						}
-					});
+					Raven.captureException(err);
 				}
 				files.sort();
 				this._files = files;
@@ -153,11 +149,7 @@ class GetImgs extends events.EventEmitter {
 				}
 			}
 		} catch (err) {
-			bugsnag.notify(new Error(err), {
-				subsystem: {
-					name: 'Get Imgs Class'
-				}
-			});
+			Raven.captureException(err);
 			setImmediate(() => this._loop());
 		}
 	}
@@ -176,11 +168,7 @@ class GetImgs extends events.EventEmitter {
 				if (err.message === 'Resource not found') {
 					setImmediate(() => this._loop());
 				} else {
-					bugsnag.notify(new Error(err), {
-						subsystem: {
-							name: 'Get Imgs Class'
-						}
-					});
+					Raven.captureException(err);
 				}
 			});
 	}
@@ -198,11 +186,7 @@ class GetImgs extends events.EventEmitter {
 				if (err.message === 'Resource not found') {
 					setImmediate(() => this._loop());
 				} else {
-					bugsnag.notify(new Error(err), {
-						subsystem: {
-							name: 'Get Imgs Class'
-						}
-					});
+					Raven.captureException(err);
 				}
 			});
 	}

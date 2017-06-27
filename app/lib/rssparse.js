@@ -9,10 +9,9 @@
 const events = require('events');
 const FeedParser = require('feedparser');
 const request = require('request'); // For fetching the feed
-const bugsnag = require('bugsnag'); // Catch bugs / errors
 const isRenderer = require('is-electron-renderer');
 const isOnline = require('is-online');
-
+const Raven = require('raven');
 let version;
 // Make sure that version can be got from both render and main process
 if (isRenderer) {
@@ -20,8 +19,10 @@ if (isRenderer) {
 } else {
 	version = require('electron').app.getVersion();
 }
+Raven.config('https://3d1b1821b4c84725a3968fcb79f49ea1:1ec6e95026654dddb578cf1555a2b6eb@sentry.io/184666').install({
+	release: version
+});
 
-bugsnag.register('03b389d77abc2d10136d8c859391f952', {appVersion: version, sendCode: true});
 /**
  * Class for parsing RSS
  */
@@ -51,12 +52,8 @@ class RSSParse extends events.EventEmitter {
 		const feedparser = new FeedParser();
 		req.on('error', err => {
 			console.log(err);
+			Raven.captureException(err);
 			this.emit('error', err);
-			bugsnag.notify(new Error(err), {
-				subsystem: {
-					name: 'RSS Parser'
-				}
-			});
 		});
 
 		req.on('response', function (res) {
@@ -65,11 +62,7 @@ class RSSParse extends events.EventEmitter {
 			if (res.statusCode === 200) {
 				stream.pipe(feedparser);
 				feedparser.on('error', err => {
-					bugsnag.notify(new Error(err), {
-						subsystem: {
-							name: 'RSS Parser'
-						}
-					});
+					Raven.captureException(err);
 				});
 
 				feedparser.on('readable', function () {
@@ -85,6 +78,7 @@ class RSSParse extends events.EventEmitter {
 				});
 			} else {
 				this.emit('error', new Error('Bad status code'));
+				Raven.captureException(new Error('Bad status code'));
 			}
 		});
 	}

@@ -15,7 +15,7 @@ const version = require('electron').remote.app.getVersion();
 const fs = require('fs-extra');
 const TVDB = require('node-tvdb');
 const storage = require('electron-json-storage');
-const bugsnag = require('bugsnag');
+const Raven = require('raven');
 const moment = require('moment');
 const _ = require('underscore');
 const parser = require('episode-parser');
@@ -28,7 +28,9 @@ PouchDB.plugin(require('pouchdb-find'));
 const tvdb = new TVDB(process.env.TVDB_KEY);
 const vidProgressthrottled = _.throttle(vidProgress, 500);
 
-bugsnag.register('03b389d77abc2d10136d8c859391f952', {appVersion: version, sendCode: true});
+Raven.config('https://3d1b1821b4c84725a3968fcb79f49ea1:1ec6e95026654dddb578cf1555a2b6eb@sentry.io/184666').install({
+	release: version
+});
 /**
  * Add a context menu so that we can reset time watched.
  */
@@ -67,10 +69,10 @@ function convertImgToBlob(img, callback) {
 		blobUtil.blobToBase64String(blob).then(base64String => {
 			callback(base64String);
 		}).catch(err => {
-			throw err;
+			Raven.captureException(err);
 		});
 	}).catch(err => {
-		throw err;
+		Raven.captureException(err);
 	});
 }
 /**
@@ -99,7 +101,7 @@ function getImgDB(data) {
 								img.children[0].src = URL.createObjectURL(blob); // eslint-disable-line
 								resolve(['got from db']);
 							}).catch(err => {
-								throw err;
+								Raven.captureException(err);
 							});
 						});
 					}
@@ -117,7 +119,7 @@ function getPath() {
 	return new Promise(resolve => {
 		storage.get('path', (err, data) => {
 			if (err) {
-				throw err;
+				Raven.captureException(err);
 			}
 			if (_.isEmpty(data) === false) {
 				resolve({path: data.path});
@@ -125,11 +127,7 @@ function getPath() {
 				const dir = path.join(require('os').homedir(), 'media_mate_dl');
 				fs.ensureDir(dir, err => {
 					if (err) {
-						bugsnag.notify(new Error(err), {
-							subsystem: {
-								name: 'Viewer'
-							}
-						});
+						Raven.captureException(err);
 					}
 					resolve({path: dir});
 				});
@@ -189,11 +187,7 @@ async function getImgs() {
 					})
 					.catch(err => {
 						console.log(err);
-						bugsnag.notify(new Error(err), {
-							subsystem: {
-								name: 'Viewer'
-							}
-						});
+						Raven.captureException(err);
 					});
 			}
 		});
@@ -230,19 +224,11 @@ function vidFinished(e) {
 		figcap[2].innerText = `${figcap[0].title} (${Math.round(percent)}% watched)`;
 		if (err) {
 			console.log(err);
-			bugsnag.notify(new Error(err), {
-				subsystem: {
-					name: 'Viewer'
-				}
-			});
+			Raven.captureException(err);
 		}
 		storage.set(filename, {file: filename, watched: true, time: (process.env.SPECTRON ? 5.014 : this.duration), duration: (process.env.SPECTRON ? 5.014 : duration)}, err => {
 			if (err) {
-				bugsnag.notify(new Error(err), {
-					subsystem: {
-						name: 'Viewer'
-					}
-				});
+				Raven.captureException(err);
 			}
 		});
 	});
@@ -255,16 +241,12 @@ function handleVids(e) {
 	const filename = this.getAttribute('data-file-name');
 	storage.get(filename, (err, data) => {
 		if (err) {
-			bugsnag.notify(new Error(err), {
-				subsystem: {
-					name: 'Viewer'
-				}
-			});
+			Raven.captureException(err);
 		}
 		if (_.isEmpty(data) === true) {
 			storage.set(filename, {file: filename, watched: false, time: this.currentTime, duration: this.duration}, err => {
 				if (err) {
-					throw err;
+					Raven.captureException(err);
 				}
 			});
 		} else {
@@ -287,7 +269,7 @@ function resetTime(params) {
 	const figcap = elem.childNodes;
 	storage.get(filename, (err, data) => {
 		if (err) {
-			throw err;
+			Raven.captureException(err);
 		}
 		const time = 0;
 		const duration = data.duration;
@@ -305,7 +287,7 @@ function resetTime(params) {
 	});
 	storage.remove(filename, err => {
 		if (err) {
-			throw err;
+			Raven.captureException(err);
 		}
 	});
 }
@@ -332,22 +314,18 @@ function vidProgress(e) {
 		figcap[2].innerText = `${figcap[0].title} (${Math.round(percent)}% watched)`;
 		storage.get(filename, (err, data) => {
 			if (err) {
-				bugsnag.notify(new Error(err), {
-					subsystem: {
-						name: 'Viewer'
-					}
-				});
+				Raven.captureException(err);
 			}
 			if (_.isEmpty(data) === false) {
 				storage.set(filename, {file: filename, watched: false, time: this.currentTime, duration: this.duration}, err => {
 					if (err) {
-						throw err;
+						Raven.captureException(err);
 					}
 				});
 			} else {
 				storage.set(filename, {file: filename, watched: false, time: this.currentTime, duration: this.duration}, err => {
 					if (err) {
-						throw err;
+						Raven.captureException(err);
 					}
 				});
 			}
@@ -356,19 +334,11 @@ function vidProgress(e) {
 		storage.get(filename, (err, data) => {
 			if (err) {
 				console.log(err);
-				bugsnag.notify(new Error(err), {
-					subsystem: {
-						name: 'Viewer'
-					}
-				});
+				Raven.captureException(err);
 			}
 			storage.set(filename, {file: filename, watched: true, time: this.currentTime, duration: this.duration}, err => {
 				if (err) {
-					bugsnag.notify(new Error(err), {
-						subsystem: {
-							name: 'Viewer'
-						}
-					});
+					Raven.captureException(err);
 				}
 			});
 		});
@@ -388,6 +358,7 @@ async function watchedTime(vid, elem, figcap) {
 		storage.get(vid.getAttribute('data-store-name'), (err, data) => {
 			if (err) {
 				console.log(err);
+				Raven.captureException(err);
 			}
 			if (_.isEmpty(data)) {
 				elem.style.zIndex = 9999;
