@@ -1,5 +1,13 @@
 ## Change Log
 
+### v1.0.7 (2017/06/27 23:01 +00:00)
+- [fc87f3f](https://github.com/willyb321/media_mate/commit/fc87f3f4d34f0d178a6eadcae0b9bf5c39cd0511) Release v1.0.7 (@willyb321)
+- [1c7c267](https://github.com/willyb321/media_mate/commit/1c7c267d8e76f4c87136d46a3bcc1941334e4e34) switch to sentry and also update deps (@willyb321)
+- [b6accef](https://github.com/willyb321/media_mate/commit/b6accefe359b683c8d6b76b5053525d9966dbafd) deps (@willyb321)
+- [30a504d](https://github.com/willyb321/media_mate/commit/30a504d375058ca305c3ac7e20e83e7b778ad7cb) add contributing.md (@willyb321)
+- [ad38aef](https://github.com/willyb321/media_mate/commit/ad38aef02abff73f7306af0ebd0f3ff2f8cef374) add code of conduct (@willyb321)
+- [1feb43c](https://github.com/willyb321/media_mate/commit/1feb43c99a92aa35ba996ec453dc74b328570f52) changes (@willyb321)
+
 ### v1.0.6 (2017/06/21 22:50 +00:00)
 - [28ea124](https://github.com/willyb321/media_mate/commit/28ea1249a4de3651dbd16abeef2cd51f9d726140) Release v1.0.6 (@willyb321)
 - [1cac090](https://github.com/willyb321/media_mate/commit/1cac090759edfa902478c19c7ced7fa852865164) .release.json (@willyb321)
