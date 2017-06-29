@@ -6,4 +6,7 @@
   <component name="UnicodeBrowser">
     <option name="fontName" value="Source Code Pro" />
   </component>
+  <component name="WebPackConfiguration">
+    <option name="path" value="$PROJECT_DIR$/webpack.config.js" />
+  </component>
 </project>
