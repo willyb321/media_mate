@@ -19,9 +19,9 @@ if (isRenderer) {
 } else {
 	version = require('electron').app.getVersion();
 }
-Raven.config('https://3d1b1821b4c84725a3968fcb79f49ea1:1ec6e95026654dddb578cf1555a2b6eb@sentry.io/184666').install({
+Raven.config('https://3d1b1821b4c84725a3968fcb79f49ea1:1ec6e95026654dddb578cf1555a2b6eb@sentry.io/184666', {
 	release: version
-});
+}).install();
 
 /**
  * Class for parsing RSS
