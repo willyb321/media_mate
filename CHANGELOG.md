@@ -1,5 +1,12 @@
 ## Change Log
 
+### v1.0.8 (2017/06/29 23:05 +00:00)
+- [0b5d865](https://github.com/willyb321/media_mate/commit/0b5d86512c14998b5c636e03f483313ce56c02ef) Release v1.0.8 (@willyb321)
+- [ad0812f](https://github.com/willyb321/media_mate/commit/ad0812f2e3f03d1ced763cda4c36823c24e51d3d) i put the config in the wrong bit (@willyb321)
+- [02a3e2d](https://github.com/willyb321/media_mate/commit/02a3e2dfce34dd1278670bca29a02a71f6457180) .idea (@willyb321)
+- [60f169c](https://github.com/willyb321/media_mate/commit/60f169c8425c5c35b9d0e6e8cb2cf27f22c50569) deps (@willyb321)
+- [787c804](https://github.com/willyb321/media_mate/commit/787c804f2e2c39441f9ee5d3656d6239469208ca) Changelog (@willyb321)
+
 ### v1.0.7 (2017/06/27 23:01 +00:00)
 - [fc87f3f](https://github.com/willyb321/media_mate/commit/fc87f3f4d34f0d178a6eadcae0b9bf5c39cd0511) Release v1.0.7 (@willyb321)
 - [1c7c267](https://github.com/willyb321/media_mate/commit/1c7c267d8e76f4c87136d46a3bcc1941334e4e34) switch to sentry and also update deps (@willyb321)
