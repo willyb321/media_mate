@@ -326,7 +326,7 @@ function watchRSS() {
 					mainWindow.webContents.executeJavaScript(`sweetAlert('Offline', 'You are offline, thats fine though.', 'info')`);
 				} else {
 					console.log('offline');
-					mainWindow.webContents.once('dom-ready', e => {
+					mainWindow.webContents.once('dom-ready', () => {
 						mainWindow.webContents.executeJavaScript(`sweetAlert('Offline', 'You are offline, thats fine though.', 'info')`);
 					});
 				}
