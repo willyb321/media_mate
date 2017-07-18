@@ -152,7 +152,7 @@ function ignoreDupeTorrents(torrent, callback) {
 				tvdbID: torrent['tv:show_name']['#'],
 				airdate: torrent['rss:pubdate']['#'],
 				downloaded: false
-			}).then(res => {
+			}).then(() => {
 				callback();
 			}).catch(err => {
 				handleErrs(err);
