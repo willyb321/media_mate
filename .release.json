@@ -25,7 +25,8 @@
 		"release": true,
 		"releaseName": "Release %s",
 		"preRelease": false,
-		"tokenRef": "GITHUB_TOKEN"
+		"tokenRef": "GITHUB_TOKEN",
+		"draft": true
 	},
 	"prompt": {
 		"src": {
