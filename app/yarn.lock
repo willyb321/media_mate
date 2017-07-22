@@ -1509,9 +1509,9 @@ mp4-stream@^2.0.0:
     next-event "^1.0.0"
     readable-stream "^2.0.3"
 
-mprogress@^0.1.1:
+mprogress@willyb321/MProgress.js:
   version "0.1.1"
-  resolved "https://registry.yarnpkg.com/mprogress/-/mprogress-0.1.1.tgz#1135daa480329106c4f749e9118d89d2fe3f98a1"
+  resolved "https://codeload.github.com/willyb321/MProgress.js/tar.gz/d4649a2671f765a04b9b494566b1e9998b806005"
 
 ms@0.7.3:
   version "0.7.3"

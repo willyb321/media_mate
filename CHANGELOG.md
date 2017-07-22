@@ -1,5 +1,18 @@
 ## Change Log
 
+### v1.0.9 (2017/07/22 07:49 +00:00)
+- [c0983b2](https://github.com/willyb321/media_mate/commit/c0983b222428fa841dafffe7d5364441f02e216f) Release v1.0.9 (@willyb321)
+- [be74395](https://github.com/willyb321/media_mate/commit/be74395c82dc6a255b9e88de738589ee075d2c9c) change .release.json a bit (@willyb321)
+- [ffe1e99](https://github.com/willyb321/media_mate/commit/ffe1e99ddf3c3013e93946cf61a64325841e3452) make delete function a lot better. (@willyb321)
+- [8a1c434](https://github.com/willyb321/media_mate/commit/8a1c43471e530c8ba34d343bbee349067ae8722d) Allows you to delete files directly from viewer. (@willyb321)
+- [f827197](https://github.com/willyb321/media_mate/commit/f827197e146810b8f2d508e7cba6d140b6dd5171) release-it draft (@willyb321)
+- [be7e892](https://github.com/willyb321/media_mate/commit/be7e8923150e797436fea037e15b23afe80c0fc5) Update deps (@willyb321)
+- [40e368b](https://github.com/willyb321/media_mate/commit/40e368b5dbd3a3ea895b98f0024229bfb1d1104c) Merge remote-tracking branch 'origin/develop' into develop (@willyb321)
+- [51ffb11](https://github.com/willyb321/media_mate/commit/51ffb119fb8be619200ed58319f4734beeef2346) help v6.6.6 (@willyb321)
+- [f453af1](https://github.com/willyb321/media_mate/commit/f453af1b02c263899ace9d2a7df369d2ca343345) deps (@willyb321)
+- [cdec7d3](https://github.com/willyb321/media_mate/commit/cdec7d3fd321074c1e0de8d0fa52e32a08c9d1b2) remove unused params (@willyb321)
+- [4e84e3c](https://github.com/willyb321/media_mate/commit/4e84e3c6c58df6b6c23365c2b64ec1f483d4cec7) changelog (@willyb321)
+
 ### v1.0.8 (2017/06/29 23:05 +00:00)
 - [0b5d865](https://github.com/willyb321/media_mate/commit/0b5d86512c14998b5c636e03f483313ce56c02ef) Release v1.0.8 (@willyb321)
 - [ad0812f](https://github.com/willyb321/media_mate/commit/ad0812f2e3f03d1ced763cda4c36823c24e51d3d) i put the config in the wrong bit (@willyb321)
