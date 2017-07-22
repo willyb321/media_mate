@@ -42,6 +42,13 @@ require('electron-context-menu')({
 		},
 		// Only show it when right-clicking images
 		visible: params.mediaType === 'image'
+	}, {
+		label: 'Remove Episode',
+		click: () => {
+			deleteTV(params);
+		},
+		// Only show it when right-clicking images
+		visible: params.mediaType === 'image'
 	}]
 });
 
@@ -254,6 +261,39 @@ function handleVids(e) {
 		}
 	});
 }
+
+function deleteTV(params) {
+	const elem = document.elementFromPoint(params.x, params.y).parentNode;
+	const storename = elem.getAttribute('data-store-name');
+	const filename = elem.getAttribute('data-file-name');
+	storage.get('path', (err, data) => {
+		if (err) {
+			Raven.captureException(err);
+		} else {
+			console.log(data);
+			const files = klawSync(data.path, {nodir: true});
+			_.each(files, (elem, index) => {
+				files[index] = elem.path;
+				const pathSplit = elem.path.split('/');
+				if (pathSplit[pathSplit.length - 1] === filename) {
+					console.log('found it');
+					fs.unlink(elem.path, err => {
+						Raven.captureException(err);
+						console.log(err);
+						storage.remove(storename, err => {
+							if (err) {
+								Raven.captureException(err);
+							}
+						});
+						elem.parentNode.removeChild(elem);
+					});
+				}
+			});
+			console.log(files);
+		}
+	});
+}
+
 /**
  * Reset the time watched.
  * @param params {object} - the x / y of the image.
@@ -408,10 +448,25 @@ async function findDL() {
 	_.each(files, (elem, index) => {
 		files[index] = elem.path;
 	});
-	const mediadiv = document.getElementById('media');
-	const videodiv = document.getElementById('video');
 	files = _.filter(files, isPlayable);
 	files.sort();
+	if (files.length === 0) {
+		indeterminateProgress.end();
+		document.getElementById('Loading').style.display = 'none';
+		const elem = document.getElementById('media');
+		const emptyElem = document.createElement('h1');
+		emptyElem.className = 'title';
+		console.log('empty');
+		emptyElem.innerText = `You have not downloaded anything yet.`;
+		const emptySubtitle = document.createElement('h2');
+		emptyElem.style['text-align'] = 'center';
+		emptySubtitle.innerText = `Go to the downloader first and do some downloading!`;
+		emptySubtitle.className = 'subtitle';
+		emptyElem.appendChild(emptySubtitle);
+		elem.appendChild(emptyElem);
+	}
+	const mediadiv = document.getElementById('media');
+	const videodiv = document.getElementById('video');
 	for (let i = 0; i < files.length; i++) {
 		const parsedName = parser(files[i].replace(/^.*[\\/]/, ''));
 		if (parsedName !== null) {
@@ -461,5 +516,7 @@ async function findDL() {
 			mediadiv.appendChild(figelem);
 		}
 	}
-	getImgs();
+	if (files.length > 0) {
+		getImgs();
+	}
 }
