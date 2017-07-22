@@ -19,7 +19,7 @@
 		"pushRepo": null,
 		"beforeStartCommand": false,
 		"beforeStageCommand": false,
-		"afterReleaseCommand": "gulp changelog"
+		"afterReleaseCommand": "gulp changelog && npm run release"
 	},
 	"github": {
 		"release": true,
