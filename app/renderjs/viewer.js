@@ -261,35 +261,66 @@ function handleVids(e) {
 		}
 	});
 }
-
+/**
+ * Delete tv from the filesystem / db.
+ * @param {any} params - the file to remove
+ */
 function deleteTV(params) {
 	const elem = document.elementFromPoint(params.x, params.y).parentNode;
 	const storename = elem.getAttribute('data-store-name');
 	const filename = elem.getAttribute('data-file-name');
+	const db = new PouchDB(require('path').join(require('electron').remote.app.getPath('userData'), 'dbImg').toString());
 	storage.get('path', (err, data) => {
 		if (err) {
 			Raven.captureException(err);
 		} else {
 			console.log(data);
 			const files = klawSync(data.path, {nodir: true});
-			_.each(files, (elem, index) => {
-				files[index] = elem.path;
-				const pathSplit = elem.path.split('/');
+			_.each(files, (file, index) => {
+				files[index] = file.path;
+				const pathSplit = file.path.split('/');
 				if (pathSplit[pathSplit.length - 1] === filename) {
 					console.log('found it');
-					fs.unlink(elem.path, err => {
-						Raven.captureException(err);
-						console.log(err);
-						storage.remove(storename, err => {
+					console.log(file.path);
+					console.log(path.resolve(`${file.path}/../`));
+					require('sweetalert2')({
+						title: 'Delete confirmation',
+						text: `The following folder and its contents will be deleted: ${path.resolve(file.path + '/../')}`,
+						type: 'warning',
+						showCancelButton: true,
+						confirmButtonColor: '#3085d6',
+						cancelButtonColor: '#d33',
+						confirmButtonText: 'Yes, delete it!'
+					}).then(() => {
+						fs.remove(path.resolve(`${file.path}/../`), err => {
 							if (err) {
 								Raven.captureException(err);
 							}
+							storage.remove(storename, err => {
+								if (err) {
+									Raven.captureException(err);
+								}
+							});
+							db.get(`img${elem.getAttribute('data-store-name')}`).then(doc => {
+								return db.remove(doc);
+							}).then(result => {
+								console.log(result);
+							}).catch(err => {
+								Raven.captureException(err);
+							});
+							elem.parentNode.removeChild(elem);
 						});
-						elem.parentNode.removeChild(elem);
+					}, dismiss => {
+						if (dismiss === 'cancel') {
+							require('sweetalert2')(
+								'Cancelled',
+								'Nothing will be deleted.',
+								'info'
+							);
+						}
 					});
 				}
 			});
-			console.log(files);
 		}
 	});
 }
