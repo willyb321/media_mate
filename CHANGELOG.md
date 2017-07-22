@@ -1,5 +1,9 @@
 ## Change Log
 
+### v1.0.10 (2017/07/22 08:12 +00:00)
+- [e4d02fa](https://github.com/willyb321/media_mate/commit/e4d02fa5abbc9f793e5994b49772bc139e5c9e2e) Release v1.0.10 (@willyb321)
+- [2859031](https://github.com/willyb321/media_mate/commit/285903155429512a1d8146ec707897f2c79c0e93) random pre-release it (@willyb321)
+
 ### v1.0.9 (2017/07/22 07:49 +00:00)
 - [c0983b2](https://github.com/willyb321/media_mate/commit/c0983b222428fa841dafffe7d5364441f02e216f) Release v1.0.9 (@willyb321)
 - [be74395](https://github.com/willyb321/media_mate/commit/be74395c82dc6a255b9e88de738589ee075d2c9c) change .release.json a bit (@willyb321)
