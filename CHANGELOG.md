@@ -1,5 +1,17 @@
 ## Change Log
 
+### v1.0.12 (2017/07/31 23:08 +00:00)
+- [c207a2d](https://github.com/willyb321/media_mate/commit/c207a2d0ab422b3114df0864f63976a240ea8073) Release v1.0.12 (@willyb321)
+
+### v1.0.11 (2017/07/31 23:08 +00:00)
+- [06778d2](https://github.com/willyb321/media_mate/commit/06778d23f6216ad30819081ae21e14a5d64a0700) Release v1.0.11 (@willyb321)
+- [0e9e2a5](https://github.com/willyb321/media_mate/commit/0e9e2a57a9f5946a6b4b2d2a361e9365653a3e18) better db dropping (@willyb321)
+- [5c8b832](https://github.com/willyb321/media_mate/commit/5c8b832f46330f934b4191f854d6eecb291bd482) only show stop video when a video is playing (@willyb321)
+- [9d18092](https://github.com/willyb321/media_mate/commit/9d18092d4943ccd5f23a6fde38015c013cb5a1c9) downgrade bulma because reasons (@willyb321)
+- [b8d625b](https://github.com/willyb321/media_mate/commit/b8d625b95e73f3bd3a616a6bdc679509daf821ec) deps (@willyb321)
+- [833eab4](https://github.com/willyb321/media_mate/commit/833eab4641c446829d773af75ab5899308900352) update deps (@willyb321)
+- [0e8a4f2](https://github.com/willyb321/media_mate/commit/0e8a4f2aefa8520270740823e87267c9b0a7972e) changelog (@willyb321)
+
 ### v1.0.10 (2017/07/22 08:12 +00:00)
 - [e4d02fa](https://github.com/willyb321/media_mate/commit/e4d02fa5abbc9f793e5994b49772bc139e5c9e2e) Release v1.0.10 (@willyb321)
 - [2859031](https://github.com/willyb321/media_mate/commit/285903155429512a1d8146ec707897f2c79c0e93) random pre-release it (@willyb321)
