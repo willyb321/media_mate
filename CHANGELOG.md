@@ -1,5 +1,10 @@
 ## Change Log
 
+### v1.0.13 (2017/07/31 23:10 +00:00)
+- [5298a1b](https://github.com/willyb321/media_mate/commit/5298a1b2876eeadca295e1791ce70e302488cb9b) Release v1.0.13 (@willyb321)
+- [e37ed5c](https://github.com/willyb321/media_mate/commit/e37ed5ce35974e343bcc8eafafdaaa9e41740d0d) dont automatically run npm run release (@willyb321)
+- [a9e02d9](https://github.com/willyb321/media_mate/commit/a9e02d9fa044fd6f419cdc92d7820a0f2eed60c9) changelog (@willyb321)
+
 ### v1.0.12 (2017/07/31 23:08 +00:00)
 - [c207a2d](https://github.com/willyb321/media_mate/commit/c207a2d0ab422b3114df0864f63976a240ea8073) Release v1.0.12 (@willyb321)
 
