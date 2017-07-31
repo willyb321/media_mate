@@ -168,17 +168,8 @@ function ignoreDupeTorrents(torrent, callback) {
  */
 function dropTorrents(callback) {
 	const db = new PouchDB(require('path').join(require('electron').remote.app.getPath('userData'), 'dbTor').toString());
-	db.allDocs({
-		include_docs: true, // eslint-disable-line camelcase
-		attachments: true
-	}).then(res => {
-		_.each(res.rows, elem => {
-			if (elem.doc._id !== 'showRSS') {
-				db.remove(elem.doc);
-			}
-		});
-	}).catch(err => {
-		console.log(err);
+	db.destroy().then(res => {
+		console.log(res);
 	});
 }
 /**
