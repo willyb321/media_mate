@@ -10,7 +10,7 @@
   "main": "main/es6-init.js",
   "productName": "Media Mate",
   "description": "My SDD HSC Major Project, a full media server/player/downloader/etc - in one",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "dependencies": {
     "about-window": "^1.7.0",
     "blob-util": "^1.2.1",
