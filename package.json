@@ -45,9 +45,9 @@
     "del": "^3.0.0",
     "devtron": "^1.4.0",
     "electron": "^1.7.2",
-    "electron-builder": "^19.16.2",
+    "electron-builder": "^19.18.0",
     "electron-compilers": "^5.9.0",
-    "electron-rebuild": "^1.5.11",
+    "electron-rebuild": "^1.6.0",
     "eslint": "^4.3.0",
     "eslint-config-xo": "^0.18.2",
     "eslint-formatter-pretty": "^1.1.0",
@@ -74,7 +74,7 @@
     "rimraf": "^2.6.1",
     "spectron": "^3.7.2",
     "tape": "^4.7.0",
-    "tui-jsdoc-template": "^1.1.0"
+    "tui-jsdoc-template": "^1.2.2"
   },
   "ava": {},
   "xo": {
