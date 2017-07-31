@@ -246,6 +246,7 @@ function vidFinished(e) {
  */
 function handleVids(e) {
 	const filename = this.getAttribute('data-file-name');
+	document.getElementById('stopvid').style.display = 'inline';
 	storage.get(filename, (err, data) => {
 		if (err) {
 			Raven.captureException(err);
@@ -422,6 +423,7 @@ function handleEventHandlers() {
 	const videodiv = document.getElementById('video');
 	videodiv.removeChild(videodiv.firstElementChild);
 	document.getElementById('stopvid').removeEventListener('click', handleEventHandlers);
+	document.getElementById('stopvid').style.display = 'none';
 }
 
 async function watchedTime(vid, elem, figcap) {
@@ -517,7 +519,9 @@ async function findDL() {
 				video.addEventListener('loadedmetadata', handleVids, false);
 				video.addEventListener('ended', vidFinished, false);
 				video.addEventListener('timeupdate', vidProgress, false);
+				video.addEventListener('seeking', vidProgress, false);
 				document.getElementById('stopvid').addEventListener('click', handleEventHandlers);
+				document.getElementById('stopvid').style.display = 'inline';
 				if (videodiv.childElementCount > 0) {
 					videodiv.replaceChild(video, videodiv.firstElementChild);
 				} else {
