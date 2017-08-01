@@ -1,11 +1,21 @@
+osx_image: xcode8.3
+
 language: node_js
-node_js:
-  - "7"
+node_js: "8"
+os:
+  - linux
+  - osx
+
 cache:
   yarn: true
-  directories:
-    - node_modules
-script: npm run release
+
+install:
+- yarn
+
+script:
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then npm run release; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then npm run release; fi
+
 branches:
   except:
     - "/^v\\d+\\.\\d+\\.\\d+$/"
