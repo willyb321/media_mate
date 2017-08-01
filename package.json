@@ -116,7 +116,10 @@
     },
     "linux": {
       "target": [
-        "dir"
+        "AppImage"
+      ],
+      "publish": [
+        "github"
       ]
     }
   }
