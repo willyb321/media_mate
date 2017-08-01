@@ -1,5 +1,16 @@
 ## Change Log
 
+### v1.0.15 (2017/08/01 22:53 +00:00)
+- [ed11b26](https://github.com/willyb321/media_mate/commit/ed11b26dbef51eae9629c99b29baacc04bde6472) Release v1.0.15 (@willyb321)
+
+### v1.0.14 (2017/08/01 22:52 +00:00)
+- [c003fcf](https://github.com/willyb321/media_mate/commit/c003fcf0c0d2045edc2d2375fae90b95c95eaee1) Release v1.0.14 (@willyb321)
+- [3621a91](https://github.com/willyb321/media_mate/commit/3621a912d8da9cc5d41700bd83590775997028a2) update travis (@willyb321)
+- [166e813](https://github.com/willyb321/media_mate/commit/166e81393443083874fc811c2aee5eb7ebfbccd0) Merge branch 'develop' of https://github.com/willyb321/media_mate into develop (@willyb321)
+- [da31182](https://github.com/willyb321/media_mate/commit/da311823a994bc2481448c313dd67e53a69bb870) hopefully travis will build on tag and deploy (@willyb321)
+- [53f7673](https://github.com/willyb321/media_mate/commit/53f7673db613b837f2ff010583dbb8a3fd0e45a1) publish appimage for linux (@willyb321)
+- [26f7628](https://github.com/willyb321/media_mate/commit/26f76284e09695f93319a09f3c6eadfb3572fbb2) changelog (@willyb321)
+
 ### v1.0.13 (2017/07/31 23:10 +00:00)
 - [5298a1b](https://github.com/willyb321/media_mate/commit/5298a1b2876eeadca295e1791ce70e302488cb9b) Release v1.0.13 (@willyb321)
 - [e37ed5c](https://github.com/willyb321/media_mate/commit/e37ed5ce35974e343bcc8eafafdaaa9e41740d0d) dont automatically run npm run release (@willyb321)
