@@ -9,6 +9,10 @@ os:
 cache:
   yarn: true
 
+before_install:
+- sudo apt-get -qq update
+- sudo apt-get install --no-install-recommends -y icnsutils graphicsmagick xz-utils
+
 install:
 - yarn
 
