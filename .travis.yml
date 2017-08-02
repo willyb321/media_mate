@@ -14,4 +14,4 @@ install:
 - yarn
 
 script:
-  - npm run release
+  - npm run dist

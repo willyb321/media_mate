@@ -45,7 +45,7 @@
     "del": "^3.0.0",
     "devtron": "^1.4.0",
     "electron": "^1.7.2",
-    "electron-builder": "^19.18.0",
+    "electron-builder": "^19.18.1",
     "electron-compilers": "^5.9.0",
     "electron-rebuild": "^1.6.0",
     "eslint": "^4.3.0",
@@ -73,7 +73,7 @@
     "release-it": "^2.8.2",
     "rimraf": "^2.6.1",
     "spectron": "^3.7.2",
-    "tape": "^4.7.0",
+    "tape": "^4.8.0",
     "tui-jsdoc-template": "^1.2.2"
   },
   "ava": {},
