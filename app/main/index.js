@@ -12,11 +12,11 @@ console.time('init');
 console.time('require');
 require('dotenv').config({path: `${__dirname}/../.env`});
 console.time('electron');
-import electron, {dialog, protocol, autoUpdater, ipcMain as ipc} from 'electron';
+import electron, {dialog, protocol, ipcMain as ipc} from 'electron';
 console.timeEnd('electron');
-console.time('url');
-import {resolve} from 'url';
-console.timeEnd('url');
+console.time('updater');
+import {autoUpdater} from 'electron-updater';
+console.timeEnd('updater');
 console.time('is-dev');
 import isDev from 'electron-is-dev';
 console.timeEnd('is-dev');
@@ -360,10 +360,6 @@ app.on('ready', () => {
 	watchRSS();
 	onBoard();
 	if (!isDev && process.env.NODE_ENV !== 'test' && process.platform !== 'darwin') {
-		const server = 'https://hazel-wcaadyahvw.now.sh/';
-		const feed = `${server}update/${process.platform}/${app.getVersion()}`;
-		console.log(feed);
-		autoUpdater.setFeedURL(feed);
 		autoUpdater.checkForUpdates();
 	}
 	protocol.uninterceptProtocol('video');
