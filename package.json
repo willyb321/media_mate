@@ -16,7 +16,6 @@
     "test": "node tests/",
     "prestart": "gulp && gulp index",
     "start": "electron app/",
-    "build": "electron-zip-packager . --out=dist --overwrite --platform=win32 --arch=x64 --prune --asar",
     "pack": "gulp index && gulp build:pack",
     "dist": "gulp index && gulp build:dist",
     "release": "gulp index && gulp build:dist",
