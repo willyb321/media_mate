@@ -414,6 +414,22 @@ concat-map@0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/concat-map/-/concat-map-0.0.1.tgz#d8a96bd77fd68df7793a73036a3ba0d5405d477b"
 
+concordance@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/concordance/-/concordance-2.0.0.tgz#c3c5dbffa83c29537df202bded8fa1d6aa94e805"
+  dependencies:
+    esutils "^2.0.2"
+    fast-diff "^1.1.1"
+    function-name-support "^0.2.0"
+    js-string-escape "^1.0.1"
+    lodash.clonedeep "^4.5.0"
+    lodash.flattendeep "^4.4.0"
+    lodash.merge "^4.6.0"
+    md5-hex "^2.0.0"
+    moment "^2.18.1"
+    semver "^5.3.0"
+    well-known-symbols "^1.0.0"
+
 console-control-strings@^1.0.0, console-control-strings@~1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/console-control-strings/-/console-control-strings-1.1.0.tgz#3d7cf4464db6446ea644bf4b39507f9851008e8e"
@@ -556,9 +572,9 @@ ecc-jsbn@~0.1.1:
   dependencies:
     jsbn "~0.1.0"
 
-electron-builder-http@~19.18.1:
-  version "19.18.1"
-  resolved "https://registry.yarnpkg.com/electron-builder-http/-/electron-builder-http-19.18.1.tgz#a55dab80062e1bd7d998ba4cdf44910e30342b84"
+electron-builder-http@~19.19.0:
+  version "19.19.0"
+  resolved "https://registry.yarnpkg.com/electron-builder-http/-/electron-builder-http-19.19.0.tgz#20f908fcd1bbe202fd44a9623abd9e4d7bc98825"
   dependencies:
     bluebird-lst "^1.0.2"
     debug "^2.6.8"
@@ -587,12 +603,12 @@ electron-context-menu@^0.9.1:
     electron-dl "^1.2.0"
     electron-is-dev "^0.1.1"
 
-electron-debug@^1.3.0:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/electron-debug/-/electron-debug-1.3.0.tgz#9b7418121f29cdf989317b70c0892682293d87d6"
+electron-debug@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/electron-debug/-/electron-debug-1.4.0.tgz#bec7005522220a9d0622153352e1bbff0f37af2e"
   dependencies:
     electron-is-dev "^0.3.0"
-    electron-localshortcut "^2.0.0"
+    electron-localshortcut "^3.0.0"
 
 electron-dl@^1.2.0:
   version "1.9.0"
@@ -623,11 +639,15 @@ electron-json-storage@^3.0.7:
     rimraf "^2.5.1"
     rwlock "^5.0.0"
 
-electron-localshortcut@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/electron-localshortcut/-/electron-localshortcut-2.0.0.tgz#bf088d42812d764c06ae0c9f179cf204d9c90103"
+electron-localshortcut@^3.0.0:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/electron-localshortcut/-/electron-localshortcut-3.0.1.tgz#cefc1bdbe897defc2e6d9c62c657353cfaefcb91"
   dependencies:
+    debug "^2.6.8"
     electron-is-accelerator "^0.1.0"
+    insp "^0.1.0"
+    keyboardevent-from-electron-accelerator "^0.7.0"
+    keyboardevents-areequal "^0.2.1"
 
 electron-notify@^0.1.0:
   version "0.1.0"
@@ -636,16 +656,16 @@ electron-notify@^0.1.0:
     async "^0.9.0"
     lodash "^2.4.1"
 
-electron-updater@^2.8.1:
-  version "2.8.1"
-  resolved "https://registry.yarnpkg.com/electron-updater/-/electron-updater-2.8.1.tgz#3a7add30a63b54b8c09e0320fca1c45b6e3b5ddf"
+electron-updater@^2.8.2:
+  version "2.8.2"
+  resolved "https://registry.yarnpkg.com/electron-updater/-/electron-updater-2.8.2.tgz#a6f3b8264150040e9dedf14c894355f773c990ce"
   dependencies:
     bluebird-lst "^1.0.2"
     debug "^2.6.8"
-    electron-builder-http "~19.18.1"
+    electron-builder-http "~19.19.0"
     electron-is-dev "^0.3.0"
     fs-extra-p "^4.4.0"
-    js-yaml "^3.9.0"
+    js-yaml "^3.9.1"
     lodash.isequal "^4.5.0"
     semver "^5.4.1"
     source-map-support "^0.4.15"
@@ -720,6 +740,10 @@ esprima@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/esprima/-/esprima-4.0.0.tgz#4499eddcd1110e0b218bacf2fa7f7f59f55ca804"
 
+esutils@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/esutils/-/esutils-2.0.2.tgz#0abf4f1caa5bcb1f7a9d8acc6dea4faaa04bac9b"
+
 execspawn@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/execspawn/-/execspawn-1.0.1.tgz#8286f9dde7cecde7905fbdc04e24f368f23f8da6"
@@ -737,6 +761,10 @@ extend@~3.0.0:
 extsprintf@1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/extsprintf/-/extsprintf-1.0.2.tgz#e1080e0658e300b06294990cc70e1502235fd550"
+
+fast-diff@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/fast-diff/-/fast-diff-1.1.1.tgz#0aea0e4e605b6a2189f0e936d4b7fbaf1b7cfd9b"
 
 fast-future@~1.0.0:
   version "1.0.2"
@@ -837,6 +865,10 @@ fstream@^1.0.0, fstream@^1.0.2:
     inherits "~2.0.0"
     mkdirp ">=0.5 0"
     rimraf "2"
+
+function-name-support@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/function-name-support/-/function-name-support-0.2.0.tgz#55d3bfaa6eafd505a50f9bc81fdf57564a0bb071"
 
 gauge@~1.2.5:
   version "1.2.7"
@@ -1042,6 +1074,12 @@ ini@~1.3.0:
   version "1.3.4"
   resolved "https://registry.yarnpkg.com/ini/-/ini-1.3.4.tgz#0537cb79daf59b59a1a517dff706c86ec039162e"
 
+insp@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/insp/-/insp-0.1.0.tgz#1a532c78664745dbb1d2c08e39f8d4832ab26349"
+  dependencies:
+    concordance "^2.0.0"
+
 invert-kv@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/invert-kv/-/invert-kv-1.0.0.tgz#104a8e4aaca6d3d8cd157a8ef8bfab2d7a3ffdb6"
@@ -1180,9 +1218,13 @@ jquery@^3.2.1:
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.2.1.tgz#5c4d9de652af6cd0a770154a631bba12b015c787"
 
-js-yaml@^3.9.0:
-  version "3.9.0"
-  resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.9.0.tgz#4ffbbf25c2ac963b8299dc74da7e3740de1c18ce"
+js-string-escape@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/js-string-escape/-/js-string-escape-1.0.1.tgz#e2625badbc0d67c7533e9edc1068c587ae4137ef"
+
+js-yaml@^3.9.1:
+  version "3.9.1"
+  resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.9.1.tgz#08775cebdfdd359209f0d2acd383c8f86a6904a0"
   dependencies:
     argparse "^1.0.7"
     esprima "^4.0.0"
@@ -1265,10 +1307,18 @@ k-rpc@^4.0.0:
     k-bucket "^3.0.1"
     k-rpc-socket "^1.5.0"
 
-klaw-sync@^2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/klaw-sync/-/klaw-sync-2.1.0.tgz#3d3bcd8600e7bfdef53231c739ff053aed560e44"
-  optionalDependencies:
+keyboardevent-from-electron-accelerator@^0.7.0:
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/keyboardevent-from-electron-accelerator/-/keyboardevent-from-electron-accelerator-0.7.0.tgz#0532545ac08ce2dd1bacd81f2a8a9c67abee7a1a"
+
+keyboardevents-areequal@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/keyboardevents-areequal/-/keyboardevents-areequal-0.2.1.tgz#4431d04fecc44f364cda73cf3f3270e177a54b8c"
+
+klaw-sync@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/klaw-sync/-/klaw-sync-3.0.0.tgz#07ff84e82e3f7c1c39dd0c9b7259db826ec998f6"
+  dependencies:
     graceful-fs "^4.1.11"
 
 lcid@^1.0.0:
@@ -1358,6 +1408,14 @@ lodash.assign@^4.0.3, lodash.assign@^4.0.6, lodash.assign@^4.2.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/lodash.assign/-/lodash.assign-4.2.0.tgz#0d99f3ccd7a6d261d19bdaeb9245005d285808e7"
 
+lodash.clonedeep@^4.5.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/lodash.clonedeep/-/lodash.clonedeep-4.5.0.tgz#e23f3f9c4f8fbdde872529c1071857a086e5ccef"
+
+lodash.flattendeep@^4.4.0:
+  version "4.4.0"
+  resolved "https://registry.yarnpkg.com/lodash.flattendeep/-/lodash.flattendeep-4.4.0.tgz#fb030917f86a3134e5bc9bec0d69e0013ddfedb2"
+
 lodash.get@^4.4.2:
   version "4.4.2"
   resolved "https://registry.yarnpkg.com/lodash.get/-/lodash.get-4.4.2.tgz#2d177f652fa31e939b4438d5341499dfa3825e99"
@@ -1373,6 +1431,10 @@ lodash.isequal@^4.5.0:
 lodash.isnull@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/lodash.isnull/-/lodash.isnull-3.0.0.tgz#fafbe59ea1dca27eed786534039dd84c2e07c56e"
+
+lodash.merge@^4.6.0:
+  version "4.6.0"
+  resolved "https://registry.yarnpkg.com/lodash.merge/-/lodash.merge-4.6.0.tgz#69884ba144ac33fe699737a6086deffadd0f89c5"
 
 lodash.pad@^4.1.0:
   version "4.5.1"
@@ -1435,6 +1497,16 @@ magnet-uri@^5.1.3:
     thirty-two "^1.0.1"
     uniq "^1.0.1"
     xtend "^4.0.0"
+
+md5-hex@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/md5-hex/-/md5-hex-2.0.0.tgz#d0588e9f1c74954492ecd24ac0ac6ce997d92e33"
+  dependencies:
+    md5-o-matic "^0.1.1"
+
+md5-o-matic@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/md5-o-matic/-/md5-o-matic-0.1.1.tgz#822bccd65e117c514fab176b25945d54100a03c3"
 
 mediasource@^2.0.0, mediasource@^2.1.0:
   version "2.1.3"
@@ -2236,7 +2308,7 @@ sax@1.2.3, sax@^1.2.1:
   version "5.3.0"
   resolved "https://registry.yarnpkg.com/semver/-/semver-5.3.0.tgz#9b2ce5d3de02d17c6012ad326aa6b4d0cf54f94f"
 
-semver@^5.4.1:
+semver@^5.3.0, semver@^5.4.1:
   version "5.4.1"
   resolved "https://registry.yarnpkg.com/semver/-/semver-5.4.1.tgz#e059c09d8571f0540823733433505d3a2f00b18e"
 
@@ -2738,6 +2810,10 @@ webtorrent@^0.98.19:
     ut_pex "^1.1.1"
     xtend "^4.0.1"
     zero-fill "^2.2.3"
+
+well-known-symbols@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/well-known-symbols/-/well-known-symbols-1.0.0.tgz#73c78ae81a7726a8fa598e2880801c8b16225518"
 
 which-module@^1.0.0:
   version "1.0.0"
