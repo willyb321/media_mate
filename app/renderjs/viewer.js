@@ -214,7 +214,6 @@ function vidFinished(e) {
 		filename = this.getAttribute('data-file-name');
 		elem = document.getElementById(this.getAttribute('data-img-id'));
 	}
-
 	const figcap = elem.childNodes;
 	storage.get(filename, (err, data) => {
 		const time = data.time;
@@ -239,6 +238,7 @@ function vidFinished(e) {
 			}
 		});
 	});
+	this.parentNode.removeChild(this);
 }
 /**
  * On video metadata loaded, add it to the JSON.
