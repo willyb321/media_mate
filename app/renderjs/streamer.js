@@ -152,6 +152,14 @@ function getFileHistory() {
 	const text = e.options[e.selectedIndex];
 	submitmagnet(text.id);
 }
+
+function removeStreamHistory() {
+	const db = new PouchDB(require('path').join(require('electron').remote.app.getPath('userData'), 'dbStream').toString());
+	const historyForm = document.getElementById('historyForm');
+	db.destroy();
+	historyForm.parentNode.removeChild(historyForm);
+}
+
 /**
  * Get stream history, and make options in a select tag.
  * Called on window load.
@@ -183,8 +191,8 @@ function streamHistory() {
  */
 function stop() {
 	process.torrent.destroy(tor => {
+		document.getElementById('files').parentNode.removeChild(document.getElementById('files'));
 		document.getElementById('player').removeChild(document.getElementById('player').firstChild);
 		document.getElementById('destroy').style.display = 'none';
-		document.getElementById('selectFile').style.display = 'none';
 	});
 }
