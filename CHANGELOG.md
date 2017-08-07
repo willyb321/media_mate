@@ -1,5 +1,23 @@
 ## Change Log
 
+### v1.0.16 (2017/08/07 03:45 +00:00)
+- [9727326](https://github.com/willyb321/media_mate/commit/9727326b062a603a1ca8af9f4a1dce352bb75ad9) Release v1.0.16 (@willyb321)
+- [ef123ac](https://github.com/willyb321/media_mate/commit/ef123ac5172e7d12e978ecd55abd78b144d5611a) remove video player when video finishes. (@willyb321)
+- [3f0b271](https://github.com/willyb321/media_mate/commit/3f0b271b09c85802df01c5b5f5c8c75f8f67dc67) add way to remove stream history (@willyb321)
+- [35b6258](https://github.com/willyb321/media_mate/commit/35b6258a00bb87f24de64bc4692d39d04d17ed80) deps (@willyb321)
+- [b6bcdb6](https://github.com/willyb321/media_mate/commit/b6bcdb61229f10d2737cf21e35895b0432206b9a) downgrade bulma again (@willyb321)
+- [0051ee0](https://github.com/willyb321/media_mate/commit/0051ee0b11de1845d7218c200502b68fee74609e) remove unused script (@willyb321)
+- [2f3559e](https://github.com/willyb321/media_mate/commit/2f3559e81395b81d8e77231a4f8f318beb633239) Revert "maybe we should use this thing i found" (@willyb321)
+- [ad160a3](https://github.com/willyb321/media_mate/commit/ad160a3dc23ec0f9d5e3cb90172c6dcb60419bd4) maybe we should use this thing i found (@willyb321)
+- [ee904d4](https://github.com/willyb321/media_mate/commit/ee904d400672a023362fc6bf355656fa89160250) fix css (@willyb321)
+- [8eb919a](https://github.com/willyb321/media_mate/commit/8eb919a57762ff9d6bb16fbd35c9095d1588324a) travis should only publish on draft / tag (@willyb321)
+- [10c0fc8](https://github.com/willyb321/media_mate/commit/10c0fc85e23e11c1438f44136529225fbc4ca9ce) fix readme (@willyb321)
+- [b82c3c3](https://github.com/willyb321/media_mate/commit/b82c3c329e59549f3384150455a30b354dc95708) travis (@willyb321)
+- [da7abf0](https://github.com/willyb321/media_mate/commit/da7abf0a74e0487ab1e371d0577b949d2f45fc7d) individual icon sizes (@willyb321)
+- [e331a14](https://github.com/willyb321/media_mate/commit/e331a14df0565ff3d45c7092b84722723a225d0b) travis (@willyb321)
+- [6dbc6ef](https://github.com/willyb321/media_mate/commit/6dbc6ef996c08d05337a74dc0e8c454df4cd3ba0) travis (@willyb321)
+- [7e9e479](https://github.com/willyb321/media_mate/commit/7e9e479c0c4365399714c45c941cb9a96cad28a5) changelog (@willyb321)
+
 ### v1.0.15 (2017/08/01 22:53 +00:00)
 - [ed11b26](https://github.com/willyb321/media_mate/commit/ed11b26dbef51eae9629c99b29baacc04bde6472) Release v1.0.15 (@willyb321)
 
