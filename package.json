@@ -114,6 +114,9 @@
       ]
     },
     "linux": {
+      "category": "AudioVideo",
+      "maintainer": "Willyb321",
+      "synopsis": "A full media server/player/downloader/etc - in one",
       "target": [
         "AppImage"
       ],
