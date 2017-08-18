@@ -1,5 +1,10 @@
 ## Change Log
 
+### v1.1.0 (2017/08/18 23:15 +00:00)
+- [165b3e1](https://github.com/willyb321/media_mate/commit/165b3e16bd779ba33e0b77c71fd6afd3e692c670) Release v1.1.0 (@willyb321)
+- [2da36d0](https://github.com/willyb321/media_mate/commit/2da36d06a6a52e5ca7af7e528d34611610ec0951) add linux category, maintainer and synopsis (@willyb321)
+- [d97690a](https://github.com/willyb321/media_mate/commit/d97690a4c484e713dd4431700ebbb8861ad78975) Changelog (@willyb321)
+
 ### v1.0.16 (2017/08/07 03:45 +00:00)
 - [9727326](https://github.com/willyb321/media_mate/commit/9727326b062a603a1ca8af9f4a1dce352bb75ad9) Release v1.0.16 (@willyb321)
 - [ef123ac](https://github.com/willyb321/media_mate/commit/ef123ac5172e7d12e978ecd55abd78b144d5611a) remove video player when video finishes. (@willyb321)
