@@ -7,7 +7,9 @@
  */
 /* eslint-disable no-unused-vars */
 /* eslint-disable max-nested-callbacks */
-require('dotenv').config({path: `${__dirname}/.env`});
+require('dotenv').config({
+	path: `${__dirname}/.env`
+});
 const {dialog} = require('electron').remote;
 const path = require('path');
 const Raven = require('raven');
@@ -21,10 +23,9 @@ const ProgressBar = require('progressbar.js');
 const _ = require('underscore');
 const storage = require('electron-json-storage');
 const WebTorrent = require('webtorrent');
-
+const {createDB} = require('../lib/utils');
 const rssTor = [];
 let dupeCount = 0;
-let db;
 PouchDB.plugin(require('pouchdb-find'));
 const version = require('electron').remote.app.getVersion();
 Raven.config('https://3d1b1821b4c84725a3968fcb79f49ea1:1ec6e95026654dddb578cf1555a2b6eb@sentry.io/184666', {
@@ -33,6 +34,11 @@ Raven.config('https://3d1b1821b4c84725a3968fcb79f49ea1:1ec6e95026654dddb578cf155
 const client = new WebTorrent();
 let i = 0;
 let bar;
+let db;
+createDB(path.join(require('electron').remote.app.getPath('userData'), 'dbTor').toString())
+.then(dbCreated => {
+	db = dbCreated;
+});
 const dbindex = 0;
 const allTorrents = [];
 const prog = _.throttle(dlProgress, 10000);
@@ -130,8 +136,8 @@ function getRSSURI(callback) {
  * @param torrent {object} - the torrent object to be checked
  * @param callback - You know what it is.
  */
-function ignoreDupeTorrents(torrent, callback) {
-	const db = new PouchDB(require('path').join(require('electron').remote.app.getPath('userData'), 'dbTor').toString());
+async function ignoreDupeTorrents(torrent, callback) {
+	db = await createDB(require('path').join(require('electron').remote.app.getPath('userData'), 'dbTor').toString());
 	db.find({
 		selector: {
 			_id: torrent.link
@@ -166,8 +172,10 @@ function ignoreDupeTorrents(torrent, callback) {
  * Drop the torrent database. Mainly for testing purpose.
  * @param callback - let em know.
  */
-function dropTorrents(callback) {
-	const db = new PouchDB(require('path').join(require('electron').remote.app.getPath('userData'), 'dbTor').toString());
+async function dropTorrents(callback) {
+	if (db.closed === true) {
+		db = await createDB(require('path').join(require('electron').remote.app.getPath('userData'), 'dbTor').toString());
+	}
 	db.destroy().then(res => {
 		console.log(res);
 	});
@@ -177,7 +185,9 @@ function dropTorrents(callback) {
  * @param uri {string} - the ShowRSS URI
  */
 function updateURI(uri) {
-	storage.set('showRSS', {showRSSURI: uri}, err => {
+	storage.set('showRSS', {
+		showRSSURI: uri
+	}, err => {
 		if (err) {
 			throw err;
 		}
@@ -186,20 +196,27 @@ function updateURI(uri) {
 /**
  * Initial load, get the torrents in the db.
  */
-function findDocuments() {
-	const db = new PouchDB(require('path').join(require('electron').remote.app.getPath('userData'), 'dbTor').toString());
+async function findDocuments() {
+	if (db.closed === true) {
+		db = await createDB(require('path').join(require('electron').remote.app.getPath('userData'), 'dbTor').toString());
+	}
 	db.allDocs({
 		include_docs: true // eslint-disable-line camelcase
 	}).then(result => {
 		_.each(result.rows, elem => allTorrents.push(elem.doc.magnet));
-		db.close();
+		if (!db.closed) {
+			db.close().then(() => {
+			});
+		}
 	}).catch(err => {
 		console.log(err);
 	});
 }
 
-function indexDB() {
-	const db = new PouchDB(require('path').join(require('electron').remote.app.getPath('userData'), 'dbTor').toString());
+async function indexDB() {
+	if (db.closed === true) {
+		db = await createDB(require('path').join(require('electron').remote.app.getPath('userData'), 'dbTor').toString());
+	}
 	db.createIndex({
 		index: {
 			fields: ['_id', 'magnet', 'downloaded']
@@ -218,16 +235,23 @@ function indexDB() {
 /**
  * Download all of the torrents, after they are added to the DOM.
  */
-function dlAll() {
-	const db = new PouchDB(require('path').join(require('electron').remote.app.getPath('userData'), 'dbTor').toString());
+async function dlAll() {
+	if (db.closed === true) {
+		db = await createDB(require('path').join(require('electron').remote.app.getPath('userData'), 'dbTor').toString());
+	}
 	db.find({
-		selector: {downloaded: false},
+		selector: {
+			downloaded: false
+		},
 		fields: ['_id', 'magnet', 'title', 'airdate', 'downloaded']
 	}).then(result => {
 		_.each(result.docs, (elem, index) => {
 			addTor(elem.magnet, index);
 		});
-		db.close();
+		if (!db.closed) {
+			db.close().then(() => {
+			});
+		}
 	}).catch(err => {
 		handleErrs(err);
 	});
@@ -304,9 +328,11 @@ function addTor(magnet, index) {
 				prog(torrent, magnet);
 				updateDlProg(magnet, torrent);
 			});
-			torrent.on('done', () => {
+			torrent.on('done', async () => {
 				dlProgress();
-				const db = new PouchDB(require('path').join(require('electron').remote.app.getPath('userData'), 'dbTor').toString());
+				if (db.closed === true) {
+					db = await createDB(require('path').join(require('electron').remote.app.getPath('userData'), 'dbTor').toString());
+				}
 				db.get(document.getElementsByName(magnet)[0].name).then(doc => {
 					db.put({
 						_id: document.getElementsByName(magnet)[0].name,

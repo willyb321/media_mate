@@ -19,29 +19,29 @@ let injects = [
 ];
 
 gulp.task('default', () => {
-	rimraf('app/main/indexbuild.js*', err => {
-		if (err && err.code !== 'ENOENT') {
-			console.log(err.codeFrame);
-			return err;
-		}
-		return gulp.src(['!node_modules',
-			'!node_modules/**',
-			'!app/menu.js',
-			'!dist',
-			'!app/renderjs',
-			'app/main/index.js',
-			'!app/lib',
-			'!app/indexbuild.js',
-			'!dist/**'])
-				.pipe(sourcemaps.init())
-				.pipe(babel({
-					presets: ['es2015'],
-					ignore: 'node_modules/**/*'
-				}))
-				.pipe(concat('indexbuild.js'))
-				.pipe(sourcemaps.write('.'))
-				.pipe(gulp.dest('app/main'));
-	});
+	// rimraf('app/main/indexbuild.js*', err => {
+	// 	if (err && err.code !== 'ENOENT') {
+	// 		console.log(err.codeFrame);
+	// 		return err;
+	// 	}
+	// 	return gulp.src(['!node_modules',
+	// 		'!node_modules/**',
+	// 		'!app/menu.js',
+	// 		'!dist',
+	// 		'!app/renderjs',
+	// 		'app/main/index.js',
+	// 		'!app/lib',
+	// 		'!app/indexbuild.js',
+	// 		'!dist/**'])
+	// 			.pipe(sourcemaps.init())
+	// 			.pipe(babel({
+	// 				presets: ['es2015'],
+	// 				ignore: 'node_modules/**/*'
+	// 			}))
+	// 			.pipe(concat('indexbuild.js'))
+	// 			.pipe(sourcemaps.write('.'))
+	// 			.pipe(gulp.dest('app/main'));
+	// });
 });
 
 gulp.task('build:pack', ['default'], cb => {

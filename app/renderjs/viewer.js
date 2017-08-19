@@ -23,11 +23,10 @@ const klawSync = require('klaw-sync');
 const PouchDB = require('pouchdb');
 const blobUtil = require('blob-util');
 const {titleCase, isPlayable} = require(require('path').join(__dirname, '..', 'lib', 'utils.js'));
-
 PouchDB.plugin(require('pouchdb-find'));
 const tvdb = new TVDB(process.env.TVDB_KEY);
 const vidProgressthrottled = _.throttle(vidProgress, 500);
-
+let db = new PouchDB(require('path').join(require('electron').remote.app.getPath('userData'), 'dbImg').toString());
 Raven.config('https://3d1b1821b4c84725a3968fcb79f49ea1:1ec6e95026654dddb578cf1555a2b6eb@sentry.io/184666', {
 	release: version
 }).install();
@@ -88,12 +87,14 @@ function convertImgToBlob(img, callback) {
  * @returns {Promise}
  */
 function getImgDB(data) {
-	return new Promise(resolve => {
+	return new Promise(async resolve => {
 		const mediadiv = document.getElementById('media');
 		const medianodes = mediadiv.childNodes;
 		const tvelem = data[0];
 		const elempath = data[1];
-		const db = new PouchDB(require('path').join(require('electron').remote.app.getPath('userData'), 'dbImg').toString());
+		if (db.closed === true) {
+			db = await new PouchDB(require('path').join(require('electron').remote.app.getPath('userData'), 'dbImg').toString());
+		}
 		medianodes.forEach((img, ind) => {
 			if (ind === medianodes.length - 1) {
 				indeterminateProgress.end();
@@ -157,8 +158,10 @@ async function getImgs() {
 
 		});
 	});
-	getimgs.on('episode', data => {
-		const db = new PouchDB(require('path').join(require('electron').remote.app.getPath('userData'), 'dbImg').toString());
+	getimgs.on('episode', async data => {
+		if (db.closed === true) {
+			db = await new PouchDB(require('path').join(require('electron').remote.app.getPath('userData'), 'dbImg').toString());
+		}
 		console.log('ep');
 		const elem = data[0];
 		const tvelem = data[1];
@@ -266,11 +269,13 @@ function handleVids(e) {
  * Delete tv from the filesystem / db.
  * @param {any} params - the file to remove
  */
-function deleteTV(params) {
+async function deleteTV(params) {
 	const elem = document.elementFromPoint(params.x, params.y).parentNode;
 	const storename = elem.getAttribute('data-store-name');
 	const filename = elem.getAttribute('data-file-name');
-	const db = new PouchDB(require('path').join(require('electron').remote.app.getPath('userData'), 'dbImg').toString());
+	if (db.closed === true) {
+		db = await new PouchDB(require('path').join(require('electron').remote.app.getPath('userData'), 'dbImg').toString());
+	}
 	storage.get('path', (err, data) => {
 		if (err) {
 			Raven.captureException(err);

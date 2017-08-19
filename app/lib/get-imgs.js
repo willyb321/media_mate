@@ -23,6 +23,7 @@ const {isPlayable} = require(require('path').join(__dirname, 'utils.js'));
 PouchDB.plugin(require('pouchdb-find'));
 const tvdb = new TVDB(process.env.TVDB_KEY);
 const POLL_INTERVAL = 100;
+let db = new PouchDB(require('path').join(require('electron').remote.app.getPath('userData'), 'dbImg').toString());
 let version;
 // Make sure that version can be got from both render and main process
 if (isRenderer) {
@@ -86,8 +87,10 @@ class GetImgs extends events.EventEmitter {
 	 * @returns {Promise} - Returns 'need image' if not in db, returns 'got image' if in db.
 	 */
 	async inDB() {
-		return new Promise(resolve => {
-			const db = new PouchDB(require('path').join(require('electron').remote.app.getPath('userData'), 'dbImg').toString());
+		return new Promise(async resolve => {
+			if (db.closed === true) {
+				db = await new PouchDB(require('path').join(require('electron').remote.app.getPath('userData'), 'dbImg').toString());
+			}
 			db.find({
 				selector: {_id: `img${this.tvelem.show.replace(' ', '')}S${this.tvelem.season}E${this.tvelem.episode}`},
 				fields: ['_id', '_rev', 'tvelem']

@@ -3,6 +3,7 @@
  */
 
 const path = require('path');
+const PouchDB = require('pouchdb');
 /**
  * Return true if file is playable
  * @param file {string} - the filename with extension
@@ -49,8 +50,19 @@ function titleCase(str) {
 		.map(i => i[0].toUpperCase() + i.substr(1).toLowerCase())
 		.join(' ');
 }
+/**
+ * Initialise PouchDB in path
+ * @param {string} path
+ */
+function createDB(path) {
+	return new Promise(async (resolve, reject) => {
+		const db = await new PouchDB(path, {auto_compaction: true});
+		resolve(db);
+	});
+}
 
 module.exports = {
 	isPlayable,
-	titleCase
+	titleCase,
+	createDB
 };

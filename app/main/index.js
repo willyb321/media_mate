@@ -51,6 +51,9 @@ console.timeEnd('windowstate');
 console.time('path');
 import path from 'path';
 console.timeEnd('path');
+console.time('utils');
+import {createDB} from '../lib/utils';
+console.timeEnd('utils');
 console.timeEnd('require');
 let RSS;
 const app = electron.app;
@@ -59,6 +62,11 @@ Raven.config('https://3d1b1821b4c84725a3968fcb79f49ea1:1ec6e95026654dddb578cf155
 	release: version
 }).install();
 let win;
+let db;
+createDB(path.join(app.getPath('userData'), 'dbTor').toString())
+.then(dbCreated => {
+	db = dbCreated;
+});
 
 if (process.env.SPECTRON) {
 	/**
@@ -248,8 +256,10 @@ app.on('activate', () => {
  * @param torrent {object} - the torrent object to be checked
  * @param callback {function} - The callback.
  */
-function ignoreDupeTorrents(torrent, callback) {
-	const db = new PouchDB(require('path').join(app.getPath('userData'), 'dbTor').toString());
+async function ignoreDupeTorrents(torrent, callback) {
+	if (db.closed === true) {
+		db = await createDB(path.join(app.getPath('userData'), 'dbTor').toString());
+	}
 	db.get(torrent.link)
 		.then(doc => {
 			if (doc === null) {
@@ -261,32 +271,42 @@ function ignoreDupeTorrents(torrent, callback) {
 					airdate: torrent.pubDate,
 					downloaded: false
 				}).then(() => {
-					db.close().then(() => {
-						callback();
-					});
+					if (!db.closed) {
+						db.close().then(() => {
+							callback();
+						});
+					}
 				}).catch(err => {
 					if (err) {
 						Raven.captureException(err);
 					}
 				});
 			} else if (doc.downloaded === true) {
-				db.close().then(() => {
-					callback('dupe');
-				});
+				if (!db.closed) {
+					db.close().then(() => {
+						callback('dupe');
+					});
+				}
 			} else if (doc.downloaded === false) {
-				db.close().then(() => {
-					callback();
-				});
+				if (!db.closed) {
+					db.close().then(() => {
+						callback();
+					});
+				}
 			}
 		})
 		.catch(err => {
 			if (err.status === 404) {
-				db.close().then(() => {
-					callback();
-				});
+				if (!db.closed) {
+					db.close().then(() => {
+						callback();
+					});
+				}
 			} else if (err.status !== 404) {
-				db.close().then(() => {
-				});
+				if (!db.closed) {
+					db.close().then(() => {
+					});
+				}
 				Raven.captureException(err);
 			}
 		});
