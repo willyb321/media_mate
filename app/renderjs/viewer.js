@@ -20,13 +20,16 @@ const moment = require('moment');
 const _ = require('underscore');
 const parser = require('episode-parser');
 const klawSync = require('klaw-sync');
-const PouchDB = require('pouchdb');
 const blobUtil = require('blob-util');
+const {createDB} = require('../lib/utils');
 const {titleCase, isPlayable} = require(require('path').join(__dirname, '..', 'lib', 'utils.js'));
-PouchDB.plugin(require('pouchdb-find'));
 const tvdb = new TVDB(process.env.TVDB_KEY);
 const vidProgressthrottled = _.throttle(vidProgress, 500);
-let db = new PouchDB(require('path').join(require('electron').remote.app.getPath('userData'), 'dbImg').toString());
+let db;
+createDB(path.join(require('electron').remote.app.getPath('userData'), 'dbImg.db').toString())
+.then(dbCreated => {
+	db = dbCreated;
+});
 Raven.config('https://3d1b1821b4c84725a3968fcb79f49ea1:1ec6e95026654dddb578cf1555a2b6eb@sentry.io/184666', {
 	release: version
 }).install();
@@ -92,9 +95,6 @@ function getImgDB(data) {
 		const medianodes = mediadiv.childNodes;
 		const tvelem = data[0];
 		const elempath = data[1];
-		if (db.closed === true) {
-			db = await new PouchDB(require('path').join(require('electron').remote.app.getPath('userData'), 'dbImg').toString());
-		}
 		medianodes.forEach((img, ind) => {
 			if (ind === medianodes.length - 1) {
 				indeterminateProgress.end();
@@ -102,10 +102,10 @@ function getImgDB(data) {
 			}
 			if (img.id === elempath) {
 				img.children[0].parentNode.style.display = 'inline-block';
-				db.find({selector: {_id: `img${tvelem.show.replace(' ', '')}S${tvelem.season}E${tvelem.episode}`}, fields: ['_id', '_rev']}).then(docs => {
-					if (docs.docs.length > 0) {
-						db.get(`img${tvelem.show.replace(' ', '')}S${tvelem.season}E${tvelem.episode}`, {attachments: true}).then(doc => {
-							blobUtil.base64StringToBlob(doc._attachments.img.data, 'image/jpeg').then(blob => {
+				db.find({_id: `img${tvelem.show.replace(' ', '')}S${tvelem.season}E${tvelem.episode}`}, (err, docs) => {
+					if (docs.length > 0) {
+						db.find({_id: `img${tvelem.show.replace(' ', '')}S${tvelem.season}E${tvelem.episode}`}, (err, doc) => {
+							blobUtil.base64StringToBlob(doc[0].imgData, 'image/jpeg').then(blob => {
 								img.children[0].src = URL.createObjectURL(blob); // eslint-disable-line
 								resolve(['got from db']);
 							}).catch(err => {
@@ -152,16 +152,13 @@ async function getImgs() {
 	let dlpath = await getPath();
 	console.log(dlpath);
 	dlpath = dlpath.path.toString();
-	const getimgs = new Getimg(dlpath);
+	const getimgs = new Getimg(dlpath, db);
 	getimgs.on('tvelem', data => {
 		getImgDB(data).then(res => {
 
 		});
 	});
 	getimgs.on('episode', async data => {
-		if (db.closed === true) {
-			db = await new PouchDB(require('path').join(require('electron').remote.app.getPath('userData'), 'dbImg').toString());
-		}
 		console.log('ep');
 		const elem = data[0];
 		const tvelem = data[1];
@@ -177,17 +174,12 @@ async function getImgs() {
 						if (res.filename !== '') {
 							img.children[0].src = `http://thetvdb.com/banners/${res.filename}`;
 							convertImgToBlob(img.children[0], blob => {
-								db.put({
+								db.insert({
 									_id: `img${tvelem.show.replace(' ', '')}S${tvelem.season}E${tvelem.episode}`,
 									elempath: data[2],
 									elem: data[0],
 									tvelem: data[1],
-									_attachments: {
-										img: {
-											content_type: 'image/jpeg', // eslint-disable-line
-											data: Buffer.from(blob, 'base64')
-										}
-									}
+									imgData: blob
 								});
 							});
 						} else if (res.filename === '') {
@@ -273,9 +265,6 @@ async function deleteTV(params) {
 	const elem = document.elementFromPoint(params.x, params.y).parentNode;
 	const storename = elem.getAttribute('data-store-name');
 	const filename = elem.getAttribute('data-file-name');
-	if (db.closed === true) {
-		db = await new PouchDB(require('path').join(require('electron').remote.app.getPath('userData'), 'dbImg').toString());
-	}
 	storage.get('path', (err, data) => {
 		if (err) {
 			Raven.captureException(err);
@@ -307,12 +296,11 @@ async function deleteTV(params) {
 									Raven.captureException(err);
 								}
 							});
-							db.get(`img${elem.getAttribute('data-store-name')}`).then(doc => {
-								return db.remove(doc);
-							}).then(result => {
-								console.log(result);
-							}).catch(err => {
-								Raven.captureException(err);
+							db.remove({_id: `img${elem.getAttribute('data-store-name')}`}, {}, (err, numRemoved) => {
+								if (err) {
+									Raven.captureException(err);
+								}
+								console.log(numRemoved);
 							});
 							elem.parentNode.removeChild(elem);
 						});

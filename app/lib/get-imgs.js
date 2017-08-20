@@ -17,13 +17,10 @@ const parser = require('episode-parser');
 const dir = require('node-dir');
 const _ = require('underscore');
 const path = require('path');
-const PouchDB = require('pouchdb');
-const {isPlayable} = require(require('path').join(__dirname, 'utils.js'));
-
-PouchDB.plugin(require('pouchdb-find'));
+const {isPlayable, createDB} = require(require('path').join(__dirname, 'utils.js'));
 const tvdb = new TVDB(process.env.TVDB_KEY);
 const POLL_INTERVAL = 100;
-let db = new PouchDB(require('path').join(require('electron').remote.app.getPath('userData'), 'dbImg').toString());
+let db;
 let version;
 // Make sure that version can be got from both render and main process
 if (isRenderer) {
@@ -41,9 +38,11 @@ class GetImgs extends events.EventEmitter {
 	/**
 	 * The constructor for {@link GetImgs}
 	 * @param directory {string} - a string with path to downloaded files
+	 * @param nedb {object} - The NeDB instance
 	 */
-	constructor(directory) {
+	constructor(directory, nedb) {
 		super();
+		db = nedb;
 		this._directory = directory;
 		this._files = [];
 		this._ops = [];
@@ -88,16 +87,13 @@ class GetImgs extends events.EventEmitter {
 	 */
 	async inDB() {
 		return new Promise(async resolve => {
-			if (db.closed === true) {
-				db = await new PouchDB(require('path').join(require('electron').remote.app.getPath('userData'), 'dbImg').toString());
-			}
-			db.find({
-				selector: {_id: `img${this.tvelem.show.replace(' ', '')}S${this.tvelem.season}E${this.tvelem.episode}`},
-				fields: ['_id', '_rev', 'tvelem']
-			}).then(doc => {
-				if (doc.docs.length === 0) {
+			db.find({_id: `img${this.tvelem.show.replace(' ', '')}S${this.tvelem.season}E${this.tvelem.episode}`}, (err, docs) => {
+				if (err) {
+					Raven.captureException(err);
+				}
+				if (docs.length === 0) {
 					resolve('need image');
-				} else if (doc.docs[0].tvelem) {
+				} else if (docs[0].imgData) {
 					resolve('got image');
 				}
 			});

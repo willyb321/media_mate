@@ -29,9 +29,9 @@ console.timeEnd('rssparse');
 console.time('menu');
 import {init} from './menu.js';
 console.timeEnd('menu');
-console.time('pouch');
-import PouchDB from 'pouchdb';
-console.timeEnd('pouch');
+console.time('nedb');
+import Datastore from 'nedb-core';
+console.timeEnd('nedb');
 console.time('underscore');
 import _ from 'underscore';
 console.timeEnd('underscore');
@@ -41,10 +41,6 @@ console.timeEnd('jsonstorage');
 console.time('debug');
 require('electron-debug')();
 console.timeEnd('debug');
-console.time('find');
-import * as find from 'pouchdb-find';
-PouchDB.plugin(find);
-console.timeEnd('find');
 console.time('windowstate');
 import windowStateKeeper from 'electron-window-state';
 console.timeEnd('windowstate');
@@ -63,7 +59,7 @@ Raven.config('https://3d1b1821b4c84725a3968fcb79f49ea1:1ec6e95026654dddb578cf155
 }).install();
 let win;
 let db;
-createDB(path.join(app.getPath('userData'), 'dbTor').toString())
+createDB(path.join(app.getPath('userData'), 'dbTor.db').toString())
 .then(dbCreated => {
 	db = dbCreated;
 });
@@ -213,6 +209,7 @@ function createMainWindow() {
 	win.once('ready-to-show', () => {
 		win.show();
 	});
+	win.webContents.openDevTools();
 	return win;
 }
 /**
@@ -257,59 +254,33 @@ app.on('activate', () => {
  * @param callback {function} - The callback.
  */
 async function ignoreDupeTorrents(torrent, callback) {
-	if (db.closed === true) {
-		db = await createDB(path.join(app.getPath('userData'), 'dbTor').toString());
-	}
-	db.get(torrent.link)
-		.then(doc => {
-			if (doc === null) {
-				db.put({
-					_id: torrent.link,
-					magnet: torrent.link,
-					title: torrent.title,
-					tvdbID: torrent['tv:show_name']['#'],
-					airdate: torrent.pubDate,
-					downloaded: false
-				}).then(() => {
-					if (!db.closed) {
-						db.close().then(() => {
-							callback();
-						});
-					}
-				}).catch(err => {
-					if (err) {
-						Raven.captureException(err);
-					}
-				});
-			} else if (doc.downloaded === true) {
-				if (!db.closed) {
-					db.close().then(() => {
-						callback('dupe');
-					});
-				}
-			} else if (doc.downloaded === false) {
-				if (!db.closed) {
-					db.close().then(() => {
-						callback();
-					});
-				}
-			}
-		})
-		.catch(err => {
-			if (err.status === 404) {
-				if (!db.closed) {
-					db.close().then(() => {
-						callback();
-					});
-				}
-			} else if (err.status !== 404) {
-				if (!db.closed) {
-					db.close().then(() => {
-					});
-				}
+	db.find({_id: torrent.link}, (err, docs) => {
+		if (err) {
+			Raven.context(() => {
+				Raven.captureBreadcrumb({torrent: torrent.link, docs});
 				Raven.captureException(err);
-			}
-		});
+			});
+		}
+		if (_.isEmpty(docs)) {
+			db.insert({
+				_id: torrent.link,
+				magnet: torrent.link,
+				title: torrent.title,
+				tvdbID: torrent['tv:show_name']['#'],
+				airdate: torrent.pubDate,
+				downloaded: false
+			});
+			callback();
+		} else {
+			_.each(docs, doc => {
+				if (doc.downloaded === true && doc._id === torrent.link) {
+					callback('dupe');
+				} else {
+					callback();
+				}
+			});
+		}
+	});
 }
 /**
  * @description Get the ShowRSS URI from the DB.

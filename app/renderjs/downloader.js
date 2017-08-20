@@ -14,7 +14,6 @@ const {dialog} = require('electron').remote;
 const path = require('path');
 const Raven = require('raven');
 const ipc = require('electron').ipcRenderer;
-const PouchDB = require('pouchdb');
 require('events').EventEmitter.prototype._maxListeners = 1000;
 const moment = require('moment');
 const swal = require('sweetalert2');
@@ -22,11 +21,11 @@ const RSSParse = require(`${__dirname}/../lib/rssparse.js`).RSSParse;
 const ProgressBar = require('progressbar.js');
 const _ = require('underscore');
 const storage = require('electron-json-storage');
+const Datastore = require('nedb-core');
 const WebTorrent = require('webtorrent');
 const {createDB} = require('../lib/utils');
 const rssTor = [];
 let dupeCount = 0;
-PouchDB.plugin(require('pouchdb-find'));
 const version = require('electron').remote.app.getVersion();
 Raven.config('https://3d1b1821b4c84725a3968fcb79f49ea1:1ec6e95026654dddb578cf1555a2b6eb@sentry.io/184666', {
 	release: version
@@ -35,7 +34,7 @@ const client = new WebTorrent();
 let i = 0;
 let bar;
 let db;
-createDB(path.join(require('electron').remote.app.getPath('userData'), 'dbTor').toString())
+createDB(path.join(require('electron').remote.app.getPath('userData'), 'dbTor.db').toString())
 .then(dbCreated => {
 	db = dbCreated;
 });
@@ -137,35 +136,29 @@ function getRSSURI(callback) {
  * @param callback - You know what it is.
  */
 async function ignoreDupeTorrents(torrent, callback) {
-	db = await createDB(require('path').join(require('electron').remote.app.getPath('userData'), 'dbTor').toString());
 	db.find({
-		selector: {
-			_id: torrent.link
-		},
-		fields: ['_id', 'magnet', 'downloaded']
-	}).then(res => {
-		if (res.docs.length > 0) {
-			if (res.docs[0].downloaded === true) {
+		_id: torrent.link
+	}, (err, docs) => {
+		if (err) {
+			console.log(err);
+		}
+		if (docs.length > 0) {
+			if (docs[0].downloaded === true) {
 				callback('dupe');
-			} else if (res.docs[0].downloaded === false) {
+			} else if (docs[0].downloaded === false) {
 				callback();
 			}
 		} else {
-			db.put({
+			db.insert({
 				_id: torrent.link,
 				magnet: torrent.link,
 				title: torrent.title,
 				tvdbID: torrent['tv:show_name']['#'],
 				airdate: torrent['rss:pubdate']['#'],
 				downloaded: false
-			}).then(() => {
-				callback();
-			}).catch(err => {
-				handleErrs(err);
 			});
+			callback();
 		}
-	}).catch(err => {
-		handleErrs(err);
 	});
 }
 /**
@@ -173,11 +166,11 @@ async function ignoreDupeTorrents(torrent, callback) {
  * @param callback - let em know.
  */
 async function dropTorrents(callback) {
-	if (db.closed === true) {
-		db = await createDB(require('path').join(require('electron').remote.app.getPath('userData'), 'dbTor').toString());
-	}
-	db.destroy().then(res => {
-		console.log(res);
+	db.remove({}, {multi: true}, (err, numRemoved) => {
+		if (err) {
+			console.log(err);
+		}
+		console.log(numRemoved);
 	});
 }
 /**
@@ -197,38 +190,35 @@ function updateURI(uri) {
  * Initial load, get the torrents in the db.
  */
 async function findDocuments() {
-	if (db.closed === true) {
-		db = await createDB(require('path').join(require('electron').remote.app.getPath('userData'), 'dbTor').toString());
-	}
-	db.allDocs({
-		include_docs: true // eslint-disable-line camelcase
-	}).then(result => {
-		_.each(result.rows, elem => allTorrents.push(elem.doc.magnet));
-		if (!db.closed) {
-			db.close().then(() => {
-			});
+	db.find({}, (err, docs) => {
+		if (err) {
+			console.log(err);
 		}
-	}).catch(err => {
-		console.log(err);
+		_.each(docs, elem => allTorrents.push(elem.magnet));
 	});
 }
 
 async function indexDB() {
-	if (db.closed === true) {
-		db = await createDB(require('path').join(require('electron').remote.app.getPath('userData'), 'dbTor').toString());
-	}
-	db.createIndex({
-		index: {
-			fields: ['_id', 'magnet', 'downloaded']
+	db.ensureIndex({
+		fieldName: '_id'
+	}, err => {
+		if (err) {
+			console.log(err);
 		}
-	}).then(result => {
-		if (result.result === 'created') {
-			console.log('index made');
-		} else {
-			console.log('already exists');
+	});
+	db.ensureIndex({
+		fieldName: 'magnet'
+	}, err => {
+		if (err) {
+			console.log(err);
 		}
-	}).catch(err => {
-		handleErrs(err);
+	});
+	db.ensureIndex({
+		fieldName: 'downloaded'
+	}, err => {
+		if (err) {
+			console.log(err);
+		}
 	});
 }
 
@@ -236,24 +226,12 @@ async function indexDB() {
  * Download all of the torrents, after they are added to the DOM.
  */
 async function dlAll() {
-	if (db.closed === true) {
-		db = await createDB(require('path').join(require('electron').remote.app.getPath('userData'), 'dbTor').toString());
-	}
 	db.find({
-		selector: {
-			downloaded: false
-		},
-		fields: ['_id', 'magnet', 'title', 'airdate', 'downloaded']
-	}).then(result => {
-		_.each(result.docs, (elem, index) => {
+		downloaded: false
+	}, (err, docs) => {
+		_.each(docs, (elem, index) => {
 			addTor(elem.magnet, index);
 		});
-		if (!db.closed) {
-			db.close().then(() => {
-			});
-		}
-	}).catch(err => {
-		handleErrs(err);
 	});
 }
 /**
@@ -330,26 +308,18 @@ function addTor(magnet, index) {
 			});
 			torrent.on('done', async () => {
 				dlProgress();
-				if (db.closed === true) {
-					db = await createDB(require('path').join(require('electron').remote.app.getPath('userData'), 'dbTor').toString());
-				}
-				db.get(document.getElementsByName(magnet)[0].name).then(doc => {
-					db.put({
-						_id: document.getElementsByName(magnet)[0].name,
-						_rev: doc._rev,
-						magnet: document.getElementsByName(magnet)[0].name,
-						downloaded: true,
-						title: doc.title,
-						tvdbID: doc.tvdbID,
-						airdate: doc.airdate
-					}).then(res => {
-						document.getElementsByName(magnet)[0].parentNode.style.display = 'none';
-						console.log('done');
-						ipc.send('dldone', torrent.name);
-						torrent.destroy();
-					}).catch(err => {
-						handleErrs(err);
-					});
+				db.update({_id: document.getElementsByName(magnet)[0].name}, {
+					$set: {
+						downloaded: true
+					}
+				}, (err, numReplaced) => {
+					if (err) {
+						console.log(err);
+					}
+					document.getElementsByName(magnet)[0].parentNode.style.display = 'none';
+					console.log('done');
+					ipc.send('dldone', torrent.name);
+					torrent.destroy();
 				});
 			});
 		});

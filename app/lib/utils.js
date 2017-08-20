@@ -3,7 +3,7 @@
  */
 
 const path = require('path');
-const PouchDB = require('pouchdb');
+const Datastore = require('nedb-core');
 /**
  * Return true if file is playable
  * @param file {string} - the filename with extension
@@ -51,12 +51,12 @@ function titleCase(str) {
 		.join(' ');
 }
 /**
- * Initialise PouchDB in path
+ * Initialise NeDB in path
  * @param {string} path
  */
 function createDB(path) {
 	return new Promise(async (resolve, reject) => {
-		const db = await new PouchDB(path, {auto_compaction: true});
+		const db = new Datastore({filename: path, autoload: true});
 		resolve(db);
 	});
 }

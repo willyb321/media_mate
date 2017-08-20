@@ -12,18 +12,19 @@ require('events').EventEmitter.prototype._maxListeners = 1000;
 const swal = require('sweetalert2');
 const path = require('path');
 const _ = require('underscore');
-const PouchDB = require('pouchdb');
 const Raven = require('raven');
-const {isPlayable, titleCase} = require(require('path').join(__dirname, '..', 'lib', 'utils.js'));
+const {isPlayable, titleCase, createDB} = require(require('path').join(__dirname, '..', 'lib', 'utils.js'));
 const version = require('electron').remote.app.getVersion();
 Raven.config('https://3d1b1821b4c84725a3968fcb79f49ea1:1ec6e95026654dddb578cf1555a2b6eb@sentry.io/184666', {
 	release: version
 }).install();
-PouchDB.plugin(require('pouchdb-upsert'));
-PouchDB.plugin(require('pouchdb-find'));
 const client = new WebTorrent();
 let filesAll;
-
+let db;
+createDB(path.join(require('electron').remote.app.getPath('userData'), 'dbStream.db').toString())
+.then(dbCreated => {
+	db = dbCreated;
+});
 client.on('error', err => {
 	console.log(err);
 });
@@ -127,22 +128,17 @@ function submitmagnet(magnet) {
  * @param torrent {object} Contains magnet, files, metadata etc.
  */
 function addStreamHistory(torrent) {
-	const db = new PouchDB(require('path').join(require('electron').remote.app.getPath('userData'), 'dbStream').toString());
 	let files = [];
 	_.each(torrent.files, file => {
 		files.push(file.name);
 	});
 	files = _.filter(files, isPlayable);
 	console.log(files);
-	db.putIfNotExists(torrent.magnetURI, {magnet: torrent.magnetURI, files})
-		.then(res => {
-			console.log(res);
-		})
-		.catch(err => {
-			if (err.status !== 404) {
-				throw err;
-			}
-		});
+	db.update({_id: torrent.magnetURI, magnet: torrent.magnetURI, files}, {}, err => {
+		if (err) {
+			Raven.captureException(err);
+		}
+	});
 }
 /**
  * Called when choosing a file in the history form.
@@ -154,9 +150,13 @@ function getFileHistory() {
 }
 
 function removeStreamHistory() {
-	const db = new PouchDB(require('path').join(require('electron').remote.app.getPath('userData'), 'dbStream').toString());
 	const historyForm = document.getElementById('historyForm');
-	db.destroy();
+	db.remove({}, {multi: true}, (err, numRemoved) => {
+		if (err) {
+			Raven.captureException(err);
+		}
+		console.log(numRemoved);
+	});
 	historyForm.parentNode.removeChild(historyForm);
 }
 
@@ -165,25 +165,23 @@ function removeStreamHistory() {
  * Called on window load.
  */
 function streamHistory() {
-	const db = new PouchDB(require('path').join(require('electron').remote.app.getPath('userData'), 'dbStream').toString());
 	const select = document.getElementById('historySelect');
-	db.allDocs({include_docs: true}) // eslint-disable-line camelcase
-		.then(res => {
-			for (let i = 0; i < res.rows.length; i++) {
-				_.each(res.rows[i].doc.files, file => {
-					const opt = file;
-					const el = document.createElement('option');
-					el.textContent = opt;
-					el.value = i;
-					el.id = res.rows[i].doc.magnet;
-					select.appendChild(el);
-				});
-				document.getElementById('historyForm').style.display = 'inline-block';
-			}
-		})
-		.catch(err => {
-			throw err;
-		});
+	db.find({}, (err, res) => {
+		if (err) {
+			Raven.captureException(err);
+		}
+		for (let i = 0; i < res.length; i++) {
+			_.each(res[i].files, file => {
+				const opt = file;
+				const el = document.createElement('option');
+				el.textContent = opt;
+				el.value = i;
+				el.id = res[i].magnet;
+				select.appendChild(el);
+			});
+			document.getElementById('historyForm').style.display = 'inline-block';
+		}
+	});
 }
 
 /**
