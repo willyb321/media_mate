@@ -44,6 +44,10 @@ console.timeEnd('windowstate');
 console.time('path');
 import path from 'path';
 console.timeEnd('path');
+console.time('logger');
+import log from 'electron-log';
+console.log = log.info;
+console.timeEnd('logger');
 console.time('utils');
 import {createDB} from '../lib/utils';
 console.timeEnd('utils');
@@ -57,6 +61,8 @@ const version = app.getVersion();
 Raven.config('https://3d1b1821b4c84725a3968fcb79f49ea1:1ec6e95026654dddb578cf1555a2b6eb@sentry.io/184666', {
 	release: version
 }).install();
+autoUpdater.logger = require('electron-log');
+autoUpdater.logger.transports.file.level = 'info';
 let win;
 let db;
 createDB(path.join(app.getPath('userData'), 'dbTor.db').toString())

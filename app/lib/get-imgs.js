@@ -14,6 +14,7 @@ const isRenderer = require('is-electron-renderer');
 const TVDB = require('node-tvdb');
 // Const storage = require('electron-json-storage');
 const parser = require('episode-parser');
+const log = require('electron-log');
 const dir = require('node-dir');
 const _ = require('underscore');
 const path = require('path');
@@ -22,6 +23,7 @@ const tvdb = new TVDB(process.env.TVDB_KEY);
 const POLL_INTERVAL = 100;
 let db;
 let version;
+console.log = log.info;
 // Make sure that version can be got from both render and main process
 if (isRenderer) {
 	version = require('electron').remote.app.getVersion();

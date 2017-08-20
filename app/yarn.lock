@@ -652,6 +652,10 @@ electron-localshortcut@^3.0.0:
     keyboardevent-from-electron-accelerator "^0.7.0"
     keyboardevents-areequal "^0.2.1"
 
+electron-log@^2.2.7:
+  version "2.2.7"
+  resolved "https://registry.yarnpkg.com/electron-log/-/electron-log-2.2.7.tgz#8da0d2586b53b175392ae6b91dc510a67c195341"
+
 electron-notify@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/electron-notify/-/electron-notify-0.1.0.tgz#8f24b940db2c9f33aff919d56bf8aff9ca4328b5"

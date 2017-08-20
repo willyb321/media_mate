@@ -17,7 +17,7 @@
 		"tagName": "v%s",
 		"tagAnnotation": "Release v%s",
 		"pushRepo": null,
-		"beforeStartCommand": false,
+		"beforeStartCommand": "./release-notes.sh",
 		"beforeStageCommand": false,
 		"afterReleaseCommand": "gulp changelog"
 	},

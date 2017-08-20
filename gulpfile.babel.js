@@ -6,8 +6,10 @@ import sourcemaps from 'gulp-sourcemaps';
 import babel from 'gulp-babel';
 import concat from 'gulp-concat';
 import rimraf from 'rimraf';
+import fs from 'fs';
+import path from 'path';
 const spawn = require('child_process').spawn;
-
+const pkg = require('./package.json');
 const builder = require('electron-builder');
 
 let injects = [
