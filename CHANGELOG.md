@@ -1,5 +1,11 @@
 ## Change Log
 
+### v1.1.2 (2017/08/20 10:44 +00:00)
+- [c411e48](https://github.com/willyb321/media_mate/commit/c411e484dba44cc08fb0729182d261e4b5191106) Release v1.1.2 (@willyb321)
+- [8e8c91b](https://github.com/willyb321/media_mate/commit/8e8c91b2f6cf3a623b43f9fb3debecf95ebb0379) use electron-collection, fix `notify is not defined`, (@willyb321)
+- [c33064c](https://github.com/willyb321/media_mate/commit/c33064cb03633832888844a72864019c61efce94) oops forgot to remove the devtools (@willyb321)
+- [66f62b6](https://github.com/willyb321/media_mate/commit/66f62b6935ab64f6d4f7aa4c45d2373d74a4589b) changelog (@willyb321)
+
 ### v1.1.1 (2017/08/20 04:32 +00:00)
 - [eb5956a](https://github.com/willyb321/media_mate/commit/eb5956aeaa0ade68cc841e18e8832c5bdf6dd61b) Release v1.1.1 (@willyb321)
 - [fb99f58](https://github.com/willyb321/media_mate/commit/fb99f58d17a408b15d2876bb289d23cfc53db720) linting (@willyb321)
