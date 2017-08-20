@@ -209,7 +209,6 @@ function createMainWindow() {
 	win.once('ready-to-show', () => {
 		win.show();
 	});
-	win.webContents.openDevTools();
 	return win;
 }
 /**
