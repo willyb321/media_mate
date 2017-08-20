@@ -17,9 +17,6 @@ console.timeEnd('electron');
 console.time('updater');
 import {autoUpdater} from 'electron-updater';
 console.timeEnd('updater');
-console.time('is-dev');
-import isDev from 'electron-is-dev';
-console.timeEnd('is-dev');
 console.time('sentry');
 import Raven from 'raven';
 console.timeEnd('sentry');
@@ -38,9 +35,9 @@ console.timeEnd('underscore');
 console.time('jsonstorage');
 import storage from 'electron-json-storage';
 console.timeEnd('jsonstorage');
-console.time('debug');
-require('electron-debug')();
-console.timeEnd('debug');
+console.time('electron-collection');
+import {debug, firstRun, isDev, rootPath} from 'electron-collection';
+console.timeEnd('electron-collection');
 console.time('windowstate');
 import windowStateKeeper from 'electron-window-state';
 console.timeEnd('windowstate');
@@ -50,6 +47,9 @@ console.timeEnd('path');
 console.time('utils');
 import {createDB} from '../lib/utils';
 console.timeEnd('utils');
+console.time('pkg');
+const pkg = require(path.join(rootPath.path, 'package.json'));
+console.timeEnd('pkg');
 console.timeEnd('require');
 let RSS;
 const app = electron.app;
@@ -119,8 +119,9 @@ autoUpdater.on('download-progress', percent => {
 
 });
 // Adds debug features like hotkeys for triggering dev tools and reload
-require('electron-debug')();
-
+if (isDev) {
+	debug({showDevTools: true});
+}
 // Prevent window being garbage collected
 let mainWindow;
 /**
@@ -215,19 +216,34 @@ function createMainWindow() {
  * Ask the user if they want to view the tutorial on first run
  */
 function onBoard() {
-	storage.get('firstrun', (err, data) => {
-		if (err) {
-			Raven.captureException(err);
-		}
-		if (_.isEmpty(data)) {
+	if (firstRun({
+		name: pkg.name
+	})) {
+		storage.has('path', (err, hasKey) => {
+			if (err) {
+				Raven.captureException(err);
+			} else if (!hasKey) {
+				storage.set('path', {
+					path: path.join(require('os').homedir(), 'media_matedl')
+				});
+			}
+		});
+		mainWindow.webContents.once('dom-ready', () => {
 			mainWindow.webContents.executeJavaScript('firstrun()');
-			storage.set('firstrun', {first: false}, err => {
-				if (err) {
-					Raven.captureException(err);
-				}
-			});
-		}
-	});
+		});
+		storage.get('firstrun', (err, data) => {
+			if (err) {
+				Raven.captureException(err);
+			}
+			if (_.isEmpty(data)) {
+				storage.set('firstrun', {first: false}, err => {
+					if (err) {
+						Raven.captureException(err);
+					}
+				});
+			}
+		});
+	}
 }
 
 /**
@@ -305,26 +321,36 @@ function watchRSS() {
 	getRSSURI(cb => {
 		uri = cb;
 		if (cb === '') {
-			mainWindow.webContents.executeJavaScript(`notify('Put your ShowRSS URL into the downloader!', 'showrss.info')`);
+			if (win.webContents.isLoading()) {
+				mainWindow.webContents.once('dom-ready', () => {
+					mainWindow.webContents.executeJavaScript(`notify('Put your ShowRSS URL into the downloader!', 'showrss.info')`);
+				});
+			} else {
+				mainWindow.webContents.executeJavaScript(`notify('Put your ShowRSS URL into the downloader!', 'showrss.info')`);
+			}
 		} else {
 			RSS = new RSSParse(uri);
 			RSS.on('error', err => {
 				Raven.captureException(err);
 			});
 			RSS.on('offline', () => {
-				if (mainWindow.webContents.isLoading() === false) {
-					mainWindow.webContents.executeJavaScript(`sweetAlert('Offline', 'You are offline, thats fine though.', 'info')`);
-				} else {
+				if (mainWindow.webContents.isLoading()) {
 					console.log('offline');
 					mainWindow.webContents.once('dom-ready', () => {
 						mainWindow.webContents.executeJavaScript(`sweetAlert('Offline', 'You are offline, thats fine though.', 'info')`);
 					});
+				} else {
+					mainWindow.webContents.executeJavaScript(`sweetAlert('Offline', 'You are offline, thats fine though.', 'info')`);
 				}
 			});
 			RSS.on('data', data => {
 				ignoreDupeTorrents(data, dupe => {
 					if (dupe) {
 						console.log('already DL');
+					} else if (win.webContents.isLoading()) {
+						mainWindow.webContents.once('dom-ready', () => {
+							mainWindow.webContents.executeJavaScript(`notify('New Download Available', '${data.title.toString()}')`);
+						});
 					} else {
 						mainWindow.webContents.executeJavaScript(`notify('New Download Available', '${data.title.toString()}')`);
 					}

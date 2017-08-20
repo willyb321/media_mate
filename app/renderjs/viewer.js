@@ -279,21 +279,21 @@ async function deleteTV(params) {
 			const files = klawSync(data.path, {nodir: true});
 			_.each(files, (file, index) => {
 				files[index] = file.path;
-				const pathSplit = file.path.split('/');
-				if (pathSplit[pathSplit.length - 1] === filename) {
+				const pathParsed = path.parse(file.path);
+				if (pathParsed.base === filename) {
 					console.log('found it');
-					console.log(file.path);
-					console.log(path.resolve(`${file.path}/../`));
+					console.log(`File path: ${file.path}`);
+					console.log(`Directory: ${pathParsed.dir}`);
 					require('sweetalert2')({
 						title: 'Delete confirmation',
-						text: `The following folder and its contents will be deleted: ${path.resolve(file.path + '/../')}`,
+						text: `The following folder and its contents will be deleted: ${pathParsed.dir}`,
 						type: 'warning',
 						showCancelButton: true,
 						confirmButtonColor: '#3085d6',
 						cancelButtonColor: '#d33',
 						confirmButtonText: 'Yes, delete it!'
 					}).then(() => {
-						fs.remove(path.resolve(`${file.path}/../`), err => {
+						fs.remove(pathParsed.dir, err => {
 							if (err) {
 								Raven.captureException(err);
 							}

@@ -19,7 +19,7 @@ function firstrun() {
 		require('electron').remote.getCurrentWindow().loadURL(`file://${__dirname}/../renderhtml/onboard.html`)
 	}).catch(err => {
 		if (err !== 'cancel') {
-			throw err;
+			console.log(err);
 		}
 	});
 }
