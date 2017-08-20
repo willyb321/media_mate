@@ -1,5 +1,12 @@
 ## Change Log
 
+### v1.1.1 (2017/08/20 04:32 +00:00)
+- [eb5956a](https://github.com/willyb321/media_mate/commit/eb5956aeaa0ade68cc841e18e8832c5bdf6dd61b) Release v1.1.1 (@willyb321)
+- [fb99f58](https://github.com/willyb321/media_mate/commit/fb99f58d17a408b15d2876bb289d23cfc53db720) linting (@willyb321)
+- [2f91ab7](https://github.com/willyb321/media_mate/commit/2f91ab759a110955d9fa5c8b265c90948d6bde40) Switch to NeDB, deps, see extended (@willyb321)
+- [4a17c4c](https://github.com/willyb321/media_mate/commit/4a17c4c061b4716409a45b5d8e680faf8332a975) bunch of db related things (@willyb321)
+- [80e9ff4](https://github.com/willyb321/media_mate/commit/80e9ff417fd7ef44326c4dee50a8044668a4826c) changelog (@willyb321)
+
 ### v1.1.0 (2017/08/18 23:15 +00:00)
 - [165b3e1](https://github.com/willyb321/media_mate/commit/165b3e16bd779ba33e0b77c71fd6afd3e692c670) Release v1.1.0 (@willyb321)
 - [2da36d0](https://github.com/willyb321/media_mate/commit/2da36d06a6a52e5ca7af7e528d34611610ec0951) add linux category, maintainer and synopsis (@willyb321)
