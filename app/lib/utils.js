@@ -55,7 +55,7 @@ function titleCase(str) {
  * @param {string} path
  */
 function createDB(path) {
-	return new Promise(async (resolve, reject) => {
+	return new Promise(resolve => {
 		const db = new Datastore({filename: path, autoload: true});
 		resolve(db);
 	});

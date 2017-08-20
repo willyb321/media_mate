@@ -22,9 +22,9 @@ const client = new WebTorrent();
 let filesAll;
 let db;
 createDB(path.join(require('electron').remote.app.getPath('userData'), 'dbStream.db').toString())
-.then(dbCreated => {
-	db = dbCreated;
-});
+	.then(dbCreated => {
+		db = dbCreated;
+	});
 client.on('error', err => {
 	console.log(err);
 });

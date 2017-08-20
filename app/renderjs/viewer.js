@@ -27,9 +27,9 @@ const tvdb = new TVDB(process.env.TVDB_KEY);
 const vidProgressthrottled = _.throttle(vidProgress, 500);
 let db;
 createDB(path.join(require('electron').remote.app.getPath('userData'), 'dbImg.db').toString())
-.then(dbCreated => {
-	db = dbCreated;
-});
+	.then(dbCreated => {
+		db = dbCreated;
+	});
 Raven.config('https://3d1b1821b4c84725a3968fcb79f49ea1:1ec6e95026654dddb578cf1555a2b6eb@sentry.io/184666', {
 	release: version
 }).install();
@@ -103,8 +103,14 @@ function getImgDB(data) {
 			if (img.id === elempath) {
 				img.children[0].parentNode.style.display = 'inline-block';
 				db.find({_id: `img${tvelem.show.replace(' ', '')}S${tvelem.season}E${tvelem.episode}`}, (err, docs) => {
+					if (err) {
+						Raven.captureException(err);
+					}
 					if (docs.length > 0) {
 						db.find({_id: `img${tvelem.show.replace(' ', '')}S${tvelem.season}E${tvelem.episode}`}, (err, doc) => {
+							if (err) {
+								Raven.captureException(err);
+							}
 							blobUtil.base64StringToBlob(doc[0].imgData, 'image/jpeg').then(blob => {
 								img.children[0].src = URL.createObjectURL(blob); // eslint-disable-line
 								resolve(['got from db']);

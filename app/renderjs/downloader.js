@@ -35,9 +35,9 @@ let i = 0;
 let bar;
 let db;
 createDB(path.join(require('electron').remote.app.getPath('userData'), 'dbTor.db').toString())
-.then(dbCreated => {
-	db = dbCreated;
-});
+	.then(dbCreated => {
+		db = dbCreated;
+	});
 const dbindex = 0;
 const allTorrents = [];
 const prog = _.throttle(dlProgress, 10000);
@@ -229,6 +229,9 @@ async function dlAll() {
 	db.find({
 		downloaded: false
 	}, (err, docs) => {
+		if (err) {
+			Raven.captureException(err);
+		}
 		_.each(docs, (elem, index) => {
 			addTor(elem.magnet, index);
 		});
