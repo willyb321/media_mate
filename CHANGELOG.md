@@ -1,5 +1,14 @@
 ## Change Log
 
+### v1.1.3 (2017/08/21 00:16 +00:00)
+- [59d89e0](https://github.com/willyb321/media_mate/commit/59d89e0f36a7fa4672b7b2945645920fb252ade8) Release v1.1.3 (@willyb321)
+- [e70c5e8](https://github.com/willyb321/media_mate/commit/e70c5e89769ae0339608d9ed7213e41f6562b1a6) Merge branch 'develop' of https://github.com/willyb321/media_mate into develop (@willyb321)
+- [201ca9b](https://github.com/willyb321/media_mate/commit/201ca9b22f91896a01c0e3c59fb2b7692e6326bb) i shouldnt need this (@willyb321)
+- [d757641](https://github.com/willyb321/media_mate/commit/d757641011c3670f5815cb653b78942ef8c59398) load changelog into main window when downloading update. (@willyb321)
+- [16e44ec](https://github.com/willyb321/media_mate/commit/16e44ec3b07ca3b47445a4f8048706db7a112f4a) log update info (@willyb321)
+- [d726d9e](https://github.com/willyb321/media_mate/commit/d726d9e29e79081e077bf979a389b72e78b00807) logs and also release notes (@willyb321)
+- [48a46d6](https://github.com/willyb321/media_mate/commit/48a46d618b5fb6a831f0e5ad895731f69b8098fc) changelog (@willyb321)
+
 ### v1.1.2 (2017/08/20 10:44 +00:00)
 - [c411e48](https://github.com/willyb321/media_mate/commit/c411e484dba44cc08fb0729182d261e4b5191106) Release v1.1.2 (@willyb321)
 - [8e8c91b](https://github.com/willyb321/media_mate/commit/8e8c91b2f6cf3a623b43f9fb3debecf95ebb0379) use electron-collection, fix `notify is not defined`, (@willyb321)
