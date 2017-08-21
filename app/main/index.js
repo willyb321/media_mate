@@ -92,7 +92,7 @@ autoUpdater.on('update-available', info => { // eslint-disable-line no-unused-va
 		message: 'Press OK to download the update, and the application will download the update and then tell you when its done.'
 	});
 	console.log(info);
-	win.loadURL(`file:///${__dirname}/../renderhtml/index.html`);
+	win.loadURL(`data:text/html,<h1>Changelog for ${info.version}</h1><br>${info.releaseNotes}`);
 });
 /**
  * Autoupdater on downloaded
