@@ -16,9 +16,9 @@
   version "7.0.18"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-7.0.18.tgz#cd67f27d3dc0cfb746f0bdd5e086c4c5d55be173"
 
-about-window@^1.7.0:
-  version "1.7.0"
-  resolved "https://registry.yarnpkg.com/about-window/-/about-window-1.7.0.tgz#9a18ab50546305d069ac3caf9d4c11861f9b77ac"
+about-window@^1.7.1:
+  version "1.7.1"
+  resolved "https://registry.yarnpkg.com/about-window/-/about-window-1.7.1.tgz#bfacaa445702857d1c4a0768288e02159cdb9867"
 
 accessibility-developer-tools@^2.11.0:
   version "2.12.0"
@@ -2227,9 +2227,9 @@ sudo-prompt@^6.2.0:
   version "6.2.1"
   resolved "https://registry.yarnpkg.com/sudo-prompt/-/sudo-prompt-6.2.1.tgz#1079211ac2cf21f5230ffbeb124ffc22cee4c2b6"
 
-sweetalert2@^6.6.8:
-  version "6.6.8"
-  resolved "https://registry.yarnpkg.com/sweetalert2/-/sweetalert2-6.6.8.tgz#d1cafd25b6ec1ea4cd43c02baac94637ff33eace"
+sweetalert2@^6.6.9:
+  version "6.6.9"
+  resolved "https://registry.yarnpkg.com/sweetalert2/-/sweetalert2-6.6.9.tgz#d3814561d4b2dba71ebda7f4497800e5e4e8a58a"
 
 symbol-observable@^1.0.1:
   version "1.0.4"
