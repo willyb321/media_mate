@@ -211,7 +211,6 @@ function createMainWindow() {
 				app.quit();
 			}
 		} else {
-			console.log(e);
 			Raven.captureException(e);
 		}
 	});
