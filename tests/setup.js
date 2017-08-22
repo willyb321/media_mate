@@ -28,7 +28,7 @@ function createApp(t) {
 		// path: path.join(__dirname, '..', 'dist/mac/Media Mate.app/Contents/MacOS/Media Mate'),
 		path: path.join(__dirname, '..', 'node_modules', '.bin',
 			'electron' + (process.platform === 'win32' ? '.cmd' : '')),
-		args: [`${__dirname}/../app/main/indexbuild.js`, '-r', path.join(__dirname, '..', 'app', 'main', 'mocks.js')],
+		args: [`${__dirname}/../app/main/es6-init.js`, '-r', path.join(__dirname, '..', 'app', 'main', 'mocks.js')],
 		env: {NODE_ENV: 'test', SPECTRON: '1'},
 		waitTimeout: 10e3
 	});
