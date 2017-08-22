@@ -22,6 +22,7 @@ const swal = require('sweetalert2');
 const RSSParse = require(`${__dirname}/../lib/rssparse.js`).RSSParse;
 const ProgressBar = require('progressbar.js');
 const _ = require('underscore');
+const bytes = require('bytes');
 const storage = require('electron-json-storage');
 const Datastore = require('nedb-core');
 const WebTorrent = require('webtorrent');
@@ -281,7 +282,7 @@ function updateProgress(magnet, torrent) {
 	const percent = Math.round(torrent.progress * 100 * 100) / 100;
 	const elem = document.getElementsByName(magnet)[0];
 	if (elem) {
-		elem.parentNode.childNodes[1].nodeValue = `- ${percent.toString()}% downloaded, ${moment.duration(torrent.timeRemaining / 1000, 'seconds').humanize()} remaining.`;
+		elem.parentNode.childNodes[1].nodeValue = `- ${percent.toString()}% downloaded (${bytes.format(torrent.downloadSpeed)}/s) , ${moment.duration(torrent.timeRemaining / 1000, 'seconds').humanize()} remaining.`;
 	}
 }
 

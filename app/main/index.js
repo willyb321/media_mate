@@ -387,12 +387,13 @@ app.on('ready', () => {
 	}
 	protocol.uninterceptProtocol('video');
 	protocol.registerFileProtocol('video', (request, callback) => {
-		const url = request.url;
+		let url = request.url;
 		const urlParsed = require('url').parse(request.url);
 		if (process.platform === 'win32') {
 			// Hacky af but it works so I can't complain.
 			callback(path.join(urlParsed.hostname.toUpperCase() + ':\\', urlParsed.path).replace('\\', '\\\\'));
 		} else {
+			url = decodeURIComponent(url);
 			callback(path.resolve(url.substring(7)));
 		}
 	}, error => {
