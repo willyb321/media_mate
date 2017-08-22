@@ -210,6 +210,7 @@ async function getImgs() {
 function vidFinished(e) {
 	let filename;
 	let elem;
+	const video = document.getElementById('vidPlay');
 	if (process.env.SPECTRON) {
 		filename = 'TopGearS24E7';
 		elem = document.getElementById('top.gear.s24e07.hdtv.x264-mtb.mp4');
@@ -219,6 +220,10 @@ function vidFinished(e) {
 	}
 	const figcap = elem.childNodes;
 	storage.get(filename, (err, data) => {
+		if (err) {
+			console.log(err);
+			Raven.captureException(err);
+		}
 		const time = data.time;
 		const duration = data.duration;
 		const percent = (time / duration) * 100;
@@ -231,17 +236,13 @@ function vidFinished(e) {
 		figcap[1].style.setProperty('margin', '0px 0px', 'important');
 		figcap[1].style.backgroundColor = 'red';
 		figcap[2].innerText = `${figcap[0].title} (${Math.round(percent)}% watched)`;
-		if (err) {
-			console.log(err);
-			Raven.captureException(err);
-		}
 		storage.set(filename, {file: filename, watched: true, time: (process.env.SPECTRON ? 5.014 : this.duration), duration: (process.env.SPECTRON ? 5.014 : duration)}, err => {
 			if (err) {
 				Raven.captureException(err);
 			}
 		});
 	});
-	this.parentNode.removeChild(this);
+	video.parentNode.removeChild(video);
 }
 /**
  * On video metadata loaded, add it to the JSON.
@@ -512,6 +513,7 @@ async function findDL() {
 				window.scrollTo(0, 0);
 				const video = document.createElement('video');
 				video.src = 'video://' + files[i];
+				video.id = 'vidPlay';
 				video.setAttribute('data-file-name', `${parsedName.show.replace(' ', '')}S${parsedName.season}E${parsedName.episode}`);
 				video.setAttribute('data-store-name', `${parsedName.show.replace(' ', '')}S${parsedName.season}E${parsedName.episode}`);
 				video.autoplay = true;

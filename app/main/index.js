@@ -171,12 +171,14 @@ function createMainWindow() {
 		win = new electron.BrowserWindow({
 			width: 1280,
 			height: 720,
-			enableLargerThanScreen: true,
+			useContentSize: true,
+			isMaximized: false,
 			backgroundColor: '#f8f9fa'
 		});
 	} else {
 		const mainWindowState = windowStateKeeper({
 			isMaximized: false,
+			useContentSize: true,
 			defaultWidth: 1280,
 			defaultHeight: 720
 		});
@@ -186,7 +188,6 @@ function createMainWindow() {
 			width: mainWindowState.width,
 			height: mainWindowState.height,
 			show: false,
-			enableLargerThanScreen: true,
 			backgroundColor: '#f8f9fa'
 		});
 		mainWindowState.manage(win);
