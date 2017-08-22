@@ -126,7 +126,7 @@ autoUpdater.on('download-progress', percent => {
 
 });
 // Adds debug features like hotkeys for triggering dev tools and reload
-if (isDev) {
+if (isDev && process.env.NODE_ENV !== 'test') {
 	debug({showDevTools: true});
 }
 // Prevent window being garbage collected
