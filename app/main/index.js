@@ -35,6 +35,9 @@ console.timeEnd('underscore');
 console.time('jsonstorage');
 import storage from 'electron-json-storage';
 console.timeEnd('jsonstorage');
+console.time('bypass');
+import {addBypassChecker} from 'electron-compile';
+console.timeEnd('bypass');
 console.time('electron-collection');
 import {debug, firstRun, isDev, rootPath} from 'electron-collection';
 console.timeEnd('electron-collection');
@@ -49,7 +52,7 @@ import log from 'electron-log';
 console.log = log.info;
 console.timeEnd('logger');
 console.time('utils');
-import {createDB} from '../lib/utils';
+import {createDB, isPlayable} from '../lib/utils';
 console.timeEnd('utils');
 console.time('pkg');
 const pkg = require(path.join(rootPath.path, 'package.json'));
@@ -69,7 +72,12 @@ createDB(path.join(app.getPath('userData'), 'dbTor.db').toString())
 	.then(dbCreated => {
 		db = dbCreated;
 	});
-
+addBypassChecker(filePath => {
+	if (isPlayable(filePath)) {
+		console.log(`Bypassing ${filePath}`);
+	}
+	return isPlayable(filePath);
+});
 if (process.env.SPECTRON) {
 	/**
 	 * If Spectron is running, mock showOpenDialog to return the test folder.
@@ -373,7 +381,6 @@ ipc.on('dldone', (event, data) => {
 	console.log(data);
 	mainWindow.webContents.executeJavaScript(`notify('Download Finished', '${data}' )`);
 });
-protocol.registerStandardSchemes(['video']);
 /**
  * Make the main window.
  */
@@ -385,23 +392,5 @@ app.on('ready', () => {
 	if (!isDev && process.env.NODE_ENV !== 'test' && process.platform !== 'darwin') {
 		autoUpdater.checkForUpdates();
 	}
-	protocol.uninterceptProtocol('video');
-	protocol.registerFileProtocol('video', (request, callback) => {
-		let url = request.url;
-		const urlParsed = require('url').parse(request.url);
-		if (process.platform === 'win32') {
-			// Hacky af but it works so I can't complain.
-			callback(path.join(urlParsed.hostname.toUpperCase() + ':\\', urlParsed.path).replace('\\', '\\\\'));
-		} else {
-			url = decodeURIComponent(url);
-			callback(path.resolve(url.substring(7)));
-		}
-	}, error => {
-		if (error) {
-			console.log(error);
-			Raven.captureException(error);
-			console.error('Failed to register protocol');
-		}
-	});
 	console.timeEnd('init');
 });
