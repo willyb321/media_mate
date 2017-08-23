@@ -522,7 +522,11 @@ async function findDL() {
 				}
 				const video = document.createElement('video');
 				video.id = 'vidPlay';
-				video.src = `http://127.0.0.1:53324/${path.parse(files[i]).dir.split('/')[path.parse(files[i]).dir.split('/').length - 1]}/${path.parse(files[i]).base}`;
+				if (dlPath.path === path.parse(files[i]).dir) {
+					video.src = `http://127.0.0.1:53324/${path.parse(files[i]).base}`;
+				} else {
+					video.src = `http://127.0.0.1:53324/${path.parse(files[i]).dir.split('/')[path.parse(files[i]).dir.split('/').length - 1]}/${path.parse(files[i]).base}`;
+				}
 				console.log(files[i]);
 				video.setAttribute('data-file-name', `${parsedName.show.replace(' ', '')}S${parsedName.season}E${parsedName.episode}`);
 				video.setAttribute('data-store-name', `${parsedName.show.replace(' ', '')}S${parsedName.season}E${parsedName.episode}`);
