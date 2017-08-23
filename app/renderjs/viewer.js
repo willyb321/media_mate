@@ -22,12 +22,14 @@ const parser = require('episode-parser');
 const log = require('electron-log');
 console.log = log.info;
 const klawSync = require('klaw-sync');
+const server = require('pushstate-server');
 const blobUtil = require('blob-util');
 const {createDB} = require('../lib/utils');
 const {titleCase, isPlayable} = require(require('path').join(__dirname, '..', 'lib', 'utils.js'));
 const tvdb = new TVDB(process.env.TVDB_KEY);
 const vidProgressthrottled = _.throttle(vidProgress, 500);
 let db;
+let served;
 createDB(path.join(require('electron').remote.app.getPath('userData'), 'dbImg.db').toString())
 	.then(dbCreated => {
 		db = dbCreated;
@@ -478,8 +480,8 @@ async function watchedTime(vid, elem, figcap) {
  * Get files downloaded and process them to the DOM.
  */
 async function findDL() {
-	const path = await getPath();
-	let files = klawSync(path.path, {nodir: true});
+	const dlPath = await getPath();
+	let files = klawSync(dlPath.path, {nodir: true});
 	_.each(files, (elem, index) => {
 		files[index] = elem.path;
 	});
@@ -509,11 +511,19 @@ async function findDL() {
 			const figcap = document.createElement('figcaption');
 			const imgelem = document.createElement('img');
 			parsedName.show = titleCase(parsedName.show);
-			figelem.addEventListener('click', () => {
+			figelem.addEventListener('click', async () => {
 				window.scrollTo(0, 0);
+				if (!served || !served.listening) {
+					served = server.start({
+						port: 53324,
+						host: '127.0.0.1',
+						directory: dlPath.path
+					});
+				}
 				const video = document.createElement('video');
-				video.src = 'video://' + files[i];
 				video.id = 'vidPlay';
+				video.src = `http://127.0.0.1:53324/${path.parse(files[i]).dir.split('/')[path.parse(files[i]).dir.split('/').length - 1]}/${path.parse(files[i]).base}`;
+				console.log(files[i]);
 				video.setAttribute('data-file-name', `${parsedName.show.replace(' ', '')}S${parsedName.season}E${parsedName.episode}`);
 				video.setAttribute('data-store-name', `${parsedName.show.replace(' ', '')}S${parsedName.season}E${parsedName.episode}`);
 				video.autoplay = true;

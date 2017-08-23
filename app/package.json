@@ -45,6 +45,7 @@
     "node-tvdb": "^3.2.0",
     "open-color": "^1.5.1",
     "progressbar.js": "^1.0.1",
+    "pushstate-server": "^3.0.1",
     "raven": "^2.1.2",
     "request": "^2.81.0",
     "source-map-support": "^0.4.16",
