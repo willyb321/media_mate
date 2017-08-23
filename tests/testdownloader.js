@@ -13,7 +13,7 @@ test('downloader', t => {
 		.then(() => app.client.click('#downloader'))
 		.then(() => setup.wait(6e3))
 		.then(() => {
-			app.electron.clipboard.writeText('http://showrss.info/user/3414.rss?magnets=true&namespaces=true&name=clean&quality=null&re=no')
+			app.electron.clipboard.writeText('https://cdn.rawgit.com/willyb321/media_mate/4c10674eaa76d9006b2ad4826a8c69b888386c39/tests/resources/downloader_test.rss')
 				.electron.clipboard.readText().then(function (clipboardText) {
 					app.client.moveToObject('#rss')
 						.then(() => setup.wait())
@@ -21,10 +21,23 @@ test('downloader', t => {
 						.then(() => setup.wait())
 						.then(() => app.client.element('#rss').setValue(clipboardText))
 						.then(() => app.client.moveToObject('#title'))
-						.then(() => app.client.click('#title'))
-						.then(() => setup.screenshotCreateOrCompare(app, t, 'downloader'))
-						.then(() => app.client.keys(['Enter']))
-						.then(() => app.client.keys(['Enter']))
+						.then(() => setup.wait())
+						.then(() => app.client.click('#dupecount'))
+						.then(() => setup.wait(2e3))
+						.then(() => app.client.executeAsync(async function (done) {
+							let swalcon = await getSwalConfirmButton()
+							swalcon.id = 'downloaderSwalConfirmBut'
+							done({id: swalcon.id});
+						})
+							.then(result => {
+								console.log(result);
+								t.equal(result.value.id, 'downloaderSwalConfirmBut', 'Sweetalert ok button\'s id was set to "downloaderSwalConfirmBut"')
+							}))
+						.then(() => setup.screenshotCreateOrCompare(app, t, 'downloader-sweetalert'))
+						.then(() => setup.wait())
+						.then(() => app.client.click('#downloaderSwalConfirmBut'))
+						.then(() => setup.wait(3e3))
+						.then(() => setup.screenshotCreateOrCompare(app, t, 'downloader-downloads'))
 						.then(() => app.webContents.executeJavaScript('insertDlPath()'))
 						.then(() => setup.copy(`${__dirname}/resources/top.gear.s24e07.hdtv.x264-mtb.mp4`, `${config.TEST_DIR_DOWNLOAD}/top.gear.s24e07.hdtv.x264-mtb.mp4`))
 						.then(() => setup.endTest(app, t),

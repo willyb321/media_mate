@@ -112,6 +112,22 @@ function dlProgress() {
 	animateThrottled(client.progress);
 }
 /**
+ * Get the confirm button for the currently active sweetalert
+ * @return {Promise} Rejects if no sweetalert on screen, resolves the confirm button DOM element if a sweetalert is currently active
+ */
+function getSwalConfirmButton() {
+	return new Promise((resolve, reject) => {
+		if (swal.getConfirmButton) {
+			let res = swal.getConfirmButton();
+			if (res) {
+				resolve(res);
+			}
+		}
+		reject(new Error('No swal found'));
+	});
+}
+
+/**
  * WebTorrent on error, handle it.
  */
 client.on('error', err => {
@@ -342,6 +358,9 @@ function processTorrents(data) {
 		if (!dupe) {
 			const br = document.createElement('br');
 			const label = document.createElement('label');
+			if (process.env.NODE_ENV === 'test' && process.env.SPECTRON === '1') {
+				label.innerText = `${data.title} - (${moment(data.pubdate).from(moment.unix(1503474469))}) `;
+			}
 			label.innerText = `${data.title} - (${moment(data.pubdate).fromNow()}) `;
 			const input = document.createElement('input');
 			const dlprogTitle = document.createTextNode(' ');
