@@ -36,14 +36,12 @@ function createApp(t) {
 
 // Starts the app, waits for it to load, returns a promise
 function waitForLoad(app, t, opts) {
-	if (!opts) {
-		opts = {};
-	}
 	return app.start().then(function () {
 		return app.client.waitUntilWindowLoaded();
 	}).then(function () {
 		// Switch to the main window.
-		return app.client.windowByIndex(0);
+		return app.browserWindow.focus()
+		// return app.client.windowByIndex(0);
 	}).then(function () {
 		return app.client.waitUntilWindowLoaded();
 	}).then(function () {
