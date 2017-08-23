@@ -28,11 +28,8 @@ test('downloader', t => {
 							let swalcon = await getSwalConfirmButton()
 							swalcon.id = 'downloaderSwalConfirmBut'
 							done({id: swalcon.id});
-						})
-							.then(result => {
-								console.log(result);
-								t.equal(result.value.id, 'downloaderSwalConfirmBut', 'Sweetalert ok button\'s id was set to "downloaderSwalConfirmBut"')
-							}))
+						}))
+						.then(result => t.equal(result.value.id, 'downloaderSwalConfirmBut', 'Sweetalert ok button\'s id was set to "downloaderSwalConfirmBut"'))
 						.then(() => setup.screenshotCreateOrCompare(app, t, 'downloader-sweetalert'))
 						.then(() => setup.wait())
 						.then(() => app.client.click('#downloaderSwalConfirmBut'))
