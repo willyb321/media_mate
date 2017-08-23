@@ -35,7 +35,8 @@ createDB(path.join(require('electron').remote.app.getPath('userData'), 'dbImg.db
 		db = dbCreated;
 	});
 Raven.config('https://3d1b1821b4c84725a3968fcb79f49ea1:1ec6e95026654dddb578cf1555a2b6eb@sentry.io/184666', {
-	release: version
+	release: version,
+	autoBreadcrumbs: true
 }).install();
 /**
  * Add a context menu so that we can reset time watched.

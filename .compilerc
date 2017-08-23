@@ -3,7 +3,8 @@
 		"presets": [
 			"es2015"
 		],
-		"minified": true,
+		"sourceMaps": "both",
+		"minified": false,
 		"only": [
 			"app/*.js",
 			"app/main/*.js"
