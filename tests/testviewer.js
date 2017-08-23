@@ -1,10 +1,12 @@
 const test = require('tape');
 const setup = require('./setup');
+const config = require('./config');
 
 test('viewer', t => {
 	t.timeoutAfter(40e3);
 	const app = setup.createApp();
 	setup.waitForLoad(app, t, {online: true})
+		.then(() => setup.copy(`${__dirname}/resources/top.gear.s24e07.hdtv.x264-mtb.mp4`, `${config.TEST_DIR_DOWNLOAD}/top.gear.s24e07.hdtv.x264-mtb.mp4`))
 		.then(() => app.browserWindow.focus())
 		.then(() => app.client.waitUntilTextExists('#viewer', 'Go to Viewer'))
 		.then(() => app.client.moveToObject('#viewer'))

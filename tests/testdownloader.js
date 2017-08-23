@@ -36,7 +36,6 @@ test('downloader', t => {
 						.then(() => setup.wait(3e3))
 						.then(() => setup.screenshotCreateOrCompare(app, t, 'downloader-downloads'))
 						.then(() => app.webContents.executeJavaScript('insertDlPath()'))
-						.then(() => setup.copy(`${__dirname}/resources/top.gear.s24e07.hdtv.x264-mtb.mp4`, `${config.TEST_DIR_DOWNLOAD}/top.gear.s24e07.hdtv.x264-mtb.mp4`))
 						.then(() => setup.endTest(app, t),
 							err => setup.endTest(app, t, err || 'error'));
 				});
