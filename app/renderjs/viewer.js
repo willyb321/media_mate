@@ -526,7 +526,13 @@ async function findDL() {
 				if (dlPath.path === path.parse(files[i]).dir) {
 					video.src = `http://127.0.0.1:53324/${path.parse(files[i]).base}`;
 				} else {
+					// Sorry about this line lol
 					video.src = `http://127.0.0.1:53324/${path.parse(files[i]).dir.split('/')[path.parse(files[i]).dir.split('/').length - 1]}/${path.parse(files[i]).base}`;
+				}
+				if (process.platform === 'win32') {
+					// This one too :/
+					let urlPath = `http://127.0.0.1:53324/${path.parse(files[i]).dir.split('\\')[path.parse(files[i]).dir.split('\\').length - 1]}/${path.parse(files[i]).base}`;
+					video.src = `${urlPath}`;
 				}
 				console.log(files[i]);
 				video.setAttribute('data-file-name', `${parsedName.show.replace(' ', '')}S${parsedName.season}E${parsedName.episode}`);
@@ -536,8 +542,8 @@ async function findDL() {
 				video.setAttribute('data-img-id', files[i].replace(/^.*[\\/]/, ''));
 				video.addEventListener('loadedmetadata', handleVids, false);
 				video.addEventListener('ended', vidFinished, false);
-				video.addEventListener('timeupdate', vidProgress, false);
-				video.addEventListener('seeking', vidProgress, false);
+				video.addEventListener('timeupdate', vidProgressthrottled, false);
+				video.addEventListener('seeking', vidProgressthrottled, false);
 				document.getElementById('stopvid').addEventListener('click', handleEventHandlers);
 				document.getElementById('stopvid').style.display = 'inline';
 				if (videodiv.childElementCount > 0) {
