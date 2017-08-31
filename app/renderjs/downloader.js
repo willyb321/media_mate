@@ -169,15 +169,20 @@ async function ignoreDupeTorrents(torrent, callback) {
 				callback();
 			}
 		} else {
-			db.insert({
-				_id: torrent.link,
-				magnet: torrent.link,
-				title: torrent.title,
-				tvdbID: torrent['tv:show_name']['#'],
-				airdate: torrent['rss:pubdate']['#'],
-				downloaded: false
+			Raven.context(function () {
+				Raven.captureBreadcrumb({
+					torrent: torrent
+				});
+				db.insert({
+					_id: torrent.link,
+					magnet: torrent.link,
+					title: torrent.title,
+					tvdbID: torrent['tv:show_name']['#'],
+					airdate: torrent['rss:pubdate']['#'],
+					downloaded: false
+				});
+				callback();
 			});
-			callback();
 		}
 	});
 }
@@ -413,15 +418,17 @@ function runScript(e) {
 		const RSS = new RSSParse(tb.value);
 		// Emitted on RSS error (invalid url etc).
 		RSS.on('error', err => {
-			Raven.captureException(err);
+			Raven.context(function () {
+				Raven.captureBreadcrumb({
+					rssURL: tb.value
+				});
+				tb.disabled = false;
+				document.getElementById('dupecount').disabled = false;
+				Raven.captureException(err);
+			});
 		});
 		RSS.on('offline', online => {
 			swal('Offline', 'You are offline, thats fine though.', 'info');
-		});
-		RSS.on('error', err => {
-			console.log(err);
-			tb.disabled = false;
-			document.getElementById('dupecount').disabled = false;
 		});
 		// Emitted every time a new RSS item appears.
 		RSS.on('data', data => {

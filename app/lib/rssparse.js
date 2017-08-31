@@ -52,8 +52,6 @@ class RSSParse extends events.EventEmitter {
 		const req = request(this.rssFeed);
 		const feedparser = new FeedParser();
 		req.on('error', err => {
-			console.log(err);
-			Raven.captureException(err);
 			this.emit('error', err);
 		});
 
@@ -63,7 +61,7 @@ class RSSParse extends events.EventEmitter {
 			if (res.statusCode === 200) {
 				stream.pipe(feedparser);
 				feedparser.on('error', err => {
-					Raven.captureException(err);
+					rssThis.emit('error', err);
 				});
 
 				feedparser.on('readable', function () {
@@ -79,7 +77,6 @@ class RSSParse extends events.EventEmitter {
 				});
 			} else {
 				this.emit('error', new Error('Bad status code'));
-				Raven.captureException(new Error('Bad status code'));
 			}
 		});
 	}
