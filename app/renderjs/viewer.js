@@ -89,6 +89,12 @@ function convertImgToBlob(img, callback) {
 		Raven.captureException(err);
 	});
 }
+
+function openInExternalPlayer(path) {
+	const shell = require('electron').shell;
+	shell.openItem(path);
+}
+
 /**
  * Get images from the DB, if they exist in the DB.
  * @param data {Array} - Data needed to identify the image in the DB.
@@ -254,6 +260,7 @@ function vidFinished(e) {
 function handleVids(e) {
 	const filename = this.getAttribute('data-file-name');
 	document.getElementById('stopvid').style.display = 'inline';
+	document.getElementById('openexternal').style.display = 'inline';
 	storage.get(filename, (err, data) => {
 		if (err) {
 			Raven.captureException(err);
@@ -429,6 +436,7 @@ function handleEventHandlers() {
 	videodiv.removeChild(videodiv.firstElementChild);
 	document.getElementById('stopvid').removeEventListener('click', handleEventHandlers);
 	document.getElementById('stopvid').style.display = 'none';
+	document.getElementById('openexternal').style.display = 'none';
 }
 
 async function watchedTime(vid, elem, figcap) {
@@ -522,6 +530,7 @@ async function findDL() {
 					});
 				}
 				const video = document.createElement('video');
+				document.getElementById('openexternal').addEventListener('click', () => openInExternalPlayer(files[i]));
 				video.id = 'vidPlay';
 				if (dlPath.path === path.parse(files[i]).dir) {
 					video.src = `http://127.0.0.1:53324/${path.parse(files[i]).base}`;
