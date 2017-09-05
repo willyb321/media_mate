@@ -20,7 +20,6 @@ const moment = require('moment');
 const _ = require('underscore');
 const parser = require('episode-parser');
 const log = require('electron-log');
-console.log = log.info;
 const klawSync = require('klaw-sync');
 const server = require('pushstate-server');
 const blobUtil = require('blob-util');
@@ -32,6 +31,7 @@ let db;
 let served;
 createDB(path.join(require('electron').remote.app.getPath('userData'), 'dbImg.db').toString())
 	.then(dbCreated => {
+		log.info('VIEWER: DB Created');
 		db = dbCreated;
 	});
 Raven.config('https://3d1b1821b4c84725a3968fcb79f49ea1:1ec6e95026654dddb578cf1555a2b6eb@sentry.io/184666', {
@@ -167,7 +167,7 @@ async function getImgs() {
 	const mediadiv = document.getElementById('media');
 	const medianodes = mediadiv.childNodes;
 	let dlpath = await getPath();
-	console.log(dlpath);
+	log.info('VIEWER: Download Path: ' + dlpath);
 	dlpath = dlpath.path.toString();
 	const getimgs = new Getimg(dlpath, db);
 	getimgs.on('tvelem', data => {
@@ -176,7 +176,7 @@ async function getImgs() {
 		});
 	});
 	getimgs.on('episode', async data => {
-		console.log('ep');
+		log.info('VIEWER: Got episode');
 		const elem = data[0];
 		const tvelem = data[1];
 		const elempath = data[2];
@@ -205,7 +205,7 @@ async function getImgs() {
 						}
 					})
 					.catch(err => {
-						console.log(err);
+						log.info('VIEWER: Error in GetImgs (getEpisodeById)');
 						Raven.captureException(err);
 					});
 			}
@@ -288,15 +288,14 @@ async function deleteTV(params) {
 		if (err) {
 			Raven.captureException(err);
 		} else {
-			console.log(data);
 			const files = klawSync(data.path, {nodir: true});
 			_.each(files, (file, index) => {
 				files[index] = file.path;
 				const pathParsed = path.parse(file.path);
 				if (pathParsed.base === filename) {
-					console.log('found it');
-					console.log(`File path: ${file.path}`);
-					console.log(`Directory: ${pathParsed.dir}`);
+					console.log('VIEWER: Found file to delete.');
+					console.log(`VIEWER: File path: ${file.path}`);
+					console.log(`VIEWER: Directory: ${pathParsed.dir}`);
 					require('sweetalert2')({
 						title: 'Delete confirmation',
 						text: `The following folder and its contents will be deleted: ${pathParsed.dir}`,
@@ -319,7 +318,7 @@ async function deleteTV(params) {
 								if (err) {
 									Raven.captureException(err);
 								}
-								console.log(numRemoved);
+								log.info(`VIEWER: removed ${numRemoved} from DB`);
 							});
 							elem.parentNode.removeChild(elem);
 						});
@@ -367,7 +366,6 @@ function resetTime(params) {
 		figcap[1].style.setProperty('margin', '0px 0px', 'important');
 		figcap[1].style.backgroundColor = 'red';
 		figcap[2].innerText = `${figcap[0].title}`;
-		console.log(elem);
 	});
 	storage.remove(filename, err => {
 		if (err) {
@@ -417,7 +415,7 @@ function vidProgress(e) {
 	} else if (time === duration) {
 		storage.get(filename, (err, data) => {
 			if (err) {
-				console.log(err);
+				log.info(`VIEWER: Error in vidProgress (time === duration)`);
 				Raven.captureException(err);
 			}
 			storage.set(filename, {file: filename, watched: true, time: this.currentTime, duration: this.duration}, err => {
@@ -443,7 +441,7 @@ async function watchedTime(vid, elem, figcap) {
 	return new Promise((resolve, reject) => {
 		storage.get(vid.getAttribute('data-store-name'), (err, data) => {
 			if (err) {
-				console.log(err);
+				log.info('VIEWER: Error in watchedTime (video data-store-name)');
 				Raven.captureException(err);
 			}
 			if (_.isEmpty(data)) {
@@ -502,7 +500,7 @@ async function findDL() {
 		const elem = document.getElementById('media');
 		const emptyElem = document.createElement('h1');
 		emptyElem.className = 'title';
-		console.log('empty');
+		log.info('VIEWER: No files');
 		emptyElem.innerText = `You have not downloaded anything yet.`;
 		const emptySubtitle = document.createElement('h2');
 		emptyElem.style['text-align'] = 'center';
@@ -543,7 +541,6 @@ async function findDL() {
 					let urlPath = `http://127.0.0.1:53324/${path.parse(files[i]).dir.split('\\')[path.parse(files[i]).dir.split('\\').length - 1]}/${path.parse(files[i]).base}`;
 					video.src = `${urlPath}`;
 				}
-				console.log(files[i]);
 				video.setAttribute('data-file-name', `${parsedName.show.replace(' ', '')}S${parsedName.season}E${parsedName.episode}`);
 				video.setAttribute('data-store-name', `${parsedName.show.replace(' ', '')}S${parsedName.season}E${parsedName.episode}`);
 				video.autoplay = true;
