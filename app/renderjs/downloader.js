@@ -17,7 +17,6 @@ const ipc = require('electron').ipcRenderer;
 require('events').EventEmitter.prototype._maxListeners = 1000;
 const moment = require('moment');
 const log = require('electron-log');
-console.log = log.info;
 const swal = require('sweetalert2');
 const RSSParse = require(`${__dirname}/../lib/rssparse.js`).RSSParse;
 const ProgressBar = require('progressbar.js');
@@ -160,7 +159,8 @@ async function ignoreDupeTorrents(torrent, callback) {
 		_id: torrent.link
 	}, (err, docs) => {
 		if (err) {
-			console.log(err);
+			log.info('DOWNLOADER: Error in ignoreDupeTorrents (db.find)');
+			Raven.captureException(err);
 		}
 		if (docs.length > 0) {
 			if (docs[0].downloaded === true) {
@@ -193,9 +193,10 @@ async function ignoreDupeTorrents(torrent, callback) {
 async function dropTorrents(callback) {
 	db.remove({}, {multi: true}, (err, numRemoved) => {
 		if (err) {
-			console.log(err);
+			log.info('DOWNLOADER: Error in dropTorrents (db.remove)');
+			Raven.captureException(err);
 		}
-		console.log(numRemoved);
+		log.info(`DOWNLOADER: Removed ${numRemoved} from DB`);
 	});
 }
 /**
@@ -207,7 +208,8 @@ function updateURI(uri) {
 		showRSSURI: uri
 	}, err => {
 		if (err) {
-			throw err;
+			log.info(`DOWNLOADER: Error in updateURI (storage.set)`);
+			Raven.captureException(err);
 		}
 	});
 }
@@ -217,7 +219,8 @@ function updateURI(uri) {
 async function findDocuments() {
 	db.find({}, (err, docs) => {
 		if (err) {
-			console.log(err);
+			log.info('DOWNLOADER: Error in findDocuments');
+			Raven.captureException(err);
 		}
 		_.each(docs, elem => allTorrents.push(elem.magnet));
 	});
@@ -228,21 +231,24 @@ async function indexDB() {
 		fieldName: '_id'
 	}, err => {
 		if (err) {
-			console.log(err);
+			log.info('DOWNLOADER: Error in indexDB (ensureIndex on _id)');
+			Raven.captureException(err);
 		}
 	});
 	db.ensureIndex({
 		fieldName: 'magnet'
 	}, err => {
 		if (err) {
-			console.log(err);
+			log.info('DOWNLOADER: Error in indexDB (ensureIndex on magnet)');
+			Raven.captureException(err);
 		}
 	});
 	db.ensureIndex({
 		fieldName: 'downloaded'
 	}, err => {
 		if (err) {
-			console.log(err);
+			log.info('DOWNLOADER: Error in indexDB (ensureIndex on downloaded)');
+			Raven.captureException(err);
 		}
 	});
 }
@@ -288,7 +294,7 @@ function insertDlPath(callback) {
 		properties: ['openDirectory']
 	}, dlpath => {
 		if (dlpath !== undefined) {
-			console.log(dlpath[0]);
+			log.info('DOWNLOADER: path to DL to: ' + dlpath[0]);
 			storage.set('path', {
 				path: dlpath[0]
 			}, error => {
@@ -342,10 +348,11 @@ function addTor(magnet, index) {
 					}
 				}, (err, numReplaced) => {
 					if (err) {
-						console.log(err);
+						log.info(`DOWNLOADER: Error in addTor (.on(done))`);
+						Raven.captureException(err);
 					}
 					document.getElementsByName(magnet)[0].parentNode.style.display = 'none';
-					console.log('done');
+					log.info('DOWNLOADER: Download done');
 					ipc.send('dldone', torrent.name);
 					torrent.destroy();
 				});
@@ -386,9 +393,9 @@ function processTorrents(data) {
 			document.getElementById('dlAll').style.display = 'block';
 			i++;
 		} else if (dupe) {
-			console.log('dupe');
+			log.info('DOWNLOADER: dupe torrent');
 			dupeCount++;
-			console.log(dupeCount);
+			log.info(`DOWNLOADER: ${dupeCount} dupes`);
 			document.getElementById('dupecount').style.display = '';
 			document.getElementById('dupecount').textContent = `${dupeCount} dupes`;
 		}
