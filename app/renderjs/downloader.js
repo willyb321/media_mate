@@ -364,10 +364,10 @@ function processTorrents(data) {
 		if (!dupe) {
 			const br = document.createElement('br');
 			const label = document.createElement('label');
+			label.innerText = `${data.title} - (${moment(data.pubdate).fromNow()}) `;
 			if (process.env.NODE_ENV === 'test' && process.env.SPECTRON === '1') {
 				label.innerText = `${data.title} - (${moment(data.pubdate).from(moment.unix(1503474469))}) `;
 			}
-			label.innerText = `${data.title} - (${moment(data.pubdate).fromNow()}) `;
 			const input = document.createElement('input');
 			const dlprogTitle = document.createTextNode(' ');
 			label.appendChild(dlprogTitle);
