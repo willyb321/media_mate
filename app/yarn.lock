@@ -328,9 +328,13 @@ bulma@^0.4.3:
   version "0.4.4"
   resolved "https://registry.yarnpkg.com/bulma/-/bulma-0.4.4.tgz#182a3d9fb15026b4602aa8da3cf42140bfb9bb2c"
 
-bytes@2.5.0, bytes@^2.5.0:
+bytes@2.5.0:
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/bytes/-/bytes-2.5.0.tgz#4c9423ea2d252c270c41b2bdefeff9bb6b62c06a"
+
+bytes@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/bytes/-/bytes-3.0.0.tgz#d32815404d689699f85a4ea4fa8755dd13a96048"
 
 camelcase@^3.0.0:
   version "3.0.0"
@@ -529,9 +533,9 @@ debug@2.6.8, debug@^2.0.0, debug@^2.1.0, debug@^2.1.3, debug@^2.2.0, debug@^2.5.
   dependencies:
     ms "2.0.0"
 
-debug@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/debug/-/debug-3.0.0.tgz#1d2feae53349047b08b264ec41906ba17a8516e4"
+debug@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/debug/-/debug-3.0.1.tgz#0564c612b521dc92d9f2988f0549e34f9c98db64"
   dependencies:
     ms "2.0.0"
 
@@ -616,12 +620,12 @@ ee-first@1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/ee-first/-/ee-first-1.1.1.tgz#590c61156b0ae2f4f0255732a158b266bc56b21d"
 
-electron-builder-http@~19.21.0:
-  version "19.21.0"
-  resolved "https://registry.yarnpkg.com/electron-builder-http/-/electron-builder-http-19.21.0.tgz#3e812f030fddb5eaebcc26303f7bca1a34e1da76"
+electron-builder-http@~19.27.5:
+  version "19.27.5"
+  resolved "https://registry.yarnpkg.com/electron-builder-http/-/electron-builder-http-19.27.5.tgz#800865df2e618ffab9e5b3b895c15b4ce7fd7f17"
   dependencies:
     bluebird-lst "^1.0.3"
-    debug "^3.0.0"
+    debug "^3.0.1"
     fs-extra-p "^4.4.0"
 
 electron-collection@^1.2.0:
@@ -690,9 +694,9 @@ electron-is-dev@^0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/electron-is-dev/-/electron-is-dev-0.3.0.tgz#14e6fda5c68e9e4ecbeff9ccf037cbd7c05c5afe"
 
-electron-json-storage@^3.0.7:
-  version "3.0.7"
-  resolved "https://registry.yarnpkg.com/electron-json-storage/-/electron-json-storage-3.0.7.tgz#a2137756d06782fe565948b8d07242d3f5624c27"
+electron-json-storage@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/electron-json-storage/-/electron-json-storage-3.1.0.tgz#2c1fe5b3e39fb8907cb0c9cf411cfc8f9013fa17"
   dependencies:
     async "^2.0.0"
     lodash "^4.0.1"
@@ -733,20 +737,20 @@ electron-squirrel-startup@^1.0.0:
   dependencies:
     debug "^2.2.0"
 
-electron-updater@^2.8.7:
-  version "2.8.7"
-  resolved "https://registry.yarnpkg.com/electron-updater/-/electron-updater-2.8.7.tgz#139c34382bea26701c6ef82db457268b08f071a1"
+electron-updater@^2.8.9:
+  version "2.8.9"
+  resolved "https://registry.yarnpkg.com/electron-updater/-/electron-updater-2.8.9.tgz#e2525dcbd7c27ff173bdfd2e87056d67310e2555"
   dependencies:
     bluebird-lst "^1.0.3"
-    debug "^3.0.0"
-    electron-builder-http "~19.21.0"
+    debug "^3.0.1"
+    electron-builder-http "~19.27.5"
     electron-is-dev "^0.3.0"
     fs-extra-p "^4.4.0"
     js-yaml "^3.9.1"
     lazy-val "^1.0.2"
     lodash.isequal "^4.5.0"
     semver "^5.4.1"
-    source-map-support "^0.4.15"
+    source-map-support "^0.4.16"
     uuid-1345 "^0.99.6"
     xelement "^1.0.16"
 
@@ -2274,15 +2278,15 @@ sntp@1.x.x:
   dependencies:
     hoek "2.x.x"
 
-source-map-support@^0.4.15:
-  version "0.4.15"
-  resolved "https://registry.yarnpkg.com/source-map-support/-/source-map-support-0.4.15.tgz#03202df65c06d2bd8c7ec2362a193056fef8d3b1"
-  dependencies:
-    source-map "^0.5.6"
-
 source-map-support@^0.4.16:
   version "0.4.16"
   resolved "https://registry.yarnpkg.com/source-map-support/-/source-map-support-0.4.16.tgz#16fecf98212467d017d586a2af68d628b9421cd8"
+  dependencies:
+    source-map "^0.5.6"
+
+source-map-support@^0.4.17:
+  version "0.4.17"
+  resolved "https://registry.yarnpkg.com/source-map-support/-/source-map-support-0.4.17.tgz#6f2150553e6375375d0ccb3180502b78c18ba430"
   dependencies:
     source-map "^0.5.6"
 
@@ -2426,9 +2430,9 @@ sudo-prompt@^6.2.0:
   version "6.2.1"
   resolved "https://registry.yarnpkg.com/sudo-prompt/-/sudo-prompt-6.2.1.tgz#1079211ac2cf21f5230ffbeb124ffc22cee4c2b6"
 
-sweetalert2@^6.6.9:
-  version "6.6.9"
-  resolved "https://registry.yarnpkg.com/sweetalert2/-/sweetalert2-6.6.9.tgz#d3814561d4b2dba71ebda7f4497800e5e4e8a58a"
+sweetalert2@^6.6.10:
+  version "6.6.10"
+  resolved "https://registry.yarnpkg.com/sweetalert2/-/sweetalert2-6.6.10.tgz#7799f63b47872503dcb7b262f6e7266a04d43a34"
 
 symbol-observable@^1.0.1:
   version "1.0.4"

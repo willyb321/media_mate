@@ -1,7 +1,11 @@
 {
 	"application/javascript": {
 		"presets": [
-			"es2015"
+			["env", {
+				"targets": {
+					"electron": "1.7"
+				}
+			}]
 		],
 		"sourceMaps": "both",
 		"minified": false,
