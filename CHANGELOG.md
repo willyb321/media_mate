@@ -1,5 +1,15 @@
 ## Change Log
 
+### v1.1.5 (2017/09/06 01:39 +00:00)
+- [9caa570](https://github.com/willyb321/media_mate/commit/9caa5700e96797ac6836f97856f762d3ec3dad12) Release v1.1.5 (@willyb321)
+- [dab63bf](https://github.com/willyb321/media_mate/commit/dab63bf9a72a75caed893a07d4d4a20642455e38) use raven-js in renderer (@willyb321)
+- [6ca381b](https://github.com/willyb321/media_mate/commit/6ca381b4123148e3f8f9421c39b43c11f2a87366) way better logging on DL (@willyb321)
+- [1b83387](https://github.com/willyb321/media_mate/commit/1b8338728832b765e9b641e37fe131be0503728f) Merge branch 'develop' of https://github.com/willyb321/media_mate into develop (@willyb321)
+- [97d0a70](https://github.com/willyb321/media_mate/commit/97d0a7002cff655dd57bde5b70cbab03b885db9c) viewer way better logging (@willyb321)
+- [a58a001](https://github.com/willyb321/media_mate/commit/a58a00143d97c0575f5a1f2304adccd30f79c967) fix tests (@willyb321)
+- [7a11c44](https://github.com/willyb321/media_mate/commit/7a11c44d8cbd18117d642f9f49d3ddc07f892c91) add way to open in default player (@willyb321)
+- [e3e80cc](https://github.com/willyb321/media_mate/commit/e3e80cc7bb8d01f844e952e78decf8c109dd8ede) changelog (@willyb321)
+
 ### v1.1.4 (2017/08/31 10:10 +00:00)
 - [3f174b7](https://github.com/willyb321/media_mate/commit/3f174b7e5e4333ab677e2f16b5e86aa32e23c10b) Release v1.1.4 (@willyb321)
 - [e23d004](https://github.com/willyb321/media_mate/commit/e23d004196524376664129feb0111fed61733cc2) hotfix (coldfix really) win32 videos (@willyb321)
