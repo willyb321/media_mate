@@ -47,12 +47,12 @@ const prog = _.throttle(dlProgress, 10000);
 const updateDlProg = _.throttle(updateProgress, 2000);
 
 process.on('unhandledRejection', (err, promise) => {
-	console.error('Unhandled rejection: ' + (err && err.stack || err)); // eslint-disable-line
+	log.error('Unhandled rejection: ' + (err && err.stack || err)); // eslint-disable-line
 	Raven.captureException(err);
 });
 
 function handleErrs(err) {
-	console.error('Unhandled error: ' + (err && err.stack || err)); // eslint-disable-line
+	log.error('Unhandled error: ' + (err && err.stack || err)); // eslint-disable-line
 	Raven.captureException(err);
 }
 
@@ -325,6 +325,7 @@ function addTor(magnet, index) {
 		client.add(magnet, {
 			path: callback
 		}, torrent => {
+			log.info(`DOWNLOADER: Started download for magnet URI: ${magnet}`);
 			torrent.index = index;
 			try {
 				const elem = document.getElementsByName(magnet)[0];
@@ -333,7 +334,8 @@ function addTor(magnet, index) {
 					elem.disabled = true;
 				}
 			} catch (err) {
-				console.error(err);
+				log.info(`DOWNLOADER: Error in addTor (addTor disable elements)`);
+				Raven.captureException(err);
 			}
 
 			torrent.on('download', () => {
@@ -353,6 +355,7 @@ function addTor(magnet, index) {
 					}
 					document.getElementsByName(magnet)[0].parentNode.style.display = 'none';
 					log.info('DOWNLOADER: Download done');
+					log.info(`DOWNLOADER: Replaced ${numReplaced} in DB when finishing download.`);
 					ipc.send('dldone', torrent.name);
 					torrent.destroy();
 				});
