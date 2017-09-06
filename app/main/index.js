@@ -107,11 +107,17 @@ autoUpdater.on('update-available', info => { // eslint-disable-line no-unused-va
  * Autoupdater on downloaded
  */
 autoUpdater.on('update-downloaded', (event, info) => { // eslint-disable-line no-unused-vars
-	dialog.showMessageBox({
+	const dialogOpts = {
 		type: 'info',
-		buttons: [],
-		title: 'Update ready to install.',
-		message: 'The update is downloaded, and will be installed on quit. The version downloaded is: ' + event.version
+		buttons: ['Restart', 'Later'],
+		title: 'Media Mate Update Downloaded',
+		message: `Version: ${info.version}`,
+		detail: 'A new version has been downloaded. Restart the application to apply the updates.'
+	};
+	dialog.showMessageBox(dialogOpts, response => {
+		if (response === 0) {
+			autoUpdater.quitAndInstall();
+		}
 	});
 });
 /**
@@ -121,8 +127,8 @@ autoUpdater.on('error', error => {
 	dialog.showMessageBox({
 		type: 'info',
 		buttons: [],
-		title: 'Update ready to install.',
-		message: `Sorry, we've had an error. The message is ` + error
+		title: 'Update error!',
+		message: `Sorry, we've had an error. Please open an issue on github if this continues to be a problem!`
 	});
 	if (!isDev) {
 		Raven.captureException(error);
@@ -132,7 +138,6 @@ autoUpdater.on('error', error => {
  * Emitted on autoupdate progress.
  */
 autoUpdater.on('download-progress', percent => {
-
 });
 // Adds debug features like hotkeys for triggering dev tools and reload
 if (isDev && process.env.NODE_ENV !== 'test') {
