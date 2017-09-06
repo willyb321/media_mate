@@ -167,7 +167,7 @@ async function getImgs() {
 	const mediadiv = document.getElementById('media');
 	const medianodes = mediadiv.childNodes;
 	let dlpath = await getPath();
-	log.info('VIEWER: Download Path: ' + dlpath);
+	log.info('VIEWER: Download Path: ' + dlpath.path);
 	dlpath = dlpath.path.toString();
 	const getimgs = new Getimg(dlpath, db);
 	getimgs.on('tvelem', data => {
@@ -435,6 +435,7 @@ function handleEventHandlers() {
 	document.getElementById('stopvid').removeEventListener('click', handleEventHandlers);
 	document.getElementById('stopvid').style.display = 'none';
 	document.getElementById('openexternal').style.display = 'none';
+	log.info('VIEWER: Stopped playing episode');
 }
 
 async function watchedTime(vid, elem, figcap) {
@@ -557,6 +558,7 @@ async function findDL() {
 				} else {
 					videodiv.appendChild(video);
 				}
+				log.info('VIEWER: Started playing episode');
 			});
 			imgelem.className = 'hvr-shrink';
 			imgelem.id = 'img_' + files[i].replace(/^.*[\\/]/, '');
