@@ -11,18 +11,24 @@ const FeedParser = require('feedparser');
 const request = require('request'); // For fetching the feed
 const isRenderer = require('is-electron-renderer');
 const isOnline = require('is-online');
-const Raven = require('raven');
+let Raven;
 let version;
 // Make sure that version can be got from both render and main process
 if (isRenderer) {
 	version = require('electron').remote.app.getVersion();
+	Raven = require('raven-js');
+	Raven.config('https://3d1b1821b4c84725a3968fcb79f49ea1@sentry.io/184666', {
+		release: version,
+		autoBreadcrumbs: true
+	}).install();
 } else {
 	version = require('electron').app.getVersion();
+	Raven = require('raven');
+	Raven.config('https://3d1b1821b4c84725a3968fcb79f49ea1:1ec6e95026654dddb578cf1555a2b6eb@sentry.io/184666', {
+		release: version,
+		autoBreadcrumbs: true
+	}).install();
 }
-Raven.config('https://3d1b1821b4c84725a3968fcb79f49ea1:1ec6e95026654dddb578cf1555a2b6eb@sentry.io/184666', {
-	release: version,
-	autoBreadcrumbs: true
-}).install();
 
 /**
  * Class for parsing RSS

@@ -9,7 +9,7 @@
 /* eslint-disable max-nested-callbacks */
 require('dotenv').config({path: `${__dirname}/../.env`});
 const events = require('events');
-const Raven = require('raven');
+let Raven;
 const isRenderer = require('is-electron-renderer');
 const TVDB = require('node-tvdb');
 // Const storage = require('electron-json-storage');
@@ -27,13 +27,19 @@ console.log = log.info;
 // Make sure that version can be got from both render and main process
 if (isRenderer) {
 	version = require('electron').remote.app.getVersion();
+	Raven = require('raven-js');
+	Raven.config('https://3d1b1821b4c84725a3968fcb79f49ea1@sentry.io/184666', {
+		release: version,
+		autoBreadcrumbs: true
+	}).install();
 } else {
 	version = require('electron').app.getVersion();
+	Raven = require('raven');
+	Raven.config('https://3d1b1821b4c84725a3968fcb79f49ea1:1ec6e95026654dddb578cf1555a2b6eb@sentry.io/184666', {
+		release: version,
+		autoBreadcrumbs: true
+	}).install();
 }
-Raven.config('https://3d1b1821b4c84725a3968fcb79f49ea1:1ec6e95026654dddb578cf1555a2b6eb@sentry.io/184666', {
-	release: version,
-	autoBreadcrumbs: true
-}).install();
 /**
  * Class for getting images from files in the download directory
  */

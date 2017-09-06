@@ -47,6 +47,7 @@
     "progressbar.js": "^1.0.1",
     "pushstate-server": "^3.0.1",
     "raven": "^2.1.2",
+    "raven-js": "^3.17.0",
     "request": "^2.81.0",
     "source-map-support": "^0.4.16",
     "sweetalert2": "^6.6.9",

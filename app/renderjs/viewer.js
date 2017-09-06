@@ -15,7 +15,7 @@ const version = require('electron').remote.app.getVersion();
 const fs = require('fs-extra');
 const TVDB = require('node-tvdb');
 const storage = require('electron-json-storage');
-const Raven = require('raven');
+const Raven = require('raven-js');
 const moment = require('moment');
 const _ = require('underscore');
 const parser = require('episode-parser');
@@ -34,7 +34,7 @@ createDB(path.join(require('electron').remote.app.getPath('userData'), 'dbImg.db
 		log.info('VIEWER: DB Created');
 		db = dbCreated;
 	});
-Raven.config('https://3d1b1821b4c84725a3968fcb79f49ea1:1ec6e95026654dddb578cf1555a2b6eb@sentry.io/184666', {
+Raven.config('https://3d1b1821b4c84725a3968fcb79f49ea1@sentry.io/184666', {
 	release: version,
 	autoBreadcrumbs: true
 }).install();
