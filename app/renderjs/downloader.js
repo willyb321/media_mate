@@ -257,6 +257,7 @@ async function indexDB() {
  * Download all of the torrents, after they are added to the DOM.
  */
 async function dlAll() {
+	document.getElementById('dlAll').disabled = true;
 	db.find({
 		downloaded: false
 	}, (err, docs) => {
@@ -342,7 +343,7 @@ function addTor(magnet, index) {
 				prog(torrent, magnet);
 				updateDlProg(magnet, torrent);
 			});
-			torrent.on('done', async () => {
+			torrent.on('done', () => {
 				dlProgress();
 				db.update({_id: document.getElementsByName(magnet)[0].name}, {
 					$set: {
