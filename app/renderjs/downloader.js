@@ -43,7 +43,7 @@ createDB(path.join(require('electron').remote.app.getPath('userData'), 'dbTor.db
 	});
 const dbindex = 0;
 const allTorrents = [];
-const prog = _.throttle(dlProgress, 10000);
+const prog = _.throttle(dlProgress, 4500);
 const updateDlProg = _.throttle(updateProgress, 2000);
 
 process.on('unhandledRejection', (err, promise) => {
