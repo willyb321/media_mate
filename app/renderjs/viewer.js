@@ -372,6 +372,7 @@ function resetTime(params) {
 			Raven.captureException(err);
 		}
 	});
+	log.info(`VIEWER: Reset watched time for ${filename}`);
 }
 /**
  * On time update in the video, throttled for every few seconds.
@@ -558,7 +559,7 @@ async function findDL() {
 				} else {
 					videodiv.appendChild(video);
 				}
-				log.info('VIEWER: Started playing episode');
+				log.info(`VIEWER: Started playing episode ${parsedName.show.replace(' ', '')}S${parsedName.season}E${parsedName.episode}`);
 			});
 			imgelem.className = 'hvr-shrink';
 			imgelem.id = 'img_' + files[i].replace(/^.*[\\/]/, '');
