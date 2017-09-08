@@ -1,5 +1,19 @@
 ## Change Log
 
+### v1.1.6 (2017/09/08 09:44 +00:00)
+- [012a067](https://github.com/willyb321/media_mate/commit/012a06742fa7f447efdeda732e292863a27dbdea) Release v1.1.6 (@willyb321)
+- [9fef170](https://github.com/willyb321/media_mate/commit/9fef1708bde03b88783e6998078b5e94a4859bd7) .idea (@willyb321)
+- [49f5fa6](https://github.com/willyb321/media_mate/commit/49f5fa6b8bedf9d39de3533429863d9c24f1e012) deps (@willyb321)
+- [8bf53c8](https://github.com/willyb321/media_mate/commit/8bf53c8294ed9920cd246b1c83279b640b105f4f) fix torrent done, also dlall (@willyb321)
+- [ff84ce3](https://github.com/willyb321/media_mate/commit/ff84ce3a5637c8a84c619e0e100a77f44f1b1f9e) lower delay for updating dlprogress (@willyb321)
+- [f3d0eed](https://github.com/willyb321/media_mate/commit/f3d0eedd9e1435aafa288491d132c245da952bae) some more viewer logging (@willyb321)
+- [15453ef](https://github.com/willyb321/media_mate/commit/15453ef3e078f778ff6212b22602942487479ceb) some autoupdate related bits (@willyb321)
+- [600ff6c](https://github.com/willyb321/media_mate/commit/600ff6c9553e46ca781668589e9b265376ab6317) handle some errors, more logs (@willyb321)
+- [2f7c2b6](https://github.com/willyb321/media_mate/commit/2f7c2b6e9f24888926067b2e2b47a43338d3f2f2) fix object object in viewer logs, log playing and stopping video (@willyb321)
+- [dd7e843](https://github.com/willyb321/media_mate/commit/dd7e843a1129cd81dbd5b551d932d73dcabc7514) Deps, babel, electron-compile etc (@willyb321)
+- [ee2460a](https://github.com/willyb321/media_mate/commit/ee2460a34d7b2a330605b9192068fec3f20a6fcb) .idea (@willyb321)
+- [bea7444](https://github.com/willyb321/media_mate/commit/bea7444ba3df19942548af9f32331a9568c68b1b) changelog (@willyb321)
+
 ### v1.1.5 (2017/09/06 01:39 +00:00)
 - [9caa570](https://github.com/willyb321/media_mate/commit/9caa5700e96797ac6836f97856f762d3ec3dad12) Release v1.1.5 (@willyb321)
 - [dab63bf](https://github.com/willyb321/media_mate/commit/dab63bf9a72a75caed893a07d4d4a20642455e38) use raven-js in renderer (@willyb321)
