@@ -229,7 +229,9 @@ async function findDocuments() {
 		_.each(docs, elem => allTorrents.push(elem.magnet));
 	});
 }
-
+/**
+ * Index the database.
+ */
 async function indexDB() {
 	db.ensureIndex({
 		fieldName: '_id'
@@ -310,7 +312,11 @@ function insertDlPath(callback) {
 		}
 	});
 }
-
+/**
+ * Update the download progress.
+ * @param {string} magnet - The magnet URI for the download. Used to identify which DOM element to modify.
+ * @param {any} torrent - The WebTorrent torrent instance.
+ */
 function updateProgress(magnet, torrent) {
 	const percent = Math.round(torrent.progress * 100 * 100) / 100;
 	const elem = document.getElementsByName(magnet)[0];

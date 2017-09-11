@@ -438,7 +438,14 @@ function handleEventHandlers() {
 	document.getElementById('openexternal').style.display = 'none';
 	log.info('VIEWER: Stopped playing episode');
 }
-
+/**
+ * Check how long video has been watched, and add a bar going across the
+ * videos image to graphically represent it.
+ * @param {HTMLDOMElement} vid - DOM element for the image.
+ * @param {HTMLDOMElement} elem - The HR DOM element that changes width based on watched time.
+ * @param {HTMLDOMElement} figcap - The caption.
+ * @returns {Promise.<HTMLDOMElement>}
+ */
 async function watchedTime(vid, elem, figcap) {
 	return new Promise((resolve, reject) => {
 		storage.get(vid.getAttribute('data-store-name'), (err, data) => {
