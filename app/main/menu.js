@@ -6,11 +6,9 @@ module.exports = {
 	init,
 	getMenuItem
 };
-const electron = require('electron');
-const {shell} = require('electron');
-const {BrowserWindow} = require('electron');
-const path = require('path');
-const openAboutWindow = require('about-window').default;
+import electron, {BrowserWindow, shell} from 'electron';
+import path from 'path';
+import {openAboutWindow} from 'about-window';
 
 const app = electron.app;
 let win;

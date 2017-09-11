@@ -109,7 +109,11 @@ function dlProgress() {
 		_.bind(bar.animate, bar),
 		500
 	);
-	animateThrottled(client.progress);
+	const progress = client.progress;
+	if (progress === 0 && client.torrents.length === 0) {
+		log.info(`DOWNLOADER: Downloads finished`);
+	}
+	animateThrottled(progress);
 }
 /**
  * Get the confirm button for the currently active sweetalert
