@@ -111,7 +111,7 @@ autoUpdater.on('update-downloaded', (event, info) => { // eslint-disable-line no
 		type: 'info',
 		buttons: ['Restart', 'Later'],
 		title: 'Media Mate Update Downloaded',
-		message: `Version: ${info.version}`,
+		message: `New Media Mate version!`,
 		detail: 'A new version has been downloaded. Restart the application to apply the updates.'
 	};
 	dialog.showMessageBox(dialogOpts, response => {

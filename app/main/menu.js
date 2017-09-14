@@ -8,7 +8,7 @@ module.exports = {
 };
 import electron, {BrowserWindow, shell} from 'electron';
 import path from 'path';
-import {openAboutWindow} from 'about-window';
+import openAboutWindow from 'about-window';
 
 const app = electron.app;
 let win;
