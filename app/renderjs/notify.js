@@ -1,3 +1,4 @@
+const ipcRenderer = require('electron').ipcRenderer;
 function notify(title, body) {
 	let notif = new Notification(title, {
 		body: body.toString()
@@ -6,6 +7,16 @@ function notify(title, body) {
 		console.log('notif clicked');
 	};
 }
+ipcRenderer.on('newdl', (event, data) => {
+	if (data.length === 2) {
+		notify(data[0], data[1]);
+	}
+});
+
+ipcRenderer.on('offline', (event, data) => {
+	sweetrequire('sweetalert2')('Offline', 'You are offline, thats fine though.', 'info');
+});
+
 function firstrun() {
 	require('sweetalert2')({
 		title: 'Want to check out the tutorial?',

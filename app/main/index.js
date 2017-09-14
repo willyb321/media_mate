@@ -344,10 +344,10 @@ function watchRSS() {
 		if (cb === '') {
 			if (win.webContents.isLoading()) {
 				mainWindow.webContents.once('dom-ready', () => {
-					mainWindow.webContents.executeJavaScript(`notify('Put your ShowRSS URL into the downloader!', 'showrss.info')`);
+					mainWindow.webContents.send('newdl', ['Put your ShowRSS URL into the downloader!', 'showrss.info']);
 				});
 			} else {
-				mainWindow.webContents.executeJavaScript(`notify('Put your ShowRSS URL into the downloader!', 'showrss.info')`);
+				mainWindow.webContents.send('newdl', ['Put your ShowRSS URL into the downloader!', 'showrss.info']);
 			}
 		} else {
 			RSS = new RSSParse(uri);
@@ -358,10 +358,10 @@ function watchRSS() {
 				if (mainWindow.webContents.isLoading()) {
 					console.log('offline');
 					mainWindow.webContents.once('dom-ready', () => {
-						mainWindow.webContents.executeJavaScript(`sweetAlert('Offline', 'You are offline, thats fine though.', 'info')`);
+						mainWindow.webContents.send('offline');
 					});
 				} else {
-					mainWindow.webContents.executeJavaScript(`sweetAlert('Offline', 'You are offline, thats fine though.', 'info')`);
+					mainWindow.webContents.send('offline');
 				}
 			});
 			RSS.on('data', data => {
@@ -370,10 +370,10 @@ function watchRSS() {
 						console.log('already DL');
 					} else if (win.webContents.isLoading()) {
 						mainWindow.webContents.once('dom-ready', () => {
-							mainWindow.webContents.executeJavaScript(`notify('New Download Available', '${data.title.toString()}')`);
+							mainWindow.webContents.send('newdl', ['New Download Available', data.title.toString()]);
 						});
 					} else {
-						mainWindow.webContents.executeJavaScript(`notify('New Download Available', '${data.title.toString()}')`);
+						mainWindow.webContents.send('newdl', ['New Download Available', data.title.toString()]);
 					}
 				});
 			});
@@ -385,7 +385,7 @@ function watchRSS() {
  */
 ipc.on('dldone', (event, data) => {
 	console.log(data);
-	mainWindow.webContents.executeJavaScript(`notify('Download Finished', '${data}' )`);
+	win.webContents.send('newdl', ['Download Finished', data.toString()]);
 });
 /**
  * Make the main window.
