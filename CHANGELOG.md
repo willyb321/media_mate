@@ -1,5 +1,13 @@
 ## Change Log
 
+### v1.1.7 (2017/09/14 22:09 +00:00)
+- [30b0a9f](https://github.com/willyb321/media_mate/commit/30b0a9f0fbff8f741479a09a2c2d55c63c08ee90) Release v1.1.7 (@willyb321)
+- [d5ab441](https://github.com/willyb321/media_mate/commit/d5ab441232c112b7050b8fd648a0f293d3b2b0a2) fix possible RCE. (@willyb321)
+- [59ce256](https://github.com/willyb321/media_mate/commit/59ce256a5024598080cb25d5abc214ee344bdbcf) some jsdocs (@willyb321)
+- [7a5abd8](https://github.com/willyb321/media_mate/commit/7a5abd84878b640016be36f5c7bead7177e23504) dunno why i didnt just do that (@willyb321)
+- [2a6058b](https://github.com/willyb321/media_mate/commit/2a6058b02d9c86122cf813e82e64adfea59a3365) imports, and also figure out when all dls finish (@willyb321)
+- [0a0c1cf](https://github.com/willyb321/media_mate/commit/0a0c1cf2275bd15a5a3fd0329c65211e845bd933) changelog (@willyb321)
+
 ### v1.1.6 (2017/09/08 09:44 +00:00)
 - [012a067](https://github.com/willyb321/media_mate/commit/012a06742fa7f447efdeda732e292863a27dbdea) Release v1.1.6 (@willyb321)
 - [9fef170](https://github.com/willyb321/media_mate/commit/9fef1708bde03b88783e6998078b5e94a4859bd7) .idea (@willyb321)
