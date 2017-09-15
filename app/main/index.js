@@ -75,7 +75,7 @@ createDB(path.join(app.getPath('userData'), 'dbTor.db').toString())
 	});
 addBypassChecker(filePath => {
 	if (isPlayable(filePath)) {
-		console.log(`Bypassing ${filePath}`);
+		log.info(`Bypassing ${filePath}`);
 	}
 	return isPlayable(filePath);
 });
@@ -100,7 +100,7 @@ autoUpdater.on('update-available', info => { // eslint-disable-line no-unused-va
 		title: 'New update available.',
 		message: 'Press OK to download the update, and the application will download the update and then tell you when its done.'
 	});
-	console.log(info);
+	log.info(info);
 	win.loadURL(`data:text/html,<h1>Changelog for ${info.version}</h1><br>${info.releaseNotes}`);
 });
 /**
@@ -150,7 +150,7 @@ let mainWindow;
  * @param err {object} - The error to be handled.
  */
 process.on('uncaughtError', err => {
-	console.log('ERROR! The error is: ' + err || err.stack);
+	log.error('ERROR! The error is: ' + err || err.stack);
 	Raven.captureException(err);
 });
 /**
@@ -160,14 +160,7 @@ process.on('unhandledRejection', err => {
 	console.error('Unhandled rejection: ' + (err && err.stack || err)); // eslint-disable-line
 	Raven.captureException(err);
 });
-/**
- * Called from renderer process when an error occurs
- */
-ipc.on('errorInWindow', (event, data) => {
-	// Bugsnag.notify(data);
-	console.log(data);
-	// Console.log('ERROR! The error is: ' + data);
-});
+
 /**
  * Dereference the window to make sure that things are collected properly.
  */
@@ -209,17 +202,17 @@ function createMainWindow() {
 	win.loadURL(`file://${__dirname}/../renderhtml/index.html`);
 	win.on('closed', onClosed);
 	win.on('unresponsive', () => {
-		console.log('I\'ve frozen. Sorry about that.');
+		log.info('I\'ve frozen. Sorry about that.');
 	});
 	win.on('responsive', () => {
-		console.log('I\'ve unfrozen. Sorry.');
+		log.info('I\'ve unfrozen. Sorry.');
 	});
 	win.webContents.once('dom-ready', () => {
 		console.timeEnd('full');
 	});
 	win.webContents.on('crashed', (e, killed) => {
 		if (killed === true) {
-			console.log(e);
+			log.error(e);
 			mainWindow = null;
 			if (process.platform === 'darwin') {
 				app.quit();
@@ -246,6 +239,11 @@ function onBoard() {
 			} else if (!hasKey) {
 				storage.set('path', {
 					path: path.join(require('os').homedir(), 'media_matedl')
+				}, err => {
+					if (err) {
+						log.info('MAIN: Error in onBoard (storage.set)');
+						Raven.captureException(err);
+					}
 				});
 			}
 		});
@@ -356,7 +354,7 @@ function watchRSS() {
 			});
 			RSS.on('offline', () => {
 				if (mainWindow.webContents.isLoading()) {
-					console.log('offline');
+					log.info('Offline');
 					mainWindow.webContents.once('dom-ready', () => {
 						mainWindow.webContents.send('offline');
 					});
@@ -367,7 +365,7 @@ function watchRSS() {
 			RSS.on('data', data => {
 				ignoreDupeTorrents(data, dupe => {
 					if (dupe) {
-						console.log('already DL');
+						log.info('MAIN: Torrent already DL');
 					} else if (win.webContents.isLoading()) {
 						mainWindow.webContents.once('dom-ready', () => {
 							mainWindow.webContents.send('newdl', ['New Download Available', data.title.toString()]);
@@ -384,7 +382,7 @@ function watchRSS() {
  * Sent from render process on a download finishes. Sends a notification
  */
 ipc.on('dldone', (event, data) => {
-	console.log(data);
+	log.info('MAIN: Download done - ' + data.toString());
 	win.webContents.send('newdl', ['Download Finished', data.toString()]);
 });
 /**
