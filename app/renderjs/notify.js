@@ -14,7 +14,7 @@ ipcRenderer.on('newdl', (event, data) => {
 });
 
 ipcRenderer.on('offline', (event, data) => {
-	sweetrequire('sweetalert2')('Offline', 'You are offline, thats fine though.', 'info');
+	require('sweetalert2')('Offline', 'You are offline, thats fine though.', 'info');
 });
 
 function firstrun() {
