@@ -41,7 +41,7 @@ createDB(path.join(require('electron').remote.app.getPath('userData'), 'dbTor.db
 	.then(dbCreated => {
 		db = dbCreated;
 	});
-const dbindex = 0;
+
 const allTorrents = [];
 const prog = _.throttle(dlProgress, 4500);
 const updateDlProg = _.throttle(updateProgress, 2000);
