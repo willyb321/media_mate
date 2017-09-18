@@ -1,5 +1,16 @@
 ## Change Log
 
+### upcoming (2017/09/18 00:19 +00:00)
+- [ac7f88f](https://github.com/willyb321/media_mate/commit/ac7f88fc9788d6ff02ea0668b7f6517322b0e518) Release v1.1.8 (@willyb321)
+
+### v1.1.8 (2017/09/15 06:55 +00:00)
+- [b7fc3a1](https://github.com/willyb321/media_mate/commit/b7fc3a112f2d92207af80d3a590b974ad9777d27) console logs (@willyb321)
+- [2a57b03](https://github.com/willyb321/media_mate/commit/2a57b038c0daf53c2ee4f93fa7aeef899fa624c9) .idea (@willyb321)
+- [2680d20](https://github.com/willyb321/media_mate/commit/2680d20a98a021ad2f7dc5f738b19077c27098ac) deps (@willyb321)
+- [a911183](https://github.com/willyb321/media_mate/commit/a9111830fb11ab97339a525eaf63256cb475b7b6) i cant spell apparently (@willyb321)
+- [a04c329](https://github.com/willyb321/media_mate/commit/a04c329fbad410df96886071c6939186558495a7) fix about window, also crash on update downloaded (@willyb321)
+- [ece49e4](https://github.com/willyb321/media_mate/commit/ece49e4853046321f771a54c80815479ef2a7f86) changelog (@willyb321)
+
 ### v1.1.7 (2017/09/14 22:09 +00:00)
 - [30b0a9f](https://github.com/willyb321/media_mate/commit/30b0a9f0fbff8f741479a09a2c2d55c63c08ee90) Release v1.1.7 (@willyb321)
 - [d5ab441](https://github.com/willyb321/media_mate/commit/d5ab441232c112b7050b8fd648a0f293d3b2b0a2) fix possible RCE. (@willyb321)
