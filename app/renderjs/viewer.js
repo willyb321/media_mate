@@ -441,10 +441,10 @@ function handleEventHandlers() {
 /**
  * Check how long video has been watched, and add a bar going across the
  * videos image to graphically represent it.
- * @param {HTMLDOMElement} vid - DOM element for the image.
- * @param {HTMLDOMElement} elem - The HR DOM element that changes width based on watched time.
- * @param {HTMLDOMElement} figcap - The caption.
- * @returns {Promise.<HTMLDOMElement>}
+ * @param {Element} vid - DOM element for the image.
+ * @param {Element} elem - The HR DOM element that changes width based on watched time.
+ * @param {Element} figcap - The caption.
+ * @returns {Promise.<Element>}
  */
 async function watchedTime(vid, elem, figcap) {
 	return new Promise((resolve, reject) => {
