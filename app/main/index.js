@@ -210,15 +210,23 @@ function createMainWindow() {
 	win.webContents.once('dom-ready', () => {
 		console.timeEnd('full');
 	});
-	win.webContents.on('crashed', (e, killed) => {
+	win.webContents.on('gpu-process-crashed', (event, killed) => {
+		log.info(event);
+	});
+	win.webContents.on('plugin-crashed', (event, killed) => {
+		log.info(event);
+	});
+	win.webContents.on('crashed', (event, killed) => {
 		if (killed === true) {
-			log.error(e);
+			log.error(event);
 			mainWindow = null;
 			if (process.platform === 'darwin') {
 				app.quit();
 			}
 		} else {
-			Raven.captureException(e);
+			// Look into what causes this - I have encountered it from the viewer when loading images.
+			log.info(event);
+			log.error('Browser process crashed. Not sure how or why because there doesn\'t seem to be a good stack trace');
 		}
 	});
 	win.once('ready-to-show', () => {

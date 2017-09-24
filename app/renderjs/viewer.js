@@ -29,6 +29,17 @@ const tvdb = new TVDB(process.env.TVDB_KEY);
 const vidProgressthrottled = _.throttle(vidProgress, 500);
 let db;
 let served;
+
+process.on('uncaughtError', err => {
+	log.error('ERROR! The error is: ' + err || err.stack);
+	Raven.captureException(err);
+});
+
+process.on('unhandledRejection', err => {
+	log.error('Unhandled rejection: ' + (err && err.stack || err)); // eslint-disable-line
+	Raven.captureException(err);
+});
+
 createDB(path.join(require('electron').remote.app.getPath('userData'), 'dbImg.db').toString())
 	.then(dbCreated => {
 		log.info('VIEWER: DB Created');
@@ -76,18 +87,12 @@ window.onload = () => {
 /**
  * Helper function to store images as blobs.
  * @param img {object} - image tag to convert to blob.
- * @param callback {function} - Returns blob of img.
  */
-function convertImgToBlob(img, callback) {
-	blobUtil.imgSrcToBlob(img.src).then(blob => {
-		blobUtil.blobToBase64String(blob).then(base64String => {
-			callback(base64String);
-		}).catch(err => {
-			Raven.captureException(err);
+function convertImgToBlob(img) {
+	return blobUtil.imgSrcToBlob(img).then(blobUtil.blobToBase64String)
+		.catch(err => {
+			log.info(err);
 		});
-	}).catch(err => {
-		Raven.captureException(err);
-	});
 }
 
 function openInExternalPlayer(path) {
@@ -160,6 +165,7 @@ function getPath() {
 		});
 	});
 }
+
 /**
  * Get images for each of the downloaded files.
  */
@@ -170,16 +176,14 @@ async function getImgs() {
 	log.info('VIEWER: Download Path: ' + dlpath.path);
 	dlpath = dlpath.path.toString();
 	const getimgs = new Getimg(dlpath, db);
-	getimgs.on('tvelem', data => {
-		getImgDB(data).then(res => {
-
-		});
+	getimgs.on('tvelem', async data => {
+		await getImgDB(data);
 	});
 	getimgs.on('episode', async data => {
-		log.info('VIEWER: Got episode');
 		const elem = data[0];
 		const tvelem = data[1];
 		const elempath = data[2];
+		log.info(`VIEWER: Got episode ${tvelem.show}S${tvelem.season}E${tvelem.episode}`);
 		medianodes.forEach((img, ind) => {
 			if (img.id === elempath) {
 				tvdb.getEpisodeById(elem.id)
@@ -189,14 +193,19 @@ async function getImgs() {
 							document.getElementById('Loading').style.display = 'none';
 						}
 						if (res.filename !== '') {
-							img.children[0].src = `http://thetvdb.com/banners/${res.filename}`;
-							convertImgToBlob(img.children[0], blob => {
+							convertImgToBlob(`https://www.thetvdb.com/banners/${res.filename}`).then(blob => {
 								db.insert({
 									_id: `img${tvelem.show.replace(' ', '')}S${tvelem.season}E${tvelem.episode}`,
 									elempath: data[2],
 									elem: data[0],
 									tvelem: data[1],
 									imgData: blob
+								});
+								blobUtil.base64StringToBlob(blob, 'image/jpeg').then(blob => {
+									console.info(blob);
+									img.children[0].src = blobUtil.createObjectURL(blob); // eslint-disable-line
+								}).catch(err => {
+									Raven.captureException(err);
 								});
 							});
 						} else if (res.filename === '') {
@@ -212,6 +221,7 @@ async function getImgs() {
 		});
 	});
 }
+
 /**
  * Called when a video is finished.
  * @param e {object} - the event.
@@ -245,7 +255,12 @@ function vidFinished(e) {
 		figcap[1].style.setProperty('margin', '0px 0px', 'important');
 		figcap[1].style.backgroundColor = 'red';
 		figcap[2].innerText = `${figcap[0].title} (${Math.round(percent)}% watched)`;
-		storage.set(filename, {file: filename, watched: true, time: (process.env.SPECTRON ? 5.014 : this.duration), duration: (process.env.SPECTRON ? 5.014 : duration)}, err => {
+		storage.set(filename, {
+			file: filename,
+			watched: true,
+			time: (process.env.SPECTRON ? 5.014 : this.duration),
+			duration: (process.env.SPECTRON ? 5.014 : duration)
+		}, err => {
 			if (err) {
 				Raven.captureException(err);
 			}
@@ -253,6 +268,7 @@ function vidFinished(e) {
 	});
 	video.parentNode.removeChild(video);
 }
+
 /**
  * On video metadata loaded, add it to the JSON.
  * @param e {object} - event.
@@ -266,7 +282,12 @@ function handleVids(e) {
 			Raven.captureException(err);
 		}
 		if (_.isEmpty(data) === true) {
-			storage.set(filename, {file: filename, watched: false, time: this.currentTime, duration: this.duration}, err => {
+			storage.set(filename, {
+				file: filename,
+				watched: false,
+				time: this.currentTime,
+				duration: this.duration
+			}, err => {
 				if (err) {
 					Raven.captureException(err);
 				}
@@ -276,6 +297,7 @@ function handleVids(e) {
 		}
 	});
 }
+
 /**
  * Delete tv from the filesystem / db.
  * @param {any} params - the file to remove
@@ -374,6 +396,7 @@ function resetTime(params) {
 	});
 	log.info(`VIEWER: Reset watched time for ${filename}`);
 }
+
 /**
  * On time update in the video, throttled for every few seconds.
  * @param e {object} - video event.
@@ -400,13 +423,23 @@ function vidProgress(e) {
 				Raven.captureException(err);
 			}
 			if (_.isEmpty(data) === false) {
-				storage.set(filename, {file: filename, watched: false, time: this.currentTime, duration: this.duration}, err => {
+				storage.set(filename, {
+					file: filename,
+					watched: false,
+					time: this.currentTime,
+					duration: this.duration
+				}, err => {
 					if (err) {
 						Raven.captureException(err);
 					}
 				});
 			} else {
-				storage.set(filename, {file: filename, watched: false, time: this.currentTime, duration: this.duration}, err => {
+				storage.set(filename, {
+					file: filename,
+					watched: false,
+					time: this.currentTime,
+					duration: this.duration
+				}, err => {
 					if (err) {
 						Raven.captureException(err);
 					}
@@ -419,7 +452,12 @@ function vidProgress(e) {
 				log.info(`VIEWER: Error in vidProgress (time === duration)`);
 				Raven.captureException(err);
 			}
-			storage.set(filename, {file: filename, watched: true, time: this.currentTime, duration: this.duration}, err => {
+			storage.set(filename, {
+				file: filename,
+				watched: true,
+				time: this.currentTime,
+				duration: this.duration
+			}, err => {
 				if (err) {
 					Raven.captureException(err);
 				}
@@ -427,6 +465,7 @@ function vidProgress(e) {
 		});
 	}
 }
+
 /**
  * Add and remove event handlers for the stop video button
  */
@@ -438,6 +477,7 @@ function handleEventHandlers() {
 	document.getElementById('openexternal').style.display = 'none';
 	log.info('VIEWER: Stopped playing episode');
 }
+
 /**
  * Check how long video has been watched, and add a bar going across the
  * videos image to graphically represent it.
