@@ -60,7 +60,9 @@ class GetImgs extends events.EventEmitter {
 	async tvdbInit(directory) {
 		const files = await this.findFiles(directory);
 		for (let i = 0; i < files.files.length; i++) {
-			this._loop(files.files[i]);
+			setTimeout(() => {
+				this._loop(files.files[i]);
+			}, 1000);
 		}
 	}
 	_loop(currentFile) {
