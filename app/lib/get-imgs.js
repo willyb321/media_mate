@@ -2,9 +2,6 @@
  * @author William Blythe
  * @fileoverview The class that gets TVDB info from files
  */
-/**
- * @module Get-Images
- */
 /* eslint-disable no-unused-vars */
 /* eslint-disable max-nested-callbacks */
 require('dotenv').config({path: `${__dirname}/../.env`});
@@ -50,22 +47,39 @@ if (isRenderer) {
 	}).install();
 }
 
+/**
+ * Class for getting images from files in the download directory
+ */
 class GetImgs extends events.EventEmitter {
+	/**
+	 * The constructor for {@link GetImgs}
+	 * @param {string} directory - a string with path to downloaded files
+	 * @param {object} nedb - The NeDB instance
+	 */
 	constructor(directory, nedb) {
 		super();
 		db = nedb;
 		this.tvdbInit(directory);
 	}
 
+	/**
+	 * Loop through each file in directory and initiate {@link GetImgs#loop}.
+	 * @param {string} directory - Path to download directory.
+	 */
 	async tvdbInit(directory) {
 		const files = await this.findFiles(directory);
 		for (let i = 0; i < files.files.length; i++) {
 			setTimeout(() => {
-				this._loop(files.files[i]);
+				this.loop(files.files[i]);
 			}, 1000);
 		}
 	}
-	_loop(currentFile) {
+
+	/**
+	 * Strips path from filename, parses it, continues to {@link GetImgs#hasShow}.
+	 * @param {string} currentFile - Path to current file that we are getting images for.
+	 */
+	loop(currentFile) {
 		let elem = currentFile;
 		log.info(`VIEWER: getting image for: ${elem}`);
 		if (elem !== undefined) {
@@ -74,6 +88,12 @@ class GetImgs extends events.EventEmitter {
 			this.hasShow(tvelem, elempath, elem);
 		}
 	}
+
+	/**
+	 * Returns object with all files from directory param in an array.
+	 * @param {string} directory - Path to files.
+	 * @returns {Promise.<Object>}
+	 */
 	findFiles(directory) {
 		return new Promise(resolve => {
 			dir.files(directory, (err, files) => {
@@ -86,6 +106,13 @@ class GetImgs extends events.EventEmitter {
 			});
 		});
 	}
+
+	/**
+	 * Check if the parsed filename has the needed information in it.
+	 * @param {object} tvelem - Parsed filename usually containing things like show, episode, season etc.
+	 * @param {string} elempath - Filename without path (includes extension).
+	 * @param {string} elem - Full path to file.
+	 */
 	async hasShow(tvelem, elempath, elem) {
 		if (_.has(tvelem, 'show') === true) {
 			const already = await this.inDB(tvelem);
@@ -97,6 +124,12 @@ class GetImgs extends events.EventEmitter {
 			}
 		}
 	}
+
+	/**
+	 * Check if there is already an image for an episode in the DB.
+	 * @param {object} tvelem - Parsed filename usually containing things like show, episode, season etc.
+	 * @returns {Promise.<String>} - 'need image' if needing image, 'got image' if already in DB.
+	 */
 	inDB(tvelem) {
 		return new Promise(resolve => {
 			db.find({_id: `img${tvelem.show.replace(' ', '')}S${tvelem.season}E${tvelem.episode}`}, (err, docs) => {
@@ -111,6 +144,14 @@ class GetImgs extends events.EventEmitter {
 			});
 		});
 	}
+
+	/**
+	 * Looks up a series on The TVDB, and gets info about it.
+	 * Calls {@link GetImgs#getEpisodes} if it finds a series.
+	 * Emits a notfound event if it doesn't find the series.
+	 * @param {object} tvelem - Parsed filename usually containing things like show, episode, season etc.
+	 * @param {string} elempath - Filename without path (includes extension).
+	 */
 	getSeriesByName(tvelem, elempath) {
 		tvdb.getSeriesByName(tvelem.show)
 			.then(res => {
@@ -127,6 +168,15 @@ class GetImgs extends events.EventEmitter {
 				}
 			});
 	}
+
+	/**
+	 * Gets all episodes from a TVDB series ID
+	 * Emits a notfound event if no episodes are found for the series ID. Probably unlikely, but happens.
+	 * Calls {@link GetImgs#findRightEp} with all episodes.
+	 * @param {object} series - Information from The TVDB API about the series currently being processed.
+	 * @param {object} tvelem - Parsed filename usually containing things like show, episode, season etc.
+	 * @param {string} elempath - Filename without path (includes extension).
+	 */
 	getEpisodes(series, tvelem, elempath) {
 		tvdb.getEpisodesBySeriesId(series[0].id)
 			.then(res => {
@@ -142,6 +192,15 @@ class GetImgs extends events.EventEmitter {
 				}
 			});
 	}
+
+	/**
+	 * Loops through all episodes found from The TVDB, checking if they match the episode we want.
+	 * We check the episode number and season.
+	 * Emits an episode event if it finds an episode, and a notfound event if it doesn't.
+	 * @param {object} episodes - Information from The TVDB API about the episodes currently being processed.
+	 * @param {object} tvelem - Parsed filename usually containing things like show, episode, season etc.
+	 * @param {string} elempath - Filename without path (includes extension).
+	 */
 	findRightEp(episodes, tvelem, elempath) {
 		let found = false;
 		episodes.forEach((elem, ind) => {
