@@ -60,18 +60,16 @@ class GetImgs extends events.EventEmitter {
 	async tvdbInit(directory) {
 		const files = await this.findFiles(directory);
 		for (let i = 0; i < files.files.length; i++) {
-			log.info(`VIEWER: Getting image for ${files.files[i]}`);
 			this._loop(files.files[i]);
 		}
 	}
 	_loop(currentFile) {
 		let elem = currentFile;
-		console.log(elem);
+		log.info(`VIEWER: getting image for: ${elem}`);
 		if (elem !== undefined) {
-			elem = elem.replace(/^.*[\\/]/, '');
-			const elempath = elem;
-			const tvelem = parser(elem);
-			this.hasShow(tvelem, elempath);
+			const elempath = elem.replace(/^.*[\\/]/, '');
+			const tvelem = parser(elempath);
+			this.hasShow(tvelem, elempath, elem);
 		}
 	}
 	findFiles(directory) {
@@ -82,15 +80,15 @@ class GetImgs extends events.EventEmitter {
 				}
 				files.sort();
 				files = _.filter(files, isPlayable);
-				console.log(files);
 				resolve({files});
 			});
 		});
 	}
-	async hasShow(tvelem, elempath) {
+	async hasShow(tvelem, elempath, elem) {
 		if (_.has(tvelem, 'show') === true) {
 			const already = await this.inDB(tvelem);
 			if (already === 'got image') {
+				log.info(`VIEWER: got image from DB for: ${elem}`);
 				this.emit('tvelem', [tvelem, elempath]);
 			} else if (already === 'need image') {
 				this.getSeriesByName(tvelem, elempath);
@@ -114,12 +112,14 @@ class GetImgs extends events.EventEmitter {
 	getSeriesByName(tvelem, elempath) {
 		tvdb.getSeriesByName(tvelem.show)
 			.then(res => {
-				console.log(tvelem.show);
+				log.info(`VIEWER: Got series of name: ${tvelem.show}`);
 				this.getEpisodes(res, tvelem, elempath);
 			})
 			.catch(err => {
+				log.error(err);
 				if (err.message === 'Resource not found') {
-					setImmediate(() => this._loop());
+					log.info(`VIEWER: Did not find series: ${tvelem.show}`);
+					this.emit('notfound', {tvelem, elempath});
 				} else {
 					Raven.captureException(err);
 				}
@@ -131,17 +131,25 @@ class GetImgs extends events.EventEmitter {
 				this.findRightEp(res, tvelem, elempath);
 			})
 			.catch(err => {
+				log.error(err);
 				if (err.message === 'Resource not found') {
-					setImmediate(() => this._loop());
+					log.info(`VIEWER: Did not find episodes from series of name: ${tvelem.show}`);
+					this.emit('notfound', {tvelem, elempath});
 				} else {
 					Raven.captureException(err);
 				}
 			});
 	}
 	findRightEp(episodes, tvelem, elempath) {
-		episodes.forEach(elem => {
+		let found = false;
+		episodes.forEach((elem, ind) => {
 			if (_.isMatch(elem, {airedEpisodeNumber: tvelem.episode}) === true && _.isMatch(elem, {airedSeason: tvelem.season}) === true) {
+				found = true;
 				this.emit('episode', [elem, tvelem, elempath]);
+			}
+			if (ind === episodes.length - 1 && !found) {
+				log.info(`VIEWER: Did not find S${tvelem.season}E${tvelem.episode} from ${tvelem.show}`);
+				this.emit('notfound', {tvelem, elempath});
 			}
 		});
 	}

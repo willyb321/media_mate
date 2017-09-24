@@ -179,11 +179,20 @@ async function getImgs() {
 	getimgs.on('tvelem', async data => {
 		await getImgDB(data);
 	});
+	getimgs.on('notfound', async data => {
+		const {elempath} = data;
+		medianodes.forEach(img => {
+			if (img.id === elempath) {
+				img.children[0].src = `file:///${__dirname}/404.png`;
+				img.children[0].parentNode.style.display = 'inline-block';
+			}
+		});
+	});
 	getimgs.on('episode', async data => {
 		const elem = data[0];
 		const tvelem = data[1];
 		const elempath = data[2];
-		log.info(`VIEWER: Got episode ${tvelem.show}S${tvelem.season}E${tvelem.episode}`);
+		log.info(`VIEWER: Got episode ${tvelem.show} S${tvelem.season}E${tvelem.episode}`);
 		medianodes.forEach((img, ind) => {
 			if (img.id === elempath) {
 				tvdb.getEpisodeById(elem.id)
