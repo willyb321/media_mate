@@ -67,7 +67,7 @@
     "npm-check-updates": "^2.12.1",
     "pngjs": "^3.3.0",
     "pre-commit": "^1.2.2",
-    "release-it": "^3.0.0-beta.5",
+    "release-it": "^3.0.0-beta.7",
     "rimraf": "^2.6.2",
     "spectron": "^3.7.2",
     "tape": "^4.8.0",
