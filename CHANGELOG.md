@@ -1,7 +1,20 @@
 ## Change Log
 
-### upcoming (2017/09/18 00:19 +00:00)
+### v1.1.9 (2017/09/24 23:09 +00:00)
+- [23973b2](https://github.com/willyb321/media_mate/commit/23973b29b1dc513fba83b3e2cfc47d25bbc1b873) Release v1.1.9 (@willyb321)
+- [f87d0f7](https://github.com/willyb321/media_mate/commit/f87d0f7bef2dae16e2a617b9aad4ae1aba4cb1a9) update lockfile. (@willyb321)
+- [f06d19c](https://github.com/willyb321/media_mate/commit/f06d19c3ee812e02ff0bb38310d0c3bca1515586) get-imgs docs (@willyb321)
+- [631be1a](https://github.com/willyb321/media_mate/commit/631be1a51d34fffb584bf920246579b6d20264e4) deps (@willyb321)
+- [c5d0a4d](https://github.com/willyb321/media_mate/commit/c5d0a4d78c72cce303493b097c68d09b28688140) well that seemed to fix the whole crashing when loading thing (@willyb321)
+- [54ecedd](https://github.com/willyb321/media_mate/commit/54ecedde6d5a0374b75761fb46104f0a5f67fb84) fix not found image not triggering, more logging, (@willyb321)
+- [1eea518](https://github.com/willyb321/media_mate/commit/1eea51803d529006057796ee2e45887cef019df9) deps (@willyb321)
+- [abb6591](https://github.com/willyb321/media_mate/commit/abb65918cf29bf55b6d8d95b4c9a63c0bf07835b) WIP: super speedy tvdb downloading (@willyb321)
+- [52fda3b](https://github.com/willyb321/media_mate/commit/52fda3b60a196f6d7da9799e9c6e8fb98deb302f) deps (@willyb321)
+- [6522dcd](https://github.com/willyb321/media_mate/commit/6522dcdc839562b6ad10af3bf5399b359d441951) fix jsdoc (@willyb321)
+- [c608fd3](https://github.com/willyb321/media_mate/commit/c608fd35a600d47684b341ba5329b0e5a9f389b8) Merge branch 'develop' of https://github.com/willyb321/media_mate into develop (@willyb321)
+- [edc350f](https://github.com/willyb321/media_mate/commit/edc350f65d65c65e42f0894feb58b6f8927cd9ef) changelog (@willyb321)
 - [ac7f88f](https://github.com/willyb321/media_mate/commit/ac7f88fc9788d6ff02ea0668b7f6517322b0e518) Release v1.1.8 (@willyb321)
+- [cd69772](https://github.com/willyb321/media_mate/commit/cd697727de6b19d20e01c1e527f8df7ffbe493cc) remove unused var (@willyb321)
 
 ### v1.1.8 (2017/09/15 06:55 +00:00)
 - [b7fc3a1](https://github.com/willyb321/media_mate/commit/b7fc3a112f2d92207af80d3a590b974ad9777d27) console logs (@willyb321)
