@@ -8,6 +8,7 @@ import concat from 'gulp-concat';
 import rimraf from 'rimraf';
 import fs from 'fs';
 import path from 'path';
+
 const spawn = require('child_process').spawn;
 const pkg = require('./package.json');
 const builder = require('electron-builder');
@@ -92,8 +93,8 @@ gulp.task('build:dist', ['default'], cb => {
 				category: 'public.app-category.entertainment',
 				target: ['zip'],
 				publish: [
-				"github"
-			]
+					"github"
+				]
 			},
 			win: {
 				target: [
@@ -179,7 +180,7 @@ gulp.task('build:packCI', cb => {
 		});
 });
 gulp.task('changelog', cb => {
-	let githubChanges = spawn(require('path').join('node_modules', '.bin', 'github-changes')+ (process.platform === 'win32' ? '.cmd' : ''), ['-o', 'willyb321', '-r', 'media_mate', '-b', 'develop', '--use-commit-body', '-k',  `${process.env.GH_TOKEN || process.env.GITHUB_TOKEN}`]);
+	let githubChanges = spawn(require('path').join('node_modules', '.bin', 'github-changes') + (process.platform === 'win32' ? '.cmd' : ''), ['-o', 'willyb321', '-r', 'media_mate', '-b', 'develop', '--use-commit-body', '-k', `${process.env.GH_TOKEN || process.env.GITHUB_TOKEN}`]);
 	githubChanges.stdout.on('data', (data) => {
 		console.log(`stdout: ${data}`);
 	});
