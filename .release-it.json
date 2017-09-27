@@ -1,7 +1,7 @@
 {
 	"non-interactive": true,
 	"dry-run": false,
-	"verbose": false,
+	"verbose": true,
 	"force": false,
 	"pkgFiles": [
 		"package.json",
@@ -28,13 +28,16 @@
 		"tokenRef": "GITHUB_TOKEN",
 		"draft": true
 	},
+	"npm": {
+		"publish": "false"
+	},
 	"prompt": {
 		"src": {
 			"status": false,
-			"commit": true,
-			"tag": true,
-			"push": true,
-			"release": true,
+			"commit": false,
+			"tag": false,
+			"push": false,
+			"release": false,
 			"publish": false
 		}
 	}
