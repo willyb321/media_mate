@@ -1,5 +1,18 @@
 ## Change Log
 
+### v1.2.1 (2017/09/27 03:57 +00:00)
+- [cf852de](https://github.com/willyb321/media_mate/commit/cf852deb5f28d29c092a515f18bf7f6a05870558) Release v1.2.1 (@willyb321)
+- [8288bd4](https://github.com/willyb321/media_mate/commit/8288bd40bdf6d0e93d63123b49087bd786bac97e) oops (@willyb321)
+
+### v1.2.0 (2017/09/27 03:56 +00:00)
+- [8ef961b](https://github.com/willyb321/media_mate/commit/8ef961b91c25ca349ee62463d4475bf7cbdfa529) Release v1.2.0 (@willyb321)
+- [e9c9755](https://github.com/willyb321/media_mate/commit/e9c9755bd6b646f6c1a3a7777bd38459dd44b0eb) forgot to remove the actual dependency (@willyb321)
+- [6c3b0e2](https://github.com/willyb321/media_mate/commit/6c3b0e26d06884c9b62ba296b8897a9f3ead5a4b) deps (@willyb321)
+- [dcba7a1](https://github.com/willyb321/media_mate/commit/dcba7a133419fb982b97571f9f377b6d2c7fda11) release-it 3.0.0 changes (@willyb321)
+- [95d2afc](https://github.com/willyb321/media_mate/commit/95d2afc7859125c6f16217f001fc4bcc4a8ba46b) fancy release notes (@willyb321)
+- [f8b79c2](https://github.com/willyb321/media_mate/commit/f8b79c2e5775b78d119ae48970a175867e9f2885) reformat gulpfile (@willyb321)
+- [aa6e18e](https://github.com/willyb321/media_mate/commit/aa6e18eda2a175df8734db96dbf855105cc780fc) changelog (@willyb321)
+
 ### v1.1.9 (2017/09/24 23:09 +00:00)
 - [23973b2](https://github.com/willyb321/media_mate/commit/23973b29b1dc513fba83b3e2cfc47d25bbc1b873) Release v1.1.9 (@willyb321)
 - [f87d0f7](https://github.com/willyb321/media_mate/commit/f87d0f7bef2dae16e2a617b9aad4ae1aba4cb1a9) update lockfile. (@willyb321)
