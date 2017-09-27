@@ -1,16 +1,13 @@
 environment:
-  nodejs_version: "7"
-before_build:
-- ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/set-screenresolution.ps1'))
-#- ps: Set-ScreenResolution 1920 1080
+  nodejs_version: "8"
+# - ps: Set-ScreenResolution 1920 1080
 os: unstable
 platform:
   - x64
 cache:
 - node_modules -> package.json
 - app/node_modules -> app/package.json
-- '%USERPROFILE%\.electron -> package.json'
-- "%LOCALAPPDATA%\\Yarn -> package.json"
+- "%LOCALAPPDATA%\\Yarn"
 install:
   # Get the latest stable version of Node.js
   - ps: Install-Product node $env:nodejs_version x64
@@ -19,9 +16,4 @@ install:
 version: 1.0.{build}
 skip_non_tags: true
 build_script:
-- cmd: npm run prestart
 - cmd: npm run dist
-on_finish:
-  - ps: Get-ChildItem .\tests\*.png -Recurse | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
-  - ps: Get-ChildItem .\dist\*.exe | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
-  - ps: Get-ChildItem .\dist\*.yml | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
