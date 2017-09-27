@@ -65,6 +65,8 @@ Raven.config('https://3d1b1821b4c84725a3968fcb79f49ea1:1ec6e95026654dddb578cf155
 	release: version,
 	autoBreadcrumbs: true
 }).install();
+
+let updateInfo;
 autoUpdater.logger = log;
 autoUpdater.logger.transports.file.level = 'info';
 let win;
@@ -90,18 +92,23 @@ if (process.env.SPECTRON) {
 	};
 }
 
+ipc.on('releaseLoaded', (event, arg) => {
+	event.returnValue = {notes: updateInfo.releaseNotes, version: updateInfo.version};
+});
 /**
  * Autoupdater on update available
  */
 autoUpdater.on('update-available', info => { // eslint-disable-line no-unused-vars
+	log.info('Updater: Update available, info follows');
+	log.info(info);
+	updateInfo = info;
+	win.loadURL(`file://${__dirname}/../renderhtml/releasenotes.html`);
 	dialog.showMessageBox({
 		type: 'info',
 		buttons: [],
 		title: 'New update available.',
 		message: 'Press OK to download the update, and the application will download the update and then tell you when its done.'
 	});
-	log.info(info);
-	win.loadURL(`data:text/html,<h1>Changelog for ${info.version}</h1><br>${info.releaseNotes}`);
 });
 /**
  * Autoupdater on downloaded
@@ -114,6 +121,9 @@ autoUpdater.on('update-downloaded', (event, info) => { // eslint-disable-line no
 		message: `New Media Mate version!`,
 		detail: 'A new version has been downloaded. Restart the application to apply the updates.'
 	};
+	log.info('Updater: Update downloaded, info follows');
+	log.info(event);
+	log.info(info);
 	dialog.showMessageBox(dialogOpts, response => {
 		if (response === 0) {
 			autoUpdater.quitAndInstall();
@@ -138,6 +148,8 @@ autoUpdater.on('error', error => {
  * Emitted on autoupdate progress.
  */
 autoUpdater.on('download-progress', percent => {
+	log.info(`Update ${percent.percent}% downloaded`);
+	win.setProgressBar(percent.percent);
 });
 // Adds debug features like hotkeys for triggering dev tools and reload
 if (isDev && process.env.NODE_ENV !== 'test') {

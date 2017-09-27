@@ -15,7 +15,6 @@ const builder = require('electron-builder');
 
 let injects = [
 	'./app/renderjs/notify.js',
-	'./app/node_modules/jquery/dist/jquery.min.js',
 	'./app/renderjs/pace.min.js',
 	'./app/css/index.less',
 	'./app/node_modules/mprogress/mprogress.min.js'
@@ -119,6 +118,12 @@ gulp.task('clean', () => {
 });
 gulp.task('index', () => {
 	let filename;
+	filename = './app/renderjs/releasenotes.js';
+	injects.push(filename);
+	gulp.src(['./app/renderhtml/releasenotes.html', '!./app/node_modules/**'])
+		.pipe(inject(gulp.src(injects, {read: false}), {relative: true}))
+		.pipe(gulp.dest('./app/renderhtml'));
+	injects.pop();
 	filename = './app/renderjs/downloader.js';
 	injects.push(filename);
 	gulp.src(['./app/renderhtml/downloader.html', '!./app/node_modules/**'])
