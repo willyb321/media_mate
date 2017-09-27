@@ -29,7 +29,7 @@
 		"draft": true
 	},
 	"npm": {
-		"publish": "false"
+		"publish": false
 	},
 	"prompt": {
 		"src": {
