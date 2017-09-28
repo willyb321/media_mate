@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /**
  * @author William Blythe
  * @fileoverview The main file. Entry point.
@@ -12,7 +13,7 @@ console.time('init');
 console.time('require');
 require('dotenv').config({path: `${__dirname}/../.env`});
 console.time('electron');
-import electron, {dialog, protocol, ipcMain as ipc} from 'electron';
+import electron, {dialog, protocol, Notification, ipcMain as ipc} from 'electron';
 console.timeEnd('electron');
 console.time('updater');
 import {autoUpdater} from 'electron-updater';
@@ -59,6 +60,7 @@ const pkg = require(path.join(rootPath.path, 'package.json'));
 console.timeEnd('pkg');
 console.timeEnd('require');
 let RSS;
+
 const app = electron.app;
 const version = app.getVersion();
 Raven.config('https://3d1b1821b4c84725a3968fcb79f49ea1:1ec6e95026654dddb578cf1555a2b6eb@sentry.io/184666', {
@@ -362,10 +364,18 @@ function watchRSS() {
 		if (cb === '') {
 			if (win.webContents.isLoading()) {
 				mainWindow.webContents.once('dom-ready', () => {
-					mainWindow.webContents.send('newdl', ['Put your ShowRSS URL into the downloader!', 'showrss.info']);
+					new Notification({
+						title: 'Put your ShowRSS URL into the downloader!',
+						body: 'showrss.info',
+						icon: path.join(__dirname, '..', 'renderhtml', 'notificon.png')
+					}).show();
 				});
 			} else {
-				mainWindow.webContents.send('newdl', ['Put your ShowRSS URL into the downloader!', 'showrss.info']);
+				new Notification({
+					title: 'Put your ShowRSS URL into the downloader!',
+					body: 'showrss.info',
+					icon: path.join(__dirname, '..', 'renderhtml', 'notificon.png')
+				}).show();
 			}
 		} else {
 			RSS = new RSSParse(uri);
@@ -388,10 +398,18 @@ function watchRSS() {
 						log.info('MAIN: Torrent already DL');
 					} else if (win.webContents.isLoading()) {
 						mainWindow.webContents.once('dom-ready', () => {
-							mainWindow.webContents.send('newdl', ['New Download Available', data.title.toString()]);
+							new Notification({
+								title: 'New Download Available!',
+								body: data.title.toString(),
+								icon: path.join(__dirname, '..', 'renderhtml', 'notificon.png')
+							}).show();
 						});
 					} else {
-						mainWindow.webContents.send('newdl', ['New Download Available', data.title.toString()]);
+						new Notification({
+							title: 'New Download Available!',
+							body: data.title.toString(),
+							icon: path.join(__dirname, '..', 'renderhtml', 'notificon.png')
+						}).show();
 					}
 				});
 			});
@@ -403,7 +421,11 @@ function watchRSS() {
  */
 ipc.on('dldone', (event, data) => {
 	log.info('MAIN: Download done - ' + data.toString());
-	win.webContents.send('newdl', ['Download Finished', data.toString()]);
+	new Notification({
+		title: 'Download Finished!',
+		body: data.toString(),
+		icon: path.join(__dirname, '..', 'renderhtml', 'notificon.png')
+	}).show();
 });
 /**
  * Make the main window.

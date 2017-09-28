@@ -16,7 +16,7 @@ let menu;
 /**
  * Initialise the menu.
  */
-function init() {
+export function init() {
 	menu = electron.Menu.buildFromTemplate(getMenuTemplate());
 	electron.Menu.setApplicationMenu(menu);
 	win = BrowserWindow.getAllWindows()[0];
