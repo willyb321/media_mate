@@ -2,10 +2,6 @@
  * @module Menu
  */
 
-module.exports = {
-	init,
-	getMenuItem
-};
 import electron, {BrowserWindow, shell} from 'electron';
 import path from 'path';
 import openAboutWindow from 'about-window';
@@ -27,7 +23,7 @@ export function init() {
  * @param {string} label - name of the menu item to find.
  * @returns {object} - the menu item.
  */
-function getMenuItem(label) {
+export function getMenuItem(label) {
 	for (let i = 0; i < menu.items.length; i++) {
 		const menuItem = menu.items[i].submenu.items.find(item => {
 			return item.label === label;
