@@ -81,6 +81,9 @@ class RSSParse extends events.EventEmitter {
 						rssThis.emit('data', item);
 					}
 				});
+				feedparser.on('end', () => {
+					rssThis.emit('finish');
+				});
 			} else {
 				this.emit('error', new Error('Bad status code'));
 			}

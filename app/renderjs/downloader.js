@@ -23,7 +23,6 @@ const ProgressBar = require('progressbar.js');
 const _ = require('underscore');
 const bytes = require('bytes');
 const storage = require('electron-json-storage');
-const Datastore = require('nedb-core');
 const WebTorrent = require('webtorrent');
 const {createDB} = require('../lib/utils');
 const rssTor = [];
@@ -192,9 +191,8 @@ async function ignoreDupeTorrents(torrent, callback) {
 }
 /**
  * Drop the torrent database. Mainly for testing purpose.
- * @param callback - let em know.
  */
-async function dropTorrents(callback) {
+async function dropTorrents() {
 	db.remove({}, {multi: true}, (err, numRemoved) => {
 		if (err) {
 			log.info('DOWNLOADER: Error in dropTorrents (db.remove)');
@@ -402,7 +400,7 @@ function processTorrents(data) {
 				addTor(input.name, parseInt(input.id, 0));
 			});
 			label.appendChild(input);
-			dlbox.appendChild(document.createElement('br'));
+			dlbox.appendChild(br);
 			document.getElementById('dlbox').appendChild(label);
 			document.getElementById('dlAll').style.display = 'block';
 			i++;
@@ -456,6 +454,24 @@ function runScript(e) {
 			data = _.omit(data, '_id');
 			rssTor.push(data);
 			processTorrents(data);
+		});
+		RSS.on('finish', () => {
+			setTimeout(() => {
+				const howManyDls = document.getElementById('dlbox').childElementCount;
+				if (howManyDls === 0) {
+					const elem = document.getElementById('dlbox');
+					const emptyElem = document.createElement('h1');
+					emptyElem.className = 'title';
+					log.info('DOWNLOADER: No downloads');
+					emptyElem.innerText = `There is no new downloads!`;
+					const emptySubtitle = document.createElement('h2');
+					emptyElem.style['text-align'] = 'center';
+					emptySubtitle.innerText = `Go to the viewer and do some viewing while you wait!`;
+					emptySubtitle.className = 'subtitle';
+					emptyElem.appendChild(emptySubtitle);
+					elem.appendChild(emptyElem);
+				}
+			}, 1500);
 		});
 		return false;
 	}
