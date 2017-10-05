@@ -13,8 +13,12 @@ console.time('init');
 console.time('require');
 require('dotenv').config({path: `${__dirname}/../.env`});
 console.time('electron');
-import electron, {dialog, protocol, Notification, ipcMain as ipc} from 'electron';
+import electron, {dialog, Notification, ipcMain as ipc} from 'electron';
 console.timeEnd('electron');
+console.time('logger');
+import log from 'electron-log';
+console.log = log.info;
+console.timeEnd('logger');
 console.time('updater');
 import {autoUpdater} from 'electron-updater';
 console.timeEnd('updater');
@@ -27,9 +31,6 @@ console.timeEnd('rssparse');
 console.time('menu');
 import {init} from './menu.js';
 console.timeEnd('menu');
-console.time('nedb');
-import Datastore from 'nedb-core';
-console.timeEnd('nedb');
 console.time('underscore');
 import _ from 'underscore';
 console.timeEnd('underscore');
@@ -48,10 +49,6 @@ console.timeEnd('windowstate');
 console.time('path');
 import path from 'path';
 console.timeEnd('path');
-console.time('logger');
-import log from 'electron-log';
-console.log = log.info;
-console.timeEnd('logger');
 console.time('utils');
 import {createDB, isPlayable} from '../lib/utils';
 console.timeEnd('utils');
@@ -94,7 +91,7 @@ if (process.env.SPECTRON) {
 	};
 }
 
-ipc.on('releaseLoaded', (event, arg) => {
+ipc.on('releaseLoaded', event => {
 	event.returnValue = {notes: updateInfo.releaseNotes, version: updateInfo.version};
 });
 /**
@@ -224,10 +221,10 @@ function createMainWindow() {
 	win.webContents.once('dom-ready', () => {
 		console.timeEnd('full');
 	});
-	win.webContents.on('gpu-process-crashed', (event, killed) => {
+	win.webContents.on('gpu-process-crashed', event => {
 		log.info(event);
 	});
-	win.webContents.on('plugin-crashed', (event, killed) => {
+	win.webContents.on('plugin-crashed', event => {
 		log.info(event);
 	});
 	win.webContents.on('crashed', (event, killed) => {
