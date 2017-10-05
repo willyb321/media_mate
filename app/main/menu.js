@@ -2,19 +2,18 @@
  * @module Menu
  */
 
-import electron, {BrowserWindow, shell} from 'electron';
+import {BrowserWindow, Menu, shell} from 'electron';
 import path from 'path';
 import openAboutWindow from 'about-window';
-
-const app = electron.app;
+const app = require('electron').app;
 let win;
 let menu;
 /**
  * Initialise the menu.
  */
 export function init() {
-	menu = electron.Menu.buildFromTemplate(getMenuTemplate());
-	electron.Menu.setApplicationMenu(menu);
+	menu = Menu.buildFromTemplate(getMenuTemplate());
+	Menu.setApplicationMenu(menu);
 	win = BrowserWindow.getAllWindows()[0];
 }
 

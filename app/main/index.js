@@ -13,7 +13,7 @@ console.time('init');
 console.time('require');
 require('dotenv').config({path: `${__dirname}/../.env`});
 console.time('electron');
-import electron, {dialog, Notification, ipcMain as ipc} from 'electron';
+import {dialog, BrowserWindow, Notification, ipcMain as ipc} from 'electron';
 console.timeEnd('electron');
 console.time('logger');
 import log from 'electron-log';
@@ -57,8 +57,7 @@ const pkg = require(path.join(rootPath.path, 'package.json'));
 console.timeEnd('pkg');
 console.timeEnd('require');
 let RSS;
-
-const app = electron.app;
+const app = require('electron').app;
 const version = app.getVersion();
 Raven.config('https://3d1b1821b4c84725a3968fcb79f49ea1:1ec6e95026654dddb578cf1555a2b6eb@sentry.io/184666', {
 	release: version,
@@ -86,7 +85,7 @@ if (process.env.SPECTRON) {
 	 * @param opts {object} Options showOpenDialog was called with.
 	 * @param cb {function} An array of file paths returned.
 	 */
-	electron.dialog.showOpenDialog = (opts, cb) => {
+	dialog.showOpenDialog = (opts, cb) => {
 		cb([require('path').join(require('os').tmpdir(), 'MediaMateTest', 'Downloads')]);
 	};
 }
@@ -186,7 +185,7 @@ function onClosed() {
  */
 function createMainWindow() {
 	if (process.env.SPECTRON) {
-		win = new electron.BrowserWindow({
+		win = new BrowserWindow({
 			width: 1280,
 			height: 720,
 			useContentSize: true,
@@ -200,7 +199,7 @@ function createMainWindow() {
 			defaultWidth: 1280,
 			defaultHeight: 720
 		});
-		win = new electron.BrowserWindow({
+		win = new BrowserWindow({
 			x: mainWindowState.x,
 			y: mainWindowState.y,
 			width: mainWindowState.width,

@@ -16,9 +16,9 @@
   version "7.0.18"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-7.0.18.tgz#cd67f27d3dc0cfb746f0bdd5e086c4c5d55be173"
 
-about-window@^1.7.1:
-  version "1.7.1"
-  resolved "https://registry.yarnpkg.com/about-window/-/about-window-1.7.1.tgz#bfacaa445702857d1c4a0768288e02159cdb9867"
+about-window@^1.8.0:
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/about-window/-/about-window-1.8.0.tgz#3e183cfaef4342e1fea6c442f4e43f682e9da580"
 
 accepts@^1.2.5, accepts@~1.3.3:
   version "1.3.3"
@@ -324,12 +324,12 @@ bufferutil@^3.0.0:
     nan "~2.5.0"
     prebuild-install "~2.1.0"
 
-builder-util-runtime@^1.0.3:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/builder-util-runtime/-/builder-util-runtime-1.0.4.tgz#4de588094f25fa484e6def0ec4a9d7b6093cf52f"
+builder-util-runtime@^1.0.6:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/builder-util-runtime/-/builder-util-runtime-1.0.6.tgz#3087c39608470fa1b6ee90a4c565d96bd768c531"
   dependencies:
     bluebird-lst "^1.0.3"
-    debug "^3.0.1"
+    debug "^3.1.0"
     fs-extra-p "^4.4.2"
 
 builtin-modules@^1.0.0:
@@ -545,9 +545,9 @@ debug@2.6.8, debug@^2.0.0, debug@^2.1.0, debug@^2.1.3, debug@^2.2.0, debug@^2.5.
   dependencies:
     ms "2.0.0"
 
-debug@^3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/debug/-/debug-3.0.1.tgz#0564c612b521dc92d9f2988f0549e34f9c98db64"
+debug@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/debug/-/debug-3.1.0.tgz#5bb5a0672628b64149566ba16819e61518c67261"
   dependencies:
     ms "2.0.0"
 
@@ -698,9 +698,9 @@ electron-is-dev@^0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/electron-is-dev/-/electron-is-dev-0.3.0.tgz#14e6fda5c68e9e4ecbeff9ccf037cbd7c05c5afe"
 
-electron-json-storage@^3.1.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/electron-json-storage/-/electron-json-storage-3.1.0.tgz#2c1fe5b3e39fb8907cb0c9cf411cfc8f9013fa17"
+electron-json-storage@^3.1.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/electron-json-storage/-/electron-json-storage-3.1.1.tgz#943ebcad38103d4128701aacd5099bf0ad1aa67f"
   dependencies:
     async "^2.0.0"
     lodash "^4.0.1"
@@ -741,12 +741,12 @@ electron-squirrel-startup@^1.0.0:
   dependencies:
     debug "^2.2.0"
 
-electron-updater@^2.10.0:
-  version "2.10.0"
-  resolved "https://registry.yarnpkg.com/electron-updater/-/electron-updater-2.10.0.tgz#cf03a34c82270ccc9ee736c736ef766324bcd9d9"
+electron-updater@^2.10.1:
+  version "2.10.1"
+  resolved "https://registry.yarnpkg.com/electron-updater/-/electron-updater-2.10.1.tgz#5763bda9153c08459d7058d9afedccc178b88304"
   dependencies:
     bluebird-lst "^1.0.3"
-    builder-util-runtime "^1.0.3"
+    builder-util-runtime "^1.0.6"
     electron-is-dev "^0.3.0"
     fs-extra-p "^4.4.2"
     js-yaml "^3.10.0"
@@ -1313,7 +1313,7 @@ json-stable-stringify@^1.0.1:
   dependencies:
     jsonify "~0.0.0"
 
-json-stringify-safe@5.0.1, json-stringify-safe@^5.0.1, json-stringify-safe@~5.0.1:
+json-stringify-safe@^5.0.1, json-stringify-safe@~5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/json-stringify-safe/-/json-stringify-safe-5.0.1.tgz#1296a2d58fd45f19a0f6ce01d65701e2c735b6eb"
 
@@ -1984,16 +1984,15 @@ range-slice-stream@^1.2.0:
     inherits "^2.0.1"
     readable-stream "^2.0.5"
 
-raven-js@^3.17.0:
-  version "3.17.0"
-  resolved "https://registry.yarnpkg.com/raven-js/-/raven-js-3.17.0.tgz#779457ac7910512c3c2cc9bb6d0a9eeb59a969ec"
+raven-js@^3.18.1:
+  version "3.18.1"
+  resolved "https://registry.yarnpkg.com/raven-js/-/raven-js-3.18.1.tgz#746339c08fca75c3f402d7e6b633687c3ffc6ee8"
 
-raven@^2.1.2:
-  version "2.1.2"
-  resolved "https://registry.yarnpkg.com/raven/-/raven-2.1.2.tgz#4aa7a72c4b3061d7fde06bfc62d669a74a651e27"
+raven@^2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/raven/-/raven-2.2.1.tgz#57c7fbe68a80147ec527def3d7c01575cf948fe3"
   dependencies:
     cookie "0.3.1"
-    json-stringify-safe "5.0.1"
     lsmod "1.0.0"
     stack-trace "0.0.9"
     timed-out "4.0.1"
@@ -2063,9 +2062,9 @@ render-media@^2.8.0:
     stream-to-blob-url "^2.0.0"
     videostream "^2.3.0"
 
-request@^2.82.0:
-  version "2.82.0"
-  resolved "https://registry.yarnpkg.com/request/-/request-2.82.0.tgz#2ba8a92cd7ac45660ea2b10a53ae67cd247516ea"
+request@^2.83.0:
+  version "2.83.0"
+  resolved "https://registry.yarnpkg.com/request/-/request-2.83.0.tgz#ca0b65da02ed62935887808e6f510381034e3356"
   dependencies:
     aws-sign2 "~0.7.0"
     aws4 "^1.6.0"
@@ -2086,7 +2085,7 @@ request@^2.82.0:
     qs "~6.5.1"
     safe-buffer "^5.1.1"
     stringstream "~0.0.5"
-    tough-cookie "~2.3.2"
+    tough-cookie "~2.3.3"
     tunnel-agent "^0.6.0"
     uuid "^3.1.0"
 
@@ -2288,6 +2287,12 @@ source-map-support@^0.4.18:
   dependencies:
     source-map "^0.5.6"
 
+source-map-support@^0.5.0:
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/source-map-support/-/source-map-support-0.5.0.tgz#2018a7ad2bdf8faf2691e5fddab26bed5a2bacab"
+  dependencies:
+    source-map "^0.6.0"
+
 source-map@0.1.31:
   version "0.1.31"
   resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.1.31.tgz#9f704d0d69d9e138a81badf6ebb4fde33d151c61"
@@ -2297,6 +2302,10 @@ source-map@0.1.31:
 source-map@^0.5.6, source-map@~0.5.0:
   version "0.5.6"
   resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.5.6.tgz#75ce38f52bf0733c5a7f0c118d81334a2bb5f412"
+
+source-map@^0.6.0:
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.6.1.tgz#74722af32e9614e9c287a8d0bbde48b5e2f1a263"
 
 spawn-rx@^2.0.3:
   version "2.0.10"
@@ -2428,9 +2437,9 @@ sudo-prompt@^6.2.0:
   version "6.2.1"
   resolved "https://registry.yarnpkg.com/sudo-prompt/-/sudo-prompt-6.2.1.tgz#1079211ac2cf21f5230ffbeb124ffc22cee4c2b6"
 
-sweetalert2@^6.9.1:
-  version "6.9.1"
-  resolved "https://registry.yarnpkg.com/sweetalert2/-/sweetalert2-6.9.1.tgz#2fa57eb9310777e07e6f11baf63cc8a42f61dbe7"
+sweetalert2@^6.10.1:
+  version "6.10.1"
+  resolved "https://registry.yarnpkg.com/sweetalert2/-/sweetalert2-6.10.1.tgz#5b284777a546fb11429915b577088473aa24e0fd"
 
 symbol-observable@^1.0.1:
   version "1.0.4"
@@ -2502,7 +2511,7 @@ torrent-piece@^1.1.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/torrent-piece/-/torrent-piece-1.1.1.tgz#50346e42a43b35daf2a86f414afb153629a854be"
 
-tough-cookie@~2.3.2:
+tough-cookie@~2.3.3:
   version "2.3.3"
   resolved "https://registry.yarnpkg.com/tough-cookie/-/tough-cookie-2.3.3.tgz#0b618a5565b6dea90bf3425d04d55edc475a7561"
   dependencies:
