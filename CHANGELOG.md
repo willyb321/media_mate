@@ -1,5 +1,22 @@
 ## Change Log
 
+### v1.2.3 (2017/10/06 23:07 +00:00)
+- [cb04214](https://github.com/willyb321/media_mate/commit/cb042148658f7f73b943a805d45cce18bde63246) Release v1.2.3 (@willyb321)
+
+### 1.2.2 (2017/10/06 23:07 +00:00)
+- [2edc029](https://github.com/willyb321/media_mate/commit/2edc029a4f2454768a26d725936f883a131dda22) Release 1.2.2 (@willyb321)
+- [8697774](https://github.com/willyb321/media_mate/commit/8697774df7758c6a3690cab32b93b5f8d6bb173d) build linux and win32 on CI (@willyb321)
+- [15f708e](https://github.com/willyb321/media_mate/commit/15f708e4eac0e52bfd1c81d6e2423465957e0d25) fix breadcrumbs not sending the data properly (@willyb321)
+- [39319e2](https://github.com/willyb321/media_mate/commit/39319e29b67411019b4a8af38e2305219be25b8a) update deps and fix the breaking that happened because of it (@willyb321)
+- [24b62d3](https://github.com/willyb321/media_mate/commit/24b62d37580f6fbf0b5ad695fb972c166eca4826) .idea (@willyb321)
+- [0ec8b81](https://github.com/willyb321/media_mate/commit/0ec8b8186ac78247299e730ffdef7f0b9b70bcd1) import logger earlier, remove nedb import in main.js etc (@willyb321)
+- [53eb10a](https://github.com/willyb321/media_mate/commit/53eb10a471139ad5a8fbfd811d93a052bd7aabb5) remove an import, handle no downloads etc (@willyb321)
+- [13ced7e](https://github.com/willyb321/media_mate/commit/13ced7ec41f273f2ebd0a925ef22e8a5bad738b6) use import export syntax in menu rather than module.exports (@willyb321)
+- [7d079b9](https://github.com/willyb321/media_mate/commit/7d079b96d38255f8073537cd70a3d987cf0a80a0) notifications from main process :tada: (@willyb321)
+- [0f5c97b](https://github.com/willyb321/media_mate/commit/0f5c97bca1ee07c4293f7db6488c241cacabdef0) downgrade deps (@willyb321)
+- [8f4b32f](https://github.com/willyb321/media_mate/commit/8f4b32fc3a80c4ff47db6f5256038f967ea989c2) update appveyor (@willyb321)
+- [4268260](https://github.com/willyb321/media_mate/commit/426826005f4b5cf6fcf8c851e9a3a2127a25a13b) changelog (@willyb321)
+
 ### v1.2.1 (2017/09/27 03:57 +00:00)
 - [cf852de](https://github.com/willyb321/media_mate/commit/cf852deb5f28d29c092a515f18bf7f6a05870558) Release v1.2.1 (@willyb321)
 - [8288bd4](https://github.com/willyb321/media_mate/commit/8288bd40bdf6d0e93d63123b49087bd786bac97e) oops (@willyb321)
