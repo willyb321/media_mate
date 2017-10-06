@@ -174,7 +174,9 @@ async function ignoreDupeTorrents(torrent, callback) {
 		} else {
 			Raven.context(function () {
 				Raven.captureBreadcrumb({
-					torrent: torrent
+					data: {
+						torrent: torrent
+					}
 				});
 				db.insert({
 					_id: torrent.link,
@@ -439,7 +441,9 @@ function runScript(e) {
 		RSS.on('error', err => {
 			Raven.context(function () {
 				Raven.captureBreadcrumb({
-					rssURL: tb.value
+					data: {
+						rssURL: tb.value
+					}
 				});
 				tb.disabled = false;
 				document.getElementById('dupecount').disabled = false;

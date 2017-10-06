@@ -309,7 +309,13 @@ async function ignoreDupeTorrents(torrent, callback) {
 	db.find({_id: torrent.link}, (err, docs) => {
 		if (err) {
 			Raven.context(() => {
-				Raven.captureBreadcrumb({torrent: torrent.link, docs});
+				Raven.captureBreadcrumb({
+					data:
+						{
+							torrent: torrent.link,
+							docs: docs
+						}
+				});
 				Raven.captureException(err);
 			});
 		}
