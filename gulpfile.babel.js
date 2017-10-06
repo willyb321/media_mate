@@ -12,6 +12,7 @@ import path from 'path';
 const spawn = require('child_process').spawn;
 const pkg = require('./package.json');
 const builder = require('electron-builder');
+const isCI = require('is-ci');
 
 let injects = [
 	'./app/renderjs/notify.js',
@@ -80,7 +81,7 @@ gulp.task('build:pack', ['default'], cb => {
 });
 gulp.task('build:dist', ['default'], cb => {
 	builder.build({
-		platform: process.platform,
+		platform: (isCI === true ? ['linux', 'win32'] : process.platform),
 		arch: 'x64',
 		config: {
 			appId: 'com.willyb321.media_mate',
