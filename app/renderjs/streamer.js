@@ -6,15 +6,19 @@
  * @module Streamer
  */
 /* eslint-disable no-unused-vars */
-const WebTorrent = require('webtorrent');
+import 'source-map-support/register';
+import WebTorrent from 'webtorrent';
+import swal from 'sweetalert2';
+import path from 'path';
+import _ from 'underscore';
+import Raven from 'raven-js';
+import {createDB, isPlayable, titleCase} from '../lib/utils.js';
+import {remote} from 'electron';
+
 require('dotenv').config();
 require('events').EventEmitter.prototype._maxListeners = 1000;
-const swal = require('sweetalert2');
-const path = require('path');
-const _ = require('underscore');
-const Raven = require('raven-js');
-const {isPlayable, titleCase, createDB} = require(require('path').join(__dirname, '..', 'lib', 'utils.js'));
-const version = require('electron').remote.app.getVersion();
+
+const version = remote.app.getVersion();
 Raven.config('https://3d1b1821b4c84725a3968fcb79f49ea1@sentry.io/184666', {
 	release: version,
 	autoBreadcrumbs: true
@@ -27,7 +31,7 @@ createDB(path.join(require('electron').remote.app.getPath('userData'), 'dbStream
 		db = dbCreated;
 	});
 client.on('error', err => {
-	console.log(err);
+	Raven.captureException(err);
 });
 
 /**

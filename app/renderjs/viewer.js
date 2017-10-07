@@ -7,24 +7,26 @@
  */
 /* eslint-disable no-unused-vars */
 /* eslint-disable max-nested-callbacks */
+import 'source-map-support/register';
+import path from 'path';
+import {GetImgs as Getimg} from '../lib/get-imgs';
+import {remote} from 'electron';
+import fs from 'fs-extra';
+import TVDB from 'node-tvdb';
+import storage from 'electron-json-storage';
+import Raven from 'raven-js';
+import _ from 'underscore';
+import parser from 'episode-parser';
+import log from 'electron-log';
+import klawSync from 'klaw-sync';
+import server from 'pushstate-server';
+import blobUtil from 'blob-util';
+import {createDB, isPlayable, titleCase} from '../lib/utils';
+
 require('dotenv').config({path: `${__dirname}/../.env`});
 require('events').EventEmitter.prototype._maxListeners = 1000;
-const Getimg = require(require('path').join(__dirname, '..', 'lib', 'get-imgs.js')).GetImgs;
-const path = require('path');
-const version = require('electron').remote.app.getVersion();
-const fs = require('fs-extra');
-const TVDB = require('node-tvdb');
-const storage = require('electron-json-storage');
-const Raven = require('raven-js');
-const moment = require('moment');
-const _ = require('underscore');
-const parser = require('episode-parser');
-const log = require('electron-log');
-const klawSync = require('klaw-sync');
-const server = require('pushstate-server');
-const blobUtil = require('blob-util');
-const {createDB} = require('../lib/utils');
-const {titleCase, isPlayable} = require(require('path').join(__dirname, '..', 'lib', 'utils.js'));
+const version = remote.app.getVersion();
+
 const tvdb = new TVDB(process.env.TVDB_KEY);
 const vidProgressthrottled = _.throttle(vidProgress, 500);
 let db;

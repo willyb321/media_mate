@@ -7,24 +7,25 @@
  */
 /* eslint-disable no-unused-vars */
 /* eslint-disable max-nested-callbacks */
+import 'source-map-support/register';
+import {dialog, ipcRenderer as ipc} from 'electron';
+import path from 'path';
+import Raven from 'raven-js';
+import moment from 'moment';
+import log from 'electron-log';
+import swal from 'sweetalert2';
+import ProgressBar from 'progressbar.js';
+import _ from 'underscore';
+import bytes from 'bytes';
+import storage from 'electron-json-storage';
+import WebTorrent from 'webtorrent';
+import {createDB} from '../lib/utils';
+import {RSSParse} from '../lib/rssparse.js';
+
 require('dotenv').config({
 	path: `${__dirname}/.env`
 });
-const {dialog} = require('electron').remote;
-const path = require('path');
-const Raven = require('raven-js');
-const ipc = require('electron').ipcRenderer;
 require('events').EventEmitter.prototype._maxListeners = 1000;
-const moment = require('moment');
-const log = require('electron-log');
-const swal = require('sweetalert2');
-const RSSParse = require(`${__dirname}/../lib/rssparse.js`).RSSParse;
-const ProgressBar = require('progressbar.js');
-const _ = require('underscore');
-const bytes = require('bytes');
-const storage = require('electron-json-storage');
-const WebTorrent = require('webtorrent');
-const {createDB} = require('../lib/utils');
 const rssTor = [];
 let dupeCount = 0;
 const version = require('electron').remote.app.getVersion();
@@ -441,6 +442,7 @@ function runScript(e) {
 		RSS.on('error', err => {
 			Raven.context(function () {
 				Raven.captureBreadcrumb({
+					message: err.message,
 					data: {
 						rssURL: tb.value
 					}

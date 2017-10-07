@@ -7,11 +7,8 @@
 				}
 			}]
 		],
-		"sourceMaps": "both",
-		"minified": false,
-		"only": [
-			"app/*.js",
-			"app/main/*.js"
-		]
+		"plugins": ["source-map-support"],
+		"sourceMaps": "inline",
+		"minified": false
 	}
 }

@@ -1,5 +1,5 @@
-const ipc = require('electron').ipcRenderer;
-const log = require('electron-log');
+import {ipcRenderer as ipc} from 'electron';
+import log from 'electron-log';
 
 function makeReleaseNotesFancy(notes, version) {
 	const releaseNotesDiv = document.getElementById('notes');

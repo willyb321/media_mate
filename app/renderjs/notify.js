@@ -1,11 +1,12 @@
-const ipcRenderer = require('electron').ipcRenderer;
+import {ipcRenderer, remote} from 'electron';
+import {swal as swalNotify} from 'sweetalert2';
 
 ipcRenderer.on('offline', (event, data) => {
-	require('sweetalert2')('Offline', 'You are offline, thats fine though.', 'info');
+	swalNotify('Offline', 'You are offline, thats fine though.', 'info');
 });
 
 function firstrun() {
-	require('sweetalert2')({
+	swalNotify({
 		title: 'Want to check out the tutorial?',
 		text: 'I noticed this is your first run.',
 		type: 'question',
@@ -14,7 +15,7 @@ function firstrun() {
 		cancelButtonColor: '#d33',
 		confirmButtonText: 'Yes!'
 	}).then(function () {
-		require('electron').remote.getCurrentWindow().loadURL(`file://${__dirname}/../renderhtml/onboard.html`)
+		remote.getCurrentWindow().loadURL(`file://${__dirname}/../renderhtml/onboard.html`)
 	}).catch(err => {
 		if (err !== 'cancel') {
 			console.log(err);
@@ -22,7 +23,7 @@ function firstrun() {
 	});
 }
 function sweetAlert(title, text, type) {
-	require('sweetalert2')({
+	swalNotify({
 		title: title,
 		text: text,
 		type: type
