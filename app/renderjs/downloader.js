@@ -8,7 +8,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable max-nested-callbacks */
 import 'source-map-support/register';
-import {dialog, ipcRenderer as ipc} from 'electron';
+import {remote, ipcRenderer as ipc} from 'electron';
 import path from 'path';
 import Raven from 'raven-js';
 import moment from 'moment';
@@ -28,7 +28,7 @@ require('dotenv').config({
 require('events').EventEmitter.prototype._maxListeners = 1000;
 const rssTor = [];
 let dupeCount = 0;
-const version = require('electron').remote.app.getVersion();
+const version = remote.app.getVersion();
 Raven.config('https://3d1b1821b4c84725a3968fcb79f49ea1@sentry.io/184666', {
 	release: version,
 	autoBreadcrumbs: true
@@ -37,7 +37,7 @@ const client = new WebTorrent();
 let i = 0;
 let bar;
 let db;
-createDB(path.join(require('electron').remote.app.getPath('userData'), 'dbTor.db').toString())
+createDB(path.join(remote.app.getPath('userData'), 'dbTor.db').toString())
 	.then(dbCreated => {
 		db = dbCreated;
 	});
@@ -298,7 +298,7 @@ function getDlPath(callback) {
  */
 function insertDlPath(callback) {
 	const tb = document.getElementById('dlpath');
-	dialog.showOpenDialog({
+	remote.dialog.showOpenDialog({
 		properties: ['openDirectory']
 	}, dlpath => {
 		if (dlpath !== undefined) {
