@@ -63,7 +63,15 @@ Raven.config('https://3d1b1821b4c84725a3968fcb79f49ea1:1ec6e95026654dddb578cf155
 	release: version,
 	autoBreadcrumbs: true
 }).install();
+process.on('uncaughtError', err => {
+	log.error('ERROR! The error is: ' + err || err.stack);
+	Raven.captureException(err);
+});
 
+process.on('unhandledRejection', err => {
+	log.error('Unhandled rejection: ' + (err && err.stack || err)); // eslint-disable-line
+	Raven.captureException(err);
+});
 let updateInfo;
 autoUpdater.logger = log;
 autoUpdater.logger.transports.file.level = 'info';
@@ -237,6 +245,7 @@ function createMainWindow() {
 			// Look into what causes this - I have encountered it from the viewer when loading images.
 			log.info(event);
 			log.error('Browser process crashed. Not sure how or why because there doesn\'t seem to be a good stack trace');
+			Raven.captureException(new Error('Browser process crashed. Not sure how or why because there doesn\'t seem to be a good stack trace'));
 		}
 	});
 	win.once('ready-to-show', () => {

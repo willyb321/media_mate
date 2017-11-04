@@ -5,6 +5,5 @@
     <file url="file://$PROJECT_DIR$/app" libraries="{HTML, electron-DefinitelyTyped, electron-builder-DefinitelyTyped, electron-debug-DefinitelyTyped, electron-json-storage-DefinitelyTyped, electron-notify-DefinitelyTyped, electron-window-state-DefinitelyTyped, underscore-DefinitelyTyped}" />
     <file url="PROJECT" libraries="{HTML, c7450b3c67, electron-DefinitelyTyped, electron-builder-DefinitelyTyped, electron-debug-DefinitelyTyped, electron-json-storage-DefinitelyTyped, electron-notify-DefinitelyTyped, electron-window-state-DefinitelyTyped, pouchdb-DefinitelyTyped, pouchdb-core-DefinitelyTyped, pouchdb-find-DefinitelyTyped, pouchdb-upsert-DefinitelyTyped, underscore-DefinitelyTyped, webdriverio-DefinitelyTyped}" />
     <includedPredefinedLibrary name="Node.js Core" />
-    <excludedPredefinedLibrary name="media_mate/node_modules" />
   </component>
 </project>
