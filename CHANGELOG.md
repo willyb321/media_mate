@@ -1,5 +1,17 @@
 ## Change Log
 
+### v1.2.5 (2017/11/04 03:44 +00:00)
+- [024da89](https://github.com/willyb321/media_mate/commit/024da897e8f86832452840a69f7b6b1952e85230) Release v1.2.5 (@willyb321)
+
+### 1.2.4 (2017/11/04 03:43 +00:00)
+- [fc22d58](https://github.com/willyb321/media_mate/commit/fc22d5855138eba4ce59ea837c0089fceca96d36) Release 1.2.4 (@willyb321)
+- [a449a85](https://github.com/willyb321/media_mate/commit/a449a85b7ec9aaff5b8fe5dcf31547d78dbd263b) update lots of deps, add types, add some handlers (@willyb321)
+- [a31a550](https://github.com/willyb321/media_mate/commit/a31a550a28b442afb7c6de1bdc4d2c9f6d3c2d6c) remove pace (@willyb321)
+- [d6974b4](https://github.com/willyb321/media_mate/commit/d6974b4f5e33aa6a197097558478c68ae61f5228) hopefully fix the whole app crashing when selecting download (@willyb321)
+- [6b03010](https://github.com/willyb321/media_mate/commit/6b030102115842fd8427725be7e7aafe17562240) at some point electron-compile fixed itself (@willyb321)
+- [48eee36](https://github.com/willyb321/media_mate/commit/48eee36c802967e751026135fbd8eb49a964800e) downgrade electron-builder (@willyb321)
+- [0044814](https://github.com/willyb321/media_mate/commit/00448142043c7094f73a0498636311f5ae0d153f) changelog (@willyb321)
+
 ### v1.2.3 (2017/10/06 23:07 +00:00)
 - [cb04214](https://github.com/willyb321/media_mate/commit/cb042148658f7f73b943a805d45cce18bde63246) Release v1.2.3 (@willyb321)
 
