@@ -16,7 +16,6 @@ const isCI = require('is-ci');
 
 let injects = [
 	'./app/renderjs/notify.js',
-	'./app/renderjs/pace.min.js',
 	'./app/css/index.less',
 	'./app/node_modules/mprogress/mprogress.min.js'
 ];
