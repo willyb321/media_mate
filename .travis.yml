@@ -27,6 +27,7 @@ before_install:
     fi
 before_script:
   - git lfs pull
+  - echo $TVDB_KEY > app/.env
 
 script:
   - |
