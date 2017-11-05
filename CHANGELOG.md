@@ -1,5 +1,21 @@
 ## Change Log
 
+### v1.2.6 (2017/11/05 07:48 +00:00)
+- [088488f](https://github.com/willyb321/media_mate/commit/088488f93d90625cfc4b0b43361e2261cfe0ecd7) Release v1.2.6 (@willyb321)
+- [f631ccd](https://github.com/willyb321/media_mate/commit/f631ccdf3ac5885b56f88333f1573ed9e360436f) a mess of a commit but i think i fixed the thing (@willyb321)
+- [13c1385](https://github.com/willyb321/media_mate/commit/13c138524c01eba08ce529133dba12fc956063e0) fix adding torrents more than once because of slow disabling (@willyb321)
+- [18c5c72](https://github.com/willyb321/media_mate/commit/18c5c72dc7e50499e1b55be769f89f6cfae2df42) && vs || (@willyb321)
+- [e8115ae](https://github.com/willyb321/media_mate/commit/e8115aec562500da16adc393b4dc4ef257a5a664) downgrade electron-builder again (@willyb321)
+- [6c624e7](https://github.com/willyb321/media_mate/commit/6c624e763201235ab9cc2bec1de21e71f07fcbd8) bah (@willyb321)
+- [8042098](https://github.com/willyb321/media_mate/commit/80420989110588259844237017fb2492637a54e7) upgrade electron-builder again (@willyb321)
+- [8e2dcdb](https://github.com/willyb321/media_mate/commit/8e2dcdb63c90fc73d78540fa8efdb3c10f2fad12) downgrade electron-builder again (@willyb321)
+- [#8](https://github.com/willyb321/media_mate/pull/8) Update dependencies to enable Greenkeeper 🌴 (@willyb321)
+- [6fd2791](https://github.com/willyb321/media_mate/commit/6fd2791631303219af97a21312c4b3d76d8d8247) docs(readme): add Greenkeeper badge (@greenkeeper[bot])
+- [26dbddb](https://github.com/willyb321/media_mate/commit/26dbddb5b6776aecae1055e3b6ad5e984ae14c07) chore(package): update dependencies (@greenkeeper[bot])
+- [7922b87](https://github.com/willyb321/media_mate/commit/7922b87f5e7f3fc0ae0f68ecb2e18eee61a41936) Update .travis.yml (@willyb321)
+- [1c4b2cf](https://github.com/willyb321/media_mate/commit/1c4b2cf6dd34b7a58466f6ec61e0efabd4b2e9bf) downgrade electron-builder (@willyb321)
+- [aaa6645](https://github.com/willyb321/media_mate/commit/aaa6645b451dfc0aa24cd1a1101fe5836991b7d3) changelog (@willyb321)
+
 ### v1.2.5 (2017/11/04 03:44 +00:00)
 - [024da89](https://github.com/willyb321/media_mate/commit/024da897e8f86832452840a69f7b6b1952e85230) Release v1.2.5 (@willyb321)
 
