@@ -27,7 +27,7 @@ before_install:
     fi
 before_script:
   - git lfs pull
-  - echo $TVDB_KEY > app/.env
+  - echo $TVDB_KEY > /home/travis/build/willyb321/media_mate/app/.env
 
 script:
   - |
