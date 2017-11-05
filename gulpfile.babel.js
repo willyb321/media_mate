@@ -80,7 +80,7 @@ gulp.task('build:pack', ['default'], cb => {
 });
 gulp.task('build:dist', ['default'], cb => {
 	builder.build({
-		platform: (isCI === true ? ['linux', 'win32'] : process.platform),
+		platform: (isCI === true || process.platform === 'linux' ? ['linux', 'win32'] : process.platform),
 		arch: 'x64',
 		config: {
 			appId: 'com.willyb321.media_mate',
