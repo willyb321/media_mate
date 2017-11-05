@@ -264,6 +264,9 @@ async function indexDB() {
  * Download all of the torrents, after they are added to the DOM.
  */
 async function dlAll() {
+	for (const i of document.querySelectorAll('label > input[type="checkbox"]')) {
+		i.disabled = true;
+	}
 	document.getElementById('dlAll').disabled = true;
 	db.find({
 		downloaded: false
