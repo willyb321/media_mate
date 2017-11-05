@@ -180,6 +180,7 @@ autoUpdater.on('download-progress', percent => {
 if (isDev && process.env.NODE_ENV !== 'test') {
 	debug({showDevTools: true});
 }
+
 // Prevent window being garbage collected
 let mainWindow;
 /**
@@ -468,6 +469,9 @@ ipc.on('dldone', (event, data) => {
  */
 app.on('ready', () => {
 	mainWindow = createMainWindow();
+	if (process.env.NODE_ENV === 'development') {
+		mainWindow.webContents.openDevTools();
+	}
 	init();
 	watchRSS();
 	onBoard();

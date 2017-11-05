@@ -15,7 +15,7 @@
     "compile": "(cd app && npm run compile)",
     "test": "node tests/",
     "prestart": "gulp && gulp index",
-    "start": "electron --inspect=5858 app/",
+    "start": "electron app/",
     "pack": "gulp index && gulp build:pack",
     "dist": "gulp index && gulp build:dist",
     "release": "gulp index && gulp build:dist",
