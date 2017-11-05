@@ -30,6 +30,7 @@ createDB(path.join(require('electron').remote.app.getPath('userData'), 'dbStream
 	.then(dbCreated => {
 		db = dbCreated;
 	});
+
 client.on('error', err => {
 	Raven.captureException(err);
 });

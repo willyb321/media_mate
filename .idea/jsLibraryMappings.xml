@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="JavaScriptLibraryMappings">
-    <file url="file://$PROJECT_DIR$" libraries="{HTML, electron-DefinitelyTyped, electron-builder-DefinitelyTyped, electron-debug-DefinitelyTyped, electron-json-storage-DefinitelyTyped, electron-notify-DefinitelyTyped, electron-window-state-DefinitelyTyped, underscore-DefinitelyTyped}" />
-    <file url="file://$PROJECT_DIR$/app" libraries="{HTML, electron-DefinitelyTyped, electron-builder-DefinitelyTyped, electron-debug-DefinitelyTyped, electron-json-storage-DefinitelyTyped, electron-notify-DefinitelyTyped, electron-window-state-DefinitelyTyped, underscore-DefinitelyTyped}" />
-    <file url="PROJECT" libraries="{HTML, c7450b3c67, electron-DefinitelyTyped, electron-builder-DefinitelyTyped, electron-debug-DefinitelyTyped, electron-json-storage-DefinitelyTyped, electron-notify-DefinitelyTyped, electron-window-state-DefinitelyTyped, pouchdb-DefinitelyTyped, pouchdb-core-DefinitelyTyped, pouchdb-find-DefinitelyTyped, pouchdb-upsert-DefinitelyTyped, underscore-DefinitelyTyped, webdriverio-DefinitelyTyped}" />
+    <file url="file://$PROJECT_DIR$" libraries="{HTML, electron-DefinitelyTyped, electron-builder-DefinitelyTyped, electron-debug-DefinitelyTyped, electron-json-storage-DefinitelyTyped, electron-notify-DefinitelyTyped, electron-window-state-DefinitelyTyped, media_mate/node_modules, underscore-DefinitelyTyped}" />
+    <file url="file://$PROJECT_DIR$/app" libraries="{HTML, electron-DefinitelyTyped, electron-builder-DefinitelyTyped, electron-debug-DefinitelyTyped, electron-json-storage-DefinitelyTyped, electron-notify-DefinitelyTyped, electron-window-state-DefinitelyTyped, media_mate/app/node_modules, underscore-DefinitelyTyped}" />
+    <file url="PROJECT" libraries="{HTML, c7450b3c67, electron-DefinitelyTyped, electron-builder-DefinitelyTyped, electron-debug-DefinitelyTyped, electron-json-storage-DefinitelyTyped, electron-notify-DefinitelyTyped, electron-window-state-DefinitelyTyped, media_mate/app/node_modules, media_mate/node_modules, pouchdb-DefinitelyTyped, pouchdb-core-DefinitelyTyped, pouchdb-find-DefinitelyTyped, pouchdb-upsert-DefinitelyTyped, underscore-DefinitelyTyped, webdriverio-DefinitelyTyped}" />
     <includedPredefinedLibrary name="Node.js Core" />
   </component>
 </project>

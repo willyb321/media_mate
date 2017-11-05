@@ -11,6 +11,7 @@ const FeedParser = require('feedparser');
 const request = require('request'); // For fetching the feed
 const isRenderer = require('is-electron-renderer');
 const isOnline = require('is-online');
+
 let Raven;
 let version;
 // Make sure that version can be got from both render and main process

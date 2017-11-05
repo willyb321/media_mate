@@ -12,56 +12,75 @@ console.time('full');
 console.time('init');
 console.time('require');
 require('dotenv').config({path: `${__dirname}/../.env`});
+
 console.time('electron');
 import {dialog, BrowserWindow, Notification, ipcMain as ipc} from 'electron';
+
 console.timeEnd('electron');
 console.time('logger');
 import log from 'electron-log';
-console.log = log.info;
+
 console.timeEnd('logger');
 console.time('updater');
 import {autoUpdater} from 'electron-updater';
+
 console.timeEnd('updater');
 console.time('sentry');
 import Raven from 'raven';
+
 console.timeEnd('sentry');
 console.time('rssparse');
 import {RSSParse} from '../lib/rssparse';
+
 console.timeEnd('rssparse');
 console.time('menu');
 import {init} from './menu.js';
+
 console.timeEnd('menu');
 console.time('underscore');
 import _ from 'underscore';
+
 console.timeEnd('underscore');
 console.time('jsonstorage');
 import storage from 'electron-json-storage';
+
 console.timeEnd('jsonstorage');
 console.time('bypass');
 import {addBypassChecker} from 'electron-compile';
+
 console.timeEnd('bypass');
 console.time('electron-collection');
 import {debug, firstRun, isDev, rootPath} from 'electron-collection';
+
 console.timeEnd('electron-collection');
 console.time('windowstate');
 import windowStateKeeper from 'electron-window-state';
+
 console.timeEnd('windowstate');
 console.time('path');
 import path from 'path';
+
 console.timeEnd('path');
 console.time('utils');
 import {createDB, isPlayable} from '../lib/utils';
+
 console.timeEnd('utils');
 console.time('pkg');
 const pkg = require(path.join(rootPath.path, 'package.json'));
 console.timeEnd('pkg');
 console.timeEnd('require');
+require('electron-unhandled')();
+
 let RSS;
 const app = require('electron').app;
+
+app.commandLine.appendSwitch('remote-debugging-port', '8315');
+// App.commandLine.appendSwitch('proxy-server', 'http://127.0.0.1:8888');
 const version = app.getVersion();
+app.disableHardwareAcceleration();
 Raven.config('https://3d1b1821b4c84725a3968fcb79f49ea1:1ec6e95026654dddb578cf1555a2b6eb@sentry.io/184666', {
 	release: version,
-	autoBreadcrumbs: true
+	autoBreadcrumbs: false
 }).install();
 process.on('uncaughtError', err => {
 	log.error('ERROR! The error is: ' + err || err.stack);
@@ -229,10 +248,13 @@ function createMainWindow() {
 		console.timeEnd('full');
 	});
 	win.webContents.on('gpu-process-crashed', event => {
-		log.info(event);
+		console.log(event);
+	});
+	win.webContents.on('did-finish-load', () => {
+		win.webContents.executeJavaScript('require(\'electron-unhandled\')()');
 	});
 	win.webContents.on('plugin-crashed', event => {
-		log.info(event);
+		console.log(event);
 	});
 	win.webContents.on('crashed', (event, killed) => {
 		if (killed === true) {
@@ -242,8 +264,10 @@ function createMainWindow() {
 				app.quit();
 			}
 		} else {
+			event.preventDefault();
+			event.returnValue = false;
 			// Look into what causes this - I have encountered it from the viewer when loading images.
-			log.info(event);
+			console.log(event);
 			log.error('Browser process crashed. Not sure how or why because there doesn\'t seem to be a good stack trace');
 			Raven.captureException(new Error('Browser process crashed. Not sure how or why because there doesn\'t seem to be a good stack trace'));
 		}
@@ -301,6 +325,7 @@ app.on('window-all-closed', () => {
 	}
 	RSS = null;
 });
+
 /**
  * If mainwindow doesn't exist, make it.
  */
@@ -320,10 +345,10 @@ async function ignoreDupeTorrents(torrent, callback) {
 			Raven.context(() => {
 				Raven.captureBreadcrumb({
 					data:
-						{
-							torrent: torrent.link,
-							docs: docs
-						}
+					{
+						torrent: torrent.link,
+						docs
+					}
 				});
 				Raven.captureException(err);
 			});

@@ -6,6 +6,7 @@
 /* eslint-disable max-nested-callbacks */
 require('dotenv').config({path: `${__dirname}/../.env`});
 const events = require('events');
+
 let Raven;
 const isRenderer = require('is-electron-renderer');
 const TVDB = require('node-tvdb');
@@ -14,11 +15,15 @@ const log = require('electron-log');
 const dir = require('node-dir');
 const _ = require('underscore');
 const path = require('path');
+
 const {isPlayable} = require(path.join(__dirname, 'utils.js'));
+const asynca = require('async');
+
 const tvdb = new TVDB(process.env.TVDB_KEY);
 let db;
 let version;
 console.log = log.info;
+let self;
 
 process.on('uncaughtError', err => {
 	log.error('ERROR! The error is: ' + err || err.stack);
@@ -59,6 +64,7 @@ class GetImgs extends events.EventEmitter {
 	constructor(directory, nedb) {
 		super();
 		db = nedb;
+		self = this;
 		this.tvdbInit(directory);
 	}
 
@@ -80,7 +86,7 @@ class GetImgs extends events.EventEmitter {
 	 * @param {string} currentFile - Path to current file that we are getting images for.
 	 */
 	loop(currentFile) {
-		let elem = currentFile;
+		const elem = currentFile;
 		log.info(`VIEWER: getting image for: ${elem}`);
 		if (elem !== undefined) {
 			const elempath = elem.replace(/^.*[\\/]/, '');

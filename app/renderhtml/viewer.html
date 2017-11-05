@@ -5,13 +5,13 @@
 	<!-- inject:css -->
 	<link rel="stylesheet" href="../css/index.less">
 	<!-- endinject -->
-	<script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+
 	<!-- inject:js -->
 	<script src="../renderjs/notify.js"></script>
 	<script src="../node_modules/mprogress/mprogress.min.js"></script>
 	<script src="../renderjs/viewer.js"></script>
 	<!-- endinject -->
-	<script>if (window.module) module = window.module;</script>
+
     <meta charset="UTF-8">
     <title>Media Mate Viewer</title>
 </head>
@@ -43,5 +43,6 @@
 <div id="media" class="container is-fluid">
 <p id="Loading">Loading....</p>
 </div>
+<div id="image_pool" style="display:none;"></div>
 </body>
 </html>

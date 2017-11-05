@@ -2,9 +2,8 @@
 	"presets": [
 		["env", {
 			"targets": {
-				"electron": "1.7"
+				"electron": "1.8"
 			}
 		}]
-	],
-	"plugins": ["source-map-support"]
+	]
 }

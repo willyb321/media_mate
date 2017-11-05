@@ -26,6 +26,7 @@ require('dotenv').config({
 	path: `${__dirname}/.env`
 });
 require('events').EventEmitter.prototype._maxListeners = 1000;
+
 const rssTor = [];
 let dupeCount = 0;
 const version = remote.app.getVersion();
@@ -122,7 +123,7 @@ function dlProgress() {
 function getSwalConfirmButton() {
 	return new Promise((resolve, reject) => {
 		if (swal.getConfirmButton) {
-			let res = swal.getConfirmButton();
+			const res = swal.getConfirmButton();
 			if (res) {
 				resolve(res);
 			}
@@ -173,10 +174,10 @@ async function ignoreDupeTorrents(torrent, callback) {
 				callback();
 			}
 		} else {
-			Raven.context(function () {
+			Raven.context(() => {
 				Raven.captureBreadcrumb({
 					data: {
-						torrent: torrent
+						torrent
 					}
 				});
 				db.insert({
@@ -443,7 +444,7 @@ function runScript(e) {
 		const RSS = new RSSParse(tb.value);
 		// Emitted on RSS error (invalid url etc).
 		RSS.on('error', err => {
-			Raven.context(function () {
+			Raven.context(() => {
 				Raven.captureBreadcrumb({
 					message: err.message,
 					data: {

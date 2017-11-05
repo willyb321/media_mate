@@ -5,7 +5,9 @@
 import {BrowserWindow, Menu, shell} from 'electron';
 import path from 'path';
 import openAboutWindow from 'about-window';
+
 const app = require('electron').app;
+
 let win;
 let menu;
 /**

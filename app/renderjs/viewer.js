@@ -25,8 +25,8 @@ import {createDB, isPlayable, titleCase} from '../lib/utils';
 
 require('dotenv').config({path: `${__dirname}/../.env`});
 require('events').EventEmitter.prototype._maxListeners = 1000;
-const version = remote.app.getVersion();
 
+const version = remote.app.getVersion();
 const tvdb = new TVDB(process.env.TVDB_KEY);
 const vidProgressthrottled = _.throttle(vidProgress, 500);
 let db;
@@ -47,6 +47,7 @@ createDB(path.join(require('electron').remote.app.getPath('userData'), 'dbImg.db
 		log.info('VIEWER: DB Created');
 		db = dbCreated;
 	});
+
 Raven.config('https://3d1b1821b4c84725a3968fcb79f49ea1@sentry.io/184666', {
 	release: version,
 	autoBreadcrumbs: true
@@ -82,7 +83,7 @@ let indeterminateProgress;
  * Make sure that the window is loaded.
  */
 window.onload = () => {
-	indeterminateProgress = new Mprogress(progOpt); // eslint-disable-line no-undef
+	// IndeterminateProgress = new Mprogress(progOpt); // eslint-disable-line no-undef
 	findDL();
 };
 
@@ -115,7 +116,7 @@ function getImgDB(data) {
 		const elempath = data[1];
 		medianodes.forEach((img, ind) => {
 			if (ind === medianodes.length - 1) {
-				indeterminateProgress.end();
+				// IndeterminateProgress.end();
 				document.getElementById('Loading').style.display = 'none';
 			}
 			if (img.id === elempath) {
@@ -130,7 +131,7 @@ function getImgDB(data) {
 								Raven.captureException(err);
 							}
 							blobUtil.base64StringToBlob(doc[0].imgData, 'image/jpeg').then(blob => {
-								img.children[0].src = URL.createObjectURL(blob); // eslint-disable-line
+								img.children[0].style.backgroundImage = `url(${URL.createObjectURL(blob)})`; // eslint-disable-line
 								resolve(['got from db']);
 							}).catch(err => {
 								Raven.captureException(err);
@@ -185,7 +186,7 @@ async function getImgs() {
 		const {elempath} = data;
 		medianodes.forEach(img => {
 			if (img.id === elempath) {
-				img.children[0].src = `file:///${__dirname}/404.png`;
+				img.children[0].style.backgroundImage = `url(04.png)`;
 				img.children[0].parentNode.style.display = 'inline-block';
 			}
 		});
@@ -200,7 +201,7 @@ async function getImgs() {
 				tvdb.getEpisodeById(elem.id)
 					.then(res => {
 						if (ind === medianodes.length - 1) {
-							indeterminateProgress.end();
+							// IndeterminateProgress.end();
 							document.getElementById('Loading').style.display = 'none';
 						}
 						if (res.filename !== '') {
@@ -214,13 +215,13 @@ async function getImgs() {
 								});
 								blobUtil.base64StringToBlob(blob, 'image/jpeg').then(blob => {
 									console.info(blob);
-									img.children[0].src = blobUtil.createObjectURL(blob); // eslint-disable-line
+									img.children[0].style.backgroundImage = `url(${URL.createObjectURL(blob)})`; // eslint-disable-line
 								}).catch(err => {
 									Raven.captureException(err);
 								});
 							});
 						} else if (res.filename === '') {
-							img.children[0].src = `file:///${__dirname}/404.png`;
+							img.children[0].style.backgroundImage = `url(404.png)`;
 							img.children[0].parentNode.style.display = 'inline-block';
 						}
 					})
@@ -576,7 +577,7 @@ async function findDL() {
 		if (parsedName !== null) {
 			const figelem = document.createElement('figure');
 			const figcap = document.createElement('figcaption');
-			const imgelem = document.createElement('img');
+			const imgelem = document.createElement('div');
 			parsedName.show = titleCase(parsedName.show);
 			figelem.addEventListener('click', async () => {
 				window.scrollTo(0, 0);
@@ -598,7 +599,7 @@ async function findDL() {
 				}
 				if (process.platform === 'win32') {
 					// This one too :/
-					let urlPath = `http://127.0.0.1:53324/${path.parse(files[i]).dir.split('\\')[path.parse(files[i]).dir.split('\\').length - 1]}/${path.parse(files[i]).base}`;
+					const urlPath = `http://127.0.0.1:53324/${path.parse(files[i]).dir.split('\\')[path.parse(files[i]).dir.split('\\').length - 1]}/${path.parse(files[i]).base}`;
 					video.src = `${urlPath}`;
 				}
 				video.setAttribute('data-file-name', `${parsedName.show.replace(' ', '')}S${parsedName.season}E${parsedName.episode}`);
@@ -621,7 +622,7 @@ async function findDL() {
 			});
 			imgelem.className = 'hvr-shrink';
 			imgelem.id = 'img_' + files[i].replace(/^.*[\\/]/, '');
-			imgelem.src = `file:///${__dirname}/loading.png`;
+			imgelem.style.backgroundImage = `url(loading.png)`;
 			figelem.style.display = 'inline-block';
 			figelem.id = files[i].replace(/^.*[\\/]/, '');
 			figelem.setAttribute('data-file-name', files[i].replace(/^.*[\\/]/, ''));
@@ -632,7 +633,7 @@ async function findDL() {
 			figelem.style.width = '400px';
 			figelem.style.height = '225px';
 			imgelem.style.display = 'inline-block';
-			imgelem.style.zIndex = 1;
+			imgelem.style.zIndex = '1';
 			figcap.innerText = `${parsedName.show}: S${parsedName.season}E${parsedName.episode}`;
 			let watchedhr = document.createElement('hr');
 			figelem.appendChild(imgelem);
