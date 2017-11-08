@@ -265,20 +265,11 @@ async function indexDB() {
  * Download all of the torrents, after they are added to the DOM.
  */
 async function dlAll() {
+	document.getElementById('dlAll').disabled = true;
 	for (const i of document.querySelectorAll('label > input[type="checkbox"]')) {
 		i.disabled = true;
+		addTor(i.name);
 	}
-	document.getElementById('dlAll').disabled = true;
-	db.find({
-		downloaded: false
-	}, (err, docs) => {
-		if (err) {
-			Raven.captureException(err);
-		}
-		_.each(docs, (elem, index) => {
-			addTor(elem.magnet, index);
-		});
-	});
 }
 /**
  * Get the path for torrents to be downloaded to, from JSON storage.
@@ -333,16 +324,17 @@ function updateProgress(magnet, torrent) {
 /**
  * Add a torrent to WebTorrent and the DB.
  * @param magnet {string} - the magnet URI for WebTorrent
- * @param index {number} - the index of the torrent.
  */
-function addTor(magnet, index) {
+function addTor(magnet) {
 	document.getElementById('Progress').style.display = '';
+	if (client.get(magnet)) {
+		return;
+	}
 	getDlPath(callback => {
 		client.add(magnet, {
 			path: callback
 		}, torrent => {
 			log.info(`DOWNLOADER: Started download for magnet URI: ${magnet}`);
-			torrent.index = index;
 			try {
 				const elem = document.getElementsByName(magnet)[0];
 				if (elem) {
@@ -404,7 +396,7 @@ function processTorrents(data) {
 			input.addEventListener('click', () => {
 				input.disabled = true;
 				input.className = 'is-disabled';
-				addTor(input.name, parseInt(input.id, 0));
+				addTor(input.name);
 			});
 			label.appendChild(input);
 			dlbox.appendChild(br);
