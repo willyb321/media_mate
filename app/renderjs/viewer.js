@@ -10,7 +10,7 @@
 import 'source-map-support/register';
 import path from 'path';
 import {GetImgs as Getimg} from '../lib/get-imgs';
-import {remote} from 'electron';
+import {remote, shell} from 'electron';
 import fs from 'fs-extra';
 import TVDB from 'node-tvdb';
 import storage from 'electron-json-storage';
@@ -42,7 +42,7 @@ process.on('unhandledRejection', err => {
 	Raven.captureException(err);
 });
 
-createDB(path.join(require('electron').remote.app.getPath('userData'), 'dbImg.db').toString())
+createDB(path.join(remote.app.getPath('userData'), 'dbImg.db').toString())
 	.then(dbCreated => {
 		log.info('VIEWER: DB Created');
 		db = dbCreated;
@@ -99,10 +99,20 @@ function convertImgToBlob(img) {
 }
 
 function openInExternalPlayer(path) {
-	const shell = require('electron').shell;
 	shell.openItem(path);
 }
-
+/**
+ * Drop the image database. Mainly for testing purpose.
+ */
+async function dropImages() {
+	db.remove({}, {multi: true}, (err, numRemoved) => {
+		if (err) {
+			log.info('VIEWER: Error in dropImages (db.remove)');
+			Raven.captureException(err);
+		}
+		log.info(`VIEWER: Removed ${numRemoved} from DB`);
+	});
+}
 /**
  * Get images from the DB, if they exist in the DB.
  * @param data {Array} - Data needed to identify the image in the DB.

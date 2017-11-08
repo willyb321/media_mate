@@ -315,6 +315,12 @@ function insertDlPath(callback) {
  */
 function updateProgress(magnet, torrent) {
 	const percent = Math.round(torrent.progress * 100 * 100) / 100;
+	const ulSpeed = client.uploadSpeed;
+	const dlSpeed = client.downloadSpeed;
+	document.getElementById('dlspeed').style.display = 'inline-flex';
+	document.getElementById('ulspeed').style.display = 'inline-flex';
+	document.getElementById('dlspeed').innerText = `Download speed: ${bytes.format(dlSpeed)}/s`;
+	document.getElementById('ulspeed').innerText = `Upload speed: ${bytes.format(ulSpeed)}/s`;
 	const elem = document.getElementsByName(magnet)[0];
 	if (elem) {
 		elem.parentNode.childNodes[1].nodeValue = `- ${percent.toString()}% downloaded (${bytes.format(torrent.downloadSpeed)}/s) , ${moment.duration(torrent.timeRemaining / 1000, 'seconds').humanize()} remaining.`;
