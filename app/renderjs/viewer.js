@@ -60,9 +60,7 @@ require('electron-context-menu')({
 		label: 'Reset Time Watched',
 		click: () => {
 			resetTime(params);
-		},
-		// Only show it when right-clicking images
-		visible: params.mediaType === 'image'
+		}
 	}, {
 		label: 'Remove Episode',
 		click: () => {
@@ -392,11 +390,17 @@ function resetTime(params) {
 	} else {
 		elem = document.elementFromPoint(params.x, params.y).parentNode;
 	}
+	if (!elem) {
+		return;
+	}
 	const filename = elem.getAttribute('data-store-name');
 	const figcap = elem.childNodes;
 	storage.get(filename, (err, data) => {
 		if (err) {
 			Raven.captureException(err);
+		}
+		if (!data) {
+			return;
 		}
 		const time = 0;
 		const duration = data.duration;
@@ -410,13 +414,13 @@ function resetTime(params) {
 		figcap[1].style.setProperty('margin', '0px 0px', 'important');
 		figcap[1].style.backgroundColor = 'red';
 		figcap[2].innerText = `${figcap[0].title}`;
+		log.info(`VIEWER: Reset watched time for ${filename}`);
 	});
 	storage.remove(filename, err => {
 		if (err) {
 			Raven.captureException(err);
 		}
 	});
-	log.info(`VIEWER: Reset watched time for ${filename}`);
 }
 
 /**
