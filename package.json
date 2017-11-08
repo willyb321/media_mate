@@ -47,7 +47,7 @@
     "@types/gulp-babel": "^6.1.29",
     "@types/gulp-concat": "^0.0.31",
     "@types/gulp-if": "^0.0.32",
-    "@types/gulp-inject": "^0.0.32",
+    "@types/gulp-inject": "^0.0.33",
     "@types/gulp-sourcemaps": "^0.0.31",
     "@types/gulp-uglify": "^3.0.3",
     "@types/mkdirp": "^0.5.1",
