@@ -1,5 +1,19 @@
 ## Change Log
 
+### v1.2.7 (2017/11/08 01:50 +00:00)
+- [f95a968](https://github.com/willyb321/media_mate/commit/f95a968ee38fb9b83982702ac686999a6b50faea) Release v1.2.7 (@willyb321)
+- [0ff9514](https://github.com/willyb321/media_mate/commit/0ff9514c3a9540af5d0f601d2af6d3bc7338344c) fix context menu (@willyb321)
+- [e1f61ce](https://github.com/willyb321/media_mate/commit/e1f61ce06311e8b964e277efffbaf0208e651752) add image drop, download/ul speed indicators (@willyb321)
+- [9d4b182](https://github.com/willyb321/media_mate/commit/9d4b182841ea36ca950bbef95faeca1fcd9536a1) fix download completion breaking and made dlAll better (@willyb321)
+- [906e00b](https://github.com/willyb321/media_mate/commit/906e00bcedb5ad2057a58c08a2193997616ea00f) dont try to autoupdate on linux (@willyb321)
+- [f785c47](https://github.com/willyb321/media_mate/commit/f785c4781ffae0f8a9a99c88ae56f5cd0a4454c3) greenkeeper stuff (@willyb321)
+- [c24b2e3](https://github.com/willyb321/media_mate/commit/c24b2e375ae7ba98b95da25b6f03b3722814ab1a) fix hopefully properly (@willyb321)
+- [2969b13](https://github.com/willyb321/media_mate/commit/2969b133ab66ee8a5e884ae4bcf30a22beb085be) fix hopefully (@willyb321)
+- [8680016](https://github.com/willyb321/media_mate/commit/8680016a7e3205af78078378731334ce73e334e9) fix hopefully (@willyb321)
+- [af73532](https://github.com/willyb321/media_mate/commit/af73532044558dfdbd55bea92bdaddd4bda46157) yolo (@willyb321)
+- [689812e](https://github.com/willyb321/media_mate/commit/689812e48a234cbd539543a8ef80e172632699c6) show dev tools if NODE_ENV is development (@willyb321)
+- [c407e00](https://github.com/willyb321/media_mate/commit/c407e0012d2e7fad88caa36508d18c503549db28) changelog (@willyb321)
+
 ### v1.2.6 (2017/11/05 07:48 +00:00)
 - [088488f](https://github.com/willyb321/media_mate/commit/088488f93d90625cfc4b0b43361e2261cfe0ecd7) Release v1.2.6 (@willyb321)
 - [f631ccd](https://github.com/willyb321/media_mate/commit/f631ccdf3ac5885b56f88333f1573ed9e360436f) a mess of a commit but i think i fixed the thing (@willyb321)
