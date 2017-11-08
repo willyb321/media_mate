@@ -475,7 +475,7 @@ app.on('ready', () => {
 	init();
 	watchRSS();
 	onBoard();
-	if (!isDev && process.env.NODE_ENV !== 'test' && process.platform !== 'darwin') {
+	if (!isDev && process.env.NODE_ENV !== 'test' && process.platform !== 'darwin' && process.platform !== 'linux') {
 		autoUpdater.checkForUpdates();
 	}
 	console.timeEnd('init');
