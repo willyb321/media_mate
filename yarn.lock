@@ -529,9 +529,9 @@
   dependencies:
     "@types/node" "*"
 
-"@types/gulp-concat@^0.0.31":
-  version "0.0.31"
-  resolved "https://registry.yarnpkg.com/@types/gulp-concat/-/gulp-concat-0.0.31.tgz#8b93c312f64fd98add15020e1b6d384e450c6d04"
+"@types/gulp-concat@0.0.32":
+  version "0.0.32"
+  resolved "https://registry.yarnpkg.com/@types/gulp-concat/-/gulp-concat-0.0.32.tgz#72486028b1cf5faa94c8c1cf34c626531cecacd6"
   dependencies:
     "@types/node" "*"
 
