@@ -35,11 +35,13 @@ let served;
 process.on('uncaughtError', err => {
 	log.error('ERROR! The error is: ' + err || err.stack);
 	Raven.captureException(err);
+	Raven.showReportDialog();
 });
 
 process.on('unhandledRejection', err => {
 	log.error('Unhandled rejection: ' + (err && err.stack || err)); // eslint-disable-line
 	Raven.captureException(err);
+	Raven.showReportDialog();
 });
 
 createDB(path.join(remote.app.getPath('userData'), 'dbImg.db').toString())
@@ -107,6 +109,7 @@ async function dropImages() {
 		if (err) {
 			log.info('VIEWER: Error in dropImages (db.remove)');
 			Raven.captureException(err);
+			Raven.showReportDialog();
 		}
 		log.info(`VIEWER: Removed ${numRemoved} from DB`);
 	});
@@ -132,17 +135,20 @@ function getImgDB(data) {
 				db.find({_id: `img${tvelem.show.replace(' ', '')}S${tvelem.season}E${tvelem.episode}`}, (err, docs) => {
 					if (err) {
 						Raven.captureException(err);
+						Raven.showReportDialog();
 					}
 					if (docs.length > 0) {
 						db.find({_id: `img${tvelem.show.replace(' ', '')}S${tvelem.season}E${tvelem.episode}`}, (err, doc) => {
 							if (err) {
 								Raven.captureException(err);
+								Raven.showReportDialog();
 							}
 							blobUtil.base64StringToBlob(doc[0].imgData, 'image/jpeg').then(blob => {
 								img.children[0].style.backgroundImage = `url(${URL.createObjectURL(blob)})`; // eslint-disable-line
 								resolve(['got from db']);
 							}).catch(err => {
 								Raven.captureException(err);
+								Raven.showReportDialog();
 							});
 						});
 					}
@@ -161,6 +167,7 @@ function getPath() {
 		storage.get('path', (err, data) => {
 			if (err) {
 				Raven.captureException(err);
+				Raven.showReportDialog();
 			}
 			if (_.isEmpty(data) === false) {
 				resolve({path: data.path});
@@ -169,6 +176,7 @@ function getPath() {
 				fs.ensureDir(dir, err => {
 					if (err) {
 						Raven.captureException(err);
+						Raven.showReportDialog();
 					}
 					resolve({path: dir});
 				});
@@ -226,6 +234,7 @@ async function getImgs() {
 									img.children[0].style.backgroundImage = `url(${URL.createObjectURL(blob)})`; // eslint-disable-line
 								}).catch(err => {
 									Raven.captureException(err);
+									Raven.showReportDialog();
 								});
 							});
 						} else if (res.filename === '') {
@@ -236,6 +245,7 @@ async function getImgs() {
 					.catch(err => {
 						log.info('VIEWER: Error in GetImgs (getEpisodeById)');
 						Raven.captureException(err);
+						Raven.showReportDialog();
 					});
 			}
 		});
@@ -262,6 +272,7 @@ function vidFinished(e) {
 		if (err) {
 			console.log(err);
 			Raven.captureException(err);
+			Raven.showReportDialog();
 		}
 		const time = data.time;
 		const duration = data.duration;
@@ -283,6 +294,7 @@ function vidFinished(e) {
 		}, err => {
 			if (err) {
 				Raven.captureException(err);
+				Raven.showReportDialog();
 			}
 		});
 	});
@@ -300,6 +312,7 @@ function handleVids(e) {
 	storage.get(filename, (err, data) => {
 		if (err) {
 			Raven.captureException(err);
+			Raven.showReportDialog();
 		}
 		if (_.isEmpty(data) === true) {
 			storage.set(filename, {
@@ -310,6 +323,7 @@ function handleVids(e) {
 			}, err => {
 				if (err) {
 					Raven.captureException(err);
+					Raven.showReportDialog();
 				}
 			});
 		} else {
@@ -329,6 +343,7 @@ async function deleteTV(params) {
 	storage.get('path', (err, data) => {
 		if (err) {
 			Raven.captureException(err);
+			Raven.showReportDialog();
 		} else {
 			const files = klawSync(data.path, {nodir: true});
 			_.each(files, (file, index) => {
@@ -350,15 +365,18 @@ async function deleteTV(params) {
 						fs.remove(pathParsed.dir, err => {
 							if (err) {
 								Raven.captureException(err);
+								Raven.showReportDialog();
 							}
 							storage.remove(storename, err => {
 								if (err) {
 									Raven.captureException(err);
+									Raven.showReportDialog();
 								}
 							});
 							db.remove({_id: `img${elem.getAttribute('data-store-name')}`}, {}, (err, numRemoved) => {
 								if (err) {
 									Raven.captureException(err);
+									Raven.showReportDialog();
 								}
 								log.info(`VIEWER: removed ${numRemoved} from DB`);
 							});
@@ -398,6 +416,7 @@ function resetTime(params) {
 	storage.get(filename, (err, data) => {
 		if (err) {
 			Raven.captureException(err);
+			Raven.showReportDialog();
 		}
 		if (!data) {
 			return;
@@ -419,6 +438,7 @@ function resetTime(params) {
 	storage.remove(filename, err => {
 		if (err) {
 			Raven.captureException(err);
+			Raven.showReportDialog();
 		}
 	});
 }
@@ -447,6 +467,7 @@ function vidProgress(e) {
 		storage.get(filename, (err, data) => {
 			if (err) {
 				Raven.captureException(err);
+				Raven.showReportDialog();
 			}
 			if (_.isEmpty(data) === false) {
 				storage.set(filename, {
@@ -457,6 +478,7 @@ function vidProgress(e) {
 				}, err => {
 					if (err) {
 						Raven.captureException(err);
+						Raven.showReportDialog();
 					}
 				});
 			} else {
@@ -468,6 +490,7 @@ function vidProgress(e) {
 				}, err => {
 					if (err) {
 						Raven.captureException(err);
+						Raven.showReportDialog();
 					}
 				});
 			}
@@ -477,6 +500,7 @@ function vidProgress(e) {
 			if (err) {
 				log.info(`VIEWER: Error in vidProgress (time === duration)`);
 				Raven.captureException(err);
+				Raven.showReportDialog();
 			}
 			storage.set(filename, {
 				file: filename,
@@ -486,6 +510,7 @@ function vidProgress(e) {
 			}, err => {
 				if (err) {
 					Raven.captureException(err);
+					Raven.showReportDialog();
 				}
 			});
 		});
@@ -518,6 +543,7 @@ async function watchedTime(vid, elem, figcap) {
 			if (err) {
 				log.info('VIEWER: Error in watchedTime (video data-store-name)');
 				Raven.captureException(err);
+				Raven.showReportDialog();
 			}
 			if (_.isEmpty(data)) {
 				elem.style.zIndex = 9999;

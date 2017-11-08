@@ -33,6 +33,7 @@ createDB(path.join(require('electron').remote.app.getPath('userData'), 'dbStream
 
 client.on('error', err => {
 	Raven.captureException(err);
+	Raven.showReportDialog();
 });
 
 /**
@@ -143,6 +144,7 @@ function addStreamHistory(torrent) {
 	db.update({_id: torrent.magnetURI, magnet: torrent.magnetURI, files}, {}, err => {
 		if (err) {
 			Raven.captureException(err);
+			Raven.showReportDialog();
 		}
 	});
 }
@@ -160,6 +162,7 @@ function removeStreamHistory() {
 	db.remove({}, {multi: true}, (err, numRemoved) => {
 		if (err) {
 			Raven.captureException(err);
+			Raven.showReportDialog();
 		}
 		console.log(numRemoved);
 	});
@@ -175,6 +178,7 @@ function streamHistory() {
 	db.find({}, (err, res) => {
 		if (err) {
 			Raven.captureException(err);
+			Raven.showReportDialog();
 		}
 		for (let i = 0; i < res.length; i++) {
 			_.each(res[i].files, file => {

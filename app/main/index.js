@@ -12,58 +12,44 @@ console.time('full');
 console.time('init');
 console.time('require');
 require('dotenv').config({path: `${__dirname}/../.env`});
-
 console.time('electron');
-import {dialog, BrowserWindow, Notification, ipcMain as ipc} from 'electron';
-
+import {dialog, BrowserWindow, Notification, ipcMain as ipc, session} from 'electron';
 console.timeEnd('electron');
 console.time('logger');
 import log from 'electron-log';
-
 console.timeEnd('logger');
 console.time('updater');
 import {autoUpdater} from 'electron-updater';
-
 console.timeEnd('updater');
 console.time('sentry');
 import Raven from 'raven';
-
 console.timeEnd('sentry');
 console.time('rssparse');
 import {RSSParse} from '../lib/rssparse';
-
 console.timeEnd('rssparse');
 console.time('menu');
 import {init} from './menu.js';
-
 console.timeEnd('menu');
 console.time('underscore');
 import _ from 'underscore';
-
 console.timeEnd('underscore');
 console.time('jsonstorage');
 import storage from 'electron-json-storage';
-
 console.timeEnd('jsonstorage');
 console.time('bypass');
 import {addBypassChecker} from 'electron-compile';
-
 console.timeEnd('bypass');
 console.time('electron-collection');
 import {debug, firstRun, isDev, rootPath} from 'electron-collection';
-
 console.timeEnd('electron-collection');
 console.time('windowstate');
 import windowStateKeeper from 'electron-window-state';
-
 console.timeEnd('windowstate');
 console.time('path');
 import path from 'path';
-
 console.timeEnd('path');
 console.time('utils');
 import {createDB, isPlayable} from '../lib/utils';
-
 console.timeEnd('utils');
 console.time('pkg');
 const pkg = require(path.join(rootPath.path, 'package.json'));
@@ -278,6 +264,17 @@ function createMainWindow() {
 	});
 	return win;
 }
+
+/**
+ * Initialise Origin headers to make sentry work.
+ */
+function setup() {
+	session.defaultSession.webRequest.onBeforeSendHeaders((details, callback) => {
+		details.requestHeaders.Origin = 'mediamate.williamblythe.info'; // Set the Origin to whatever you want.
+		callback({cancel: false, requestHeaders: details.requestHeaders});
+	});
+}
+
 /**
  * Ask the user if they want to view the tutorial on first run
  */
@@ -473,6 +470,7 @@ app.on('ready', () => {
 		mainWindow.webContents.openDevTools();
 	}
 	init();
+	setup();
 	watchRSS();
 	onBoard();
 	if (!isDev && process.env.NODE_ENV !== 'test' && process.platform !== 'darwin' && process.platform !== 'linux') {

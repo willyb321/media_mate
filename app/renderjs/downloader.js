@@ -50,11 +50,13 @@ const updateDlProg = _.throttle(updateProgress, 2000);
 process.on('unhandledRejection', (err, promise) => {
 	log.error('Unhandled rejection: ' + (err && err.stack || err)); // eslint-disable-line
 	Raven.captureException(err);
+	Raven.showReportDialog();
 });
 
 function handleErrs(err) {
 	log.error('Unhandled error: ' + (err && err.stack || err)); // eslint-disable-line
 	Raven.captureException(err);
+	Raven.showReportDialog();
 }
 
 /**
@@ -166,6 +168,7 @@ async function ignoreDupeTorrents(torrent, callback) {
 		if (err) {
 			log.info('DOWNLOADER: Error in ignoreDupeTorrents (db.find)');
 			Raven.captureException(err);
+			Raven.showReportDialog();
 		}
 		if (docs.length > 0) {
 			if (docs[0].downloaded === true) {
@@ -201,6 +204,7 @@ async function dropTorrents() {
 		if (err) {
 			log.info('DOWNLOADER: Error in dropTorrents (db.remove)');
 			Raven.captureException(err);
+			Raven.showReportDialog();
 		}
 		log.info(`DOWNLOADER: Removed ${numRemoved} from DB`);
 	});
@@ -216,6 +220,7 @@ function updateURI(uri) {
 		if (err) {
 			log.info(`DOWNLOADER: Error in updateURI (storage.set)`);
 			Raven.captureException(err);
+			Raven.showReportDialog();
 		}
 	});
 }
@@ -227,6 +232,7 @@ async function findDocuments() {
 		if (err) {
 			log.info('DOWNLOADER: Error in findDocuments');
 			Raven.captureException(err);
+			Raven.showReportDialog();
 		}
 		_.each(docs, elem => allTorrents.push(elem.magnet));
 	});
@@ -241,6 +247,7 @@ async function indexDB() {
 		if (err) {
 			log.info('DOWNLOADER: Error in indexDB (ensureIndex on _id)');
 			Raven.captureException(err);
+			Raven.showReportDialog();
 		}
 	});
 	db.ensureIndex({
@@ -249,6 +256,7 @@ async function indexDB() {
 		if (err) {
 			log.info('DOWNLOADER: Error in indexDB (ensureIndex on magnet)');
 			Raven.captureException(err);
+			Raven.showReportDialog();
 		}
 	});
 	db.ensureIndex({
@@ -257,6 +265,7 @@ async function indexDB() {
 		if (err) {
 			log.info('DOWNLOADER: Error in indexDB (ensureIndex on downloaded)');
 			Raven.captureException(err);
+			Raven.showReportDialog();
 		}
 	});
 }
@@ -350,6 +359,7 @@ function addTor(magnet) {
 			} catch (err) {
 				log.info(`DOWNLOADER: Error in addTor (addTor disable elements)`);
 				Raven.captureException(err);
+				Raven.showReportDialog();
 			}
 
 			torrent.on('download', () => {
@@ -366,6 +376,7 @@ function addTor(magnet) {
 					if (err) {
 						log.info(`DOWNLOADER: Error in addTor (.on(done))`);
 						Raven.captureException(err);
+						Raven.showReportDialog();
 					}
 					document.getElementsByName(magnet)[0].parentNode.style.display = 'none';
 					log.info('DOWNLOADER: Download done');
@@ -452,6 +463,7 @@ function runScript(e) {
 				tb.disabled = false;
 				document.getElementById('dupecount').disabled = false;
 				Raven.captureException(err);
+				Raven.showReportDialog();
 			});
 		});
 		RSS.on('offline', online => {
