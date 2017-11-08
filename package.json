@@ -26,6 +26,11 @@
     "deps": "(ncu -au && cd app && ncu -au)",
     "changelog": "gulp changelog"
   },
+  "greenkeeper": {
+    "ignore": [
+      "electron-builder"
+    ]
+  },
   "pre-commit": [
     "lint"
   ],
