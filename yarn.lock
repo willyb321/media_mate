@@ -535,9 +535,9 @@
   dependencies:
     "@types/node" "*"
 
-"@types/gulp-if@^0.0.32":
-  version "0.0.32"
-  resolved "https://registry.yarnpkg.com/@types/gulp-if/-/gulp-if-0.0.32.tgz#6a604be7a15a59bb3b2d3993520e1ef2bd41f9d6"
+"@types/gulp-if@0.0.33":
+  version "0.0.33"
+  resolved "https://registry.yarnpkg.com/@types/gulp-if/-/gulp-if-0.0.33.tgz#edece22b7925d9a6db5f9c8c0d7882aa776fb678"
   dependencies:
     "@types/node" "*"
     "@types/vinyl" "*"
