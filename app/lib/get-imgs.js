@@ -17,7 +17,6 @@ const _ = require('underscore');
 const path = require('path');
 
 const {isPlayable} = require(path.join(__dirname, 'utils.js'));
-const asynca = require('async');
 
 const tvdb = new TVDB(process.env.TVDB_KEY);
 let db;
@@ -55,7 +54,7 @@ if (isRenderer) {
 /**
  * Class for getting images from files in the download directory
  */
-class GetImgs extends events.EventEmitter {
+export class GetImgs extends events.EventEmitter {
 	/**
 	 * The constructor for {@link GetImgs}
 	 * @param {string} directory - a string with path to downloaded files
@@ -221,6 +220,4 @@ class GetImgs extends events.EventEmitter {
 		});
 	}
 }
-module.exports = {
-	GetImgs
-};
+

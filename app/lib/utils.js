@@ -2,11 +2,12 @@
  * @module Utils
  */
 
-const path = require('path');
-const Datastore = require('nedb-core');
-const http = require('http');
-const parseUrl = require('parseurl');
-const send = require('send');
+import path from 'path';
+import Datastore from 'nedb-core';
+import http from 'http';
+import parseUrl from 'parseurl';
+import send from 'send';
+
 let server;
 
 /**
@@ -14,7 +15,7 @@ let server;
  * @param file {string} - the filename with extension
  * @returns {boolean} - if its playable or not.
  */
-function isPlayable(file) {
+export function isPlayable(file) {
 	return isVideo(file);
 }
 
@@ -52,7 +53,7 @@ function getFileExtension(file) {
  * @param str {string} - the string to transform
  * @returns {string} - Title Cased string
  */
-function titleCase(str) {
+export function titleCase(str) {
 	return str.split(' ')
 		.map(i => i[0].toUpperCase() + i.substr(1).toLowerCase())
 		.join(' ');
@@ -62,14 +63,18 @@ function titleCase(str) {
  * Initialise NeDB in path
  * @param {string} path
  */
-function createDB(path) {
+export function createDB(path) {
 	return new Promise(resolve => {
 		const db = new Datastore({filename: path, autoload: true});
 		resolve(db);
 	});
 }
 
-function sendFile(dlPath) {
+/**
+ * Create HTTP server to send videos to the client.
+ * @param dlPath {string} - Root directory where all downloads reside.
+ */
+export function sendFile(dlPath) {
 	if (server && server.listening) {
 		server.close(() => {
 			server = http.createServer((req, res) => {
@@ -85,10 +90,3 @@ function sendFile(dlPath) {
 		}).listen(53324, '127.0.0.1');
 	}
 }
-
-module.exports = {
-	isPlayable,
-	titleCase,
-	createDB,
-	sendFile
-};

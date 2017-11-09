@@ -5,12 +5,11 @@
 /**
  * @module RSS-Parse
  */
-
-const events = require('events');
-const FeedParser = require('feedparser');
-const request = require('request'); // For fetching the feed
-const isRenderer = require('is-electron-renderer');
-const isOnline = require('is-online');
+import events from 'events';
+import FeedParser from 'feedparser';
+import request from 'request';
+import isRenderer from 'is-electron-renderer';
+import isOnline from 'is-online';
 
 let Raven;
 let version;
@@ -34,7 +33,7 @@ if (isRenderer) {
 /**
  * Class for parsing RSS
  */
-class RSSParse extends events.EventEmitter {
+export class RSSParse extends events.EventEmitter {
 	/**
 	 * The constructor for RSSParse
 	 * @param rssFeed {string} - string with url to a showRSS feed.
@@ -91,6 +90,3 @@ class RSSParse extends events.EventEmitter {
 		});
 	}
 }
-module.exports = {
-	RSSParse
-};
