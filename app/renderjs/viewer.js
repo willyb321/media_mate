@@ -30,7 +30,6 @@ const version = remote.app.getVersion();
 const tvdb = new TVDB(process.env.TVDB_KEY);
 const vidProgressthrottled = _.throttle(vidProgress, 500);
 let db;
-let served;
 
 process.on('uncaughtError', err => {
 	log.error('ERROR! The error is: ' + err || err.stack);
@@ -259,7 +258,6 @@ async function getImgs() {
 function vidFinished(e) {
 	let filename;
 	const goodthis = document.querySelector('video');
-	const video = document.getElementById('vidPlay');
 	let elem;
 	if (process.env.SPECTRON) {
 		filename = 'TopGearS24E7';
@@ -299,7 +297,14 @@ function vidFinished(e) {
 			}
 		});
 	});
-	videojs.players.vidPlay.dispose();
+	if (videojs.players.vidPlay) {
+		log.info('Disposing video');
+		videojs.players.vidPlay.dispose();
+	}
+	document.getElementById('stopvid').removeEventListener('click', handleEventHandlers);
+	document.getElementById('stopvid').style.display = 'none';
+	document.getElementById('openexternal').style.display = 'none';
+	log.info('VIEWER: Stopped playing episode');
 }
 
 /**
@@ -647,7 +652,7 @@ async function findDL() {
 				window.scrollTo(0, 0);
 				document.getElementById('openexternal').addEventListener('click', () => openInExternalPlayer(files[i]));
 				const urlPath = `http://localhost:53324/${path.relative(dlPath.path, files[i])}`;
-				log.info(urlPath);
+				log.info(`VIEWER: Playing ${urlPath}`);
 				videoPlayer.src({src: urlPath, type: 'video/mp4'});
 				video.setAttribute('data-file-name', `${parsedName.show.replace(' ', '')}S${parsedName.season}E${parsedName.episode}`);
 				video.setAttribute('data-store-name', `${parsedName.show.replace(' ', '')}S${parsedName.season}E${parsedName.episode}`);
