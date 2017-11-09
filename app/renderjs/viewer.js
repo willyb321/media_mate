@@ -12,6 +12,7 @@ import path from 'path';
 import {GetImgs as Getimg} from '../lib/get-imgs';
 import {remote, shell} from 'electron';
 import fs from 'fs-extra';
+import {config} from 'dotenv';
 import TVDB from 'node-tvdb';
 import storage from 'electron-json-storage';
 import Raven from 'raven-js';
@@ -22,9 +23,10 @@ import klawSync from 'klaw-sync';
 import blobUtil from 'blob-util';
 import {createDB, isPlayable, titleCase, sendFile} from '../lib/utils';
 import videojs from 'video.js';
+import {EventEmitter} from 'events';
 
-require('dotenv').config({path: `${__dirname}/../.env`});
-require('events').EventEmitter.prototype._maxListeners = 1000;
+config({path: `${__dirname}/../.env`});
+EventEmitter.prototype._maxListeners = 1000;
 
 const version = remote.app.getVersion();
 const tvdb = new TVDB(process.env.TVDB_KEY);
@@ -66,23 +68,14 @@ require('electron-context-menu')({
 		label: 'Remove Episode',
 		click: () => {
 			deleteTV(params);
-		},
-		// Only show it when right-clicking images
-		visible: params.mediaType === 'image'
+		}
 	}]
 });
 
-const progOpt = {
-	template: 3,
-	parent: '#media',
-	start: true
-};
-let indeterminateProgress;
 /**
  * Make sure that the window is loaded.
  */
 window.onload = () => {
-	// IndeterminateProgress = new Mprogress(progOpt); // eslint-disable-line no-undef
 	findDL();
 };
 
@@ -345,8 +338,14 @@ function handleVids(e) {
  */
 async function deleteTV(params) {
 	const elem = document.elementFromPoint(params.x, params.y).parentNode;
+	if (!elem) {
+		return;
+	}
 	const storename = elem.getAttribute('data-store-name');
 	const filename = elem.getAttribute('data-file-name');
+	if (!storename || !filename) {
+		return;
+	}
 	storage.get('path', (err, data) => {
 		if (err) {
 			Raven.captureException(err);
@@ -508,23 +507,16 @@ function vidProgress(e) {
 			}
 		});
 	} else if (time === duration) {
-		storage.get(filename, (err, data) => {
+		storage.set(filename, {
+			file: filename,
+			watched: false,
+			time: elem.currentTime,
+			duration: elem.duration
+		}, err => {
 			if (err) {
-				log.info(`VIEWER: Error in vidProgress (time === duration)`);
 				Raven.captureException(err);
 				Raven.showReportDialog();
 			}
-			storage.set(filename, {
-				file: filename,
-				watched: false,
-				time: elem.currentTime,
-				duration: elem.duration
-			}, err => {
-				if (err) {
-					Raven.captureException(err);
-					Raven.showReportDialog();
-				}
-			});
 		});
 	}
 }
@@ -533,7 +525,6 @@ function vidProgress(e) {
  * Add and remove event handlers for the stop video button
  */
 function handleEventHandlers() {
-	const videodiv = document.getElementById('video');
 	if (videojs.players.vidPlay) {
 		log.info('Disposing video');
 		videojs.players.vidPlay.dispose();
@@ -553,7 +544,7 @@ function handleEventHandlers() {
  * @returns {Promise.<Element>}
  */
 async function watchedTime(vid, elem, figcap) {
-	return new Promise((resolve, reject) => {
+	return new Promise(resolve => {
 		storage.get(vid.getAttribute('data-store-name'), (err, data) => {
 			if (err) {
 				console.log(err);
@@ -612,7 +603,6 @@ async function findDL() {
 	files = _.filter(files, isPlayable);
 	files.sort();
 	if (files.length === 0) {
-		indeterminateProgress.end();
 		document.getElementById('Loading').style.display = 'none';
 		const elem = document.getElementById('media');
 		const emptyElem = document.createElement('h1');
