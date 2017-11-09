@@ -542,9 +542,9 @@
     "@types/node" "*"
     "@types/vinyl" "*"
 
-"@types/gulp-inject@^0.0.32":
-  version "0.0.32"
-  resolved "https://registry.yarnpkg.com/@types/gulp-inject/-/gulp-inject-0.0.32.tgz#665c85562ff1298b4f1638127cc86e415e12c831"
+"@types/gulp-inject@0.0.33":
+  version "0.0.33"
+  resolved "https://registry.yarnpkg.com/@types/gulp-inject/-/gulp-inject-0.0.33.tgz#23cd040825e8210dd54278586076968626883c0c"
   dependencies:
     "@types/node" "*"
     "@types/vinyl" "*"
