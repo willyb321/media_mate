@@ -4,6 +4,11 @@
 
 const path = require('path');
 const Datastore = require('nedb-core');
+const http = require('http');
+const parseUrl = require('parseurl');
+const send = require('send');
+let server;
+
 /**
  * Return true if file is playable
  * @param file {string} - the filename with extension
@@ -12,6 +17,7 @@ const Datastore = require('nedb-core');
 function isPlayable(file) {
 	return isVideo(file);
 }
+
 /**
  * Checks whether the file path is playable video
  * @param file {string} - the path to the file
@@ -30,6 +36,7 @@ function isVideo(file) {
 		'.wmv'
 	].includes(getFileExtension(file));
 }
+
 /**
  * Get the extension of {file}
  * @param file  {string} - the file name / path
@@ -50,6 +57,7 @@ function titleCase(str) {
 		.map(i => i[0].toUpperCase() + i.substr(1).toLowerCase())
 		.join(' ');
 }
+
 /**
  * Initialise NeDB in path
  * @param {string} path
@@ -61,8 +69,26 @@ function createDB(path) {
 	});
 }
 
+function sendFile(dlPath) {
+	if (server && server.listening) {
+		server.close(() => {
+			server = http.createServer((req, res) => {
+				send(req, parseUrl(req).pathname, {root: dlPath}).pipe(res);
+			}).listen(53324);
+		});
+		setImmediate(function () {
+			server.emit('close');
+		});
+	} else {
+		server = http.createServer((req, res) => {
+			send(req, parseUrl(req).pathname, {root: dlPath}).pipe(res);
+		}).listen(53324);
+	}
+}
+
 module.exports = {
 	isPlayable,
 	titleCase,
-	createDB
+	createDB,
+	sendFile
 };

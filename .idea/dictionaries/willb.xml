@@ -5,6 +5,7 @@
       <w>airdate</w>
       <w>autoupdater</w>
       <w>bugsnag</w>
+      <w>chunksize</w>
       <w>datastore</w>
       <w>dlprog</w>
       <w>dont</w>
@@ -47,6 +48,8 @@
       <w>notificon</w>
       <w>onboard</w>
       <w>openexternal</w>
+      <w>partialend</w>
+      <w>partialstart</w>
       <w>processfinish</w>
       <w>pubdate</w>
       <w>releasenotes</w>

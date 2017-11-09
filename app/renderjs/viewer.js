@@ -19,9 +19,9 @@ import _ from 'underscore';
 import parser from 'episode-parser';
 import log from 'electron-log';
 import klawSync from 'klaw-sync';
-import server from 'pushstate-server';
 import blobUtil from 'blob-util';
-import {createDB, isPlayable, titleCase} from '../lib/utils';
+import {createDB, isPlayable, titleCase, sendFile} from '../lib/utils';
+import videojs from 'video.js';
 
 require('dotenv').config({path: `${__dirname}/../.env`});
 require('events').EventEmitter.prototype._maxListeners = 1000;
@@ -258,14 +258,15 @@ async function getImgs() {
  */
 function vidFinished(e) {
 	let filename;
-	let elem;
+	const goodthis = document.querySelector('video');
 	const video = document.getElementById('vidPlay');
+	let elem;
 	if (process.env.SPECTRON) {
 		filename = 'TopGearS24E7';
 		elem = document.getElementById('top.gear.s24e07.hdtv.x264-mtb.mp4');
 	} else {
-		filename = this.getAttribute('data-file-name');
-		elem = document.getElementById(this.getAttribute('data-img-id'));
+		filename = goodthis.getAttribute('data-file-name');
+		elem = document.getElementById(goodthis.getAttribute('data-img-id'));
 	}
 	const figcap = elem.childNodes;
 	storage.get(filename, (err, data) => {
@@ -289,7 +290,7 @@ function vidFinished(e) {
 		storage.set(filename, {
 			file: filename,
 			watched: true,
-			time: (process.env.SPECTRON ? 5.014 : this.duration),
+			time: (process.env.SPECTRON ? 5.014 : goodthis.duration),
 			duration: (process.env.SPECTRON ? 5.014 : duration)
 		}, err => {
 			if (err) {
@@ -298,7 +299,7 @@ function vidFinished(e) {
 			}
 		});
 	});
-	video.parentNode.removeChild(video);
+	videojs.players.vidPlay.dispose();
 }
 
 /**
@@ -306,7 +307,8 @@ function vidFinished(e) {
  * @param e {object} - event.
  */
 function handleVids(e) {
-	const filename = this.getAttribute('data-file-name');
+	const elem = document.querySelector('video');
+	const filename = elem.getAttribute('data-file-name');
 	document.getElementById('stopvid').style.display = 'inline';
 	document.getElementById('openexternal').style.display = 'inline';
 	storage.get(filename, (err, data) => {
@@ -432,6 +434,7 @@ function resetTime(params) {
 		figcap[1].style.marginBottom = '0px';
 		figcap[1].style.setProperty('margin', '0px 0px', 'important');
 		figcap[1].style.backgroundColor = 'red';
+		figcap[1].style.width = '0px';
 		figcap[2].innerText = `${figcap[0].title}`;
 		log.info(`VIEWER: Reset watched time for ${filename}`);
 	});
@@ -448,10 +451,14 @@ function resetTime(params) {
  * @param e {object} - video event.
  */
 function vidProgress(e) {
-	const filename = this.getAttribute('data-file-name');
-	const img = document.getElementById(this.getAttribute('data-img-id'));
-	const time = this.currentTime;
-	const duration = this.duration;
+	const elem = document.querySelector('video');
+	if (!elem) {
+		return;
+	}
+	const filename = elem.getAttribute('data-file-name');
+	const img = document.getElementById(elem.getAttribute('data-img-id'));
+	const time = elem.currentTime;
+	const duration = elem.duration;
 	const figcap = img.childNodes;
 	const percent = (time / duration) * 100;
 	if (time !== duration) {
@@ -473,8 +480,8 @@ function vidProgress(e) {
 				storage.set(filename, {
 					file: filename,
 					watched: false,
-					time: this.currentTime,
-					duration: this.duration
+					time: elem.currentTime,
+					duration: elem.duration
 				}, err => {
 					if (err) {
 						Raven.captureException(err);
@@ -485,8 +492,8 @@ function vidProgress(e) {
 				storage.set(filename, {
 					file: filename,
 					watched: false,
-					time: this.currentTime,
-					duration: this.duration
+					time: elem.currentTime,
+					duration: elem.duration
 				}, err => {
 					if (err) {
 						Raven.captureException(err);
@@ -504,9 +511,9 @@ function vidProgress(e) {
 			}
 			storage.set(filename, {
 				file: filename,
-				watched: true,
-				time: this.currentTime,
-				duration: this.duration
+				watched: false,
+				time: elem.currentTime,
+				duration: elem.duration
 			}, err => {
 				if (err) {
 					Raven.captureException(err);
@@ -522,7 +529,10 @@ function vidProgress(e) {
  */
 function handleEventHandlers() {
 	const videodiv = document.getElementById('video');
-	videodiv.removeChild(videodiv.firstElementChild);
+	if (videojs.players.vidPlay) {
+		log.info('Disposing video');
+		videojs.players.vidPlay.dispose();
+	}
 	document.getElementById('stopvid').removeEventListener('click', handleEventHandlers);
 	document.getElementById('stopvid').style.display = 'none';
 	document.getElementById('openexternal').style.display = 'none';
@@ -541,6 +551,7 @@ async function watchedTime(vid, elem, figcap) {
 	return new Promise((resolve, reject) => {
 		storage.get(vid.getAttribute('data-store-name'), (err, data) => {
 			if (err) {
+				console.log(err);
 				log.info('VIEWER: Error in watchedTime (video data-store-name)');
 				Raven.captureException(err);
 				Raven.showReportDialog();
@@ -620,32 +631,26 @@ async function findDL() {
 			const imgelem = document.createElement('div');
 			parsedName.show = titleCase(parsedName.show);
 			figelem.addEventListener('click', async () => {
-				window.scrollTo(0, 0);
-				if (!served || !served.listening) {
-					served = server.start({
-						port: 53324,
-						host: '127.0.0.1',
-						directory: dlPath.path
-					});
-				}
 				const video = document.createElement('video');
-				document.getElementById('openexternal').addEventListener('click', () => openInExternalPlayer(files[i]));
+
+				video.className = 'video-js vjs-default-skin';
 				video.id = 'vidPlay';
-				if (dlPath.path === path.parse(files[i]).dir) {
-					video.src = `http://127.0.0.1:53324/${path.parse(files[i]).base}`;
-				} else {
-					// Sorry about this line lol
-					video.src = `http://127.0.0.1:53324/${path.parse(files[i]).dir.split('/')[path.parse(files[i]).dir.split('/').length - 1]}/${path.parse(files[i]).base}`;
+				if (videojs.players.vidPlay) {
+					videojs.players.vidPlay.dispose();
 				}
-				if (process.platform === 'win32') {
-					// This one too :/
-					const urlPath = `http://127.0.0.1:53324/${path.parse(files[i]).dir.split('\\')[path.parse(files[i]).dir.split('\\').length - 1]}/${path.parse(files[i]).base}`;
-					video.src = `${urlPath}`;
-				}
+				videodiv.appendChild(video);
+				const videoPlayer = videojs('vidPlay', {
+					controls: true,
+					autoplay: false
+				});
+				sendFile(dlPath.path);
+				window.scrollTo(0, 0);
+				document.getElementById('openexternal').addEventListener('click', () => openInExternalPlayer(files[i]));
+				const urlPath = `http://localhost:53324/${path.relative(dlPath.path, files[i])}`;
+				log.info(urlPath);
+				videoPlayer.src({src: urlPath, type: 'video/mp4'});
 				video.setAttribute('data-file-name', `${parsedName.show.replace(' ', '')}S${parsedName.season}E${parsedName.episode}`);
 				video.setAttribute('data-store-name', `${parsedName.show.replace(' ', '')}S${parsedName.season}E${parsedName.episode}`);
-				video.autoplay = true;
-				video.controls = true;
 				video.setAttribute('data-img-id', files[i].replace(/^.*[\\/]/, ''));
 				video.addEventListener('loadedmetadata', handleVids, false);
 				video.addEventListener('ended', vidFinished, false);
@@ -653,11 +658,6 @@ async function findDL() {
 				video.addEventListener('seeking', vidProgressthrottled, false);
 				document.getElementById('stopvid').addEventListener('click', handleEventHandlers);
 				document.getElementById('stopvid').style.display = 'inline';
-				if (videodiv.childElementCount > 0) {
-					videodiv.replaceChild(video, videodiv.firstElementChild);
-				} else {
-					videodiv.appendChild(video);
-				}
 				log.info(`VIEWER: Started playing episode ${parsedName.show.replace(' ', '')}S${parsedName.season}E${parsedName.episode}`);
 			});
 			imgelem.className = 'hvr-shrink';
