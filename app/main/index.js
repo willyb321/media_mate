@@ -13,7 +13,7 @@ console.time('init');
 console.time('require');
 require('dotenv').config({path: `${__dirname}/../.env`});
 console.time('electron');
-import {dialog, BrowserWindow, Notification, ipcMain as ipc, session} from 'electron';
+import {dialog, BrowserWindow, Notification, ipcMain as ipc, session, app} from 'electron';
 console.timeEnd('electron');
 console.time('logger');
 import log from 'electron-log';
@@ -55,15 +55,17 @@ console.time('pkg');
 const pkg = require(path.join(rootPath.path, 'package.json'));
 console.timeEnd('pkg');
 console.timeEnd('require');
+console.time('unhandled');
 require('electron-unhandled')();
+console.timeEnd('unhandled');
 
 let RSS;
-const app = require('electron').app;
-
-app.commandLine.appendSwitch('remote-debugging-port', '8315');
-// App.commandLine.appendSwitch('proxy-server', 'http://127.0.0.1:8888');
+/**
+ * App version
+ * @type {string}
+ */
 const version = app.getVersion();
-app.disableHardwareAcceleration();
+
 Raven.config('https://3d1b1821b4c84725a3968fcb79f49ea1:1ec6e95026654dddb578cf1555a2b6eb@sentry.io/184666', {
 	release: version,
 	autoBreadcrumbs: false
@@ -86,12 +88,15 @@ createDB(path.join(app.getPath('userData'), 'dbTor.db').toString())
 	.then(dbCreated => {
 		db = dbCreated;
 	});
+
+// Bypass compiling videos because thats a bad idea.
 addBypassChecker(filePath => {
 	if (isPlayable(filePath)) {
 		log.info(`Bypassing ${filePath}`);
 	}
 	return isPlayable(filePath);
 });
+
 if (process.env.SPECTRON) {
 	/**
 	 * If Spectron is running, mock showOpenDialog to return the test folder.
@@ -103,9 +108,13 @@ if (process.env.SPECTRON) {
 	};
 }
 
+/**
+ * Send release notes to renderer.
+ */
 ipc.on('releaseLoaded', event => {
 	event.returnValue = {notes: updateInfo.releaseNotes, version: updateInfo.version};
 });
+
 /**
  * Autoupdater on update available
  */
@@ -121,6 +130,7 @@ autoUpdater.on('update-available', info => { // eslint-disable-line no-unused-va
 		message: 'Press OK to download the update, and the application will download the update and then tell you when its done.'
 	});
 });
+
 /**
  * Autoupdater on downloaded
  */
@@ -141,6 +151,7 @@ autoUpdater.on('update-downloaded', (event, info) => { // eslint-disable-line no
 		}
 	});
 });
+
 /**
  * Autoupdater if error
  */
@@ -155,6 +166,7 @@ autoUpdater.on('error', error => {
 		Raven.captureException(error);
 	}
 });
+
 /**
  * Emitted on autoupdate progress.
  */
@@ -162,6 +174,7 @@ autoUpdater.on('download-progress', percent => {
 	log.info(`Update ${percent.percent}% downloaded`);
 	win.setProgressBar(percent.percent);
 });
+
 // Adds debug features like hotkeys for triggering dev tools and reload
 if (isDev && process.env.NODE_ENV !== 'test') {
 	debug({showDevTools: true});
@@ -177,6 +190,7 @@ process.on('uncaughtError', err => {
 	log.error('ERROR! The error is: ' + err || err.stack);
 	Raven.captureException(err);
 });
+
 /**
  * Same as process.on('uncaughtError') but for promises.
  */
@@ -193,6 +207,7 @@ function onClosed() {
 	// for multiple windows store them in an array
 	mainWindow = null;
 }
+
 /**
  * Make the window, get the state, then return.
  * @returns {*}
@@ -251,10 +266,6 @@ function createMainWindow() {
 				app.quit();
 			}
 		} else {
-			event.preventDefault();
-			event.returnValue = false;
-			// Look into what causes this - I have encountered it from the viewer when loading images.
-			console.log(event);
 			log.error('Browser process crashed. Not sure how or why because there doesn\'t seem to be a good stack trace');
 			Raven.captureException(new Error('Browser process crashed. Not sure how or why because there doesn\'t seem to be a good stack trace'));
 		}
@@ -266,9 +277,9 @@ function createMainWindow() {
 }
 
 /**
- * Initialise Origin headers to make sentry work.
+ * Initialise Origin headers to make sentry works.
  */
-function setup() {
+function setupSentryHeaders() {
 	session.defaultSession.webRequest.onBeforeSendHeaders((details, callback) => {
 		details.requestHeaders.Origin = 'mediamate.williamblythe.info'; // Set the Origin to whatever you want.
 		callback({cancel: false, requestHeaders: details.requestHeaders});
@@ -332,6 +343,7 @@ app.on('activate', () => {
 		mainWindow = createMainWindow();
 	}
 });
+
 /**
  * @description Make sure to not add torrents that are already in the database / downloaded
  * @param torrent {object} - the torrent object to be checked
@@ -372,6 +384,7 @@ async function ignoreDupeTorrents(torrent, callback) {
 		}
 	});
 }
+
 /**
  * @description Get the ShowRSS URI from the DB.
  * @param callback {function} Callbacks
@@ -388,6 +401,7 @@ function getRSSURI(callback) {
 		}
 	});
 }
+
 /**
  * @description Watch the ShowRSS feed for new releases, and notify user when there is one.
  */
@@ -450,6 +464,7 @@ function watchRSS() {
 		}
 	});
 }
+
 /**
  * Sent from render process on a download finishes. Sends a notification
  */
@@ -461,6 +476,7 @@ ipc.on('dldone', (event, data) => {
 		icon: path.join(__dirname, '..', 'renderhtml', 'notificon.png')
 	}).show();
 });
+
 /**
  * Make the main window.
  */
@@ -470,7 +486,7 @@ app.on('ready', () => {
 		mainWindow.webContents.openDevTools();
 	}
 	init();
-	setup();
+	setupSentryHeaders();
 	watchRSS();
 	onBoard();
 	if (!isDev && process.env.NODE_ENV !== 'test' && process.platform !== 'darwin' && process.platform !== 'linux') {
