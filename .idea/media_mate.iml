@@ -13,12 +13,6 @@
     <orderEntry type="library" name="electron-DefinitelyTyped" level="application" />
     <orderEntry type="library" name="electron-json-storage-DefinitelyTyped" level="application" />
     <orderEntry type="library" name="electron-window-state-DefinitelyTyped" level="application" />
-    <orderEntry type="library" name="pouchdb-DefinitelyTyped" level="application" />
     <orderEntry type="library" name="electron-debug-DefinitelyTyped" level="application" />
-    <orderEntry type="library" name="underscore-DefinitelyTyped" level="application" />
-    <orderEntry type="library" name="webdriverio-DefinitelyTyped" level="application" />
-    <orderEntry type="library" name="pouchdb-find-DefinitelyTyped" level="application" />
-    <orderEntry type="library" name="pouchdb-core-DefinitelyTyped" level="application" />
-    <orderEntry type="library" name="pouchdb-upsert-DefinitelyTyped" level="application" />
   </component>
 </module>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="JavaScriptLibraryMappings">
-    <file url="PROJECT" libraries="{electron-DefinitelyTyped, electron-builder-DefinitelyTyped, electron-debug-DefinitelyTyped, electron-json-storage-DefinitelyTyped, electron-notify-DefinitelyTyped, electron-window-state-DefinitelyTyped, media_mate/app/node_modules, media_mate/node_modules, pouchdb-DefinitelyTyped, pouchdb-core-DefinitelyTyped, pouchdb-find-DefinitelyTyped, pouchdb-upsert-DefinitelyTyped, underscore-DefinitelyTyped, webdriverio-DefinitelyTyped}" />
+    <file url="PROJECT" libraries="{electron-DefinitelyTyped, electron-builder-DefinitelyTyped, electron-debug-DefinitelyTyped, electron-json-storage-DefinitelyTyped, electron-notify-DefinitelyTyped, electron-window-state-DefinitelyTyped, media_mate/app/node_modules, media_mate/node_modules}" />
     <includedPredefinedLibrary name="Node.js Core" />
   </component>
 </project>

@@ -506,15 +506,69 @@
     vue-template-compiler "^2.0.0-alpha.8"
     vue-template-es2015-compiler "^1.4.2"
 
+"@types/bittorrent-protocol@*":
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/@types/bittorrent-protocol/-/bittorrent-protocol-2.2.2.tgz#169e9633e1bd18e6b830d11cf42e611b1972cb83"
+  dependencies:
+    "@types/node" "*"
+
+"@types/blob-util@^1.3.3":
+  version "1.3.3"
+  resolved "https://registry.yarnpkg.com/@types/blob-util/-/blob-util-1.3.3.tgz#adba644ae34f88e1dd9a5864c66ad651caaf628a"
+
+"@types/bytes@^2.5.1":
+  version "2.5.1"
+  resolved "https://registry.yarnpkg.com/@types/bytes/-/bytes-2.5.1.tgz#392c42adb65e16d32328b82b58fbc1611b75da89"
+
 "@types/cp-file@^4.2.0":
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/@types/cp-file/-/cp-file-4.2.0.tgz#2b12186b50dad407b11021284627bdf4adb87a87"
+
+"@types/debug@^0.0.30":
+  version "0.0.30"
+  resolved "https://registry.yarnpkg.com/@types/debug/-/debug-0.0.30.tgz#dc1e40f7af3b9c815013a7860e6252f6352a84df"
 
 "@types/del@^3.0.0":
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/@types/del/-/del-3.0.0.tgz#1c8cd8b6e38da3b572352ca8eaf5527931426288"
   dependencies:
     "@types/glob" "*"
+
+"@types/dotenv@^4.0.2":
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/@types/dotenv/-/dotenv-4.0.2.tgz#f2983f0afe9fd7f6eb8aef515a4d77f4cbaa0597"
+  dependencies:
+    "@types/node" "*"
+
+"@types/electron-json-storage@^4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@types/electron-json-storage/-/electron-json-storage-4.0.0.tgz#ea15cb3f2ca6fa4c31e74d974e0ec5655c74414f"
+  dependencies:
+    electron "^1.7.5"
+
+"@types/electron-notify@^0.1.6":
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/@types/electron-notify/-/electron-notify-0.1.6.tgz#1fe0f2fc555ab2a3a3a7c0d17fb904f5f00905e6"
+  dependencies:
+    electron "^1.7.5"
+
+"@types/electron-window-state@^2.0.31":
+  version "2.0.31"
+  resolved "https://registry.yarnpkg.com/@types/electron-window-state/-/electron-window-state-2.0.31.tgz#9bcacebd5bf5ec622c11783ea66e594d3ebd44a3"
+  dependencies:
+    electron "^1.7.5"
+
+"@types/form-data@*":
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/@types/form-data/-/form-data-2.2.1.tgz#ee2b3b8eaa11c0938289953606b745b738c54b1e"
+  dependencies:
+    "@types/node" "*"
+
+"@types/fs-extra@^4.0.3":
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/@types/fs-extra/-/fs-extra-4.0.3.tgz#87343b1ab99415b61817ac894ed622355a0ebf67"
+  dependencies:
+    "@types/node" "*"
 
 "@types/glob@*":
   version "5.0.33"
@@ -570,6 +624,30 @@
     "@types/orchestrator" "*"
     "@types/vinyl" "*"
 
+"@types/json-stringify-safe@^5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@types/json-stringify-safe/-/json-stringify-safe-5.0.0.tgz#df34d054419d39323a3730966bacba02ac5e474e"
+
+"@types/klaw-sync@^1.1.3":
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/@types/klaw-sync/-/klaw-sync-1.1.3.tgz#fa9884ce6301be767213781bc83055812169457a"
+  dependencies:
+    "@types/node" "*"
+
+"@types/lru-cache@^4.1.0":
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/@types/lru-cache/-/lru-cache-4.1.0.tgz#ef69ce9c3ebb46bd146f0d80f0c1ce38b0508eae"
+
+"@types/magnet-uri@*":
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/@types/magnet-uri/-/magnet-uri-5.1.1.tgz#861aaf64c92a3137dd848fefc55cd352a8ea851a"
+  dependencies:
+    "@types/node" "*"
+
+"@types/mime@*":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@types/mime/-/mime-2.0.0.tgz#5a7306e367c539b9f6543499de8dd519fac37a8b"
+
 "@types/minimatch@*":
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/@types/minimatch/-/minimatch-3.0.1.tgz#b683eb60be358304ef146f5775db4c0e3696a550"
@@ -580,9 +658,19 @@
   dependencies:
     "@types/node" "*"
 
+"@types/node-dir@^0.0.32":
+  version "0.0.32"
+  resolved "https://registry.yarnpkg.com/@types/node-dir/-/node-dir-0.0.32.tgz#d00d44cd29a4e2698114ff1f33a779d219bdb699"
+  dependencies:
+    "@types/node" "*"
+
 "@types/node@*":
   version "8.0.47"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-8.0.47.tgz#968e596f91acd59069054558a00708c445ca30c2"
+
+"@types/node@^7.0.18":
+  version "7.0.46"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-7.0.46.tgz#c3dedd25558c676b3d6303e51799abb9c3f8f314"
 
 "@types/node@^8.0.24":
   version "8.0.32"
@@ -595,6 +683,26 @@
     "@types/node" "*"
     "@types/q" "*"
 
+"@types/parse-torrent-file@*":
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/@types/parse-torrent-file/-/parse-torrent-file-4.0.1.tgz#056a6c18f3fac0cd7c6c74540f00496a3225976b"
+  dependencies:
+    "@types/node" "*"
+
+"@types/parse-torrent@*":
+  version "5.8.1"
+  resolved "https://registry.yarnpkg.com/@types/parse-torrent/-/parse-torrent-5.8.1.tgz#012fe6f50d12ed23d86f10ea831a4f0e1b0aacb6"
+  dependencies:
+    "@types/magnet-uri" "*"
+    "@types/node" "*"
+    "@types/parse-torrent-file" "*"
+
+"@types/parseurl@^1.3.1":
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/@types/parseurl/-/parseurl-1.3.1.tgz#e3cb1102160e48efa59f497c4ec22dee4f3b5b27"
+  dependencies:
+    "@types/node" "*"
+
 "@types/pngjs@^3.3.0":
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/@types/pngjs/-/pngjs-3.3.0.tgz#1bd2d6d28bc89750f3deb07f584c33f5910369ea"
@@ -605,11 +713,43 @@
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/@types/q/-/q-1.0.6.tgz#ab615b4c8338dae2ce6777be013af029e357ecdb"
 
+"@types/raven@^2.1.2":
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/@types/raven/-/raven-2.1.2.tgz#f066762a40aa3dd2fa8dbfc046ab4ecaf9bf03a4"
+  dependencies:
+    "@types/node" "*"
+
+"@types/request@^2.0.7":
+  version "2.0.7"
+  resolved "https://registry.yarnpkg.com/@types/request/-/request-2.0.7.tgz#a2aa5a57317c21971d9b024e393091ab2c99ab98"
+  dependencies:
+    "@types/form-data" "*"
+    "@types/node" "*"
+
 "@types/rimraf@^2.0.2":
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/@types/rimraf/-/rimraf-2.0.2.tgz#7f0fc3cf0ff0ad2a99bb723ae1764f30acaf8b6e"
   dependencies:
     "@types/glob" "*"
+    "@types/node" "*"
+
+"@types/send@^0.14.3":
+  version "0.14.3"
+  resolved "https://registry.yarnpkg.com/@types/send/-/send-0.14.3.tgz#707a8233c2cc46a6835afe4974032f8c28c9291c"
+  dependencies:
+    "@types/mime" "*"
+    "@types/node" "*"
+
+"@types/simple-peer@*":
+  version "6.1.4"
+  resolved "https://registry.yarnpkg.com/@types/simple-peer/-/simple-peer-6.1.4.tgz#1d1384e1d8dc17b9e7d1673d704febe91ca48191"
+  dependencies:
+    "@types/node" "*"
+
+"@types/source-map-support@^0.4.0":
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/@types/source-map-support/-/source-map-support-0.4.0.tgz#a62a1866614af68c888173c001481f242aaf148b"
+  dependencies:
     "@types/node" "*"
 
 "@types/source-map@*":
@@ -628,11 +768,28 @@
   dependencies:
     "@types/source-map" "*"
 
+"@types/underscore@^1.8.4":
+  version "1.8.4"
+  resolved "https://registry.yarnpkg.com/@types/underscore/-/underscore-1.8.4.tgz#187da45fe08986d3be50f1aa58fd3d45726bf336"
+
+"@types/video.js@^6.2.0":
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/@types/video.js/-/video.js-6.2.0.tgz#1e7994e67b8ee37065762479f12ed812b54e6fa2"
+
 "@types/vinyl@*":
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/@types/vinyl/-/vinyl-2.0.1.tgz#6b414dfdcd4a785e8e76e87565ed29e79490d9b7"
   dependencies:
     "@types/node" "*"
+
+"@types/webtorrent@^0.98.4":
+  version "0.98.4"
+  resolved "https://registry.yarnpkg.com/@types/webtorrent/-/webtorrent-0.98.4.tgz#cf8dbe22e3d5cf6915305f7f970b52bca01bf8b4"
+  dependencies:
+    "@types/bittorrent-protocol" "*"
+    "@types/node" "*"
+    "@types/parse-torrent" "*"
+    "@types/simple-peer" "*"
 
 abab@^1.0.0:
   version "1.0.4"
@@ -2919,6 +3076,14 @@ electron@1.8.2-beta.1:
   resolved "https://registry.yarnpkg.com/electron/-/electron-1.8.2-beta.1.tgz#01339739cf4e208b56610736e3323426276ea09b"
   dependencies:
     "@types/node" "^8.0.24"
+    electron-download "^3.0.1"
+    extract-zip "^1.0.3"
+
+electron@^1.7.5:
+  version "1.7.9"
+  resolved "https://registry.yarnpkg.com/electron/-/electron-1.7.9.tgz#add54e9f8f83ed02f6519ec10135f698b19336cf"
+  dependencies:
+    "@types/node" "^7.0.18"
     electron-download "^3.0.1"
     extract-zip "^1.0.3"
 

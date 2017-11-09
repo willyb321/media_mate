@@ -9,11 +9,10 @@
   "name": "media_mate",
   "main": "main/es6-init.js",
   "productName": "Media Mate",
-  "description": "My SDD HSC Major Project, a full media server/player/downloader/etc - in one",
+  "description": "A full media server/player/downloader/etc - in one",
   "version": "1.2.7",
   "dependencies": {
     "about-window": "^1.8.0",
-    "async": "^2.5.0",
     "babel-plugin-source-map-support": "^1.0.0",
     "blob-util": "^1.3.0",
     "bulma": "^0.4.3",
@@ -65,25 +64,5 @@
   "xo": false,
   "scripts": {
     "compile": "electron-compile --appDir . -c .cache ."
-  },
-  "devDependencies": {
-    "@types/async": "^2.0.45",
-    "@types/blob-util": "^1.3.3",
-    "@types/bytes": "^2.5.1",
-    "@types/debug": "^0.0.30",
-    "@types/dotenv": "^4.0.2",
-    "@types/electron-json-storage": "^4.0.0",
-    "@types/electron-notify": "^0.1.6",
-    "@types/electron-window-state": "^2.0.31",
-    "@types/fs-extra": "^4.0.3",
-    "@types/json-stringify-safe": "^5.0.0",
-    "@types/klaw-sync": "^1.1.3",
-    "@types/lru-cache": "^4.1.0",
-    "@types/node-dir": "^0.0.32",
-    "@types/raven": "^2.1.2",
-    "@types/request": "^2.0.7",
-    "@types/source-map-support": "^0.4.0",
-    "@types/underscore": "^1.8.4",
-    "@types/webtorrent": "^0.98.4"
   }
 }
