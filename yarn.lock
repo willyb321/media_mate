@@ -583,29 +583,29 @@
   dependencies:
     "@types/node" "*"
 
-"@types/gulp-concat@^0.0.31":
-  version "0.0.31"
-  resolved "https://registry.yarnpkg.com/@types/gulp-concat/-/gulp-concat-0.0.31.tgz#8b93c312f64fd98add15020e1b6d384e450c6d04"
+"@types/gulp-concat@^0.0.32":
+  version "0.0.32"
+  resolved "https://registry.yarnpkg.com/@types/gulp-concat/-/gulp-concat-0.0.32.tgz#72486028b1cf5faa94c8c1cf34c626531cecacd6"
   dependencies:
     "@types/node" "*"
 
-"@types/gulp-if@^0.0.32":
-  version "0.0.32"
-  resolved "https://registry.yarnpkg.com/@types/gulp-if/-/gulp-if-0.0.32.tgz#6a604be7a15a59bb3b2d3993520e1ef2bd41f9d6"
+"@types/gulp-if@^0.0.33":
+  version "0.0.33"
+  resolved "https://registry.yarnpkg.com/@types/gulp-if/-/gulp-if-0.0.33.tgz#edece22b7925d9a6db5f9c8c0d7882aa776fb678"
   dependencies:
     "@types/node" "*"
     "@types/vinyl" "*"
 
-"@types/gulp-inject@^0.0.32":
-  version "0.0.32"
-  resolved "https://registry.yarnpkg.com/@types/gulp-inject/-/gulp-inject-0.0.32.tgz#665c85562ff1298b4f1638127cc86e415e12c831"
+"@types/gulp-inject@^0.0.33":
+  version "0.0.33"
+  resolved "https://registry.yarnpkg.com/@types/gulp-inject/-/gulp-inject-0.0.33.tgz#23cd040825e8210dd54278586076968626883c0c"
   dependencies:
     "@types/node" "*"
     "@types/vinyl" "*"
 
-"@types/gulp-sourcemaps@^0.0.31":
-  version "0.0.31"
-  resolved "https://registry.yarnpkg.com/@types/gulp-sourcemaps/-/gulp-sourcemaps-0.0.31.tgz#08347f899f4862f63f7586c997aacd41af21c72a"
+"@types/gulp-sourcemaps@^0.0.32":
+  version "0.0.32"
+  resolved "https://registry.yarnpkg.com/@types/gulp-sourcemaps/-/gulp-sourcemaps-0.0.32.tgz#e79ee617e0cb15729874be4533fe59c07793a175"
   dependencies:
     "@types/node" "*"
 
@@ -616,9 +616,9 @@
     "@types/node" "*"
     "@types/uglify-js" "*"
 
-"@types/gulp@^3.8.34":
-  version "3.8.34"
-  resolved "https://registry.yarnpkg.com/@types/gulp/-/gulp-3.8.34.tgz#4feafe428900cd818e104415e7d4e9f74c104b94"
+"@types/gulp@^3.8.35":
+  version "3.8.35"
+  resolved "https://registry.yarnpkg.com/@types/gulp/-/gulp-3.8.35.tgz#352a308070ca5c5bd52cf6b676d2273f2a4f9b65"
   dependencies:
     "@types/node" "*"
     "@types/orchestrator" "*"
@@ -3979,9 +3979,9 @@ ghauth@3.0.0:
     read "~1.0.5"
     xtend "~4.0.0"
 
-github-changes@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/github-changes/-/github-changes-1.1.0.tgz#d4e8b98bc37b32fe272ae00171416d6cdf6bffee"
+github-changes@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/github-changes/-/github-changes-1.1.1.tgz#f10152ddb084f560975d97b4bfd839b75f371624"
   dependencies:
     bluebird "1.0.3"
     ghauth "3.0.0"

@@ -1,5 +1,19 @@
 ## Change Log
 
+### v1.3.0 (2017/11/09 05:59 +00:00)
+- [14a5db2](https://github.com/willyb321/media_mate/commit/14a5db2bd9c5edce27feece5be88a0c082caad79) Release v1.3.0 (@willyb321)
+- [bf2d692](https://github.com/willyb321/media_mate/commit/bf2d6925aece3e54c93f12d43a2c3e4c7a5afd5a) fix context menu, no files, remove redundant call to storage.get (@willyb321)
+- [733c921](https://github.com/willyb321/media_mate/commit/733c92128d08997b9e91a9b89727f9e81de3d6eb) clean up index.js a bit (@willyb321)
+- [c6f9ea1](https://github.com/willyb321/media_mate/commit/c6f9ea149c12f6db80c7f6d57b32d6819d8cece8) add a couple of logs, fix video end handling (@willyb321)
+- [c6dc9f1](https://github.com/willyb321/media_mate/commit/c6dc9f1d3f2fa931eaeff6a888599b00070a0f93) imports are nice (@willyb321)
+- [f0b3a31](https://github.com/willyb321/media_mate/commit/f0b3a31564cf40e93eeb9f00211dfc15d78e7d76) remove redundant require (@willyb321)
+- [3d3c035](https://github.com/willyb321/media_mate/commit/3d3c0356580564c5ccec4a8c653f148624a232b4) move @types to root dir (@willyb321)
+- [0d4ba6d](https://github.com/willyb321/media_mate/commit/0d4ba6d36652b1ad2882720ab2cff5aaf3fa65a4) bind to 127.0.0.1 (@willyb321)
+- [306de37](https://github.com/willyb321/media_mate/commit/306de378ef3433b0994aecd502a7eb9e35fd91a3) initial video.js implementation (@willyb321)
+- [3f78abe](https://github.com/willyb321/media_mate/commit/3f78abedddc5cce029e5b2250259ec181fb6e4dd) typo (@willyb321)
+- [6a8b2a0](https://github.com/willyb321/media_mate/commit/6a8b2a0ae805479fede6a2a6964bec9b5c93bf18) use sentry report dialog (@willyb321)
+- [fd6c81b](https://github.com/willyb321/media_mate/commit/fd6c81b8762534b3a654e2084b5e2f528a18b191) changelog (@willyb321)
+
 ### v1.2.7 (2017/11/08 01:50 +00:00)
 - [f95a968](https://github.com/willyb321/media_mate/commit/f95a968ee38fb9b83982702ac686999a6b50faea) Release v1.2.7 (@willyb321)
 - [0ff9514](https://github.com/willyb321/media_mate/commit/0ff9514c3a9540af5d0f601d2af6d3bc7338344c) fix context menu (@willyb321)
