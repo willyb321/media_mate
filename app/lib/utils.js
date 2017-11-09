@@ -74,7 +74,7 @@ function sendFile(dlPath) {
 		server.close(() => {
 			server = http.createServer((req, res) => {
 				send(req, parseUrl(req).pathname, {root: dlPath}).pipe(res);
-			}).listen(53324);
+			}).listen(53324, '127.0.0.1');
 		});
 		setImmediate(function () {
 			server.emit('close');
@@ -82,7 +82,7 @@ function sendFile(dlPath) {
 	} else {
 		server = http.createServer((req, res) => {
 			send(req, parseUrl(req).pathname, {root: dlPath}).pipe(res);
-		}).listen(53324);
+		}).listen(53324, '127.0.0.1');
 	}
 }
 
