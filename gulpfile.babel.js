@@ -2,17 +2,9 @@
 import gulp from 'gulp';
 import del from 'del';
 import inject from 'gulp-inject';
-import sourcemaps from 'gulp-sourcemaps';
-import babel from 'gulp-babel';
-import concat from 'gulp-concat';
-import rimraf from 'rimraf';
-import fs from 'fs';
-import path from 'path';
-
-const spawn = require('child_process').spawn;
-const pkg = require('./package.json');
-const builder = require('electron-builder');
-const isCI = require('is-ci');
+import isCI from 'is-ci';
+import {spawn} from 'child_process';
+import builder from 'electron-builder';
 
 let injects = [
 	'./app/renderjs/notify.js',

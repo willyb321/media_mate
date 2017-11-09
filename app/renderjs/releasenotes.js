@@ -7,6 +7,7 @@ function makeReleaseNotesFancy(notes, version) {
 	versionHeader.innerHTML = `<h1>Changelog for ${version}</h1>`;
 	releaseNotesDiv.innerHTML = notes;
 }
+
 log.info('Rendering release notes.');
 const {notes, version} = ipc.sendSync('releaseLoaded', 'ping');
 log.info(notes);

@@ -40,7 +40,7 @@ function waitForLoad(app, t, opts) {
 		return app.client.waitUntilWindowLoaded();
 	}).then(function () {
 		// Switch to the main window.
-		return app.browserWindow.focus()
+		return app.browserWindow.focus();
 		// return app.client.windowByIndex(0);
 	}).then(function () {
 		return app.client.waitUntilWindowLoaded();

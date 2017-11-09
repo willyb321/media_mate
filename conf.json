@@ -1,11 +1,19 @@
 {
 	"tags": {
 		"allowUnknownTags": true,
-		"dictionaries": ["jsdoc","closure"]
+		"dictionaries": [
+			"jsdoc",
+			"closure"
+		]
 	},
 	"source": {
-		"include": ["app/"],
-		"exclude": ["app/node_modules/", "app/indexbuild.js"]
+		"include": [
+			"app/"
+		],
+		"exclude": [
+			"app/node_modules/",
+			"app/indexbuild.js"
+		]
 	},
 	"plugins": [
 		"plugins/markdown",

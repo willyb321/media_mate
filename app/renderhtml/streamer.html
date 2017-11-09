@@ -5,7 +5,10 @@
 	<!-- inject:css -->
 	<link rel="stylesheet" href="../css/index.less">
 	<!-- endinject -->
-	<script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+	<script>if (typeof module === 'object') {
+		window.module = module;
+		module = undefined;
+	}</script>
 	<!-- inject:js -->
 	<script src="../renderjs/notify.js"></script>
 	<script src="../node_modules/mprogress/mprogress.min.js"></script>
@@ -33,9 +36,11 @@
 	<div class="column">
 
 		<div class="box">
-			<p class="subtitle"><input id="magnet" class="input" style="width: 25%" placeholder="Paste magnet URI here." type="text" onkeypress="return runScript(event)" title="magnet"></p>
+			<p class="subtitle"><input id="magnet" class="input" style="width: 25%" placeholder="Paste magnet URI here."
+									   type="text" onkeypress="return runScript(event)" title="magnet"></p>
 			<div id="dl" class="column">
-			<button class="button is-primary"  id="destroy" style="display: none;" onclick="stop()">Stop torrent</button>
+				<button class="button is-primary" id="destroy" style="display: none;" onclick="stop()">Stop torrent
+				</button>
 			</div>
 			<form id="files" style="display: none;">
 				<label>Pick a file</label>
@@ -48,7 +53,9 @@
 				<select class="select" id="historySelect" onchange="getFileHistory()" title="Choose file">
 					<option>Select an option</option>
 				</select>
-				<button id="removeHistory" class="button is-primary" onclick="removeStreamHistory()">Remove all stream history</button>
+				<button id="removeHistory" class="button is-primary" onclick="removeStreamHistory()">Remove all stream
+					history
+				</button>
 			</form>
 		</div>
 	</div>

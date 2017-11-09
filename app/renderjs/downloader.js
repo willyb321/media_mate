@@ -104,6 +104,7 @@ window.onload = () => {
 		}
 	});
 };
+
 /**
  * Update the download progress bar, but make sure not to do it too often.
  */
@@ -118,6 +119,7 @@ function dlProgress() {
 	}
 	animateThrottled(progress);
 }
+
 /**
  * Get the confirm button for the currently active sweetalert
  * @return {Promise} Rejects if no sweetalert on screen, resolves the confirm button DOM element if a sweetalert is currently active
@@ -140,6 +142,7 @@ function getSwalConfirmButton() {
 client.on('error', err => {
 	handleErrs(err);
 });
+
 /**
  * Get the ShowRSS URI from JSON storage
  * @param callback - return it.
@@ -156,6 +159,7 @@ function getRSSURI(callback) {
 		}
 	});
 }
+
 /**
  * Make sure not to add torrents already downloaded.
  * @param torrent {object} - the torrent object to be checked
@@ -196,6 +200,7 @@ async function ignoreDupeTorrents(torrent, callback) {
 		}
 	});
 }
+
 /**
  * Drop the torrent database. Mainly for testing purpose.
  */
@@ -209,6 +214,7 @@ async function dropTorrents() {
 		log.info(`DOWNLOADER: Removed ${numRemoved} from DB`);
 	});
 }
+
 /**
  * Make sure that the ShowRSS URI is updated.
  * @param uri {string} - the ShowRSS URI
@@ -224,6 +230,7 @@ function updateURI(uri) {
 		}
 	});
 }
+
 /**
  * Initial load, get the torrents in the db.
  */
@@ -237,6 +244,7 @@ async function findDocuments() {
 		_.each(docs, elem => allTorrents.push(elem.magnet));
 	});
 }
+
 /**
  * Index the database.
  */
@@ -280,6 +288,7 @@ async function dlAll() {
 		addTor(i.name);
 	}
 }
+
 /**
  * Get the path for torrents to be downloaded to, from JSON storage.
  * @param callback
@@ -296,6 +305,7 @@ function getDlPath(callback) {
 		}
 	});
 }
+
 /**
  * Insert the download path to electron-json-storage
  * @param callback - callback, obviously
@@ -317,6 +327,7 @@ function insertDlPath(callback) {
 		}
 	});
 }
+
 /**
  * Update the download progress.
  * @param {string} magnet - The magnet URI for the download. Used to identify which DOM element to modify.

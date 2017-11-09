@@ -5,11 +5,14 @@
 	<!-- inject:css -->
 	<link rel="stylesheet" href="../css/index.less">
 	<!-- endinject -->
-    <meta charset="UTF-8">
-    <title>Media Mate Downloader</title>
+	<meta charset="UTF-8">
+	<title>Media Mate Downloader</title>
 </head>
 <body>
-<script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+<script>if (typeof module === 'object') {
+	window.module = module;
+	module = undefined;
+}</script>
 <!-- inject:js -->
 <script src="../renderjs/notify.js"></script>
 <script src="../node_modules/mprogress/mprogress.min.js"></script>
@@ -33,17 +36,22 @@
 	</div>
 	<div class="column">
 		<div class="box">
-			<button id="dlAll" onclick="dlAll()" class="button is-primary" style="display: none; float: right;">Download All</button>
+			<button id="dlAll" onclick="dlAll()" class="button is-primary" style="display: none; float: right;">Download
+				All
+			</button>
 			<button style="float: right;" onclick="dropTorrents()" class="button is-primary">Drop Torrents DB</button>
-			<button style="float: right;" onclick="insertDlPath()" id="dlpath" class="button is-primary">Choose DL Path</button>
-			<button class="button is-primary" style="display: none; float: right;" id="dlspeed">Download speed: </button>
-			<button class="button is-primary" style="display: none; float: right;" id="ulspeed">Upload speed: </button>
+			<button style="float: right;" onclick="insertDlPath()" id="dlpath" class="button is-primary">Choose DL
+				Path
+			</button>
+			<button class="button is-primary" style="display: none; float: right;" id="dlspeed">Download speed:</button>
+			<button class="button is-primary" style="display: none; float: right;" id="ulspeed">Upload speed:</button>
 			<div style="width: 25%" class="field has-addons">
-			<p id="rssp" class="control is-expanded">
-				<input id="rss" placeholder="Paste ShowRSS feed url." class="input" type="text" onkeypress="return runScript(event)" title="magnet">
-			</p>
+				<p id="rssp" class="control is-expanded">
+					<input id="rss" placeholder="Paste ShowRSS feed url." class="input" type="text"
+						   onkeypress="return runScript(event)" title="magnet">
+				</p>
 				<p class="control">
-				<button class="button is-info" onclick="return runScript(event)" id="dupecount">Submit</button>
+					<button class="button is-info" onclick="return runScript(event)" id="dupecount">Submit</button>
 				</p>
 			</div>
 		</div>

@@ -8,6 +8,7 @@ import openAboutWindow from 'about-window';
 
 let win;
 let menu;
+
 /**
  * Initialise the menu.
  */
@@ -32,6 +33,7 @@ export function getMenuItem(label) {
 		}
 	}
 }
+
 /**
  * Menu template.
  */

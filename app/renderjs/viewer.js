@@ -93,6 +93,7 @@ function convertImgToBlob(img) {
 function openInExternalPlayer(path) {
 	shell.openItem(path);
 }
+
 /**
  * Drop the image database. Mainly for testing purpose.
  */
@@ -106,6 +107,7 @@ async function dropImages() {
 		log.info(`VIEWER: Removed ${numRemoved} from DB`);
 	});
 }
+
 /**
  * Get images from the DB, if they exist in the DB.
  * @param data {Array} - Data needed to identify the image in the DB.

@@ -25,8 +25,8 @@ test('downloader', t => {
 						.then(() => app.client.click('#dupecount'))
 						.then(() => setup.wait(2e3))
 						.then(() => app.client.executeAsync(async function (done) {
-							let swalcon = await getSwalConfirmButton()
-							swalcon.id = 'downloaderSwalConfirmBut'
+							let swalcon = await getSwalConfirmButton();
+							swalcon.id = 'downloaderSwalConfirmBut';
 							done({id: swalcon.id});
 						}))
 						.then(result => t.equal(result.value.id, 'downloaderSwalConfirmBut', 'Sweetalert ok button\'s id was set to "downloaderSwalConfirmBut"'))

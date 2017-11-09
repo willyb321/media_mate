@@ -15,17 +15,18 @@ function firstrun() {
 		cancelButtonColor: '#d33',
 		confirmButtonText: 'Yes!'
 	}).then(function () {
-		remote.getCurrentWindow().loadURL(`file://${__dirname}/../renderhtml/onboard.html`)
+		remote.getCurrentWindow().loadURL(`file://${__dirname}/../renderhtml/onboard.html`);
 	}).catch(err => {
 		if (err !== 'cancel') {
 			console.log(err);
 		}
 	});
 }
+
 function sweetAlert(title, text, type) {
 	swalNotify({
 		title: title,
 		text: text,
 		type: type
-	})
+	});
 }

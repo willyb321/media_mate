@@ -53,6 +53,7 @@ function runScript(e) {
 		return false;
 	}
 }
+
 /**
  * Called on window load.
  */
@@ -77,6 +78,7 @@ function chooseFile(files) {
 		select.appendChild(el);
 	}
 }
+
 /**
  * Start playing the file
  * @param file {object} - the file
@@ -103,6 +105,7 @@ function startPlaying(file) {
 		});
 	}); // Append the file to the DOM
 }
+
 /**
  * Get file when selected
  */
@@ -111,6 +114,7 @@ function getFile() {
 	const text = e.options[e.selectedIndex].value;
 	startPlaying(filesAll[text]);
 }
+
 /**
  * Add magnet to WebTorrent
  * @param magnet {string} - the magnet URI
@@ -130,6 +134,7 @@ function submitmagnet(magnet) {
 		});
 	}
 }
+
 /**
  * Adds torrents to stream history DB.
  * @param torrent {object} Contains magnet, files, metadata etc.
@@ -148,6 +153,7 @@ function addStreamHistory(torrent) {
 		}
 	});
 }
+
 /**
  * Called when choosing a file in the history form.
  */
