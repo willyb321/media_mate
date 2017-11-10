@@ -4,7 +4,7 @@ import del from 'del';
 import inject from 'gulp-inject';
 import isCI from 'is-ci';
 import {spawn} from 'child_process';
-import builder from 'electron-builder';
+import * as builder from 'electron-builder';
 
 let injects = [
 	'./app/renderjs/notify.js',
