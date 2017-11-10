@@ -520,6 +520,12 @@
   version "2.5.1"
   resolved "https://registry.yarnpkg.com/@types/bytes/-/bytes-2.5.1.tgz#392c42adb65e16d32328b82b58fbc1611b75da89"
 
+"@types/chokidar@*":
+  version "1.7.3"
+  resolved "https://registry.yarnpkg.com/@types/chokidar/-/chokidar-1.7.3.tgz#ca87a53aa596c01eb93237ab4055edf71dcb9ca6"
+  dependencies:
+    "@types/node" "*"
+
 "@types/cp-file@^4.2.0":
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/@types/cp-file/-/cp-file-4.2.0.tgz#2b12186b50dad407b11021284627bdf4adb87a87"
@@ -564,10 +570,17 @@
   dependencies:
     "@types/node" "*"
 
-"@types/fs-extra@^4.0.3":
-  version "4.0.3"
-  resolved "https://registry.yarnpkg.com/@types/fs-extra/-/fs-extra-4.0.3.tgz#87343b1ab99415b61817ac894ed622355a0ebf67"
+"@types/fs-extra@^4.0.4":
+  version "4.0.4"
+  resolved "https://registry.yarnpkg.com/@types/fs-extra/-/fs-extra-4.0.4.tgz#72947e108f2cbeda5ab288a927399fdf6d02bd42"
   dependencies:
+    "@types/node" "*"
+
+"@types/glob-stream@*":
+  version "3.1.31"
+  resolved "https://registry.yarnpkg.com/@types/glob-stream/-/glob-stream-3.1.31.tgz#015842260c01dab3b56578d8b37de2e57483d4ad"
+  dependencies:
+    "@types/glob" "*"
     "@types/node" "*"
 
 "@types/glob@*":
@@ -616,13 +629,13 @@
     "@types/node" "*"
     "@types/uglify-js" "*"
 
-"@types/gulp@^3.8.35":
-  version "3.8.35"
-  resolved "https://registry.yarnpkg.com/@types/gulp/-/gulp-3.8.35.tgz#352a308070ca5c5bd52cf6b676d2273f2a4f9b65"
+"@types/gulp@^4.0.5":
+  version "4.0.5"
+  resolved "https://registry.yarnpkg.com/@types/gulp/-/gulp-4.0.5.tgz#f5f498d5bf9538364792de22490a12c0e6bc5eb4"
   dependencies:
-    "@types/node" "*"
-    "@types/orchestrator" "*"
-    "@types/vinyl" "*"
+    "@types/chokidar" "*"
+    "@types/undertaker" "*"
+    "@types/vinyl-fs" "*"
 
 "@types/json-stringify-safe@^5.0.0":
   version "5.0.0"
@@ -676,13 +689,6 @@
   version "8.0.32"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-8.0.32.tgz#869a716538b6eec65ab3893f183d557be3cda206"
 
-"@types/orchestrator@*":
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/@types/orchestrator/-/orchestrator-0.3.1.tgz#72a9cfc56d07144f3c4c4e00826d62cc891877bd"
-  dependencies:
-    "@types/node" "*"
-    "@types/q" "*"
-
 "@types/parse-torrent-file@*":
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/@types/parse-torrent-file/-/parse-torrent-file-4.0.1.tgz#056a6c18f3fac0cd7c6c74540f00496a3225976b"
@@ -709,10 +715,6 @@
   dependencies:
     "@types/node" "*"
 
-"@types/q@*":
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/@types/q/-/q-1.0.6.tgz#ab615b4c8338dae2ce6777be013af029e357ecdb"
-
 "@types/raven@^2.1.2":
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/@types/raven/-/raven-2.1.2.tgz#f066762a40aa3dd2fa8dbfc046ab4ecaf9bf03a4"
@@ -733,9 +735,9 @@
     "@types/glob" "*"
     "@types/node" "*"
 
-"@types/send@^0.14.3":
-  version "0.14.3"
-  resolved "https://registry.yarnpkg.com/@types/send/-/send-0.14.3.tgz#707a8233c2cc46a6835afe4974032f8c28c9291c"
+"@types/send@^0.14.4":
+  version "0.14.4"
+  resolved "https://registry.yarnpkg.com/@types/send/-/send-0.14.4.tgz#d70458b030305999db619a7b057f7105058bd0ff"
   dependencies:
     "@types/mime" "*"
     "@types/node" "*"
@@ -772,9 +774,27 @@
   version "1.8.4"
   resolved "https://registry.yarnpkg.com/@types/underscore/-/underscore-1.8.4.tgz#187da45fe08986d3be50f1aa58fd3d45726bf336"
 
-"@types/video.js@^6.2.0":
-  version "6.2.0"
-  resolved "https://registry.yarnpkg.com/@types/video.js/-/video.js-6.2.0.tgz#1e7994e67b8ee37065762479f12ed812b54e6fa2"
+"@types/undertaker-registry@*":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@types/undertaker-registry/-/undertaker-registry-1.0.1.tgz#4306d4a03d7acedb974b66530832b90729e1d1da"
+
+"@types/undertaker@*":
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/@types/undertaker/-/undertaker-1.1.3.tgz#9d6182f980ec8271355c1cfbf443865a20f72fe0"
+  dependencies:
+    "@types/undertaker-registry" "*"
+
+"@types/video.js@^6.2.1":
+  version "6.2.1"
+  resolved "https://registry.yarnpkg.com/@types/video.js/-/video.js-6.2.1.tgz#c73f1d576c57c8c598a0df514e5692a18227b5db"
+
+"@types/vinyl-fs@*":
+  version "2.4.8"
+  resolved "https://registry.yarnpkg.com/@types/vinyl-fs/-/vinyl-fs-2.4.8.tgz#cd55c0c625e8ba02858992d9c7265a343704ca77"
+  dependencies:
+    "@types/glob-stream" "*"
+    "@types/node" "*"
+    "@types/vinyl" "*"
 
 "@types/vinyl@*":
   version "2.0.1"
@@ -3071,9 +3091,9 @@ electron-to-chromium@^1.2.7, electron-to-chromium@^1.3.18:
   version "1.3.21"
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.21.tgz#a967ebdcfe8ed0083fc244d1894022a8e8113ea2"
 
-electron@1.8.2-beta.1:
-  version "1.8.2-beta.1"
-  resolved "https://registry.yarnpkg.com/electron/-/electron-1.8.2-beta.1.tgz#01339739cf4e208b56610736e3323426276ea09b"
+electron@1.8.2-beta.2:
+  version "1.8.2-beta.2"
+  resolved "https://registry.yarnpkg.com/electron/-/electron-1.8.2-beta.2.tgz#b532c71050ddd2d4b00e2e0d355de4e75bc1e5fd"
   dependencies:
     "@types/node" "^8.0.24"
     electron-download "^3.0.1"
