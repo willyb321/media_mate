@@ -16,8 +16,7 @@
 		]
 	},
 	"plugins": [
-		"plugins/markdown",
-		"node_modules/jsdoc-strip-async-await"
+		"plugins/markdown"
 	],
 	"templates": {
 		"cleverLinks": true,
