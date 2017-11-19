@@ -502,7 +502,7 @@ app.on('ready', () => {
 	setupSentryHeaders();
 	watchRSS();
 	onBoard();
-	if (!isDev && process.env.NODE_ENV !== 'test' && process.platform !== 'darwin' && process.platform !== 'linux') {
+	if (!isDev && process.env.NODE_ENV !== 'test' && process.platform !== 'darwin') {
 		autoUpdater.checkForUpdates();
 	}
 	console.timeEnd('init');

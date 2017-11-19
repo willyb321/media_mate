@@ -1,5 +1,16 @@
 ## Change Log
 
+### v1.3.1 (2017/11/19 11:34 +00:00)
+- [d3f9ecd](https://github.com/willyb321/media_mate/commit/d3f9ecdf09bdea0e34842d29004e03ad15a6d0c9) Release v1.3.1 (@willyb321)
+- [f4cf36f](https://github.com/willyb321/media_mate/commit/f4cf36f7fa6179b569074c4fbf19a0f1ea8226f5) update deps finally electron-builder (@willyb321)
+- [bbc2080](https://github.com/willyb321/media_mate/commit/bbc2080abf82cb482d1d7c35ce3923b7b17386f1) remove some deps update others (@willyb321)
+- [c0cdbeb](https://github.com/willyb321/media_mate/commit/c0cdbeb4a4fe1d2508cc9d895c1ac0d38ab37073) fix gulpfile (@willyb321)
+- [1aa4577](https://github.com/willyb321/media_mate/commit/1aa45779c56a6d6a737861aa60e0db0b6a29109a) deps (@willyb321)
+- [dfa655d](https://github.com/willyb321/media_mate/commit/dfa655d16ce7812f510cd816bafdb919af95f549) Merge remote-tracking branch 'origin/develop' into develop (@willyb321)
+- [fc76597](https://github.com/willyb321/media_mate/commit/fc76597f6bfbf55f18b498e1bfa270da1d4ef5be) i formatted a bunch of files (@willyb321)
+- [eb32932](https://github.com/willyb321/media_mate/commit/eb32932a2b9993f406a4807e077b7ac91ad11b09) deps (@willyb321)
+- [a4b079d](https://github.com/willyb321/media_mate/commit/a4b079d1ab234938564212af9c69019971b4e697) changelog (@willyb321)
+
 ### v1.3.0 (2017/11/09 05:59 +00:00)
 - [14a5db2](https://github.com/willyb321/media_mate/commit/14a5db2bd9c5edce27feece5be88a0c082caad79) Release v1.3.0 (@willyb321)
 - [bf2d692](https://github.com/willyb321/media_mate/commit/bf2d6925aece3e54c93f12d43a2c3e4c7a5afd5a) fix context menu, no files, remove redundant call to storage.get (@willyb321)
