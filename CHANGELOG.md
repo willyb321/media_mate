@@ -1,5 +1,9 @@
 ## Change Log
 
+### v1.3.2 (2017/11/19 21:19 +00:00)
+- [903f49e](https://github.com/willyb321/media_mate/commit/903f49ec9da706a7b5aafe7e04ea462e78f05b1f) Release v1.3.2 (@willyb321)
+- [9a46102](https://github.com/willyb321/media_mate/commit/9a4610203198dd5d11fec9c9d51b310fc4a126ea) changelog and try autoupdate on linux (@willyb321)
+
 ### v1.3.1 (2017/11/19 11:34 +00:00)
 - [d3f9ecd](https://github.com/willyb321/media_mate/commit/d3f9ecdf09bdea0e34842d29004e03ad15a6d0c9) Release v1.3.1 (@willyb321)
 - [f4cf36f](https://github.com/willyb321/media_mate/commit/f4cf36f7fa6179b569074c4fbf19a0f1ea8226f5) update deps finally electron-builder (@willyb321)
