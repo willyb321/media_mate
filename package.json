@@ -99,7 +99,7 @@
     "mkdirp": "latest",
     "pngjs": "^3.3.1",
     "pre-commit": "^1.2.2",
-    "release-it": "^4.4.1",
+    "release-it": "^5.0.0",
     "rimraf": "^2.6.2",
     "spectron": "^3.7.2",
     "tape": "^4.8.0",
