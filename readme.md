@@ -1,6 +1,7 @@
 # Media Mate
 
 [![Greenkeeper badge](https://badges.greenkeeper.io/willyb321/media_mate.svg)](https://greenkeeper.io/)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fwillyb321%2Fmedia_mate.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fwillyb321%2Fmedia_mate?ref=badge_shield)
 > A full media server/player/downloader - in one program
 
 [![Github All Releases](https://img.shields.io/github/downloads/willyb321/media_mate/total.svg)]()
@@ -23,6 +24,9 @@
 
 <!-- /TOC -->
 
+
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fwillyb321%2Fmedia_mate.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fwillyb321%2Fmedia_mate?ref=badge_large)
 
 ## What is it?
 
