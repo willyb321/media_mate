@@ -196,7 +196,7 @@ async function getImgs() {
 		const {elempath} = data;
 		medianodes.forEach(img => {
 			if (img.id === elempath) {
-				img.children[0].style.backgroundImage = `url(04.png)`;
+				img.children[0].style.backgroundImage = `url(404.png)`;
 				img.children[0].parentNode.style.display = 'inline-block';
 			}
 		});
