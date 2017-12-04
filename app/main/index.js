@@ -303,9 +303,15 @@ function setupSentryHeaders() {
  * Ask the user if they want to view the tutorial on first run
  */
 function onBoard() {
-	if (firstRun({
-		name: pkg.name
-	})) {
+	let actuallyFirstRun;
+	try {
+		actuallyFirstRun = firstRun({
+			name: pkg.name
+		});
+	} catch (err) {
+		Raven.captureException(err);
+	}
+	if (actuallyFirstRun) {
 		storage.has('path', (err, hasKey) => {
 			if (err) {
 				Raven.captureException(err);

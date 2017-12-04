@@ -453,32 +453,45 @@ function runScript(e) {
 		const tb = document.getElementById('rss');
 		tb.disabled = true;
 		document.getElementById('dupecount').disabled = true;
-		swal(
-			'Getting your downloads',
-			'Welcome to Media Mate',
-			'success'
-		);
-		// Set the ShowRSS feed url in json storage.
-		updateURI(tb.value);
 		document.getElementById('dls').style.display = 'inline';
 		const RSS = new RSSParse(tb.value);
 		// Emitted on RSS error (invalid url etc).
 		RSS.on('error', err => {
-			Raven.context(() => {
-				Raven.captureBreadcrumb({
-					message: err.message,
-					data: {
-						rssURL: tb.value
-					}
-				});
+			if (err.message === 'Not a feed') {
+				log.info(`VIEWER: Wrong URL used - ${tb.value}`);
+				swal(
+					'Not a feed',
+					'Please use an RSS URL from showrss.info',
+					'error'
+				);
 				tb.disabled = false;
 				document.getElementById('dupecount').disabled = false;
-				Raven.captureException(err);
-				Raven.showReportDialog();
-			});
+			} else {
+				Raven.context(() => {
+					Raven.captureBreadcrumb({
+						message: err.message,
+						data: {
+							rssURL: tb.value
+						}
+					});
+					tb.disabled = false;
+					document.getElementById('dupecount').disabled = false;
+					Raven.captureException(err);
+					Raven.showReportDialog();
+				});
+			}
 		});
 		RSS.on('offline', online => {
 			swal('Offline', 'You are offline, thats fine though.', 'info');
+		});
+		RSS.once('data', () => {
+			swal(
+				'Getting your downloads',
+				'Welcome to Media Mate',
+				'success'
+			);
+			// Set the ShowRSS feed url in json storage.
+			updateURI(tb.value);
 		});
 		// Emitted every time a new RSS item appears.
 		RSS.on('data', data => {
