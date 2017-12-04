@@ -1,5 +1,17 @@
 ## Change Log
 
+### v1.3.3 (2017/12/04 03:38 +00:00)
+- [e4e5832](https://github.com/willyb321/media_mate/commit/e4e5832038b18bffa8102150944baa7867752961) Release v1.3.3 (@willyb321)
+- [fc24e1d](https://github.com/willyb321/media_mate/commit/fc24e1d7db72d65a26a8264318a5f30fbce5799e) .idea (@willyb321)
+- [0c3db77](https://github.com/willyb321/media_mate/commit/0c3db7777e54a1320ad370c7415505147a20bd58) hopefully fix first run crashing because permissions (@willyb321)
+- [b253640](https://github.com/willyb321/media_mate/commit/b2536406b4fff9a34a56ff89919aba7e2187d1e6) Merge remote-tracking branch 'origin/develop' into develop (@willyb321)
+- [ae27191](https://github.com/willyb321/media_mate/commit/ae271911eb6c6580d7c82b361adf6d35cf183184) fix 404 on the 404 image (@willyb321)
+- [#16](https://github.com/willyb321/media_mate/pull/16) Add license scan report and status (@fossabot)
+- [72183c9](https://github.com/willyb321/media_mate/commit/72183c98e7ce62d176d3b33c266400b1a9a7253a) Add license scan report and status (@fossabot)
+- [7a83ad5](https://github.com/willyb321/media_mate/commit/7a83ad5ba5773e3be7bbddc8774cd0b1dedc8b4e) update deps (@willyb321)
+- [7d8b446](https://github.com/willyb321/media_mate/commit/7d8b446abb4b3a229febd4a298a4ac4a4d6468ef) update url (@willyb321)
+- [d650abd](https://github.com/willyb321/media_mate/commit/d650abd9a89784dff53182893d48de7e6ef63f87) changelog (@willyb321)
+
 ### v1.3.2 (2017/11/19 21:19 +00:00)
 - [903f49e](https://github.com/willyb321/media_mate/commit/903f49ec9da706a7b5aafe7e04ea462e78f05b1f) Release v1.3.2 (@willyb321)
 - [9a46102](https://github.com/willyb321/media_mate/commit/9a4610203198dd5d11fec9c9d51b310fc4a126ea) changelog and try autoupdate on linux (@willyb321)
