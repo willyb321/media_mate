@@ -26,6 +26,7 @@ Raven.config('https://3d1b1821b4c84725a3968fcb79f49ea1@sentry.io/184666', {
 const client = new WebTorrent();
 let filesAll;
 let db;
+let server;
 createDB(path.join(require('electron').remote.app.getPath('userData'), 'dbStream.db').toString())
 	.then(dbCreated => {
 		db = dbCreated;
@@ -68,13 +69,17 @@ window.onload = () => {
 function chooseFile(files) {
 	const select = document.getElementById('selectFile');
 	console.log(files);
+	for (const i in files) { // eslint-disable-line
+		files[i].index = i;
+	}
+	console.log(files);
 	files = _.filter(files, isPlayable);
 	filesAll = files;
 	for (let i = 0; i < files.length; i++) {
 		const opt = files[i];
 		const el = document.createElement('option');
 		el.textContent = opt.name;
-		el.value = i;
+		el.value = files[i].index;
 		select.appendChild(el);
 	}
 }
@@ -84,26 +89,13 @@ function chooseFile(files) {
  * @param file {object} - the file
  */
 function startPlaying(file) {
-	file.appendTo('#player', (err, elem) => {
-		if (err) {
-			throw err;
-		} // File failed to download or display in the DOM
-		console.log('New DOM node with the content', elem);
-		elem.style.display = 'block';
-		elem.style.width = '100%';
-		document.getElementById('destroy').style.display = 'block';
-		file.getBlobURL((err, url) => {
-			if (err) {
-				throw err;
-			}
-			const a = document.createElement('a');
-			a.download = file.name;
-			a.href = url;
-			a.textContent = 'Download ' + file.name;
-			console.log(a);
-			document.getElementById('dl').appendChild(a);
-		});
-	}); // Append the file to the DOM
+	server = process.torrent.createServer();
+	server.listen(9765);
+	const vid = document.createElement('video');
+	vid.controls = true;
+	vid.autoplay = true;
+	vid.src = `http://localhost:9765/${file}`;
+	document.getElementById('player').appendChild(vid);
 }
 
 /**
@@ -112,7 +104,7 @@ function startPlaying(file) {
 function getFile() {
 	const e = document.getElementById('selectFile');
 	const text = e.options[e.selectedIndex].value;
-	startPlaying(filesAll[text]);
+	startPlaying(text);
 }
 
 /**
@@ -126,12 +118,16 @@ function submitmagnet(magnet) {
 		process.torrent = ifExist;
 		document.getElementById('files').style.display = 'inline';
 	} else {
-		client.add(magnet, torrent => {
-			addStreamHistory(torrent);
-			chooseFile(torrent.files);
-			process.torrent = torrent;
-			document.getElementById('files').style.display = 'inline';
-		});
+		try {
+			client.add(magnet, torrent => {
+				addStreamHistory(torrent);
+				chooseFile(torrent.files);
+				process.torrent = torrent;
+				document.getElementById('files').style.display = 'inline';
+			});
+		} catch (err) {
+			console.log(err);
+		}
 	}
 }
 
@@ -204,6 +200,10 @@ function streamHistory() {
  * Stop downloading the torrent.
  */
 function stop() {
+	if (server) {
+		server.close();
+		client.destroy();
+	}
 	process.torrent.destroy(tor => {
 		document.getElementById('files').parentNode.removeChild(document.getElementById('files'));
 		document.getElementById('player').removeChild(document.getElementById('player').firstChild);
