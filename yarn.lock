@@ -554,7 +554,7 @@
   dependencies:
     "@types/node" "*"
 
-"@types/fs-extra@5.0.0":
+"@types/fs-extra@^5.0.0":
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/@types/fs-extra/-/fs-extra-5.0.0.tgz#d3e225b35eb5c6d3a5a782c28219df365c781413"
   dependencies:
@@ -3344,9 +3344,9 @@ eslint-config-xo@^0.18.0:
   version "0.18.2"
   resolved "https://registry.yarnpkg.com/eslint-config-xo/-/eslint-config-xo-0.18.2.tgz#0a157120875619929e735ffd6b185c41e8a187af"
 
-eslint-config-xo@^0.19.0:
-  version "0.19.0"
-  resolved "https://registry.yarnpkg.com/eslint-config-xo/-/eslint-config-xo-0.19.0.tgz#eded131c4983b456d0d08f5eea434a57395aa9a8"
+eslint-config-xo@^0.20.0:
+  version "0.20.0"
+  resolved "https://registry.yarnpkg.com/eslint-config-xo/-/eslint-config-xo-0.20.0.tgz#fbff02b254f8c70d1e03c5de5c557f6deac1e73f"
 
 eslint-formatter-pretty@^1.0.0, eslint-formatter-pretty@^1.1.0:
   version "1.3.0"
