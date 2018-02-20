@@ -74,7 +74,7 @@
     "@types/underscore": "^1.8.5",
     "@types/video.js": "^6.2.2",
     "@types/webtorrent": "^0.98.4",
-    "babel-plugin-source-map-support": "^1.0.0",
+    "babel-plugin-source-map-support": "^2.0.0",
     "babel-preset-react": "^6.24.1",
     "cp-file": "^5.0.0",
     "del": "^3.0.0",
