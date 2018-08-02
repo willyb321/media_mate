@@ -894,9 +894,9 @@
   dependencies:
     "@types/undertaker-registry" "*"
 
-"@types/video.js@^6.2.4":
-  version "6.2.4"
-  resolved "https://registry.yarnpkg.com/@types/video.js/-/video.js-6.2.4.tgz#d1ded3930b737cb2ffb48ed50edae806c00f917d"
+"@types/video.js@^7.0.1":
+  version "7.0.1"
+  resolved "https://registry.yarnpkg.com/@types/video.js/-/video.js-7.0.1.tgz#96e006c833c8beaff537a8e562e58a96d83e277d"
 
 "@types/vinyl-fs@*":
   version "2.4.8"
