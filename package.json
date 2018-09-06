@@ -72,7 +72,7 @@
     "@types/source-map-support": "^0.4.0",
     "@types/tape": "^4.2.31",
     "@types/underscore": "^1.8.5",
-    "@types/video.js": "^6.2.4",
+    "@types/video.js": "^7.2.3",
     "@types/webtorrent": "^0.98.4",
     "babel-plugin-source-map-support": "^2.0.1",
     "babel-preset-react": "^6.24.1",
