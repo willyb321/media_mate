@@ -750,9 +750,9 @@
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/@types/json-stringify-safe/-/json-stringify-safe-5.0.0.tgz#df34d054419d39323a3730966bacba02ac5e474e"
 
-"@types/klaw-sync@^1.1.3":
-  version "1.1.3"
-  resolved "https://registry.yarnpkg.com/@types/klaw-sync/-/klaw-sync-1.1.3.tgz#fa9884ce6301be767213781bc83055812169457a"
+"@types/klaw-sync@^5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@types/klaw-sync/-/klaw-sync-5.0.0.tgz#e4b16ea075a1223b66ea4c3a71f007d0711e1749"
   dependencies:
     "@types/node" "*"
 
