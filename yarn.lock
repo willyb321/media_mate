@@ -635,9 +635,9 @@
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/@types/cp-file/-/cp-file-4.2.0.tgz#2b12186b50dad407b11021284627bdf4adb87a87"
 
-"@types/debug@^0.0.30":
-  version "0.0.30"
-  resolved "https://registry.yarnpkg.com/@types/debug/-/debug-0.0.30.tgz#dc1e40f7af3b9c815013a7860e6252f6352a84df"
+"@types/debug@^0.0.31":
+  version "0.0.31"
+  resolved "https://registry.yarnpkg.com/@types/debug/-/debug-0.0.31.tgz#bac8d8aab6a823e91deb7f79083b2a35fa638f33"
 
 "@types/del@^3.0.0":
   version "3.0.0"
