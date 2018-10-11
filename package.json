@@ -39,7 +39,7 @@
     "electron"
   ],
   "devDependencies": {
-    "@babel/core": "^7.0.0-beta.32",
+    "@babel/core": "^7.1.2",
     "@babel/preset-env": "^7.0.0-beta.32",
     "@types/blob-util": "^1.3.3",
     "@types/bytes": "^2.5.1",
