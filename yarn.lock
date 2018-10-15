@@ -731,9 +731,9 @@
   dependencies:
     "@types/node" "*"
 
-"@types/gulp-uglify@^3.0.4":
-  version "3.0.4"
-  resolved "https://registry.yarnpkg.com/@types/gulp-uglify/-/gulp-uglify-3.0.4.tgz#a95cab2eed78e2bc24cd09d588b9c493fd3b21ce"
+"@types/gulp-uglify@^3.0.6":
+  version "3.0.6"
+  resolved "https://registry.yarnpkg.com/@types/gulp-uglify/-/gulp-uglify-3.0.6.tgz#7c7c38017680bbb8a3d815e23a7026799432ce54"
   dependencies:
     "@types/node" "*"
     "@types/uglify-js" "*"
