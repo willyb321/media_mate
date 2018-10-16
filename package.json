@@ -99,7 +99,7 @@
     "mkdirp": "latest",
     "pngjs": "^3.3.2",
     "pre-commit": "^1.2.2",
-    "release-it": "^7.2.0",
+    "release-it": "^7.6.2",
     "rimraf": "^2.6.2",
     "tape": "^4.9.0",
     "tui-jsdoc-template": "^1.2.2"
