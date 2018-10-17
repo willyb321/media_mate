@@ -657,9 +657,9 @@
   dependencies:
     electron "^1.7.5"
 
-"@types/electron-notify@^0.1.6":
-  version "0.1.6"
-  resolved "https://registry.yarnpkg.com/@types/electron-notify/-/electron-notify-0.1.6.tgz#1fe0f2fc555ab2a3a3a7c0d17fb904f5f00905e6"
+"@types/electron-notify@^0.1.7":
+  version "0.1.7"
+  resolved "https://registry.yarnpkg.com/@types/electron-notify/-/electron-notify-0.1.7.tgz#a175ae88317e470673782e30947fc9714874a1f9"
   dependencies:
     electron "^1.7.5"
 
