@@ -48,7 +48,7 @@
     "@types/del": "^3.0.0",
     "@types/dotenv": "^4.0.2",
     "@types/electron-json-storage": "^4.0.0",
-    "@types/electron-notify": "^0.1.6",
+    "@types/electron-notify": "^0.1.7",
     "@types/electron-window-state": "^2.0.31",
     "@types/fs-extra": "^5.0.1",
     "@types/gulp": "^4.0.5",
